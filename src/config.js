@@ -13,7 +13,7 @@ module.exports = Object.assign({
   mainDomain: 'knexpert.quotient.net',
   // mainDomain: 'local.com',
   host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
+  port: 8080, // use fixed 8080 instead of process.env.PORT for easier auto deploy
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
