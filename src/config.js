@@ -10,6 +10,8 @@ const environment = {
 }[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
+  mainDomain: 'knexpert.quotient.net',
+  // mainDomain: 'local.com',
   host: process.env.HOST || 'localhost',
   port: process.env.PORT,
   apiHost: process.env.APIHOST || 'localhost',

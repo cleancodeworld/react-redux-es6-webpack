@@ -9,6 +9,7 @@ import path from 'path';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
+import getSubDomain from './helpers/subDomain';
 import PrettyError from 'pretty-error';
 import http from 'http';
 
@@ -81,7 +82,9 @@ app.use((req, res) => {
     return;
   }
 
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  const subDomain = getSubDomain(req.header('host'));
+
+  match({ history, routes: getRoutes(store, subDomain), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
