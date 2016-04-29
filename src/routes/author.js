@@ -4,6 +4,7 @@ import {
     App,
     Home,
     NotFound,
+    LoginSuccess, // temporary
   } from '../containers';
 import {
     Portal
@@ -11,11 +12,7 @@ import {
 
 export default (funcs) => {
   // const {requireLogin, subdomain} = funcs;
-
-  // for testing
-  // console.log(subdomain);
-  // to avoid lint error - only temporary until more codes are written here
-  if (funcs) {}
+  const {requireLogin} = funcs;
 
   /**
    * Please keep routes in alphabetical order
@@ -25,8 +22,13 @@ export default (funcs) => {
       { /* Home (main) route */ }
       <IndexRoute component={Home}/>
 
+      { /* Sample component for dynamic subdomain routing */ }
+      <Route path="portal/:portalname" component={Portal} />
+
       { /* Routes requiring login */ }
-      <Route path="portal/:portalname" component={Portal}/>
+      <Route onEnter={requireLogin}>
+        <Route path="loginSuccess" component={LoginSuccess}/>
+      </Route>
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
