@@ -10,7 +10,7 @@ import {
   } from '../containers/Author';
 
 export default (funcs) => {
-  //const {requireLogin, subdomain} = funcs;
+  // const {requireLogin, subdomain} = funcs;
 
   // for testing
   // console.log(subdomain);
