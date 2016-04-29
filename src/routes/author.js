@@ -14,6 +14,8 @@ export default (funcs) => {
 
   // for testing
   // console.log(subdomain);
+  // to avoid lint error - only temporary until more codes are written here
+  if (funcs) {}
 
   /**
    * Please keep routes in alphabetical order
