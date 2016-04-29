@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './redux/create';
 import ApiClient from './helpers/ApiClient';
+import getSubDomain from './helpers/subDomain';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
@@ -36,11 +37,13 @@ function initSocket() {
 
 global.socket = initSocket();
 
+const subDomain = getSubDomain(document.domain);
+
 const component = (
   <Router render={(props) =>
         <ReduxAsyncConnect {...props} helpers={{client}} filter={item => !item.deferred} />
       } history={history}>
-    {getRoutes(store)}
+    {getRoutes(store, subDomain)}
   </Router>
 );
 
