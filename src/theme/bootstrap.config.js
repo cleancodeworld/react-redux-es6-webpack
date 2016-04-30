@@ -11,10 +11,6 @@
  */
 
 module.exports = {
-  preBootstrapCustomizations: './src/theme/variables.scss',
-  mainSass: './src/theme/bootstrap.overrides.scss',
-  verbose: false,
-  debug: false,
   scripts: {
     transition: false,
     alert: false,
