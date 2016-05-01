@@ -12,6 +12,7 @@ const environment = {
 }[process.env.NODE_ENV || 'development'];
 
 module.exports = Object.assign({
+  mainDomain: 'knexpert.quotient.net',
   host: process.env.HOST || 'localhost',
   port: 3000, // port fixed for easier auto deploy, changed from: process.env.PORT,
   app: {
