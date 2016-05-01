@@ -1,6 +1,6 @@
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
-import mainRoutes from './routes/main';
-import authorRoutes from './routes/author';
+import mainRoutes from './routes/bare';
+import authorRoutes from './routes/portal';
 
 export default (store, subdomain) => {
   const requireLogin = (nextState, replace, cb) => {
