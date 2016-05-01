@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, Field} from 'redux-form';
 
 @reduxForm({
   form: 'AccountPortalForm'
@@ -42,7 +42,12 @@ export default class AccountPortalForm extends Component {
                   </div>
 
                   <div className="form-group has-feedback">
-                    <input type="text" className="form-control" placeholder="Choose username"/>
+                    <Field name="username" component={username =>
+                      <div>
+                        <input type="text" className="form-control" {...username} placeholder="Choose username"/>
+                        {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
+                      </div>
+                      }/>
                     <div className="form-control-feedback">
                       <i className="icon-user-plus text-muted"></i>
                     </div>
@@ -51,7 +56,12 @@ export default class AccountPortalForm extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <input type="text" className="form-control" placeholder="First name"/>
+                        <Field name="firstName" component={firstName =>
+                          <div>
+                            <input type="text" className="form-control" {...firstName} placeholder="First name"/>
+                            {firstName.touched && firstName.error && <label className="validation-error-label">{firstName.error}</label>}
+                          </div>
+                        }/>
                         <div className="form-control-feedback">
                           <i className="icon-user-check text-muted"></i>
                         </div>
@@ -60,7 +70,12 @@ export default class AccountPortalForm extends Component {
 
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <input type="text" className="form-control" placeholder="Last name"/>
+                        <Field name="lastName" component={lastName =>
+                          <div>
+                            <input type="text" className="form-control" {...lastName} placeholder="Last name"/>
+                            {lastName.touched && lastName.error && <label className="validation-error-label">{lastName.error}</label>}
+                          </div>
+                        }/>
                         <div className="form-control-feedback">
                           <i className="icon-user-check text-muted"></i>
                         </div>
@@ -71,16 +86,25 @@ export default class AccountPortalForm extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <input type="password" className="form-control" placeholder="Create password"/>
+                        <Field name="password" component={password =>
+                          <div>
+                            <input type="password" className="form-control" {...password} placeholder="Create password"/>
+                            {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
+                          </div>
+                        }/>
                         <div className="form-control-feedback">
                           <i className="icon-user-lock text-muted"></i>
                         </div>
                       </div>
                     </div>
-
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <input type="password" className="form-control" placeholder="Repeat password"/>
+                        <Field name="confirmPassword" component={confirmPassword =>
+                          <div>
+                            <input type="password" className="form-control" {...confirmPassword} placeholder="Repeat password"/>
+                            {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
+                          </div>
+                        }/>
                         <div className="form-control-feedback">
                           <i className="icon-user-lock text-muted"></i>
                         </div>
@@ -91,44 +115,64 @@ export default class AccountPortalForm extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <input type="email" className="form-control" placeholder="Your email"/>
+                        <Field name="email" component={email =>
+                          <div>
+                            <input type="text" className="form-control" {...email} placeholder="Email"/>
+                            {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
+                          </div>
+                        }/>
                         <div className="form-control-feedback">
                           <i className="icon-mention text-muted"></i>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div className="form-group has-feedback">
-                    <input type="text" className="form-control" placeholder="Choose Portal name"/>
+                    <Field name="portalName" component={portalName =>
+                          <div>
+                            <input type="text" className="form-control" {...portalName} placeholder="Choose Portal name"/>
+                            {portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span>}
+                          </div>
+                        }/>
                     <div className="form-control-feedback">
                       <i className="icon-user-plus text-muted"></i>
                     </div>
                   </div>
-
                   <div className="form-group">
                     <div className="checkbox">
                       <label>
-                        <input type="checkbox" className="styled" checked="checked"/>
-                        <a href="#">Personal Portal</a>
+                        <Field name="isPersonal" component={isPersonal =>
+                          <div>
+                            <input type="checkbox" className="styled" {...isPersonal} placeholder="Personal Portal"/>
+                            <a href="#">Personal Portal</a>
+                          </div>
+                        }/>
                       </label>
                     </div>
 
                     <div className="checkbox">
                       <label>
-                        <input type="checkbox" className="styled" checked="checked"/>
-                        Publically available
+                        <Field name="isPublic" component={isPublic =>
+                          <div>
+                            <input type="checkbox" className="styled" {...isPublic} placeholder="Last name"/>
+                            Publically available
+                          </div>
+                        }/>
                       </label>
                     </div>
 
                     <div className="checkbox">
                       <label>
-                        <input type="checkbox" className="styled"/>
-                        Accept <a href="#">terms of service</a>
+                        <Field name="isAccepted" component={isAccepted =>
+                          <div>
+                            <input type="checkbox" className="styled" {...isAccepted} placeholder="terms of service"/>
+                               Accept <a href="#">terms of service</a>
+                               {isAccepted.touched && isAccepted.error && <span className="validation-error-label">{isAccepted.error}</span>}
+                          </div>
+                        }/>
                       </label>
                     </div>
                   </div>
-
                   <div>
                     <button type="submit" className="btn btn-link"><i className="icon-arrow-left13 position-left"></i>
                       Already a Knexpert? click to login

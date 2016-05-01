@@ -1,8 +1,24 @@
 const AccountPortalValidation = values => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = 'Required';
+  if (!values.username) {
+    errors.username = 'Required';
+  }
+
+  if (!values.isAccepted) {
+    errors.isAccepted = 'Required';
+  }
+
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  }
+
+  if (!values.portalName) {
+    errors.portalName = 'Required';
+  }
+
+  if (!values.lastName) {
+    errors.lastName = 'Required';
   }
 
   if (!values.email) {
