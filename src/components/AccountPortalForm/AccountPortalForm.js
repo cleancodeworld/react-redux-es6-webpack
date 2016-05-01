@@ -1,8 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
+import asyncValidate from './asyncValidate';
 
 @reduxForm({
-  form: 'AccountPortalForm'
+  form: 'AccountPortalForm',
+  asyncValidate,
+  asyncBlurFields: ['username', 'portalName']
 })
 export default class AccountPortalForm extends Component {
   static propTypes = {
@@ -42,9 +45,10 @@ export default class AccountPortalForm extends Component {
                   </div>
 
                   <div className="form-group has-feedback">
-                    <Field name="username" component={username =>
+                    <Field name="username"
+                           component={username =>
                       <div>
-                        <input type="text" className="form-control" {...username} placeholder="Choose username"/>
+                        <input type="text" className="form-control" {...username} onChange={event=>username.onBlur(event)} placeholder="Choose username"/>
                         {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
                       </div>
                       }/>
@@ -130,7 +134,7 @@ export default class AccountPortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="portalName" component={portalName =>
                           <div>
-                            <input type="text" className="form-control" {...portalName} placeholder="Choose Portal name"/>
+                            <input type="text" className="form-control" {...portalName} onChange={event=>portalName.onBlur(event)} placeholder="Choose Portal name"/>
                             {portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span>}
                           </div>
                         }/>

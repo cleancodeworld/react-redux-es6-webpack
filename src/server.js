@@ -12,6 +12,8 @@ import Html from './helpers/Html';
 import getSubDomain from './helpers/subDomain';
 import PrettyError from 'pretty-error';
 import http from 'http';
+import reactCookie from 'react-cookie';
+import cookieParser from 'cookie-parser';
 
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -25,6 +27,12 @@ const app = new Express();
 const server = new http.Server(app);
 const proxy = httpProxy.createProxyServer({
   target: config.apiUrl
+});
+
+app.use(cookieParser());
+app.use((req, res, next) => {
+  reactCookie.plugToRequest(req, res);
+  next();
 });
 
 app.use(compression());
