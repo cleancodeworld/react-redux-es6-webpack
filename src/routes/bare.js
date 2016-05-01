@@ -1,11 +1,11 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {
-    App,
-    Home,
-    Login,
-    NotFound,
-  } from '../containers/bare';
+  App,
+  Home,
+  NotFound,
+  AccountPortalCreate,
+} from '../containers/bare';
 
 export default () => {
   /**
@@ -17,10 +17,10 @@ export default () => {
       <IndexRoute component={Home}/>
 
       { /* Routes */ }
-      <Route path="login" component={Login}/>
+      <Route path="account-portal-create" component={AccountPortalCreate}/>
 
       { /* Catch all route */ }
-      <Route path="*" component={NotFound} status={404} />
+      <Route path="*" component={NotFound} status={404}/>
     </Route>
   );
 };
