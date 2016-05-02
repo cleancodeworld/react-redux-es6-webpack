@@ -10,7 +10,13 @@ export const CREATE_FAIL = 'knexpert/auth/SIGNUP_FAIL';
 
 import Immutable from 'immutable';
 
-const initialState = Immutable.fromJS({});
+const initialState = Immutable.fromJS({
+  loading: false,
+  loaded: false,
+  error: null,
+  data: null,
+  reqSubdomain: ''
+});
 
 export default function portal(state = initialState, action) {
   switch (action.type) {
@@ -18,29 +24,24 @@ export default function portal(state = initialState, action) {
     case REDUX_INIT:
       return Immutable.fromJS(state);
     case CHECK:
-      return {
-        ...state,
-        loading: true
-      };
+      return state.set('loading', true);
     case CHECK_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        data: action.result
-      };
+      {
+        let _state = state.set('loading', false);
+        _state = _state.set('loaded', true);
+        _state = _state.set('data', action.result);
+        return _state;
+      }
     case CHECK_FAIL:
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
-        error: action.error
-      };
+      {
+        let _state = state.set('loading', false);
+        _state = _state.set('loaded', false);
+        _state = _state.set('data', null);
+        _state = _state.set('error', action.error);
+        return _state;
+      }
     case SET_REQ_SUBDOMAIN:
-      return {
-        ...state,
-        reqSubdomain: action.subdomain
-      };
+      return state.set('reqSubdomain', action.subdomain);
     case CREATE:
     case CREATE_SUCCESS:
     case CREATE_FAIL:
@@ -50,13 +51,13 @@ export default function portal(state = initialState, action) {
 }
 
 export function isChecked(globalState) {
-  return globalState.check && globalState.check.loaded;
+  return globalState.portal && globalState.portal.get('loaded');
 }
 
 export function check(slug) {
   return {
     types: [CHECK, CHECK_SUCCESS, CHECK_FAIL],
-    promise: (client) => client.get(`/v1/portal/${slug}`)
+    promise: (client) => client.get(`/api/v1/portal/${slug}`)
   };
 }
 

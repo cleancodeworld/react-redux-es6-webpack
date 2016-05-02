@@ -18,8 +18,8 @@ import {
     const promises = [];
     const state = getState();
     if (!isChecked(state)) {
-      if (state.portal && state.portal.reqSubdomain) {
-        promises.push(dispatch(portalCheck(state.portal.reqSubdomain)));
+      if (state.portal && state.portal.get('reqSubdomain')) {
+        promises.push(dispatch(portalCheck(state.portal.get('reqSubdomain'))));
       }
     }
     return Promise.all(promises);
@@ -43,7 +43,7 @@ export default class App extends Component {
     const logoImage = require('./knexpert.png');
     const {portal} = this.props;
     let content = this.props.children;
-    if (!portal || !portal.data || !portal.data.Id) {
+    if (!portal || !portal.get('data')) {
       content = <NotFound />;
     }
     return (
