@@ -26,20 +26,17 @@ export default function portal(state = initialState, action) {
     case CHECK:
       return state.set('loading', true);
     case CHECK_SUCCESS:
-      {
-        let _state = state.set('loading', false);
-        _state = _state.set('loaded', true);
-        _state = _state.set('data', action.result);
-        return _state;
-      }
+      return state.withMutations(map => {
+        map.set('loading', false);
+        map.set('loaded', true);
+        map.set('data', action.result);
+      });
     case CHECK_FAIL:
-      {
-        let _state = state.set('loading', false);
-        _state = _state.set('loaded', false);
-        _state = _state.set('data', null);
-        _state = _state.set('error', action.error);
-        return _state;
-      }
+      return state.withMutations(map => {
+        map.set('loaded', false);
+        map.set('data', null);
+        map.set('error', action.error);
+      });
     case SET_REQ_SUBDOMAIN:
       return state.set('reqSubdomain', action.subdomain);
     case CREATE:
