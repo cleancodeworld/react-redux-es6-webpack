@@ -5,3 +5,4 @@
  *
  */
 
+export AccountPortalForm from './AccountPortalForm/AccountPortalForm';
