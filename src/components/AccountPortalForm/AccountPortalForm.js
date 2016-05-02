@@ -17,7 +17,7 @@ export default class AccountPortalForm extends Component {
   errorRender(error) {
     let res = <span/>;
     if (error) {
-      res = (<div className="alert alert-danger" role="alert">
+      res = (<div className="alert bg-danger alert-styled-left" role="alert">
         <strong>Oh snap!</strong> {error}
       </div> );
     }
@@ -33,7 +33,6 @@ export default class AccountPortalForm extends Component {
       <div>
         <form onSubmit={handleSubmit}>
           <div className="row">
-            {this.errorRender(error)}
             <div className="col-lg-6 col-lg-offset-3">
               <div className="panel registration-form">
                 <div className="panel-body">
@@ -43,7 +42,7 @@ export default class AccountPortalForm extends Component {
                       <small className="display-block">All fields are required</small>
                     </h5>
                   </div>
-
+                  {this.errorRender(error)}
                   <div className="form-group has-feedback">
                     <Field name="username"
                            component={username =>

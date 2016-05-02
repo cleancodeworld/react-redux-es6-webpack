@@ -1,13 +1,23 @@
 import superagent from 'superagent';
+import * as async from 'async';
 
-const request = url => new Promise((resolve, reject) => superagent.get(url).end((err, { body } = {}) => err ? reject(body || err) : resolve(body)));
+const checkAvailability = (values) => {
+  return new Promise((resolve, reject) => {
+    async.parallel(
+      {
+        username: (cb)=> values.username ? superagent.get(`/api/v1/author/${values.username}/available`).end(cb) : cb(null),
+        portalName: (cb)=> values.portalName ? superagent.get(`/api/v1/portal/${values.portalName}/available`).end(cb) : cb(null)
+      },
+      (err, { body } = {})=> err ? reject(body || err) : resolve(err)
+    );
+  });
+};
 
 const asyncValidate = (values) => {
-  return request(`/api/v1/author/${values.username}/available`)
-    .then(()=> {
-      throw { username: 'That username is taken' }; // eslint-disable-line no-throw-literal
-    })
-    .catch(err=>err);
+  return checkAvailability(values)
+    .catch((err)=> {
+      throw err; // eslint-disable-line no-throw-literal
+    });
 };
 
 export default asyncValidate;
