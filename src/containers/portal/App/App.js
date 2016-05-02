@@ -16,20 +16,23 @@ import {
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
-    if (!isChecked(getState())) {
-      promises.push(dispatch(portalCheck('abc')));
+    const state = getState();
+    if (!isChecked(state)) {
+      if (state.portal && state.portal.reqSubdomain) {
+        promises.push(dispatch(portalCheck(state.portal.reqSubdomain)));
+      }
     }
     return Promise.all(promises);
   }
 }])
 @connect(
-  state => ({ stt: state })
+  state => ({ portal: state.portal })
 )
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    stt: PropTypes.object
+    portal: PropTypes.object.isRequired,
   };
 
   static contextTypes = {
@@ -38,10 +41,9 @@ export default class App extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const subdomain = this.props.route.subdomain;
+    const {portal} = this.props;
     let content = this.props.children;
-    console.log(this.props.stt);
-    if (subdomain === 'abc123') {
+    if (!portal || !portal.data || !portal.data.Id) {
       content = <NotFound />;
     }
     return (

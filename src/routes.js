@@ -8,7 +8,7 @@ export default (store, subdomain) => {
 
   let routes = null;
   if (subdomain) {
-    routes = portalRoutes({ subdomain });
+    routes = portalRoutes({ store, subdomain });
   } else {
     routes = bareRoutes({ requireLogin });
   }

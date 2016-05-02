@@ -3,6 +3,7 @@ export const REDUX_INIT = '@@redux/INIT';
 export const CHECK = 'knexpert/portal/CHECK';
 export const CHECK_SUCCESS = 'knexpert/portal/CHECK_SUCCESS';
 export const CHECK_FAIL = 'knexpert/portal/CHECK_FAIL';
+export const SET_REQ_SUBDOMAIN = 'knexpert/portal/SET_REQ_SUBDOMAIN';
 
 const initialState = {
   loaded: false
@@ -16,7 +17,6 @@ export default function portal(state = initialState, action = {}) {
         loading: true
       };
     case CHECK_SUCCESS:
-      console.log(action.result);
       return {
         ...state,
         loading: false,
@@ -29,6 +29,11 @@ export default function portal(state = initialState, action = {}) {
         loading: false,
         loaded: false,
         error: action.error
+      };
+    case SET_REQ_SUBDOMAIN:
+      return {
+        ...state,
+        reqSubdomain: action.subdomain
       };
     default:
       return state;

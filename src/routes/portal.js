@@ -1,5 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
+import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal';
 import {
   App,
   Portal
@@ -9,7 +10,11 @@ import {
 } from '../containers/bare';
 
 export default (params) => {
-  const {subdomain} = params;
+  const {store, subdomain} = params;
+  store.dispatch({
+    type: SET_REQ_SUBDOMAIN,
+    subdomain: subdomain
+  });
   return (
     <Route path="/" component={App} subdomain={subdomain}>
       { /* Sub routes */ }
