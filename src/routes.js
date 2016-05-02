@@ -1,5 +1,5 @@
-import mainRoutes from './routes/bare';
-import authorRoutes from './routes/portal';
+import bareRoutes from './routes/bare';
+import portalRoutes from './routes/portal';
 
 export default (store, subdomain) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -8,9 +8,9 @@ export default (store, subdomain) => {
 
   let routes = null;
   if (subdomain) {
-    routes = authorRoutes({ requireLogin, subdomain });
+    routes = portalRoutes({ store, subdomain });
   } else {
-    routes = mainRoutes({ requireLogin });
+    routes = bareRoutes({ requireLogin });
   }
   return routes;
 };
