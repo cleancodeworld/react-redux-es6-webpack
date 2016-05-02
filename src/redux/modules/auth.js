@@ -5,6 +5,7 @@ export const LOGIN_SUCCESS = 'knexpert/auth/LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'knexpert/auth/LOGIN_FAIL';
 
 import Immutable from 'immutable';
+import { SubmissionError } from 'redux-form';
 
 const initialState = Immutable.fromJS({});
 
@@ -28,5 +29,18 @@ export function login(model) {
     data: {
       model
     }
+  };
+}
+
+export function userLogin(model) {
+  return dispatch => {
+    return dispatch(
+      login(model))
+      .then(()=> {
+        alert('Done!');
+      })
+      .catch(res => {
+        throw new SubmissionError({ _error: res.error });
+      });
   };
 }
