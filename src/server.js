@@ -46,8 +46,8 @@ app.use('/api/v1', (req, res) => {
 });
 
 const onProxyReq = (proxyReq, req) => {
-  if (req.cookies.sessionToken) {
-    const sessionToken = req.cookies.sessionToken;
+  if (req.cookies.sessionToken || req.query.sessionToken) {
+    const sessionToken = req.cookies.sessionToken || req.query.sessionToken;
     const authorizationHeader = 'Bearer ' + sessionToken;
     proxyReq.setHeader('Authorization', authorizationHeader);
   }

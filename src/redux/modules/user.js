@@ -6,11 +6,12 @@ export const SIGNUP_FAIL = 'knexpert/auth/SIGNUP_FAIL';
 
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
-import {push} from 'react-router-redux';
+import {create as portalCreate} from './portal';
+import {login} from './auth';
 
 const initialState = Immutable.fromJS({});
 
-export default function auth(state = initialState, action) {
+export default function user(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
@@ -24,16 +25,31 @@ export default function auth(state = initialState, action) {
 }
 
 export function create(model) {
+  return {
+    types: [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL],
+    promise: (client) => client.post(`/api/v1/signup`, { data: model }),
+    data: {
+      model
+    }
+  };
+}
+
+export function createWithPortal(model) {
   return dispatch => {
-    return dispatch({
-      types: [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL],
-      promise: (client) => client.post(`/api/v1/signup`, { data: model }),
-      data: {
-        model
-      }
-    })
+    return dispatch(
+      create({
+        ...model,
+        name: `${model.firstName} ${model.lastName}`
+      }))
+      .then(()=> dispatch(login(model)))
+      .then((res)=> dispatch(portalCreate({
+        ...model,
+        name: model.portalName,
+        privacy: model.isPublic ? 'Public' : 'Private',
+        type: model.isPersonal ? 'Personal' : 'Company'
+      }, res.sessionToken)))
       .then(()=> {
-        return dispatch(push('/login'));
+        alert('Done!');
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
