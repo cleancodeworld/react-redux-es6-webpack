@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {AccountPortalForm} from 'components';
+import { connect } from 'react-redux';
+import { createWithPortal as userCreateWithPortal } from 'redux/modules/user';
 
+@connect(null, { userCreateWithPortal })
 export default class AccountPortalCreate extends Component {
 
-  handleSubmit = () => {
-  }
+  static propTypes = {
+    userCreateWithPortal: PropTypes.func.isRequired,
+  };
 
   render() {
     return (
@@ -14,7 +18,7 @@ export default class AccountPortalCreate extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <AccountPortalForm onSubmit={this.handleSubmit}/>
+              <AccountPortalForm onSubmit={ model => this.props.userCreateWithPortal(model)}/>
             </div>
           </div>
         </div>
