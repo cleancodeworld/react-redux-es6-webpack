@@ -7,26 +7,29 @@ import Helmet from 'react-helmet';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { connect } from 'react-redux';
-import { check as portalCheck } from 'redux/modules/portal';
+import {connect} from 'react-redux';
+import { isChecked, check as portalCheck } from 'redux/modules/portal';
 import {
   NotFound
 } from '../../bare';
 
 @asyncConnect([{
-  promise: () => {
-    console.log(portalCheck().promise);
-    const promises = [portalCheck().promise];
+  promise: ({store: {dispatch, getState}}) => {
+    const promises = [];
+    if (!isChecked(getState())) {
+      promises.push(dispatch(portalCheck('abc')));
+    }
     return Promise.all(promises);
   }
 }])
-
-class App extends Component {
+@connect(
+  state => ({ stt: state })
+)
+export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    portalCheck: PropTypes.func.isRequired,
-    st: PropTypes.object,
+    stt: PropTypes.object
   };
 
   static contextTypes = {
@@ -35,11 +38,12 @@ class App extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    // const subdomain = this.props.route.subdomain;
-    const content = this.props.children;
-    /* if (subdomain !== 'abc') {
+    const subdomain = this.props.route.subdomain;
+    let content = this.props.children;
+    console.log(this.props.stt);
+    if (subdomain === 'abc123') {
       content = <NotFound />;
-    } */
+    }
     return (
       <div>
         <div className="navbar-bottom login-container">
@@ -89,9 +93,3 @@ class App extends Component {
     );
   }
 }
-
-export default connect(({state}) => {
-  return ({
-    st: state
-  });
-}, { portalCheck })(App);

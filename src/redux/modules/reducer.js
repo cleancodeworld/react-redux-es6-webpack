@@ -4,6 +4,7 @@ import {reducer as reduxAsyncConnect} from 'redux-async-connect';
 import {reducer as formReducer} from 'redux-form';
 
 import AccountPortalValidation from 'components/AccountPortalForm/AccountPortalValidation';
+import portal from './portal';
 
 export default combineReducers({
   routing: routerReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   form: formReducer.validation({
     AccountPortalForm: AccountPortalValidation,
   }),
+  portal,
 });
