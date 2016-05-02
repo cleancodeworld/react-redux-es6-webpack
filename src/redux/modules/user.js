@@ -37,10 +37,7 @@ export function create(model) {
 export function createWithPortal(model) {
   return dispatch => {
     return dispatch(
-      create({
-        ...model,
-        name: `${model.firstName} ${model.lastName}`
-      }))
+      create(model))
       .then(()=> dispatch(login(model)))
       .then((res)=> dispatch(portalCreate({
         ...model,
