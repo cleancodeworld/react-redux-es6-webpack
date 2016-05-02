@@ -12,6 +12,8 @@ import Html from './helpers/Html';
 import getSubDomain from './helpers/subDomain';
 import PrettyError from 'pretty-error';
 import http from 'http';
+import reactCookie from 'react-cookie';
+import cookieParser from 'cookie-parser';
 
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -27,6 +29,12 @@ const proxy = httpProxy.createProxyServer({
   target: config.apiUrl
 });
 
+app.use(cookieParser());
+app.use((req, res, next) => {
+  reactCookie.plugToRequest(req, res);
+  next();
+});
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
@@ -38,8 +46,8 @@ app.use('/api/v1', (req, res) => {
 });
 
 const onProxyReq = (proxyReq, req) => {
-  if (req.cookies.sessionToken) {
-    const sessionToken = req.cookies.sessionToken;
+  if (req.cookies.sessionToken || req.query.sessionToken) {
+    const sessionToken = req.cookies.sessionToken || req.query.sessionToken;
     const authorizationHeader = 'Bearer ' + sessionToken;
     proxyReq.setHeader('Authorization', authorizationHeader);
   }
