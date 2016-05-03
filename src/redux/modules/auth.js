@@ -9,7 +9,6 @@ import { push } from 'react-router-redux';
 import { SubmissionError } from 'redux-form';
 import reactCookie from 'react-cookie';
 
-const cookiesOpt = { path: '/', secure: false, httpOnly: false, maxAge: 60 * 60 * 24 * 42 };
 const initialState = Immutable.fromJS({
   sessionToken: ''
 });
@@ -26,7 +25,6 @@ export default function auth(state = initialState, action) {
       return newState;
     case LOGIN_SUCCESS:
       const {sessionToken} = action.result;
-      reactCookie.save('sessionToken', sessionToken, cookiesOpt);
       return state.set('sessionToken', sessionToken);
     case LOGIN_FAIL:
       return state.set('sessionToken', '');
@@ -54,7 +52,13 @@ export function userLogin(model) {
   return dispatch => {
     return dispatch(
       login(model))
-      .then(()=> {
+      .then((res)=> {
+        const {sessionToken} = res;
+        if (model.remember) {
+          reactCookie.save('sessionToken', sessionToken, { path: '/', secure: false, httpOnly: false, maxAge: 60 * 60 * 24 * 42 });
+        } else {
+          reactCookie.save('sessionToken', sessionToken, { path: '/', secure: false, httpOnly: false });
+        }
         return dispatch(push('/'));
       })
       .catch(res => {
