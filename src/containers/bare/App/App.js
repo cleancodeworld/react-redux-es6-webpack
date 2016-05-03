@@ -34,7 +34,6 @@ export default class App extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {logout} = this.props;
     const { user} = this.context;
     return (
       <div>
@@ -55,7 +54,7 @@ export default class App extends Component {
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
                 </LinkContainer>
               </Nav>
-              <UserNav logout={logout} user={user} loggedIn={!!user}/>
+              <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
           </Navbar>
           <div>

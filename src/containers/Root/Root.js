@@ -24,7 +24,6 @@ export default class Root extends React.Component {
   };
 
   getChildContext() {
-    debugger;
     const {user} = this.props;
     return {
       user

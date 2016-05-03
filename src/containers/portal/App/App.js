@@ -9,6 +9,7 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
 import { isChecked, check as portalCheck } from 'redux/modules/portal';
+import {UserNav} from 'components';
 
 import {logout} from 'redux/modules/auth';
 import {
@@ -46,7 +47,7 @@ export default class App extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {portal, logout} = this.props;
+    const {portal} = this.props;
     const { user} = this.context;
     let content = this.props.children;
     if (!portal || !portal.get('data')) {
@@ -71,7 +72,7 @@ export default class App extends Component {
                   <NavItem eventKey={2}>Menu Item 1</NavItem>
                 </LinkContainer>
               </Nav>
-              <UserNav logout={logout} user={user} loggedIn={!!user}/>
+              <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
           </Navbar>
           <div>
