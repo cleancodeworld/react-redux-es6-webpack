@@ -7,6 +7,7 @@ import userVerify from './user/verify';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidate from 'components/LoginForm/validate';
+import CreatePortalValidation from 'components/CreatePortalForm/validate';
 import auth from './auth';
 import portal from './portal';
 
@@ -18,6 +19,7 @@ export default combineReducers({
   form: formReducer.validation({
     AccountPortalForm: AccountPortalValidation,
     LoginForm: LoginFormValidate,
+    CreatePortalForm: CreatePortalValidation
   }),
   auth,
   portal,
