@@ -16,7 +16,6 @@ export default () => {
 
       { /* Sample component for dynamic subdomain routing */ }
       <Route path="portal/:portalname" component={Portal}/>
-
     </Route>
   );
 };
