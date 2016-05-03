@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {AccountPortalForm} from 'components';
 import { connect } from 'react-redux';
-import { createWithPortal as userCreateWithPortal } from 'redux/modules/user';
+import { createWithPortal as userCreateWithPortal } from 'redux/modules/user/create';
 
 @connect(null, { userCreateWithPortal })
 export default class AccountPortalCreate extends Component {

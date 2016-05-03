@@ -6,6 +6,7 @@ import {
   NotFound,
   AccountPortalCreate,
   Login,
+  VerifyRegistration,
 } from '../containers/bare';
 
 export default () => {
@@ -20,6 +21,7 @@ export default () => {
       { /* Routes */ }
       <Route path="account-portal-create" component={AccountPortalCreate}/>
       <Route path="login" component={Login}/>
+      <Route path="verify/registration" component={VerifyRegistration}/>
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404}/>

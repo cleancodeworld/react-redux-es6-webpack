@@ -9,12 +9,12 @@ export const LOGIN_FAIL = 'knexpert/auth/LOGIN_FAIL';
 
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
-import {create as portalCreate} from './portal';
-import {login} from './auth';
+import {create as portalCreate} from '../portal';
+import {login} from '../auth';
 
 const initialState = Immutable.fromJS({});
 
-export default function user(state = initialState, action) {
+export default function userCreate(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
@@ -36,6 +36,7 @@ export function create(model) {
     }
   };
 }
+
 
 export function createWithPortal(model) {
   return dispatch => {
