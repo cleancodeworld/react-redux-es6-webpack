@@ -7,3 +7,4 @@
 
 export AccountPortalForm from './AccountPortalForm/AccountPortalForm';
 export LoginForm from './LoginForm/LoginForm';
+export UserNav from './UserNav/UserNav';
