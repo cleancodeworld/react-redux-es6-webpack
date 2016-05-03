@@ -7,7 +7,9 @@ export const LOGIN_FAIL = 'knexpert/auth/LOGIN_FAIL';
 import Immutable from 'immutable';
 import { push } from 'react-router-redux';
 import { SubmissionError } from 'redux-form';
+import reactCookie from 'react-cookie';
 
+const cookiesOpt = { path: '/', secure: false, httpOnly: false, maxAge: 60 * 60 * 24 * 42 };
 const initialState = Immutable.fromJS({
   sessionToken: ''
 });
@@ -16,9 +18,16 @@ export default function auth(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
-      return Immutable.fromJS(state);
+      let newState = Immutable.fromJS(state);
+      const token = reactCookie.load('sessionToken');
+      if (token) {
+        newState = newState.set('sessionToken', token);
+      }
+      return newState;
     case LOGIN_SUCCESS:
-      return state.set('sessionToken', action.result.sessionToken);
+      const {sessionToken} = action.result;
+      reactCookie.save('sessionToken', sessionToken, cookiesOpt);
+      return state.set('sessionToken', sessionToken);
     case LOGIN_FAIL:
       return state.set('sessionToken', '');
     case LOGIN:
@@ -46,10 +55,6 @@ export function userLogin(model) {
     return dispatch(
       login(model))
       .then(()=> {
-        if (model.remember && !model.auto && typeof document !== 'undefined') {
-          document.cookie = 'email=' + model.email + '; max-age=3628800';
-          document.cookie = 'password=' + model.password + '; max-age=3628800';
-        }
         return dispatch(push('/'));
       })
       .catch(res => {

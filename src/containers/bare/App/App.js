@@ -4,33 +4,13 @@ import { LinkContainer } from 'react-router-bootstrap';
 import config from '../../../config';
 import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
-import reactCookie from 'react-cookie';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { login, isAuthenticated } from 'redux/modules/auth';
-
-function addAutoLoginPromise(promises, dispatch, state) {
-  if (!isAuthenticated(state)) {
-    const email = reactCookie.load('email');
-    const password = reactCookie.load('password');
-    if (email && password) {
-      promises.push(dispatch(login({
-        email: email,
-        password: password.toString(),
-        auto: true
-      })));
-    }
-  }
-}
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({store: {}}) => {
     const promises = [];
-    const state = getState();
-
-    addAutoLoginPromise(promises, dispatch, state);
-
     return Promise.all(promises);
   }
 }])

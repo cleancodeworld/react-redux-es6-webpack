@@ -30,7 +30,7 @@ export default class LoginForm extends Component {
     } = this.props;
     return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           {this.errorRender(error)}
           <div className="panel panel-body login-form">
             <div className="text-center">
