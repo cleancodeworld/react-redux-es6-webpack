@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 
 @reduxForm({
-  form: 'LoginForm'
+  form: 'LoginForm',
+  fields: ['email', 'password', 'remember']
 })
 export default class LoginForm extends Component {
   static propTypes = {
@@ -26,7 +27,7 @@ export default class LoginForm extends Component {
       handleSubmit,
       submitting,
       error
-      } = this.props;
+    } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -44,6 +45,7 @@ export default class LoginForm extends Component {
                   <div className="form-control-feedback">
                     <i className="icon-user text-muted"></i>
                   </div>
+                  {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
                 </div>
               }/>
             </div>
@@ -55,18 +57,21 @@ export default class LoginForm extends Component {
                   <div className="form-control-feedback">
                     <i className="icon-lock2 text-muted"></i>
                   </div>
+                  {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
                 </div>
               }/>
             </div>
 
             <div className="form-group login-options">
               <div className="row">
-                <div className="col-sm-6">
-                  <label className="checkbox-inline">
-                    <input type="checkbox" className="styled" checked="checked" />
-                    Remember
-                  </label>
-                </div>
+                <Field name="remember" component={remember =>
+                  <div className="col-sm-6">
+                    <label className="checkbox-inline">
+                      <input type="checkbox" className="styled" {...remember} placeholder="Remember Me"/>
+                      Remember Me
+                    </label>
+                  </div>
+                }/>
 
                 <div className="col-sm-6 text-right">
                   <a href="/forgot-password">Forgot password?</a>

@@ -4,16 +4,36 @@ import { LinkContainer } from 'react-router-bootstrap';
 import config from '../../../config';
 import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
+import reactCookie from 'react-cookie';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import { login, isAuthenticated } from 'redux/modules/auth';
+
+function addAutoLoginPromise(promises, dispatch, state) {
+  if (!isAuthenticated(state)) {
+    const email = reactCookie.load('email');
+    const password = reactCookie.load('password');
+    if (email && password) {
+      promises.push(dispatch(login({
+        email: email,
+        password: password.toString(),
+        auto: true
+      })));
+    }
+  }
+}
+
 @asyncConnect([{
-  promise: () => {
+  promise: ({store: {dispatch, getState}}) => {
     const promises = [];
+    const state = getState();
+
+    addAutoLoginPromise(promises, dispatch, state);
+
     return Promise.all(promises);
   }
 }])
-
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -42,6 +62,9 @@ export default class App extends Component {
               <Nav navbar>
                 <LinkContainer to="/account-portal-create">
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem eventKey={3}>Login</NavItem>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
