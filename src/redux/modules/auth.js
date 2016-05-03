@@ -50,8 +50,6 @@ export default function auth(state = initialState, action) {
         map.set('user', user);
       });
     case LOAD_FAIL:
-      console.log(action);
-      return state;
     case LOGIN:
     default:
       return state;
@@ -86,12 +84,10 @@ export function userLogin(model) {
 }
 
 export function isLoaded(globalState) {
-  console.log(globalState.auth && globalState.auth.get('loaded') || !reactCookie.load('sessionToken'));
   return globalState.auth && globalState.auth.get('loaded') || !reactCookie.load('sessionToken');
 }
 
 export function load() {
-  console.log('load');
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/api/v1/users/me')
