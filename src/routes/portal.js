@@ -2,8 +2,7 @@ import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {
   App,
-  Portal,
-  VerifyRegistration,
+  Portal
 } from '../containers/portal';
 
 export default () => {
