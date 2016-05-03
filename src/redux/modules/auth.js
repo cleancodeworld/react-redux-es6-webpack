@@ -41,6 +41,7 @@ export default function auth(state = initialState, action) {
     case LOGOUT_FAIL:
       return state.withMutations((map)=> {
         map.remove('user');
+        map.set('sessionToken', null);
         reactCookie.remove('sessionToken');
       });
     case LOAD_SUCCESS:
@@ -85,10 +86,12 @@ export function userLogin(model) {
 }
 
 export function isLoaded(globalState) {
+  console.log(globalState.auth && globalState.auth.get('loaded') || !reactCookie.load('sessionToken'));
   return globalState.auth && globalState.auth.get('loaded') || !reactCookie.load('sessionToken');
 }
 
 export function load() {
+  console.log('load');
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/api/v1/users/me')
