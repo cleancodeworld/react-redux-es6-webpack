@@ -41,6 +41,8 @@ export default function userVerify(state = initialState, action) {
       return state.set('sentAgain', true);
     case SEND_VERIFY_EMAIL_SUCCESS:
     case SEND_VERIFY_EMAIL_FAIL:
+      alert(JSON.stringify(action.error.error));
+      return state;
     default:
       return state;
   }

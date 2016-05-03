@@ -12,11 +12,12 @@ export default () => {
    */
   return (
     <Route path="/" component={App}>
-      { /* Sample component for dynamic subdomain routing */ }
-      <Route path="portal/:portalname" component={Portal}/>
-      <Route path="verify/registration" component={VerifyRegistration}/>
       { /* Home (main) route */ }
       <IndexRoute component={Portal}/>
+
+      { /* Sample component for dynamic subdomain routing */ }
+      <Route path="portal/:portalname" component={Portal}/>
+
     </Route>
   );
 };
