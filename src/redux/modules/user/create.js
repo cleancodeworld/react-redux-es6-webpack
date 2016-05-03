@@ -3,6 +3,9 @@ export const REDUX_INIT = '@@redux/INIT';
 export const SIGNUP = 'knexpert/auth/SIGNUP';
 export const SIGNUP_SUCCESS = 'knexpert/auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'knexpert/auth/SIGNUP_FAIL';
+export const LOGIN = 'knexpert/auth/LOGIN';
+export const LOGIN_SUCCESS = 'knexpert/auth/LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'knexpert/auth/LOGIN_FAIL';
 
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';

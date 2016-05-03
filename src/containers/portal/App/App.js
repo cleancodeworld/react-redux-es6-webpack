@@ -61,8 +61,8 @@ export default class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse eventKey={0}>
               <Nav navbar>
-                <LinkContainer to="/account-portal-create">
-                  <NavItem eventKey={2}>Menu Item</NavItem>
+                <LinkContainer to="#">
+                  <NavItem eventKey={2}>Menu Item 1</NavItem>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>

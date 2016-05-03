@@ -7,13 +7,13 @@ import Helmet from 'react-helmet';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+
 @asyncConnect([{
-  promise: () => {
+  promise: ({store: {}}) => {
     const promises = [];
     return Promise.all(promises);
   }
 }])
-
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -42,6 +42,9 @@ export default class App extends Component {
               <Nav navbar>
                 <LinkContainer to="/account-portal-create">
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                  <NavItem eventKey={3}>Login</NavItem>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
