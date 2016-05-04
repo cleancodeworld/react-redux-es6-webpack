@@ -2,11 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import classnames from 'classnames';
+import {TextEditor} from 'components';
 
 @reduxForm({
   form: 'CourseForm'
 })
-export default class LoginForm extends Component {
+export default class CourseForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
@@ -145,6 +146,14 @@ export default class LoginForm extends Component {
                   </div>
                   All Levels
                 </label>
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="form-group">
+                <div className="control-label">
+                  Description
+                </div>
+                <TextEditor/>
               </div>
             </div>
             <div className="col-md-12 text-right">
