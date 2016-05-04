@@ -8,12 +8,12 @@ import {
   Login,
   VerifyRegistration,
   CreatePortal,
+  CourseCreate,
 } from '../containers/bare';
 
 import Root from '../containers/Root/Root';
 
 export default () => {
-  // const { requireLogin } = params;
   /**
    * Please keep routes in alphabetical order
    */
@@ -24,6 +24,7 @@ export default () => {
         <IndexRoute component={Home}/>
 
         { /* Routes */ }
+        <Route path="course/create" component={CourseCreate}/>
         <Route path="account-portal-create" component={AccountPortalCreate}/>
         <Route path="login" component={Login}/>
         <Route path="verify/registration" component={VerifyRegistration}/>
