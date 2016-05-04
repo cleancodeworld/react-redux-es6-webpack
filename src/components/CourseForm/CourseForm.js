@@ -76,7 +76,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={language.value}
-                  options={['one', 'two', 'three'].map( value => ({ value: value, label: value}))}
+                  options={['english', 'two', 'three'].map( value => ({ value: value, label: value}))}
                   />
                   {language.touched && language.error && <label className="validation-error-label">{language.error}</label>}
                 </div>
@@ -157,7 +157,6 @@ export default class CourseForm extends Component {
                   name="description"
                   component={description=> <TextEditor {...description}/>}
                 />
-
               </div>
             </div>
             <div className="col-md-12 text-right">

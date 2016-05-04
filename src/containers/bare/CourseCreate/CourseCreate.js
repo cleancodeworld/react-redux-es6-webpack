@@ -18,7 +18,7 @@ export default class AccountPortalCreate extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <CourseForm onSubmit={ model => this.props.userCreateWithPortal(model)}/>
+              <CourseForm onSubmit={ model => alert(JSON.stringify(model, null, 4))}/>
             </div>
           </div>
         </div>
