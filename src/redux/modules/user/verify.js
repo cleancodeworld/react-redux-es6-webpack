@@ -59,9 +59,9 @@ export function verifyEmail(token) {
 }
 
 
-export function resend() {
+export function resend(email) {
   return {
     types: [SEND_VERIFY_EMAIL, SEND_VERIFY_EMAIL_SUCCESS, SEND_VERIFY_EMAIL_FAIL],
-    promise: (client) => client.post(`/api/v1/verify/email`),
+    promise: (client) => client.post(`/api/v1/verify/email/${email}`),
   };
 }
