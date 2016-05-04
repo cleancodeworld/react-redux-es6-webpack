@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
+import classnames from 'classnames';
+
 @reduxForm({
   form: 'CourseForm'
 })
@@ -96,6 +98,53 @@ export default class LoginForm extends Component {
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
               }/>
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="form-group">
+                <label className="control-label">Instructional Level</label>
+                <p className="text-muted">Specify the level of the course content to give students a better understading
+                  of whether this course is right for them.</p>
+
+                <label className="radio-inline">
+                  <div className="choice">
+                    <Field
+                      name="level"
+                      component={level=> <span className={classnames({checked: level.value === 'beginner'})}><input type="radio" {...level} value="beginner" className="styled" /></span>}
+                    />
+                  </div>
+                  Beginner Level
+                </label>
+
+                <label className="radio-inline">
+                  <div className="choice">
+                    <Field
+                      name="level"
+                      component={level=> <span className={classnames({checked: level.value === 'intermediate'})}><input type="radio" {...level} value="intermediate" className="styled" /></span>}
+                    />
+                  </div>
+                  Intermediate Level
+                </label>
+
+                <label className="radio-inline">
+                  <div className="choice">
+                    <Field
+                      name="level"
+                      component={level=> <span className={classnames({checked: level.value === 'expert'})}><input type="radio" {...level} value="expert" className="styled" /></span>}
+                    />
+                  </div>
+                  Expert Level
+                </label>
+
+                <label className="radio-inline">
+                  <div className="choice">
+                    <Field
+                      name="level"
+                      component={level=> <span className={classnames({checked: level.value === 'all'})}><input type="radio" {...level} value="all" className="styled" /></span>}
+                    />
+                  </div>
+                  All Levels
+                </label>
               </div>
             </div>
             <div className="col-md-12 text-right">

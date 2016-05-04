@@ -1,4 +1,4 @@
-const CourseFormValidate = values => {
+const CourseFormValidate = () => {
   const errors = {};
   return errors;
 };
