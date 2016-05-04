@@ -15,7 +15,7 @@ export default class LoginForm extends Component {
   errorRender(error) {
     let res = <span/>;
     if (error) {
-      res = (<div className="alert alert-danger" role="alert">
+      res = (<div className="alert bg-danger alert-styled-left" role="alert">
         <strong>Oh snap!</strong> {error}
       </div> );
     }
@@ -31,13 +31,12 @@ export default class LoginForm extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit} autoComplete="off">
-          {this.errorRender(error)}
           <div className="panel panel-body login-form">
             <div className="text-center">
               <div className="icon-object border-warning-400 text-warning-400"><i className="icon-people"></i></div>
               <h5 className="content-group-lg">Login to your knexpert account <small className="display-block">Enter your credentials</small></h5>
             </div>
-
+            {this.errorRender(error)}
             <div className="form-group has-feedback has-feedback-left">
               <Field name="email" component={email =>
                 <div>

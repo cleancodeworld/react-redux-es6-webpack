@@ -4,12 +4,12 @@ import { reducer as reduxAsyncConnect } from 'redux-async-connect';
 import { reducer as formReducer } from 'redux-form';
 import userCreate from './user/create';
 import userVerify from './user/verify';
-
-import AccountPortalValidation from 'components/AccountPortalForm/validate';
-import LoginFormValidate from 'components/LoginForm/validate';
-import CreatePortalValidation from 'components/CreatePortalForm/validate';
 import auth from './auth';
 import portal from './portal';
+
+import AccountPortalValidation from 'components/AccountPortalForm/validate';
+import LoginFormValidation from 'components/LoginForm/validate';
+import CreatePortalValidation from 'components/CreatePortalForm/validate';
 
 export default combineReducers({
   routing: routerReducer,
@@ -18,7 +18,7 @@ export default combineReducers({
   userVerify,
   form: formReducer.validation({
     AccountPortalForm: AccountPortalValidation,
-    LoginForm: LoginFormValidate,
+    LoginForm: LoginFormValidation,
     CreatePortalForm: CreatePortalValidation
   }),
   auth,

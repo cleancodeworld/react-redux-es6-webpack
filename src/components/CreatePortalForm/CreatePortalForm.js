@@ -32,7 +32,7 @@ export default class CreatePortalForm extends Component {
     } = this.props;
     return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="row">
             <div className="col-lg-6 col-lg-offset-3">
               <div className="panel registration-form">

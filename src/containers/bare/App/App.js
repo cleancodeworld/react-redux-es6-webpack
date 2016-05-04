@@ -46,6 +46,9 @@ export default class App extends Component {
                 <LinkContainer to="/login">
                   <NavItem eventKey={3}>Login</NavItem>
                 </LinkContainer>
+                <LinkContainer to="/create-portal">
+                  <NavItem eventKey={4}>Create Portal</NavItem>
+                </LinkContainer>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

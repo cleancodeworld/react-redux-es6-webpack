@@ -1,4 +1,4 @@
-const LoginFormValidate = values => {
+const LoginFormValidation = values => {
   const errors = {};
   if (!values.email) {
     errors.email = 'Required';
@@ -11,4 +11,4 @@ const LoginFormValidate = values => {
   return errors;
 };
 
-export default LoginFormValidate;
+export default LoginFormValidation;

@@ -9,6 +9,8 @@ export const CREATE_SUCCESS = 'knexpert/portal/CREATE_SUCCESS';
 export const CREATE_FAIL = 'knexpert/portal/CREATE_FAIL';
 
 import Immutable from 'immutable';
+import {SubmissionError} from 'redux-form';
+import config from 'config';
 
 const initialState = Immutable.fromJS({
   loading: false,
@@ -67,5 +69,18 @@ export function create(model, sessionToken) {
     data: {
       model
     }
+  };
+}
+
+export function createPortal(model) {
+  return dispatch => {
+    return dispatch(create(model))
+      .then((res)=> {
+        alert('Portal created successfully.');
+        window.location.href = location.protocol + '//' + res.createdPortal.name + '.' + config.mainDomain;
+      })
+      .catch(res => {
+        throw new SubmissionError({ _error: res.error });
+      });
   };
 }
