@@ -9,6 +9,9 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
 import { isChecked, check as portalCheck } from 'redux/modules/portal';
+import {UserNav} from 'components';
+
+import {logout} from 'redux/modules/auth';
 import {
   NotFound
 } from '../../bare';
@@ -26,22 +29,26 @@ import {
   }
 }])
 @connect(
-  state => ({ portal: state.portal })
+  state => ({ portal: state.portal }),
+  { logout }
 )
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     portal: PropTypes.object.isRequired,
+    logout: PropTypes.func,
   };
 
   static contextTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    user: PropTypes.object
   };
 
   render() {
     const logoImage = require('./knexpert.png');
     const {portal} = this.props;
+    const { user} = this.context;
     let content = this.props.children;
     if (!portal || !portal.get('data')) {
       content = <NotFound />;
@@ -65,6 +72,7 @@ export default class App extends Component {
                   <NavItem eventKey={2}>Menu Item 1</NavItem>
                 </LinkContainer>
               </Nav>
+              <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
           </Navbar>
           <div>
@@ -78,8 +86,9 @@ export default class App extends Component {
           </ul>
           <div className="navbar-collapse collapse" id="footer">
             <div className="navbar-text">
-              © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com" className="navbar-link"
-                                                                         target="_blank">CURTIS Digital, Inc.</a>
+              © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com"
+                                                                             className="navbar-link"
+                                                                             target="_blank">CURTIS Digital, Inc.</a>
             </div>
             <div className="navbar-right">
               <ul className="nav navbar-nav">

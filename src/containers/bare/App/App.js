@@ -7,6 +7,10 @@ import Helmet from 'react-helmet';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import {UserNav} from 'components';
+import {connect} from 'react-redux';
+
+import {logout} from 'redux/modules/auth';
 
 @asyncConnect([{
   promise: ({store: {}}) => {
@@ -14,17 +18,23 @@ import NavItem from 'react-bootstrap/lib/NavItem';
     return Promise.all(promises);
   }
 }])
+
+@connect(()=>({}), { logout })
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
+    logout: PropTypes.func,
   };
 
   static contextTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    user: PropTypes.object,
   };
 
   render() {
     const logoImage = require('./knexpert.png');
+    const { user} = this.context;
     return (
       <div>
         <div className="navbar-bottom login-container">
@@ -43,13 +53,11 @@ export default class App extends Component {
                 <LinkContainer to="/account-portal-create">
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/login">
-                  <NavItem eventKey={3}>Login</NavItem>
-                </LinkContainer>
                 <LinkContainer to="/create-portal">
-                  <NavItem eventKey={4}>Create Portal</NavItem>
+                  <NavItem eventKey={3}>Create Portal</NavItem>
                 </LinkContainer>
               </Nav>
+              <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
           </Navbar>
           <div>
@@ -63,8 +71,9 @@ export default class App extends Component {
           </ul>
           <div className="navbar-collapse collapse" id="footer">
             <div className="navbar-text">
-              © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com" className="navbar-link"
-                                                                         target="_blank">CURTIS Digital, Inc.</a>
+              © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com"
+                                                                             className="navbar-link"
+                                                                             target="_blank">CURTIS Digital, Inc.</a>
             </div>
             <div className="navbar-right">
               <ul className="nav navbar-nav">

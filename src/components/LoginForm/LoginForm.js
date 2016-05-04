@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
+import {Link} from 'react-router';
 
 @reduxForm({
   form: 'LoginForm',
@@ -16,7 +17,7 @@ export default class LoginForm extends Component {
     let res = <span/>;
     if (error) {
       res = (<div className="alert bg-danger alert-styled-left" role="alert">
-        <strong>Oh snap!</strong> {error}
+        <strong>{error}</strong>
       </div> );
     }
     return res;
@@ -27,14 +28,16 @@ export default class LoginForm extends Component {
       handleSubmit,
       submitting,
       error
-    } = this.props;
+      } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="panel panel-body login-form">
             <div className="text-center">
               <div className="icon-object border-warning-400 text-warning-400"><i className="icon-people"></i></div>
-              <h5 className="content-group-lg">Login to your knexpert account <small className="display-block">Enter your credentials</small></h5>
+              <h5 className="content-group-lg">Login to your knexpert account
+                <small className="display-block">Enter your credentials</small>
+              </h5>
             </div>
             {this.errorRender(error)}
             <div className="form-group has-feedback has-feedback-left">
@@ -79,12 +82,14 @@ export default class LoginForm extends Component {
             </div>
 
             <div className="form-group">
-              <button type="submit" disabled={submitting} className="btn bg-blue btn-block">Login <i className="icon-circle-right2 position-right"></i></button>
+              <button type="submit" disabled={submitting} className="btn bg-blue btn-block">Login <i
+                className="icon-circle-right2 position-right"></i></button>
             </div>
 
             <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-            <a href="/register" className="btn bg-slate btn-block content-group">Register</a>
-            <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
+            <Link to="/account-portal-create" className="btn bg-slate btn-block content-group">Register</Link>
+            <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
+              href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
           </div>
         </form>
       </div>
