@@ -9,3 +9,6 @@ export AccountPortalForm from './AccountPortalForm/AccountPortalForm';
 export LoginForm from './LoginForm/LoginForm';
 export CreatePortalForm from './CreatePortalForm/CreatePortalForm';
 export UserNav from './UserNav/UserNav';
+export CourseForm from './CourseForm/CourseForm';
+export TextEditor from './TextEditor/TextEditor';
+

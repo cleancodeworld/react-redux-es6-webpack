@@ -1,0 +1,26 @@
+.Select-control {
+  border-color: transparent;
+  border-bottom-color: @input-border;
+  border-radius: 0px;
+}
+
+.is-focused > .Select-control {
+  outline: 0;
+  border-color: transparent;
+  border-bottom-color: @input-border-highlight-color;
+  border-bottom: @input-border-highlight-color solid 2px;
+  box-shadow: none;
+}
+
+.Select-option{
+  &:hover{
+    background-color: @input-border;
+  }
+  &.is-selected {
+    background-color: @input-border-highlight-color;
+  }
+
+  &.is-focused {
+    background-color: @input-border-highlight-color;
+  }
+}
