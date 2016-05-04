@@ -53,6 +53,9 @@ export default class App extends Component {
                 <LinkContainer to="/account-portal-create">
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
                 </LinkContainer>
+                <LinkContainer to="/course/create">
+                  <NavItem eventKey={2}>Create course</NavItem>
+                </LinkContainer>
               </Nav>
               <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
