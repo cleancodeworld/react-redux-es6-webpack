@@ -18,9 +18,7 @@ export default class CreatePortal extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <CreatePortalForm onSubmit={ model => {
-                console.log(model);
-              } }/>{/* this.props.createPortal(model) */}
+              <CreatePortalForm onSubmit={ model => this.props.createPortal(model) }/>
             </div>
           </div>
         </div>

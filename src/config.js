@@ -15,7 +15,7 @@ const environment = {
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
-  port: 3000, // port fixed for easier auto deploy, changed from: process.env.PORT,
+  port: process.env.PORT,
   app: {
     title: 'KNExpert',
     description: 'KNExpert',

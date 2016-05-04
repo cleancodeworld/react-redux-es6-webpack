@@ -1,2 +1,2 @@
 export App from './App/App';
-export Portal from './Portal/Portal';
+export {Portal, Portal1} from './Portal/Sample';

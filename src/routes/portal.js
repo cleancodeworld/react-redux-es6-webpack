@@ -3,7 +3,8 @@ import {IndexRoute, Route} from 'react-router';
 import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal';
 import {
   App,
-  Portal
+  Portal,
+  Portal1
 } from '../containers/portal';
 import {
   NotFound
@@ -16,12 +17,12 @@ export default (params) => {
     subdomain: subdomain
   });
   return (
-    <Route path="/" component={App} subdomain={subdomain}>
+    <Route path="/" component={App}>
       { /* Sub routes */ }
       <IndexRoute component={Portal}/>
 
       { /* Sample component for dynamic subdomain routing */ }
-      <Route path="portal/:portalname" component={Portal}/>
+      <Route path="/portal/:portalname" component={Portal1}/>
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404}/>
