@@ -9,7 +9,13 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
 import { isChecked, check as portalCheck } from 'redux/modules/portal';
-import {UserNav} from 'components';
+import {
+  UserNav,
+  PageHeader,
+  Breadcrumb,
+  PageHeaderContent,
+  SideProfile
+} from 'components';
 
 import {logout} from 'redux/modules/auth';
 import {
@@ -55,7 +61,7 @@ export default class App extends Component {
     }
     return (
       <div>
-        <div className="navbar-bottom login-container">
+        <div className="navbar-bottom portal-container">
           <Helmet {...config.app.head}/>
           <Navbar className="bg-blue" fluid>
             <Navbar.Header>
@@ -75,8 +81,21 @@ export default class App extends Component {
               <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
           </Navbar>
-          <div>
-            {content}
+          <PageHeader>
+            <Breadcrumb />
+            <PageHeaderContent />
+          </PageHeader>
+          <div className="page-container">
+            <div className="page-content">
+              <div className="sidebar sidebar-main sidebar-default">
+                <div className="sidebar-content">
+                  <SideProfile />
+                </div>
+              </div>
+              <div className="content-wrapper">
+                {content}
+              </div>
+            </div>
           </div>
         </div>
         <div className="navbar navbar-default navbar-fixed-bottom footer">
