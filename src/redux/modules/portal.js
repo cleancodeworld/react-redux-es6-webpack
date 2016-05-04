@@ -4,11 +4,13 @@ export const CHECK = 'knexpert/portal/CHECK';
 export const CHECK_SUCCESS = 'knexpert/portal/CHECK_SUCCESS';
 export const CHECK_FAIL = 'knexpert/portal/CHECK_FAIL';
 export const SET_REQ_SUBDOMAIN = 'knexpert/portal/SET_REQ_SUBDOMAIN';
-export const CREATE = 'knexpert/auth/SIGNUP';
-export const CREATE_SUCCESS = 'knexpert/auth/SIGNUP_SUCCESS';
-export const CREATE_FAIL = 'knexpert/auth/SIGNUP_FAIL';
+export const CREATE = 'knexpert/portal/CREATE';
+export const CREATE_SUCCESS = 'knexpert/portal/CREATE_SUCCESS';
+export const CREATE_FAIL = 'knexpert/portal/CREATE_FAIL';
 
 import Immutable from 'immutable';
+import {SubmissionError} from 'redux-form';
+import config from 'config';
 
 const initialState = Immutable.fromJS({
   loading: false,
@@ -59,11 +61,26 @@ export function check(slug) {
 }
 
 export function create(model, sessionToken) {
+  model.privacy = model.privacy ? 'Public' : 'Private';
+  model.type = model.type ? 'Personal' : 'Company';
   return {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
     promise: (client) => client.post(`/api/v1/portal?sessionToken=${sessionToken}`, { data: model }),
     data: {
       model
     }
+  };
+}
+
+export function createPortal(model) {
+  return dispatch => {
+    return dispatch(create(model))
+      .then((res)=> {
+        alert('Portal created successfully.');
+        window.location.href = location.protocol + '//' + res.createdPortal.name + '.' + config.mainDomain;
+      })
+      .catch(res => {
+        throw new SubmissionError({ _error: res.error });
+      });
   };
 }
