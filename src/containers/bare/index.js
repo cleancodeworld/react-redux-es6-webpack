@@ -5,3 +5,4 @@ export AccountPortalCreate from './AccountPortalCreate/AccountPortalCreate';
 export Login from './Login/Login';
 export VerifyRegistration from './VerifyRegistration/VerifyRegistration';
 export CreatePortal from './CreatePortal/CreatePortal';
+export CourseCreate from './CourseCreate/CourseCreate';

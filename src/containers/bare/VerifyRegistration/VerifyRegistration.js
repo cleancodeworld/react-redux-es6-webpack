@@ -53,7 +53,7 @@ export default class VerifyRegistration extends Component {
         </div>
         <div className="panel-body">
           {!sentAgain
-            ? <a href="javascript:void(0)" onClick={()=> this.props.resend()}> send again </a>
+            ? <a href="javascript:void(0)" onClick={()=> this.props.resend(this.props.location.query.email)}> send again </a>
             : <span>Check your inbox</span>
           }
         </div>
