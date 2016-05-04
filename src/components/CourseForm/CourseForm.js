@@ -153,7 +153,11 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Description
                 </div>
-                <TextEditor/>
+                <Field
+                  name="description"
+                  component={description=> <TextEditor {...description}/>}
+                />
+
               </div>
             </div>
             <div className="col-md-12 text-right">

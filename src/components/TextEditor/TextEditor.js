@@ -20,7 +20,7 @@ export default class TextEditor extends Component {
       res = (
         <RteEditor
           value={this.state.value}
-          onChange={this.onChange}
+          onChange={this.props.onChange}
         />
       );
     }
