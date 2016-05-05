@@ -3,11 +3,12 @@ import RichTextEditor from 'react-rte';
 
 export default class RteEditor extends Component {
   static propTypes = {
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    value: PropTypes.string
   };
 
   state = {
-    value: RichTextEditor.createEmptyValue()
+    value: RichTextEditor.createValueFromString(this.props.value, 'html')
   }
 
   onChange = (value) => {
