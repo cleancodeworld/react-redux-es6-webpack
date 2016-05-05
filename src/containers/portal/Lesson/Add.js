@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { LessonForm } from 'components';
 import { connect } from 'react-redux';
-import { addLesson } from 'redux/modules/lessons';
+import { addLesson } from 'redux/modules/lessons/lessons';
 
 @connect(null, { addLesson })
 export default class LessonAdd extends Component {
@@ -21,7 +21,7 @@ export default class LessonAdd extends Component {
           <div className="tabbable">
             <div className="tab-content">
               <div className="tab-pane fade in active" id="activity">
-                <LessonForm onSubmit={ model => this.props.addLesson(model, courseName)} />
+                <LessonForm onSubmit={ model => this.props.addLesson(model, '572a28b8cbb4e21160227efc', courseName)} />
               </div>
             </div>
           </div>

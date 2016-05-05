@@ -8,7 +8,8 @@ import userVerify from './user/verify';
 import courseCreate from './course/create';
 import auth from './auth';
 import portal from './portal';
-import lessons from './lessons';
+import lessons from './lessons/lessons';
+import lessonEdit from './lessons/edit';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidation from 'components/LoginForm/validate';
@@ -31,5 +32,6 @@ export default combineReducers({
   auth,
   portal,
   lessons,
+  lessonEdit,
   courseCreate,
 });

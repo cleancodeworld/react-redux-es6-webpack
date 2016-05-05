@@ -6,7 +6,7 @@ import {
   Sample,
   LessonListContainer,
   LessonAdd,
-  LessonEdit
+  LessonEdit,
   CourseCreate,
 } from '../containers/portal';
 import {

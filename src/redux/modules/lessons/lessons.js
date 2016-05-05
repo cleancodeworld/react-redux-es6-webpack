@@ -98,6 +98,7 @@ function edit(model, lessonName) {
 }
 
 export function editLesson(model, courseId, courseName, lessonName) {
+  console.log(model);
   model.courseId = courseId;
   // test values
   model.videoUrl = 'video url';

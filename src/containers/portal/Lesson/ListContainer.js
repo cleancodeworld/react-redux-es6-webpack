@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { LessonList } from 'components';
-import { isLoaded, load as loadLessons } from 'redux/modules/lessons';
+import { isLoaded, load as loadLessons } from 'redux/modules/lessons/lessons';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {

@@ -1,32 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import { LessonForm } from 'components';
+import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
-import { editLesson } from 'redux/modules/lessons';
+import { LessonForm } from 'components';
+import { editLesson } from 'redux/modules/lessons/lessons';
+import { load as loadLesson } from 'redux/modules/lessons/edit';
 
+@asyncConnect([{
+  promise: ({store: {dispatch}, params}) => {
+    const promises = [];
+    if (params.lessonName) {
+      promises.push(dispatch(loadLesson(params.lessonName)));
+    }
+    return Promise.all(promises);
+  }
+}])
 @connect(
-  state => ({ lessons: state.lessons }),
+  state => ({ lessonEdit: state.lessonEdit }),
   { editLesson }
 )
 export default class LessonEdit extends Component {
   static propTypes = {
-    lessons: PropTypes.object,
+    lessonEdit: PropTypes.object,
     editLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
 
   render() {
     const {courseName, lessonName} = this.props.params;
-    let lessons = this.props.lessons.get('lessons');
-    if (typeof lessons.toJS !== 'undefined') {
-      lessons = lessons.toJS();
-    }
-    let lesson = {};
-    lessons.map(_lesson => {
-      if (_lesson.Slug === lessonName) {
-        lesson = _lesson;
-      }
-    });
+    const {lessonEdit} = this.props;
+    const lesson = lessonEdit.get('lesson');
     return (
       <div className="row">
         <Helmet title="Edit"/>

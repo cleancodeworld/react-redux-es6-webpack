@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {TextEditor} from 'components';
-/* import Dropzone from 'react-dropzone';
-import superagent from 'superagent'; */
+import Dropzone from 'react-dropzone';
+import superagent from 'superagent';
 
 @reduxForm({
   form: 'LessonForm',
@@ -25,7 +25,7 @@ export default class LessonForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        alert('Uploaded successfully');
+        alert('Uploaded successfully ' + body.url);
         field.onChange(body.url);
       }
     });
@@ -52,6 +52,7 @@ export default class LessonForm extends Component {
       lesson = {
         title: '',
         description: '',
+        thumbnail: '',
         content: ''
       };
     }
@@ -70,10 +71,10 @@ export default class LessonForm extends Component {
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
               </div>
             }/>
-            <Field name="thumbnail" component={thumbnail =>
+            <Field name="thumbnail" defaultValue={lesson.thumbnail} component={thumbnail =>
               <div className="form-group">
-                <div className="control-label">
-                  Upload thumbnail
+                <div>
+                  <label>Upload thumbnail</label>
                 </div>
                 <Dropzone
                         {...thumbnail}
@@ -82,7 +83,6 @@ export default class LessonForm extends Component {
                         multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
                   <div>Drop thumbnail here, or click to select file to upload.</div>
                 </Dropzone>
-                <span className="help-block">Accepted formats: mp4, mpg, flv, gif, png, jpg. Max file size 2Mb</span>
                 {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
               </div>
             }/>
@@ -95,8 +95,7 @@ export default class LessonForm extends Component {
             <Field name="content" defaultValue={lesson.content} component={content =>
               <div className="form-group">
                 <label>Content</label>
-                <textarea cols="5" rows="5" className="wysihtml5 wysihtml5-min form-control" placeholder="Enter text ..." {...content}>
-                </textarea>
+                <TextEditor {...content}/>
               </div>
             }/>
             <div className="text-right">
