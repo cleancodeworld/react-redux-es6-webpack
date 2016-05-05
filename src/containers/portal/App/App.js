@@ -80,6 +80,9 @@ export default class App extends Component {
                 <LinkContainer to="/course/create">
                   <NavItem eventKey={2}>Create course</NavItem>
                 </LinkContainer>
+                <LinkContainer to="/course/list">
+                  <NavItem eventKey={3}>List course</NavItem>
+                </LinkContainer>
               </Nav>
               <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>

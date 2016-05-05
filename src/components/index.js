@@ -21,3 +21,4 @@ export SideProfile from './PortalLayout/SideProfile';
 export SideMenu from './PortalLayout/SideMenu';
 export ProfileCover from './PortalLayout/ProfileCover';
 export ProfileToolbar from './PortalLayout/ProfileToolbar';
+export CourseListItem from './CourseListItem/CourseListItem';
