@@ -6,7 +6,8 @@ import superagent from 'superagent';
 
 @reduxForm({
   form: 'LessonForm',
-  fields: ['title', 'description', 'thumbnail', 'content']
+  fields: ['title', 'description', 'thumbnail', 'content'],
+  destroyOnUnmount: true
 })
 export default class LessonForm extends Component {
   static propTypes = {
@@ -47,15 +48,6 @@ export default class LessonForm extends Component {
       submitting,
       error
     } = this.props;
-    let lesson = this.props.lesson;
-    if (!lesson) {
-      lesson = {
-        title: '',
-        description: '',
-        thumbnail: '',
-        content: ''
-      };
-    }
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
@@ -64,14 +56,14 @@ export default class LessonForm extends Component {
         <div className="panel-body">
           {this.errorRender(error)}
           <form onSubmit={handleSubmit} autoComplete="off">
-            <Field name="title" defaultValue={lesson.title} component={title =>
+            <Field name="title" component={title =>
               <div className="form-group">
                 <label>Title</label>
                 <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
               </div>
             }/>
-            <Field name="thumbnail" defaultValue={lesson.thumbnail} component={thumbnail =>
+            <Field name="thumbnail" component={thumbnail =>
               <div className="form-group">
                 <div>
                   <label>Upload thumbnail</label>
@@ -86,13 +78,13 @@ export default class LessonForm extends Component {
                 {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
               </div>
             }/>
-            <Field name="description" defaultValue={lesson.description} component={description =>
+            <Field name="description" component={description =>
               <div className="form-group">
                 <label className="display-block">Short Description</label>
                 <textarea cols="5" rows="5" className="form-control" placeholder="Enter text ..." {...description}></textarea>
               </div>
             }/>
-            <Field name="content" defaultValue={lesson.content} component={content =>
+            <Field name="content" component={content =>
               <div className="form-group">
                 <label>Content</label>
                 <TextEditor {...content}/>

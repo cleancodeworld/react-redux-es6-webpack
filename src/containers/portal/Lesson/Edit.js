@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import { LessonForm } from 'components';
-import { editLesson } from 'redux/modules/lessons/lessons';
+import { editLesson } from 'redux/modules/lessons/edit';
 import { load as loadLesson } from 'redux/modules/lessons/edit';
 
 @asyncConnect([{
@@ -29,7 +29,10 @@ export default class LessonEdit extends Component {
   render() {
     const {courseName, lessonName} = this.props.params;
     const {lessonEdit} = this.props;
-    const lesson = lessonEdit.get('lesson');
+    let lesson = lessonEdit.get('lesson');
+    if (typeof lesson.toJS !== 'undefined') {
+      lesson = lesson.toJS();
+    }
     return (
       <div className="row">
         <Helmet title="Edit"/>
@@ -38,7 +41,7 @@ export default class LessonEdit extends Component {
           <div className="tabbable">
             <div className="tab-content">
               <div className="tab-pane fade in active" id="activity">
-                <LessonForm lesson={lesson} onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName)} />
+                <LessonForm initialValues={lesson} onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName)} />
               </div>
             </div>
           </div>

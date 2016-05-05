@@ -5,6 +5,10 @@ const LessonFormValidation = values => {
     errors.title = 'Required';
   }
 
+  if (!values.thumbnail) {
+    errors.thumbnail = 'Required';
+  }
+
   return errors;
 };
 

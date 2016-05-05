@@ -1,18 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { asyncConnect } from 'redux-async-connect';
 import { LessonForm } from 'components';
 import { connect } from 'react-redux';
 import { addLesson } from 'redux/modules/lessons/lessons';
+import { getCourse } from 'redux/modules/lessons/lessons';
 
-@connect(null, { addLesson })
+@asyncConnect([{
+  promise: ({store: {dispatch}, params}) => {
+    const promises = [];
+    if (params.courseName) {
+      promises.push(dispatch(getCourse(params.courseName)));
+    }
+    return Promise.all(promises);
+  }
+}])
+@connect(
+  state => ({ lessons: state.lessons }),
+  { addLesson }
+)
 export default class LessonAdd extends Component {
   static propTypes = {
+    lessons: PropTypes.object,
     addLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
 
   render() {
     const {courseName} = this.props.params;
+    const {lessons} = this.props;
+    const course = lessons.get('course');
     return (
       <div className="row">
         <Helmet title="Add"/>
@@ -21,7 +38,7 @@ export default class LessonAdd extends Component {
           <div className="tabbable">
             <div className="tab-content">
               <div className="tab-pane fade in active" id="activity">
-                <LessonForm onSubmit={ model => this.props.addLesson(model, '572a28b8cbb4e21160227efc', courseName)} />
+                <LessonForm onSubmit={ model => this.props.addLesson(model, course.Id, courseName)} />
               </div>
             </div>
           </div>

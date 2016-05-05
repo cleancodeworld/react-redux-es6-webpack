@@ -6,10 +6,10 @@ import { LessonList } from 'components';
 import { isLoaded, load as loadLessons } from 'redux/modules/lessons/lessons';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({store: {dispatch, getState}, params}) => {
     const promises = [];
     if (!isLoaded(getState())) {
-      promises.push(dispatch(loadLessons('Node.js-Course')));
+      promises.push(dispatch(loadLessons(params.courseName)));
     }
     return Promise.all(promises);
   }

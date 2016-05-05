@@ -6,9 +6,11 @@ export const LOAD_FAIL = 'knexpert/lessons/LOAD_FAIL';
 export const ADD = 'knexpert/lessons/ADD';
 export const ADD_SUCCESS = 'knexpert/lessons/ADD_SUCCESS';
 export const ADD_FAIL = 'knexpert/lessons/ADD_FAIL';
-export const EDIT = 'knexpert/lessons/EDIT';
-export const EDIT_SUCCESS = 'knexpert/lessons/EDIT_SUCCESS';
-export const EDIT_FAIL = 'knexpert/lessons/EDIT_FAIL';
+export const GETCOURSE = 'knexpert/lessons/GETCOURSE';
+export const GETCOURSE_SUCCESS = 'knexpert/lessons/GETCOURSE_SUCCESS';
+export const GETCOURSE_FAIL = 'knexpert/lessons/GETCOURSE_FAIL';
+
+import {EDIT, EDIT_SUCCESS, EDIT_FAIL} from './edit';
 
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
@@ -16,6 +18,7 @@ import { push } from 'react-router-redux';
 
 const initialState = Immutable.fromJS({
   lessons: [],
+  course: [],
   loaded: false
 });
 
@@ -45,6 +48,12 @@ export default function lessons(state = initialState, action) {
       return state.set('loaded', false);
     case EDIT:
     case EDIT_FAIL:
+      return state;
+    case GETCOURSE_SUCCESS:
+      return state.set('course', action.result);
+    case GETCOURSE_FAIL:
+      return state.set('course', {});
+    case GETCOURSE:
     default:
       return state;
   }
@@ -61,6 +70,13 @@ export function load(courseName) {
   };
 }
 
+export function getCourse(courseName) {
+  return {
+    types: [GETCOURSE, GETCOURSE_SUCCESS, GETCOURSE_FAIL],
+    promise: (client) => client.get(`/api/v1/course/name/${courseName}`)
+  };
+}
+
 export function add(model) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
@@ -74,37 +90,9 @@ export function add(model) {
 export function addLesson(model, courseId, courseName) {
   model.courseId = courseId;
   // test values
-  model.videoUrl = 'video url';
   model.order = 1;
   return dispatch => {
     return dispatch(add(model))
-      .then(()=> {
-        return dispatch(push('/course/' + courseName));
-      })
-      .catch(res => {
-        throw new SubmissionError({ _error: res.error });
-      });
-  };
-}
-
-function edit(model, lessonName) {
-  return {
-    types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
-    promise: (client) => client.put(`/api/v1/lesson/name/${lessonName}`, { data: model }),
-    data: {
-      model
-    }
-  };
-}
-
-export function editLesson(model, courseId, courseName, lessonName) {
-  console.log(model);
-  model.courseId = courseId;
-  // test values
-  model.videoUrl = 'video url';
-  model.order = 1;
-  return dispatch => {
-    return dispatch(edit(model, lessonName))
       .then(()=> {
         return dispatch(push('/course/' + courseName));
       })
