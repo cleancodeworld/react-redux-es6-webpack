@@ -16,3 +16,4 @@ export PageHeader from './PortalLayout/PageHeader';
 export Breadcrumb from './PortalLayout/Breadcrumb';
 export PageHeaderContent from './PortalLayout/PageHeaderContent';
 export SideProfile from './PortalLayout/SideProfile';
+export CourseListItem from './CourseListItem/CourseListItem';

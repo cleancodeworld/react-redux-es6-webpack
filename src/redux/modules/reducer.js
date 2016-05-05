@@ -6,6 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 import userCreate from './user/create';
 import userVerify from './user/verify';
 import courseCreate from './course/create';
+import courseList from './course/list';
 import auth from './auth';
 import portal from './portal';
 
@@ -28,4 +29,5 @@ export default combineReducers({
   auth,
   portal,
   courseCreate,
+  courseList,
 });
