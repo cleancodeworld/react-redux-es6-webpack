@@ -6,7 +6,7 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
   if (__SERVER__) {
-    // Prepend host and port of the API server to the path.
+    // Prepend host and port of the Host server to the path.
     let res = config.mainDomain;
     if (config.port && process.env.NODE_ENV !== 'production') {
       res += ':' + config.port;
