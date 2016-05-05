@@ -4,6 +4,8 @@ import Select from 'react-select';
 import classnames from 'classnames';
 import {TextEditor} from 'components';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
+import superagent from 'superagent';
 
 @connect(({auth}) => ({
   initialValues: {
@@ -11,7 +13,7 @@ import { connect } from 'react-redux';
     language: 'English',
     category: 'General',
     duration: 500,
-    thumbnail: 'temp',
+    thumbnail: '',
     authorId: auth.get('userId')
   }
 }))
@@ -25,7 +27,23 @@ export default class CourseForm extends Component {
     error: PropTypes.string
   }
 
-  errorRender(error) {
+
+  onDrop = (files, field)=> {
+    const req = superagent.post('/upload');
+    files.forEach((file)=> {
+      req.attach('thumbnail', file);
+    });
+    req.end((err, { body } = {})=> {
+      if (err) {
+        alert(JSON.stringify(err));
+      } else {
+        alert('Uploaded successfully');
+        field.onChange(body.url);
+      }
+    });
+  }
+
+  errorRender = (error) => {
     let res = <span/>;
     if (error) {
       res = (<div className="alert bg-danger alert-styled-left" role="alert">
@@ -75,6 +93,28 @@ export default class CourseForm extends Component {
               }/>
               </div>
             </div>
+            <div className="col-md-12">
+              <div className="form-group">
+                <div className="control-label">
+                  Thumbnail
+                </div>
+                <Field name="thumbnail" component={thumbnail =>
+                  <div>
+                   <Dropzone
+                            {...thumbnail}
+                            accept="image/*" className="action btn bg-warning"
+                            style={{height: 60}}
+                            multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
+                    <div>Drop thumbnail here, or click to select file to upload.</div>
+                  </Dropzone>
+                  {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
+                </div>
+
+                }/>
+
+              </div>
+            </div>
+
             <div className="col-md-6">
               <div className="form-group">
                 <div className="control-label">
