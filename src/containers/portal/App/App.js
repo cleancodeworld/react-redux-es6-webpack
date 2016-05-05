@@ -14,7 +14,10 @@ import {
   PageHeader,
   Breadcrumb,
   PageHeaderContent,
-  SideProfile
+  SideProfile,
+  SideMenu,
+  ProfileCover,
+  ProfileToolbar
 } from 'components';
 
 import {logout} from 'redux/modules/auth';
@@ -90,9 +93,12 @@ export default class App extends Component {
               <div className="sidebar sidebar-main sidebar-default">
                 <div className="sidebar-content">
                   <SideProfile />
+                  <SideMenu />
                 </div>
               </div>
               <div className="content-wrapper">
+                <ProfileCover />
+                <ProfileToolbar />
                 {content}
               </div>
             </div>

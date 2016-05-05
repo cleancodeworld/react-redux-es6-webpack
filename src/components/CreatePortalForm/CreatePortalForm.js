@@ -46,22 +46,22 @@ export default class CreatePortalForm extends Component {
                   {this.errorRender(error)}
                   <div className="form-group has-feedback">
                     <Field name="name" component={name =>
-                          <div>
-                            <input type="text" className="form-control" {...name} onChange={event=>name.onBlur(event)} placeholder="Portal name"/>
-                            {name.touched && name.error && <span className="validation-error-label">{name.error}</span>}
-                          </div>
-                        }/>
+                      <div>
+                        <input type="text" className="form-control" {...name} onChange={event=>name.onBlur(event)} placeholder="Portal name"/>
+                        {name.touched && name.error && <span className="validation-error-label">{name.error}</span>}
+                      </div>
+                    }/>
                     <div className="form-control-feedback">
                       <i className="icon-user-plus text-muted"></i>
                     </div>
                   </div>
                   <div className="form-group has-feedback">
                     <Field name="description" component={description =>
-                          <div>
-                            <input type="text" className="form-control" {...description} onChange={event=>description.onBlur(event)} placeholder="Portal Description"/>
-                            {/* portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span> */}
-                          </div>
-                        }/>
+                      <div>
+                        <input type="text" className="form-control" {...description} onChange={event=>description.onBlur(event)} placeholder="Portal Description"/>
+                        {/* portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span> */}
+                      </div>
+                    }/>
                     <div className="form-control-feedback">
                       <i className="icon-user-plus text-muted"></i>
                     </div>

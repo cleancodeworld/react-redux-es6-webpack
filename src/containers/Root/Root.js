@@ -12,7 +12,6 @@ import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
     return Promise.all(promises);
   }
 }])
-
 @connect(({auth})=>({ user: auth.get('user') }))
 export default class Root extends React.Component {
   static propTypes = {

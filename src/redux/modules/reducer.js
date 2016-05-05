@@ -7,11 +7,13 @@ import userCreate from './user/create';
 import userVerify from './user/verify';
 import auth from './auth';
 import portal from './portal';
+import lessons from './lessons';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidation from 'components/LoginForm/validate';
 import CreatePortalValidation from 'components/CreatePortalForm/validate';
 import CourseFormValidation from 'components/CourseForm/validate';
+import LessonFormValidation from 'components/LessonForm/validate';
 
 export default combineReducers({
   routing: routerReducer,
@@ -23,7 +25,9 @@ export default combineReducers({
     LoginForm: LoginFormValidation,
     CreatePortalForm: CreatePortalValidation,
     CourseForm: CourseFormValidation,
+    LessonForm: LessonFormValidation,
   }),
   auth,
   portal,
+  lessons,
 });

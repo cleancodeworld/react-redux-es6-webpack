@@ -1,2 +1,5 @@
 export App from './App/App';
-export {Portal, Portal1} from './Portal/Sample';
+export Sample from './Sample/Sample';
+export LessonListContainer from './Lesson/ListContainer';
+export LessonAdd from './Lesson/Add';
+export LessonEdit from './Lesson/Edit';

@@ -8,11 +8,16 @@
 export AccountPortalForm from './AccountPortalForm/AccountPortalForm';
 export LoginForm from './LoginForm/LoginForm';
 export CreatePortalForm from './CreatePortalForm/CreatePortalForm';
+export LessonList from './LessonList/LessonList';
+export LessonForm from './LessonForm/LessonForm';
+
 export UserNav from './UserNav/UserNav';
 export CourseForm from './CourseForm/CourseForm';
 export TextEditor from './TextEditor/TextEditor';
-
 export PageHeader from './PortalLayout/PageHeader';
 export Breadcrumb from './PortalLayout/Breadcrumb';
 export PageHeaderContent from './PortalLayout/PageHeaderContent';
 export SideProfile from './PortalLayout/SideProfile';
+export SideMenu from './PortalLayout/SideMenu';
+export ProfileCover from './PortalLayout/ProfileCover';
+export ProfileToolbar from './PortalLayout/ProfileToolbar';
