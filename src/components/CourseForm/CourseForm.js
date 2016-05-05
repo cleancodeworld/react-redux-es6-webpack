@@ -3,7 +3,9 @@ import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import classnames from 'classnames';
 import {TextEditor} from 'components';
+import { connect } from 'react-redux';
 
+@connect(() => ({ initialValues: { level: 'all' } }))
 @reduxForm({
   form: 'CourseForm'
 })
