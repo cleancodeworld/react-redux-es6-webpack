@@ -13,8 +13,7 @@ import {
   UserNav,
   PageHeader,
   Breadcrumb,
-  PageHeaderContent,
-  SideProfile
+  PageHeaderContent
 } from 'components';
 
 import {logout} from 'redux/modules/auth';
@@ -74,8 +73,8 @@ export default class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse eventKey={0}>
               <Nav navbar>
-                <LinkContainer to="#">
-                  <NavItem eventKey={2}>Menu Item 1</NavItem>
+                <LinkContainer to="/course/create">
+                  <NavItem eventKey={2}>Create course</NavItem>
                 </LinkContainer>
               </Nav>
               <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
@@ -87,11 +86,6 @@ export default class App extends Component {
           </PageHeader>
           <div className="page-container">
             <div className="page-content">
-              <div className="sidebar sidebar-main sidebar-default">
-                <div className="sidebar-content">
-                  <SideProfile />
-                </div>
-              </div>
               <div className="content-wrapper">
                 {content}
               </div>

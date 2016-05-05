@@ -4,7 +4,8 @@ import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal';
 import {
   App,
   Portal,
-  Portal1
+  Portal1,
+  CourseCreate,
 } from '../containers/portal';
 import {
   NotFound
@@ -23,9 +24,9 @@ export default (params) => {
       <Route path="/" component={App} subdomain={subdomain}>
         { /* Sub routes */ }
         <IndexRoute component={Portal}/>
-
+        <Route path="course/create" component={CourseCreate}/>
         { /* Sample component for dynamic subdomain routing */ }
-        <Route path="/portal/:portalname" component={Portal1}/>
+        <Route path="portal/:portalname" component={Portal1}/>
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
