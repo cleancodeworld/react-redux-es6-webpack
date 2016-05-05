@@ -32,7 +32,6 @@ export default class LessonAdd extends Component {
     return (
       <div className="row">
         <Helmet title="Add"/>
-        Add lesson
         <div className="col-lg-9">
           <div className="tabbable">
             <div className="tab-content">

@@ -36,7 +36,6 @@ export default class LessonEdit extends Component {
     return (
       <div className="row">
         <Helmet title="Edit"/>
-        Edit lesson
         <div className="col-lg-9">
           <div className="tabbable">
             <div className="tab-content">
