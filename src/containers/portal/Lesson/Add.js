@@ -3,8 +3,7 @@ import Helmet from 'react-helmet';
 import { asyncConnect } from 'redux-async-connect';
 import { LessonForm } from 'components';
 import { connect } from 'react-redux';
-import { addLesson } from 'redux/modules/lessons/lessons';
-import { getCourse } from 'redux/modules/lessons/lessons';
+import { addLesson, getCourse } from 'redux/modules/lessons/lessons';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, params}) => {

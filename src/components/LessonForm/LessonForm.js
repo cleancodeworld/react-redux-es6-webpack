@@ -26,7 +26,7 @@ export default class LessonForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        alert('Uploaded successfully ' + body.url);
+        alert('Uploaded successfully');
         field.onChange(body.url);
       }
     });

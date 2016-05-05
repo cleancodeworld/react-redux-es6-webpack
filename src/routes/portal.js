@@ -28,11 +28,11 @@ export default (params) => {
         { /* Sub routes */ }
         <IndexRoute component={Sample}/>
 
+        <Route path="course/create" component={CourseCreate}/>
+        <Route path="course/list" component={CourseList}/>
         <Route path="course/:courseName" component={LessonListContainer}/>
         <Route path="course/:courseName/lesson/add" component={LessonAdd}/>
         <Route path="course/:courseName/lesson/:lessonName/edit" component={LessonEdit}/>
-        <Route path="course/create" component={CourseCreate}/>
-        <Route path="course/list" component={CourseList}/>
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
