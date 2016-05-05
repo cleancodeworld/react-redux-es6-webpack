@@ -14,7 +14,7 @@ export default class CreatePortal extends Component {
   render() {
     return (
       <div>
-        <Helmet title="Home"/>
+        <Helmet title="Create Portal"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">

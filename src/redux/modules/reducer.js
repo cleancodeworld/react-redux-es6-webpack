@@ -9,11 +9,14 @@ import courseCreate from './course/create';
 import courseList from './course/list';
 import auth from './auth';
 import portal from './portal';
+import lessons from './lessons/lessons';
+import lessonEdit from './lessons/edit';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidation from 'components/LoginForm/validate';
 import CreatePortalValidation from 'components/CreatePortalForm/validate';
 import CourseFormValidation from 'components/CourseForm/validate';
+import LessonFormValidation from 'components/LessonForm/validate';
 
 export default combineReducers({
   routing: routerReducer,
@@ -25,9 +28,12 @@ export default combineReducers({
     LoginForm: LoginFormValidation,
     CreatePortalForm: CreatePortalValidation,
     CourseForm: CourseFormValidation,
+    LessonForm: LessonFormValidation,
   }),
   auth,
   portal,
+  lessons,
+  lessonEdit,
   courseCreate,
   courseList,
 });

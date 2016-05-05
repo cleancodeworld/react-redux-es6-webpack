@@ -14,7 +14,7 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <Helmet title="Home"/>
+        <Helmet title="Login"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
