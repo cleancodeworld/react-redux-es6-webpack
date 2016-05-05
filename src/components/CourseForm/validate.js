@@ -3,6 +3,9 @@ const CourseFormValidate = (values) => {
   if (!values.title) {
     errors.title = 'Required';
   }
+  if (!values.subtitle) {
+    errors.subtitle = 'Required';
+  }
   return errors;
 };
 

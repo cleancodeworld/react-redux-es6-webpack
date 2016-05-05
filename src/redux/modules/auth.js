@@ -26,15 +26,20 @@ export default function auth(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
-      let newState = Immutable.fromJS(state);
-      const token = reactCookie.load('sessionToken');
-      if (token) {
-        newState = newState.set('sessionToken', token);
-      }
-      return newState;
+      return Immutable.fromJS(state).withMutations(map=> {
+        const token = reactCookie.load('sessionToken');
+        const userId = reactCookie.load('userId');
+        if (token) {
+          map.set('sessionToken', token);
+          map.set('userId', userId);
+        }
+      });
     case LOGIN_SUCCESS:
-      const {sessionToken} = action.result;
-      return state.set('sessionToken', sessionToken);
+      const {sessionToken, userId} = action.result;
+      return state.withMutations(map=> {
+        map.set('sessionToken', sessionToken);
+        map.set('userId', userId);
+      });
     case LOGIN_FAIL:
       return state.set('sessionToken', '');
     case LOGOUT_SUCCESS:
@@ -42,7 +47,9 @@ export default function auth(state = initialState, action) {
       return state.withMutations((map)=> {
         map.remove('user');
         map.set('sessionToken', null);
+        map.set('userId', null);
         reactCookie.remove('sessionToken');
+        reactCookie.remove('userId');
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
@@ -75,12 +82,13 @@ export function userLogin(model) {
     return dispatch(
       login(model))
       .then((res)=> {
-        const {sessionToken} = res;
+        const {sessionToken, userId} = res;
         const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
         }
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
+        reactCookie.save('userId', userId, cookieOpt);
         return dispatch(push('/'));
       })
       .catch(res => {

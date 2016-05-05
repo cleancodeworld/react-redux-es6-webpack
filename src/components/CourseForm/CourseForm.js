@@ -5,9 +5,18 @@ import classnames from 'classnames';
 import {TextEditor} from 'components';
 import { connect } from 'react-redux';
 
-@connect(() => ({ initialValues: { level: 'all' } }))
+@connect(({auth}) => ({
+  initialValues: {
+    level: 'all',
+    language: 'English',
+    category: 'General',
+    duration: 500,
+    thumbnail: 'temp',
+    authorId: auth.get('userId')
+  }
+}))
 @reduxForm({
-  form: 'CourseForm'
+  form: 'CourseForm',
 })
 export default class CourseForm extends Component {
   static propTypes = {
@@ -45,10 +54,10 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Title
                 </div>
-                <Field name="title" component={title =>
+                <Field name="name" component={name =>
                 <div>
-                  <input type="text" className="form-control" placeholder="Title" {...title} />
-                  {title.touched && title.error && <label className="validation-error-label">{title.error}</label>}
+                  <input type="text" className="form-control" placeholder="Title" {...name} />
+                  {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
                 </div>
               }/>
               </div>
@@ -78,7 +87,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={language.value}
-                  options={['english', 'two', 'three'].map( value => ({ value: value, label: value}))}
+                  options={['English', 'Spanish', 'Dutch', 'French'].map( value => ({ value: value, label: value}))}
                   />
                   {language.touched && language.error && <label className="validation-error-label">{language.error}</label>}
                 </div>
@@ -96,7 +105,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={category.value}
-                  options={['one', 'two', 'three'].map( value => ({ value: value, label: value}))}
+                  options={['General', 'Languages', 'Programming', 'Health'].map( value => ({ value: value, label: value}))}
                   />
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
