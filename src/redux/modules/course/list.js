@@ -28,7 +28,7 @@ export default function courseCreate(state = initialState, action) {
   }
 }
 
-export function load(name = 'eeeee') {
+export function load(name) {
   return {
     types: [LIST, LIST_SUCCESS, LIST_FAIL],
     promise: (client) => client.get(`/api/v1/course/author/${name}`)
