@@ -14,6 +14,15 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import reactCookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
+import cloudinary from 'cloudinary';
+import multer from 'multer';
+const upload = multer({ dest: 'uploads/' });
+
+cloudinary.config({
+  cloud_name: 'clinic',
+  api_key: '676869843726733',
+  api_secret: 'foThBMkX7npvcYuNsOi2DhJrqJ8'
+});
 
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -41,6 +50,12 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
+app.post('/upload', upload.single('thumbnail'), (req, res) => {
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    res.send(result);
+  });
+});
+
 app.use('/api/v1', (req, res) => {
   proxy.web(req, res, { target: config.apiUrl + '/api/v1' });
 });

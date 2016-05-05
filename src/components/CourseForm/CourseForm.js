@@ -3,9 +3,22 @@ import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import classnames from 'classnames';
 import {TextEditor} from 'components';
+import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
+import superagent from 'superagent';
 
+@connect(({auth}) => ({
+  initialValues: {
+    level: 'all',
+    language: 'English',
+    category: 'General',
+    duration: 500,
+    thumbnail: '',
+    authorId: auth.get('userId')
+  }
+}))
 @reduxForm({
-  form: 'CourseForm'
+  form: 'CourseForm',
 })
 export default class CourseForm extends Component {
   static propTypes = {
@@ -14,7 +27,23 @@ export default class CourseForm extends Component {
     error: PropTypes.string
   }
 
-  errorRender(error) {
+
+  onDrop = (files, field)=> {
+    const req = superagent.post('/upload');
+    files.forEach((file)=> {
+      req.attach('thumbnail', file);
+    });
+    req.end((err, { body } = {})=> {
+      if (err) {
+        alert(JSON.stringify(err));
+      } else {
+        alert('Uploaded successfully');
+        field.onChange(body.url);
+      }
+    });
+  }
+
+  errorRender = (error) => {
     let res = <span/>;
     if (error) {
       res = (<div className="alert bg-danger alert-styled-left" role="alert">
@@ -43,10 +72,10 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Title
                 </div>
-                <Field name="title" component={title =>
+                <Field name="name" component={name =>
                 <div>
-                  <input type="text" className="form-control" placeholder="Title" {...title} />
-                  {title.touched && title.error && <label className="validation-error-label">{title.error}</label>}
+                  <input type="text" className="form-control" placeholder="Title" {...name} />
+                  {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
                 </div>
               }/>
               </div>
@@ -64,6 +93,28 @@ export default class CourseForm extends Component {
               }/>
               </div>
             </div>
+            <div className="col-md-12">
+              <div className="form-group">
+                <div className="control-label">
+                  Thumbnail
+                </div>
+                <Field name="thumbnail" component={thumbnail =>
+                  <div>
+                   <Dropzone
+                            {...thumbnail}
+                            accept="image/*" className="action btn bg-warning"
+                            style={{height: 60}}
+                            multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
+                    <div>Drop thumbnail here, or click to select file to upload.</div>
+                  </Dropzone>
+                  {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
+                </div>
+
+                }/>
+
+              </div>
+            </div>
+
             <div className="col-md-6">
               <div className="form-group">
                 <div className="control-label">
@@ -76,7 +127,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={language.value}
-                  options={['english', 'two', 'three'].map( value => ({ value: value, label: value}))}
+                  options={['English', 'Spanish', 'Dutch', 'French'].map( value => ({ value: value, label: value}))}
                   />
                   {language.touched && language.error && <label className="validation-error-label">{language.error}</label>}
                 </div>
@@ -94,7 +145,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={category.value}
-                  options={['one', 'two', 'three'].map( value => ({ value: value, label: value}))}
+                  options={['General', 'Languages', 'Programming', 'Health'].map( value => ({ value: value, label: value}))}
                   />
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
