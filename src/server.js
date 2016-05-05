@@ -15,7 +15,7 @@ import http from 'http';
 import reactCookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
-import multer  from 'multer';
+import multer from 'multer';
 const upload = multer({ dest: 'uploads/' });
 
 cloudinary.config({
@@ -50,8 +50,8 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.post('/upload', upload.single('thumbnail'),(req, res) => {
-  cloudinary.uploader.upload(req.file.path, function(result) {
+app.post('/upload', upload.single('thumbnail'), (req, res) => {
+  cloudinary.uploader.upload(req.file.path, (result) => {
     res.send(result);
   });
 });
