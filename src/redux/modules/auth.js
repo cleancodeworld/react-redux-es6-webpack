@@ -29,16 +29,19 @@ export default function auth(state = initialState, action) {
       return Immutable.fromJS(state).withMutations(map=> {
         const token = reactCookie.load('sessionToken');
         const userId = reactCookie.load('userId');
+        const username = reactCookie.load('username');
         if (token) {
           map.set('sessionToken', token);
           map.set('userId', userId);
+          map.set('username', username);
         }
       });
     case LOGIN_SUCCESS:
-      const {sessionToken, userId} = action.result;
+      const {sessionToken, userId, username} = action.result;
       return state.withMutations(map=> {
         map.set('sessionToken', sessionToken);
         map.set('userId', userId);
+        map.set('username', username);
       });
     case LOGIN_FAIL:
       return state.set('sessionToken', '');
@@ -48,8 +51,10 @@ export default function auth(state = initialState, action) {
         map.remove('user');
         map.set('sessionToken', null);
         map.set('userId', null);
+        map.set('username', null);
         reactCookie.remove('sessionToken');
         reactCookie.remove('userId');
+        reactCookie.remove('username');
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
@@ -82,13 +87,14 @@ export function userLogin(model) {
     return dispatch(
       login(model))
       .then((res)=> {
-        const {sessionToken, userId} = res;
+        const {sessionToken, username, userId} = res;
         const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
         }
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
+        reactCookie.save('username', username, cookieOpt);
         return dispatch(push('/'));
       })
       .catch(res => {

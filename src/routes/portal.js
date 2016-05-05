@@ -6,6 +6,7 @@ import {
   Portal,
   Portal1,
   CourseCreate,
+  CourseList,
 } from '../containers/portal';
 import {
   NotFound
@@ -25,6 +26,7 @@ export default (params) => {
         { /* Sub routes */ }
         <IndexRoute component={Portal}/>
         <Route path="course/create" component={CourseCreate}/>
+        <Route path="course/list" component={CourseList}/>
         { /* Sample component for dynamic subdomain routing */ }
         <Route path="portal/:portalname" component={Portal1}/>
 
