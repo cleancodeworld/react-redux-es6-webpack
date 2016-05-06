@@ -4,7 +4,7 @@ import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal';
 import {
   App,
   Dashboard,
-  CourseContainer,
+  CourseManagerContainer,
   LessonListContainer,
   LessonAdd,
   LessonEdit,
@@ -29,12 +29,12 @@ export default (params) => {
         { /* Sub routes */ }
         <IndexRoute component={Dashboard}/>
 
-        <Route path="course" component={CourseContainer}>
-          <Route path="create" component={CourseCreate}/>
-          <Route path="list" component={CourseList}/>
-          <Route path=":courseName" component={LessonListContainer}/>
-          <Route path=":courseName/lesson/add" component={LessonAdd}/>
-          <Route path=":courseName/lesson/:lessonName/edit" component={LessonEdit}/>
+        <Route path="course/create" component={CourseCreate}/>
+        <Route path="course/list" component={CourseList}/>
+        <Route path="course/:courseName" component={CourseManagerContainer}>
+          <Route path="lesson/list" component={LessonListContainer}/>
+          <Route path="lesson/add" component={LessonAdd}/>
+          <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
         </Route>
 
         { /* Catch all route */ }
