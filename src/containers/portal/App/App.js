@@ -16,8 +16,6 @@ import {
   PageHeaderContent,
   SideProfile,
   SideMenu,
-  ProfileCover,
-  ProfileToolbar
 } from 'components';
 
 import {logout} from 'redux/modules/auth';
@@ -57,7 +55,7 @@ export default class App extends Component {
   render() {
     const logoImage = require('./knexpert.png');
     const {portal} = this.props;
-    const { user} = this.context;
+    const {user} = this.context;
     let content = this.props.children;
     if (!portal || !portal.get('data')) {
       content = <NotFound />;
@@ -100,8 +98,6 @@ export default class App extends Component {
                 </div>
               </div>
               <div className="content-wrapper">
-                <ProfileCover />
-                <ProfileToolbar />
                 {content}
               </div>
             </div>
