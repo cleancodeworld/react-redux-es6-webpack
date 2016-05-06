@@ -15,6 +15,7 @@ export default class LessonForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string,
     lesson: PropTypes.object,
+    submitStatus: PropTypes.bool,
   }
 
   onDrop = (files, field)=> {
@@ -42,11 +43,22 @@ export default class LessonForm extends Component {
     return res;
   }
 
+  successRender(submitStatus, error) {
+    let res = '';
+    if (submitStatus && !error) {
+      res = (<div className="alert bg-success alert-styled-left" role="alert">
+        <strong>Success!</strong>
+      </div> );
+    }
+    return res;
+  }
+
   render() {
     const {
       handleSubmit,
       submitting,
-      error
+      error,
+      submitStatus,
     } = this.props;
     return (
       <div className="panel panel-flat">
@@ -55,6 +67,7 @@ export default class LessonForm extends Component {
         </div>
         <div className="panel-body">
           {this.errorRender(error)}
+          {this.successRender(submitStatus, error)}
           <form onSubmit={handleSubmit} autoComplete="off">
             <Field name="title" component={title =>
               <div className="form-group">

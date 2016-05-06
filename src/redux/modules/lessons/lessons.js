@@ -10,6 +10,8 @@ export const GETCOURSE = 'knexpert/lessons/GETCOURSE';
 export const GETCOURSE_SUCCESS = 'knexpert/lessons/GETCOURSE_SUCCESS';
 export const GETCOURSE_FAIL = 'knexpert/lessons/GETCOURSE_FAIL';
 
+const REDUX_FORM_INIT = 'redux-form/INITIALIZE';
+
 import {EDIT, EDIT_SUCCESS, EDIT_FAIL} from './edit';
 
 import Immutable from 'immutable';
@@ -19,7 +21,8 @@ import { push } from 'react-router-redux';
 const initialState = Immutable.fromJS({
   lessons: [],
   course: [],
-  loaded: false
+  loaded: false,
+  submitSuccess: false,
 });
 
 export default function lessons(state = initialState, action) {
@@ -27,6 +30,8 @@ export default function lessons(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case REDUX_FORM_INIT:
+      return state.set('submitSuccess', false);
     case LOAD_SUCCESS:
       return state.withMutations(map => {
         map.set('loaded', true);
@@ -40,12 +45,18 @@ export default function lessons(state = initialState, action) {
     case LOAD:
       return state;
     case ADD_SUCCESS:
-      return state.set('loaded', false);
+      return state.withMutations(map => {
+        map.set('loaded', false);
+        map.set('submitSuccess', true);
+      });
     case ADD:
     case ADD_FAIL:
       return state;
     case EDIT_SUCCESS:
-      return state.set('loaded', false);
+      return state.withMutations(map => {
+        map.set('loaded', false);
+        map.set('submitSuccess', true);
+      });
     case EDIT:
     case EDIT_FAIL:
       return state;
@@ -94,7 +105,9 @@ export function addLesson(model, courseId, courseName) {
   return dispatch => {
     return dispatch(add(model))
       .then(()=> {
-        return dispatch(push('/course/' + courseName));
+        setTimeout(function timedDispatch() {
+          dispatch(push('/course/' + courseName + '/lesson/list'));
+        }, 2500);
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });

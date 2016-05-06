@@ -28,9 +28,10 @@ export default class LessonAdd extends Component {
     const {courseName} = this.props.params;
     const {lessons} = this.props;
     const course = lessons.get('course');
+    const submitStatus = lessons.get('submitSuccess');
     return (
       <div>
-        <LessonForm onSubmit={ model => this.props.addLesson(model, course.Id, courseName)} />
+        <LessonForm onSubmit={ model => this.props.addLesson(model, course.get('Id'), courseName)} submitStatus={submitStatus} />
       </div>
     );
   }
