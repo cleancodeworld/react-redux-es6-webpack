@@ -51,7 +51,7 @@ export default class Root extends React.Component {
               <li><a href="#" className="legitRipple">About</a></li>
               <li><a href="#" className="legitRipple">Terms</a></li>
               <li><a href="#" className="legitRipple">Contact</a></li>
-              <li><a href={ `${repoUrl}/tree/${lastCommit}` }
+              <li><a target="_blank" href={ `${repoUrl}/tree/${lastCommit}` }
                      className="legitRipple">{buildVersion}</a></li>
             </ul>
           </div>
