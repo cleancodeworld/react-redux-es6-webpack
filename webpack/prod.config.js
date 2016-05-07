@@ -6,6 +6,8 @@ var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
+var buildVersion = require('./utils/build-version');
+var lastCommit = require('./utils/last-commit');
 
 var projectRootPath = path.resolve(__dirname, '../');
 var assetsPath = path.resolve(projectRootPath, './static/dist');
@@ -68,6 +70,8 @@ module.exports = {
 
       __CLIENT__: true,
       __SERVER__: false,
+      __BUILD_VERSION__: buildVersion,
+      __LAST_COMMIT__: lastCommit,
       __DEVELOPMENT__: false,
       __DEVTOOLS__: false
     }),
