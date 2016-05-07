@@ -1,11 +1,7 @@
-/**
- * Created by noursammour on 07/05/16.
- */
+import git from 'git-rev-sync';
 
-var git = require('git-rev-sync')
-
-function getLastCommit() {
-  var lastCommit = '\'' + git.short().toString() + '\'';
+const getLastCommit= ()=> {
+  const  lastCommit = '\'' + git.short().toString() + '\'';
   return lastCommit;
 }
 

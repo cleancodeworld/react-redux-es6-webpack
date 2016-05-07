@@ -1,11 +1,7 @@
-/**
- * Created by noursammour on 07/05/16.
- */
+import git from 'git-rev-sync';
 
-var git = require('git-rev-sync')
-
-function getBuildVersion() {
-  var buildVersion = '\'' + git.tag().toString() + git.short().toString() + '\'';
+const getBuildVersion = ()=> {
+  const buildVersion = '\'' + git.tag().toString() + git.short().toString() + '\'';
   return buildVersion;
 }
 
