@@ -35,7 +35,7 @@ export default function lessons(state = initialState, action) {
     case LOAD_SUCCESS:
       return state.withMutations(map => {
         map.set('loaded', true);
-        map.set('lessons', action.result.lessons);
+        map.set('lessons', Immutable.fromJS(action.result.lessons));
       });
     case LOAD_FAIL:
       return state.withMutations(map => {
@@ -61,9 +61,9 @@ export default function lessons(state = initialState, action) {
     case EDIT_FAIL:
       return state;
     case GETCOURSE_SUCCESS:
-      return state.set('course', action.result);
+      return state.set('course', Immutable.fromJS(action.result));
     case GETCOURSE_FAIL:
-      return state.set('course', {});
+      return state.set('course', Immutable.fromJS({}));
     case GETCOURSE:
     default:
       return state;
