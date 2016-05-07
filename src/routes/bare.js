@@ -8,6 +8,7 @@ import {
   Login,
   VerifyRegistration,
   CreatePortal,
+  PasswordForget,
 } from '../containers/bare';
 
 import Root from '../containers/Root/Root';
@@ -27,6 +28,7 @@ export default () => {
         <Route path="login" component={Login}/>
         <Route path="verify/registration" component={VerifyRegistration}/>
         <Route path="create-portal" component={CreatePortal}/>
+        <Route path="password/forget" component={PasswordForget}/>
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
