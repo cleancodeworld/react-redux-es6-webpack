@@ -1,6 +1,6 @@
-import git from 'git-rev-sync';
+var git = require('git-rev-sync')
 
-const getBuildVersion = ()=> {
+function getBuildVersion() {
   const buildVersion = '\'' + git.tag().toString() + git.short().toString() + '\'';
   return buildVersion;
 }

@@ -2,8 +2,8 @@
 require('../server.babel'); // babel registration (runtime transpilation for node)
 var path = require('path');
 var rootDir = path.resolve(__dirname, '..');
-var buildVersion = require('../src/utils/build-version');
-var lastCommit = require('../src/utils/last-commit');
+var buildVersion = require('../webpack/utils/build-version');
+var lastCommit = require('../webpack/utils/last-commit');
 /**
  * Define isomorphic constants.
  */

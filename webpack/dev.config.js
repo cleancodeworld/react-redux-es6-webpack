@@ -7,8 +7,8 @@ var webpack = require('webpack');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;
-var buildVersion = require('../src/utils/build-version');
-var lastCommit = require('../src/utils/last-commit');
+var buildVersion = require('./utils/build-version');
+var lastCommit = require('./utils/last-commit');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');

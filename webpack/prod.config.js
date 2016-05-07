@@ -6,8 +6,8 @@ var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var strip = require('strip-loader');
-var buildVersion = require('../src/utils/build-version');
-var lastCommit = require('../src/utils/last-commit');
+var buildVersion = require('./utils/build-version');
+var lastCommit = require('./utils/last-commit');
 
 var projectRootPath = path.resolve(__dirname, '../');
 var assetsPath = path.resolve(projectRootPath, './static/dist');
