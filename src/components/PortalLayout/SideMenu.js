@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 export default class ProfileToolbar extends Component {
   render() {
@@ -6,8 +7,8 @@ export default class ProfileToolbar extends Component {
       <div className="category-content no-padding">
         <ul className="navigation navigation-main navigation-accordion">
           <li className="navigation-header"><span>Main</span> <i className="icon-menu" title="Main pages"></i></li>
-          <li><a href="index.html"><i className="icon-home4"></i> <span>Dashboard</span></a></li>
-          <li><a href="index.html"><i className="icon-home4"></i> <span>Course Mgr</span></a></li>
+          <li><Link to="/"><i className="icon-home4"></i> <span>Dashboard</span></Link></li>
+          <li><Link to="/course/list"><i className="icon-home4"></i> <span>Course Mgr</span></Link></li>
         </ul>
       </div>
     );

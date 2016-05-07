@@ -1,5 +1,6 @@
 export App from './App/App';
-export Sample from './Sample/Sample';
+export Dashboard from './Dashboard/Dashboard';
+export CourseContainer from './CourseContainer/CourseContainer';
 export LessonListContainer from './Lesson/ListContainer';
 export LessonAdd from './Lesson/Add';
 export LessonEdit from './Lesson/Edit';
