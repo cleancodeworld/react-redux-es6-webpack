@@ -61,7 +61,9 @@ export function editLesson(model, courseId, courseName, lessonName) {
   return dispatch => {
     return dispatch(edit(model, lessonName))
       .then(()=> {
-        return dispatch(push('/course/' + courseName));
+        setTimeout(function timedDispatch() {
+          dispatch(push('/course/' + courseName + '/lesson/list'));
+        }, 2500);
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
