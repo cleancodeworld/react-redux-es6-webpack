@@ -27,9 +27,14 @@ export default class CourseList extends Component {
     return (
       <div>
         <Helmet title="Home"/>
-        {list.map(course=> {
-          return (<CourseListItem key={course.get('Id')} course={course}/>);
-        })}
+        <div className="content-group">
+          <h6 className="text-semibold">Course List </h6>
+        </div>
+        <div className="row">
+          {list.map(course=> {
+            return (<CourseListItem key={course.get('Id')} course={course}/>);
+          })}
+        </div>
       </div>
     );
   }

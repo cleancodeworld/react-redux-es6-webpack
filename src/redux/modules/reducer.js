@@ -7,6 +7,7 @@ import userCreate from './user/create';
 import userVerify from './user/verify';
 import courseCreate from './course/create';
 import courseList from './course/list';
+import courseEdit from './course/edit';
 import auth from './auth';
 import portal from './portal';
 import lessons from './lessons/lessons';
@@ -36,4 +37,5 @@ export default combineReducers({
   lessonEdit,
   courseCreate,
   courseList,
+  courseEdit,
 });

@@ -7,14 +7,12 @@ import superagent from 'superagent';
 @reduxForm({
   form: 'LessonForm',
   fields: ['title', 'description', 'thumbnail', 'content'],
-  destroyOnUnmount: true
 })
 export default class LessonForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
     error: PropTypes.string,
-    lesson: PropTypes.object,
     submitStatus: PropTypes.bool,
   }
 

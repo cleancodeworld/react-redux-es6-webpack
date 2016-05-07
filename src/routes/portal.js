@@ -5,11 +5,12 @@ import {
   App,
   Dashboard,
   CourseManagerContainer,
-  LessonListContainer,
+  LessonList,
   LessonAdd,
   LessonEdit,
   CourseCreate,
   CourseList,
+  CourseEdit,
 } from '../containers/portal';
 import {
   NotFound
@@ -32,7 +33,8 @@ export default (params) => {
         <Route path="course/create" component={CourseCreate}/>
         <Route path="course/list" component={CourseList}/>
         <Route path="course/:courseName" component={CourseManagerContainer}>
-          <Route path="lesson/list" component={LessonListContainer}/>
+          <IndexRoute component={CourseEdit}/>
+          <Route path="lesson/list" component={LessonList}/>
           <Route path="lesson/add" component={LessonAdd}/>
           <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
         </Route>
