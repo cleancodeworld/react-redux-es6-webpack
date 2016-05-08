@@ -42,6 +42,7 @@ export default function auth(state = initialState, action) {
         map.set('sessionToken', sessionToken);
         map.set('userId', userId);
         map.set('username', username);
+        map.set('user', { userId, username });
       });
     case LOGIN_FAIL:
       return state.set('sessionToken', '');
@@ -60,8 +61,10 @@ export default function auth(state = initialState, action) {
       return state.withMutations((map)=> {
         const user = Immutable.fromJS(action.result.user);
         map.set('user', user);
+        map.set('loaded', true);
       });
     case LOAD_FAIL:
+      return state.set('loaded', true);
     case LOGIN:
     default:
       return state;
@@ -82,7 +85,7 @@ export function login(model) {
   };
 }
 
-export function userLogin(model) {
+export function userLogin(model, continueTo) {
   return dispatch => {
     return dispatch(
       login(model))
@@ -95,7 +98,7 @@ export function userLogin(model) {
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
-        return dispatch(push('/'));
+        return dispatch(push(continueTo || '/'));
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });

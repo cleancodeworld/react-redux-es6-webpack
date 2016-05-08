@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 
 @reduxForm({
   form: 'LoginForm',
-  fields: ['email', 'password', 'remember']
 })
 export default class LoginForm extends Component {
   static propTypes = {

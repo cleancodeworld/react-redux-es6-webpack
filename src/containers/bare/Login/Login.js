@@ -9,16 +9,18 @@ export default class Login extends Component {
 
   static propTypes = {
     userLogin: PropTypes.func.isRequired,
+    location: PropTypes.object,
   };
 
   render() {
+    const {continueTo} = this.props.location.query;
     return (
       <div>
         <Helmet title="Login"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <LoginForm onSubmit={ model => this.props.userLogin(model)}/>
+              <LoginForm onSubmit={ model => this.props.userLogin(model, continueTo)}/>
             </div>
           </div>
         </div>
