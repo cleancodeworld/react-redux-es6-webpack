@@ -4,6 +4,7 @@ import {reduxForm, Field} from 'redux-form';
 @reduxForm({
   form: 'PasswordForgetForm',
 })
+
 export default class PasswordForgetForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -16,7 +17,7 @@ export default class PasswordForgetForm extends Component {
     if (error) {
       res = (<div className="alert bg-danger alert-styled-left" role="alert">
         <strong>{error}</strong>
-      </div> );
+      </div>);
     }
     return res;
   }
@@ -47,7 +48,6 @@ export default class PasswordForgetForm extends Component {
                   </div>
                   {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
                 </div>
-
               }/>
             </div>
             <div className="form-group">

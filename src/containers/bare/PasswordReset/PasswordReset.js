@@ -2,13 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { PasswordResetForm } from 'components';
-import { sendResetToken } from 'redux/modules/password/forget';
+import { changePassword } from 'redux/modules/password/reset';
 
-@connect(null, { sendResetToken })
+@connect(null, { changePassword })
 export default class PasswordReset extends Component {
 
   static propTypes = {
-    sendResetToken: PropTypes.func.isRequired,
+    changePassword: PropTypes.func.isRequired,
+    location: PropTypes.object,
+
   };
 
   render() {
@@ -18,7 +20,11 @@ export default class PasswordReset extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <PasswordResetForm onSubmit={ model => this.props.sendResetToken(model.email)}/>
+              <PasswordResetForm onSubmit={ model =>
+              this.props.changePassword({
+                newPassword: model.password,
+                ResetToken: this.props.location.query.token
+              })}/>
             </div>
           </div>
         </div>
