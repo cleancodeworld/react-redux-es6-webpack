@@ -64,7 +64,7 @@ export default class CourseForm extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
-          <div className="panel panel-body col-md-6 col-md-offset-3">
+          <div className="panel panel-body">
             <h2 className="content-group-lg">Basic
             </h2>
             <p className="text-muted">Help Students find your course. <a href="#">Learn best Practices</a></p>

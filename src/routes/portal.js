@@ -11,6 +11,7 @@ import {
   CourseCreate,
   CourseList,
   CourseEdit,
+  CourseAuthorView,
 } from '../containers/portal';
 import {
   NotFound
@@ -33,7 +34,8 @@ export default (params) => {
         <Route path="course/create" component={CourseCreate}/>
         <Route path="course/list" component={CourseList}/>
         <Route path="course/:courseName" component={CourseManagerContainer}>
-          <IndexRoute component={CourseEdit}/>
+          <IndexRoute component={CourseAuthorView}/>
+          <Route path="goals" component={CourseEdit}/>
           <Route path="lesson/list" component={LessonList}/>
           <Route path="lesson/add" component={LessonAdd}/>
           <Route path="lesson/:lessonName/edit" component={LessonEdit}/>

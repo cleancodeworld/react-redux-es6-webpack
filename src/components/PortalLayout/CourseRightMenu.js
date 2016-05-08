@@ -13,7 +13,7 @@ export default class CourseRightMenu extends Component {
           <h6 className="panel-title">Navigation</h6>
         </div>
         <div className="list-group no-border no-padding-top">
-          <a href="#" className="list-group-item"><i className="icon-user"></i> Goals</a>
+          <Link to={'/course/' + courseName + '/goals'} className="list-group-item"><i className="icon-user"></i> Goals</Link>
           <a href="#" className="list-group-item"><i className="icon-cash3"></i> Accounting</a>
           <Link to={'/course/' + courseName + '/lesson/list'} className="list-group-item"><i className="icon-tree7"></i> Curriculum <span className="badge bg-danger pull-right">2</span></Link>
           <a href="#" className="list-group-item"><i className="icon-users"></i> SEO</a>
