@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 
 @reduxForm({
-  form: 'PasswordForgetForm',
+  form: 'PasswordResetForm',
 })
 export default class PasswordForgetForm extends Component {
   static propTypes = {
@@ -39,16 +39,26 @@ export default class PasswordForgetForm extends Component {
             </div>
             {this.errorRender(error)}
             <div className="form-group has-feedback">
-              <Field name="email" component={email =>
-                <div>
-                  <input type="text" className="form-control" placeholder="Email" {...email} />
-                  <div className="form-control-feedback">
-                  	<i className="icon-mail5 text-muted"></i>
-                  </div>
-                  {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
-                </div>
-
-              }/>
+              <Field name="password" component={password =>
+                          <div>
+                            <input type="password" className="form-control" {...password} placeholder="Create password"/>
+                            {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
+                          </div>
+                        }/>
+              <div className="form-control-feedback">
+                <i className="icon-user-lock text-muted"></i>
+              </div>
+            </div>
+            <div className="form-group has-feedback">
+              <Field name="confirmPassword" component={confirmPassword =>
+                          <div>
+                            <input type="password" className="form-control" {...confirmPassword} placeholder="Repeat password"/>
+                            {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
+                          </div>
+                        }/>
+              <div className="form-control-feedback">
+                <i className="icon-user-lock text-muted"></i>
+              </div>
             </div>
             <div className="form-group">
               <button type="submit" disabled={submitting} className="btn bg-blue btn-block">Reset password<i

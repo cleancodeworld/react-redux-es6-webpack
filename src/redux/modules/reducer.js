@@ -17,6 +17,8 @@ import LoginFormValidation from 'components/LoginForm/validate';
 import CreatePortalValidation from 'components/CreatePortalForm/validate';
 import CourseFormValidation from 'components/CourseForm/validate';
 import LessonFormValidation from 'components/LessonForm/validate';
+import PasswordResetFormValidation from 'components/PasswordResetForm/validate';
+import PasswordForgetFormValidation from 'components/PasswordForgetForm/validate';
 
 export default combineReducers({
   routing: routerReducer,
@@ -29,6 +31,8 @@ export default combineReducers({
     CreatePortalForm: CreatePortalValidation,
     CourseForm: CourseFormValidation,
     LessonForm: LessonFormValidation,
+    PasswordResetForm: PasswordResetFormValidation,
+    PasswordForgetForm: PasswordForgetFormValidation,
   }),
   auth,
   portal,
