@@ -32,7 +32,7 @@ export default class Root extends React.Component {
   render() {
     const buildVersion = String(__BUILD_VERSION__).replace(/['"]+/g, ''); // eslint-disable-line no-undef
     const lastCommit = String(__LAST_COMMIT__).replace(/['"]+/g, ''); // eslint-disable-line no-undef
-    const repoUrl = require('../../../package.json').homepage;
+    const repoUrl = require('../../../../package.json').homepage;
     return (<div>
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">
