@@ -6,12 +6,10 @@ export const FORGET_FAIL = 'knexpert/password/FORGET_FAIL';
 
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
-import {create as portalCreate} from '../portal';
-import {login} from '../auth';
 
 const initialState = Immutable.fromJS({});
 
-export default function userCreate(state = initialState, action) {
+export default function forget(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
@@ -24,12 +22,25 @@ export default function userCreate(state = initialState, action) {
   }
 }
 
-export function create(model) {
+function _create(email) {
   return {
     types: [FORGET, FORGET_SUCCESS, FORGET_FAIL],
-    promise: (client) => client.post(`/api/v1/signup`, { data: model }),
+    promise: (client) => client.post(`/api/v1/password/reset/${email}`, { data: {} }),
     data: {
-      model
+      email
     }
+  };
+}
+
+export function sendResetToken(email) {
+  return dispatch => {
+    return dispatch(
+      _create(email))
+      .then(()=> {
+        alert('Done!');
+      })
+      .catch(res => {
+        throw new SubmissionError({ _error: res.error });
+      });
   };
 }
