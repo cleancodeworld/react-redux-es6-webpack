@@ -5,3 +5,5 @@ export AccountPortalCreate from './AccountPortalCreate/AccountPortalCreate';
 export Login from './Login/Login';
 export VerifyRegistration from './VerifyRegistration/VerifyRegistration';
 export CreatePortal from './CreatePortal/CreatePortal';
+export PasswordForget from './PasswordForget/PasswordForget';
+export PasswordReset from './PasswordReset/PasswordReset';
