@@ -32,7 +32,7 @@ export default (params) => {
         <IndexRoute component={Dashboard}/>
 
         <Route path="login" component={Login}/>
-        <Route onEnter={requireLogin}>
+        <Route path="author" onEnter={requireLogin}>
           <Route path="course/create" component={CourseCreate}/>
           <Route path="course/list" component={CourseList}/>
           <Route path="course/:courseName" component={CourseManagerContainer}>
