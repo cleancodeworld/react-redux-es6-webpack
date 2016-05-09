@@ -5,11 +5,13 @@ import {
   App,
   Dashboard,
   CourseManagerContainer,
-  LessonListContainer,
+  LessonList,
   LessonAdd,
   LessonEdit,
   CourseCreate,
   CourseList,
+  CourseEdit,
+  CourseAuthorView,
 } from '../containers/portal';
 import {
   Login,
@@ -28,12 +30,15 @@ export default (params) => {
       <Route path="/" component={App} subdomain={subdomain}>
         { /* Sub routes */ }
         <IndexRoute component={Dashboard}/>
+
         <Route path="login" component={Login}/>
         <Route onEnter={requireLogin}>
           <Route path="course/create" component={CourseCreate}/>
           <Route path="course/list" component={CourseList}/>
           <Route path="course/:courseName" component={CourseManagerContainer}>
-            <Route path="lesson/list" component={LessonListContainer}/>
+            <IndexRoute component={CourseAuthorView}/>
+            <Route path="goals" component={CourseEdit}/>
+            <Route path="lesson/list" component={LessonList}/>
             <Route path="lesson/add" component={LessonAdd}/>
             <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
           </Route>

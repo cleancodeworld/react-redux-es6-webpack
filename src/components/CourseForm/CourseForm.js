@@ -3,30 +3,20 @@ import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import classnames from 'classnames';
 import {TextEditor} from 'components';
-import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 
-@connect(({auth}) => ({
-  initialValues: {
-    level: 'all',
-    language: 'English',
-    category: 'General',
-    duration: 500,
-    thumbnail: '',
-    authorId: auth.get('userId')
-  }
-}))
 @reduxForm({
   form: 'CourseForm',
 })
 export default class CourseForm extends Component {
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
-    error: PropTypes.string
+    error: PropTypes.string,
+    submitStatus: PropTypes.bool,
   }
-
 
   onDrop = (files, field)=> {
     const req = superagent.post('/upload');
@@ -53,20 +43,32 @@ export default class CourseForm extends Component {
     return res;
   }
 
+  successRender(submitStatus, error) {
+    let res = '';
+    if (submitStatus && !error) {
+      res = (<div className="alert bg-success alert-styled-left" role="alert">
+        <strong>Success!</strong>
+      </div> );
+    }
+    return res;
+  }
+
   render() {
     const {
       handleSubmit,
       submitting,
-      error
-      } = this.props;
+      error,
+      submitStatus,
+    } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
-          <div className="panel panel-body col-md-6 col-md-offset-3">
+          <div className="panel panel-body">
             <h2 className="content-group-lg">Basic
             </h2>
             <p className="text-muted">Help Students find your course. <a href="#">Learn best Practices</a></p>
             {this.errorRender(error)}
+            {this.successRender(submitStatus, error)}
             <div className="col-md-12">
               <div className="form-group">
                 <div className="control-label">

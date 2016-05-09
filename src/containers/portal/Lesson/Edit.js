@@ -15,26 +15,28 @@ import { load as loadLesson } from 'redux/modules/lessons/edit';
   }
 }])
 @connect(
-  state => ({ lessonEdit: state.lessonEdit }),
+  state => ({ lessonEdit: state.lessonEdit, lessons: state.lessons }),
   { editLesson }
 )
 export default class LessonEdit extends Component {
   static propTypes = {
     lessonEdit: PropTypes.object,
+    lessons: PropTypes.object,
     editLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
 
   render() {
     const {courseName, lessonName} = this.props.params;
-    const {lessonEdit} = this.props;
+    const {lessonEdit, lessons} = this.props;
+    const submitStatus = lessons.get('submitSuccess');
     let lesson = lessonEdit.get('lesson');
     if (typeof lesson.toJS !== 'undefined') {
       lesson = lesson.toJS();
     }
     return (
       <div>
-        <LessonForm initialValues={lesson} onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName)} />
+        <LessonForm initialValues={lesson} submitStatus={submitStatus} onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName)} />
       </div>
     );
   }

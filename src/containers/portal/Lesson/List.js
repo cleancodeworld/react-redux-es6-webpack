@@ -17,7 +17,8 @@ import { isLoaded, load as loadLessons } from 'redux/modules/lessons/lessons';
 @connect(
   ({lessons}) => ({ list: lessons.get('lessons') })
 )
-export default class LessonListContainer extends Component {
+export default class LessonList extends Component {
+
   static propTypes = {
     list: PropTypes.object,
     params: PropTypes.object.isRequired,
