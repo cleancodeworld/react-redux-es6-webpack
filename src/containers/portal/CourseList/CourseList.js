@@ -11,7 +11,7 @@ import { load, isLoaded } from 'redux/modules/course/list';
     const promises = [];
     const state = getState();
     if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.auth.get('username'))));
+      promises.push(dispatch(load(state.auth.get('user').get('username'))));
     }
     return Promise.all(promises);
   }
