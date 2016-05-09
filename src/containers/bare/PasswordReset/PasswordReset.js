@@ -10,21 +10,25 @@ export default class PasswordReset extends Component {
   static propTypes = {
     changePassword: PropTypes.func.isRequired,
     location: PropTypes.object,
+  };
 
+  state = {
+    saved: false
   };
 
   render() {
+    const {saved} = this.state;
     return (
       <div>
         <Helmet title="Login"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <PasswordResetForm onSubmit={ model =>
+              <PasswordResetForm saved={saved} onSubmit={ model =>
               this.props.changePassword({
                 newPassword: model.password,
                 ResetToken: this.props.location.query.token
-              })}/>
+              }).then(()=> this.setState({saved: true}))}/>
             </div>
           </div>
         </div>

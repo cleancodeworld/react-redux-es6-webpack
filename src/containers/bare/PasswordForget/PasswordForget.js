@@ -11,14 +11,20 @@ export default class PasswordForget extends Component {
     sendResetToken: PropTypes.func.isRequired,
   };
 
+  state = {
+    saved: false
+  };
+
   render() {
+    const { saved } = this.state;
     return (
       <div>
         <Helmet title="Login"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <PasswordForgetForm onSubmit={ model => this.props.sendResetToken(model.email)}/>
+              <PasswordForgetForm saved={saved}
+                                  onSubmit={ model => this.props.sendResetToken(model.email).then(()=> this.setState({saved: true}))}/>
             </div>
           </div>
         </div>
