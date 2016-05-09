@@ -6,7 +6,6 @@ import superagent from 'superagent';
 
 @reduxForm({
   form: 'LessonForm',
-  fields: ['title', 'description', 'thumbnail', 'content'],
 })
 export default class LessonForm extends Component {
   static propTypes = {

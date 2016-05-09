@@ -19,6 +19,7 @@ export default function courseCreate(state = initialState, action) {
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         map.set('list', Immutable.fromJS(action.result.courses));
+        map.set('author', Immutable.fromJS(action.result.author));
         map.set('loaded', true);
       });
     case LIST:

@@ -8,7 +8,6 @@ import superagent from 'superagent';
 
 @reduxForm({
   form: 'CourseForm',
-  fields: ['name', 'subtitle', 'thumbnail', 'language', 'category', 'level', 'description'],
 })
 export default class CourseForm extends Component {
 

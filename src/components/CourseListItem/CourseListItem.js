@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-const CourseListItem = ({course}) => {
+const CourseListItem = ({course, author}) => {
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="thumbnail">
@@ -40,7 +40,7 @@ const CourseListItem = ({course}) => {
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+              <div className="media-heading text-semibold">{author.get('name')}</div>
               <span className="text-muted ellipsis">Best-selling Instructor, Game </span>
             </div>
           </div>
