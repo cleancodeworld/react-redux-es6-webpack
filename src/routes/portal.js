@@ -14,13 +14,13 @@ import {
   CourseAuthorView,
 } from '../containers/portal';
 import {
-  NotFound
-} from '../containers/bare';
-
-import Root from '../containers/Root/Root';
+  Login,
+  Root,
+  NotFound,
+} from '../containers/shared';
 
 export default (params) => {
-  const {store, subdomain} = params;
+  const {store, subdomain, requireLogin} = params;
   store.dispatch({
     type: SET_REQ_SUBDOMAIN,
     subdomain: subdomain
@@ -31,16 +31,18 @@ export default (params) => {
         { /* Sub routes */ }
         <IndexRoute component={Dashboard}/>
 
-        <Route path="course/create" component={CourseCreate}/>
-        <Route path="course/list" component={CourseList}/>
-        <Route path="course/:courseName" component={CourseManagerContainer}>
-          <IndexRoute component={CourseAuthorView}/>
-          <Route path="goals" component={CourseEdit}/>
-          <Route path="lesson/list" component={LessonList}/>
-          <Route path="lesson/add" component={LessonAdd}/>
-          <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
+        <Route path="login" component={Login}/>
+        <Route onEnter={requireLogin}>
+          <Route path="course/create" component={CourseCreate}/>
+          <Route path="course/list" component={CourseList}/>
+          <Route path="course/:courseName" component={CourseManagerContainer}>
+            <IndexRoute component={CourseAuthorView}/>
+            <Route path="goals" component={CourseEdit}/>
+            <Route path="lesson/list" component={LessonList}/>
+            <Route path="lesson/add" component={LessonAdd}/>
+            <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
+          </Route>
         </Route>
-
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
       </Route>

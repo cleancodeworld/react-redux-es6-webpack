@@ -22,3 +22,5 @@ export CourseRightMenu from './PortalLayout/CourseRightMenu';
 export LessonListItem from './LessonListItem/LessonListItem';
 export LessonForm from './LessonForm/LessonForm';
 export CourseListItem from './CourseListItem/CourseListItem';
+export PasswordForgetForm from './PasswordForgetForm/PasswordForgetForm';
+export PasswordResetForm from './PasswordResetForm/PasswordResetForm';

@@ -75,7 +75,7 @@ export default class LoginForm extends Component {
                 }/>
 
                 <div className="col-sm-6 text-right">
-                  <a href="/forgot-password">Forgot password?</a>
+                  <Link to="/password/forget">Forgot password?</Link>
                 </div>
               </div>
             </div>

@@ -3,16 +3,22 @@ import {IndexRoute, Route} from 'react-router';
 import {
   App,
   Home,
-  NotFound,
   AccountPortalCreate,
-  Login,
   VerifyRegistration,
   CreatePortal,
+  PasswordForget,
+  PasswordReset,
 } from '../containers/bare';
+import {
+  Login,
+  Root,
+  NotFound,
+} from '../containers/shared';
 
-import Root from '../containers/Root/Root';
 
-export default () => {
+export default (params) => {
+  const {requireLogin} = params;
+
   /**
    * Please keep routes in alphabetical order
    */
@@ -25,8 +31,12 @@ export default () => {
         { /* Routes */ }
         <Route path="account-portal-create" component={AccountPortalCreate}/>
         <Route path="login" component={Login}/>
+        <Route onEnter={requireLogin}>
+          <Route path="create-portal" component={CreatePortal}/>
+        </Route>
+        <Route path="password/forget" component={PasswordForget}/>
+        <Route path="password/reset" component={PasswordReset}/>
         <Route path="verify/registration" component={VerifyRegistration}/>
-        <Route path="create-portal" component={CreatePortal}/>
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>

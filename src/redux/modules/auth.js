@@ -18,8 +18,8 @@ import reactCookie from 'react-cookie';
 import config from 'config';
 
 const initialState = Immutable.fromJS({
-  sessionToken: '',
   loaded: false,
+  user: null,
 });
 
 export default function auth(state = initialState, action) {
@@ -27,31 +27,23 @@ export default function auth(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state).withMutations(map=> {
-        const token = reactCookie.load('sessionToken');
+        const sessionToken = reactCookie.load('sessionToken');
         const userId = reactCookie.load('userId');
         const username = reactCookie.load('username');
-        if (token) {
-          map.set('sessionToken', token);
-          map.set('userId', userId);
-          map.set('username', username);
-        }
+        const user = Immutable.fromJS({ sessionToken, userId, username });
+        map.set('user', user);
       });
     case LOGIN_SUCCESS:
-      const {sessionToken, userId, username} = action.result;
-      return state.withMutations(map=> {
-        map.set('sessionToken', sessionToken);
-        map.set('userId', userId);
-        map.set('username', username);
+      return state.withMutations((map)=> {
+        const user = Immutable.fromJS(action.result);
+        map.set('user', user);
       });
     case LOGIN_FAIL:
-      return state.set('sessionToken', '');
+      return state.remove('user');
     case LOGOUT_SUCCESS:
     case LOGOUT_FAIL:
       return state.withMutations((map)=> {
         map.remove('user');
-        map.set('sessionToken', null);
-        map.set('userId', null);
-        map.set('username', null);
         reactCookie.remove('sessionToken');
         reactCookie.remove('userId');
         reactCookie.remove('username');
@@ -60,8 +52,10 @@ export default function auth(state = initialState, action) {
       return state.withMutations((map)=> {
         const user = Immutable.fromJS(action.result.user);
         map.set('user', user);
+        map.set('loaded', true);
       });
     case LOAD_FAIL:
+      return state.set('loaded', true);
     case LOGIN:
     default:
       return state;
@@ -69,7 +63,7 @@ export default function auth(state = initialState, action) {
 }
 
 export function isAuthenticated(globalState) {
-  return globalState.auth && globalState.auth.get('sessionToken');
+  return globalState.auth && globalState.auth.getIn(['user', 'sessionToken']);
 }
 
 export function login(model) {
@@ -82,7 +76,7 @@ export function login(model) {
   };
 }
 
-export function userLogin(model) {
+export function userLogin(model, continueTo) {
   return dispatch => {
     return dispatch(
       login(model))
@@ -95,7 +89,7 @@ export function userLogin(model) {
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
-        return dispatch(push('/'));
+        return dispatch(push(continueTo || '/'));
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
