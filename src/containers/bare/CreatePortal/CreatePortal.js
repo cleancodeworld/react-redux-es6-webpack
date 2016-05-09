@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createPortal } from 'redux/modules/portal';
 
 @connect(
-  ({ auth }) => ({ userId: auth.get('userId') }),
+  ({ auth }) => ({ userId: auth.getIn(['user', 'userId']) }),
   { createPortal }
 )
 export default class CreatePortal extends Component {

@@ -36,5 +36,5 @@ export function load(name) {
   };
 }
 export function isLoaded(globalState) {
-  return globalState.auth && globalState.auth.get('username') && globalState.courseList && globalState.courseList.get('loaded');
+  return globalState.auth && globalState.auth.getIn(['user', 'username']) && globalState.courseList && globalState.courseList.get('loaded');
 }
