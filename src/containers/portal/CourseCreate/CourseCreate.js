@@ -22,7 +22,7 @@ export default class CourseCreate extends Component {
       category: 'General',
       duration: 500,
       thumbnail: '',
-      authorId: this.props.auth.get('user').get('userId')
+      authorId: this.props.auth.getIn(['user', 'userId'])
     };
     return (
       <div>
