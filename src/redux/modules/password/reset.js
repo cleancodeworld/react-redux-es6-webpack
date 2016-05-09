@@ -36,9 +36,6 @@ export function changePassword(model) {
   return dispatch => {
     return dispatch(
       _changePassword(model))
-      .then(()=> {
-        alert('Done!');
-      })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });
