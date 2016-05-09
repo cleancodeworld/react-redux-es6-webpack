@@ -76,6 +76,16 @@ export function login(model) {
   };
 }
 
+export function silentLogin(model) {
+  return {
+    types: [LOGIN, LOGIN, LOGIN],
+    promise: (client) => client.post(`/api/v1/login`, { data: model }),
+    data: {
+      model
+    }
+  };
+}
+
 export function userLogin(model, continueTo) {
   return dispatch => {
     return dispatch(

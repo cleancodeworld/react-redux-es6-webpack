@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import {AccountPortalForm} from 'components';
 import { connect } from 'react-redux';
 import { createWithPortal as userCreateWithPortal } from 'redux/modules/user/create';
+import config from '../../../config';
 
 @connect(null, { userCreateWithPortal })
 export default class AccountPortalCreate extends Component {
@@ -18,7 +19,10 @@ export default class AccountPortalCreate extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <AccountPortalForm onSubmit={ model => this.props.userCreateWithPortal(model)}/>
+              <AccountPortalForm
+                onSubmit={ model => this.props
+                .userCreateWithPortal(model)
+                .then(()=>location.href = `${location.protocol}//${model.portalName}.${config.mainDomain}`)}/>
             </div>
           </div>
         </div>
