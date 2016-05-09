@@ -36,9 +36,6 @@ export function sendResetToken(email) {
   return dispatch => {
     return dispatch(
       _create(email))
-      .then(()=> {
-        alert('Done!');
-      })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });
