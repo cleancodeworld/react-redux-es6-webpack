@@ -30,8 +30,8 @@ export default class Root extends React.Component {
   }
 
   render() {
-    const buildVersion = __BUILD_VERSION__; // eslint-disable-line no-undef
-    const lastCommit = __LAST_COMMIT__; // eslint-disable-line no-undef
+    const buildVersion = String(__BUILD_VERSION__).replace(/['"]+/g, ''); // eslint-disable-line no-undef
+    const lastCommit = String(__LAST_COMMIT__).replace(/['"]+/g, ''); // eslint-disable-line no-undef
     const repoUrl = require('../../../package.json').homepage;
     return (<div>
       {this.props.children}

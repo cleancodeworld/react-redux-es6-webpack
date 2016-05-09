@@ -18,7 +18,7 @@ import {
 import Root from '../containers/Root/Root';
 
 export default (params) => {
-  const {store, subdomain} = params;
+  const {store, subdomain, requireLogin} = params;
   store.dispatch({
     type: SET_REQ_SUBDOMAIN,
     subdomain: subdomain
@@ -28,15 +28,15 @@ export default (params) => {
       <Route path="/" component={App} subdomain={subdomain}>
         { /* Sub routes */ }
         <IndexRoute component={Dashboard}/>
-
-        <Route path="course/create" component={CourseCreate}/>
-        <Route path="course/list" component={CourseList}/>
-        <Route path="course/:courseName" component={CourseManagerContainer}>
-          <Route path="lesson/list" component={LessonListContainer}/>
-          <Route path="lesson/add" component={LessonAdd}/>
-          <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
+        <Route onEnter={requireLogin}>
+          <Route path="course/create" component={CourseCreate}/>
+          <Route path="course/list" component={CourseList}/>
+          <Route path="course/:courseName" component={CourseManagerContainer}>
+            <Route path="lesson/list" component={LessonListContainer}/>
+            <Route path="lesson/add" component={LessonAdd}/>
+            <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
+          </Route>
         </Route>
-
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
       </Route>

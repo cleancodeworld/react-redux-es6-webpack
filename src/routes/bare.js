@@ -14,7 +14,9 @@ import {
 
 import Root from '../containers/Root/Root';
 
-export default () => {
+export default (params) => {
+  const {requireLogin} = params;
+
   /**
    * Please keep routes in alphabetical order
    */
@@ -27,10 +29,12 @@ export default () => {
         { /* Routes */ }
         <Route path="account-portal-create" component={AccountPortalCreate}/>
         <Route path="login" component={Login}/>
-        <Route path="verify/registration" component={VerifyRegistration}/>
-        <Route path="create-portal" component={CreatePortal}/>
+        <Route onEnter={requireLogin}>
+          <Route path="create-portal" component={CreatePortal}/>
+        </Route>
         <Route path="password/forget" component={PasswordForget}/>
         <Route path="password/reset" component={PasswordReset}/>
+        <Route path="verify/registration" component={VerifyRegistration}/>
 
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
