@@ -8,7 +8,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
-import { isChecked, check as portalCheck } from 'redux/modules/portal';
+import { isLoaded, load } from 'redux/modules/portal/current';
 import {
   UserNav,
   PageHeader,
@@ -21,29 +21,27 @@ import {
 import {logout} from 'redux/modules/auth';
 import {
   NotFound
-} from '../../bare';
+} from '../../shared';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isChecked(state)) {
-      if (state.portal && state.portal.get('reqSubdomain')) {
-        promises.push(dispatch(portalCheck(state.portal.get('reqSubdomain'))));
-      }
+    if (!isLoaded(state)) {
+      promises.push(dispatch(load(state.portalCurrent.get('reqSubdomain'))));
     }
     return Promise.all(promises);
   }
 }])
 @connect(
-  state => ({ portal: state.portal }),
+  state => ({ portalCurrentMeta: state.portalCurrent.get('meta') }),
   { logout }
 )
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    portal: PropTypes.object.isRequired,
+    portalCurrentMeta: PropTypes.object,
     logout: PropTypes.func,
   };
 
@@ -54,10 +52,10 @@ export default class App extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {portal} = this.props;
+    const {portalCurrentMeta} = this.props;
     const {user} = this.context;
     let content = this.props.children;
-    if (!portal || !portal.get('data')) {
+    if (!portalCurrentMeta) {
       content = <NotFound />;
     }
     return (

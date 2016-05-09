@@ -1,6 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
-import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal';
+import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal/current';
 import {
   App,
   Dashboard,
@@ -20,7 +20,7 @@ import {
 } from '../containers/shared';
 
 export default (params) => {
-  const {store, subdomain, requireLogin} = params;
+  const {store, subdomain, requirePortalOwner} = params;
   store.dispatch({
     type: SET_REQ_SUBDOMAIN,
     subdomain: subdomain
@@ -32,7 +32,7 @@ export default (params) => {
         <IndexRoute component={Dashboard}/>
 
         <Route path="login" component={Login}/>
-        <Route path="author" onEnter={requireLogin}>
+        <Route path="author" onEnter={requirePortalOwner}>
           <Route path="course/create" component={CourseCreate}/>
           <Route path="course/list" component={CourseList}/>
           <Route path="course/:courseName" component={CourseManagerContainer}>

@@ -14,6 +14,7 @@ import lessons from './lessons/lessons';
 import lessonEdit from './lessons/edit';
 import passwordReset from './password/reset';
 import passwordForget from './password/forget';
+import portalCurrent from './portal/current';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidation from 'components/LoginForm/validate';
@@ -46,4 +47,5 @@ export default combineReducers({
   courseEdit,
   passwordReset,
   passwordForget,
+  portalCurrent,
 });
