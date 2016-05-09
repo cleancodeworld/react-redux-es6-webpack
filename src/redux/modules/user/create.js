@@ -10,7 +10,7 @@ export const LOGIN_FAIL = 'knexpert/auth/LOGIN_FAIL';
 import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
 import {create as portalCreate} from '../portal';
-import {login} from '../auth';
+import {silentLogin} from '../auth';
 
 const initialState = Immutable.fromJS({});
 
@@ -30,7 +30,7 @@ export default function userCreate(state = initialState, action) {
 export function create(model) {
   return {
     types: [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAIL],
-    promise: (client) => client.post(`/api/v1/signup`, { data: model }),
+    promise: (client) => client.post(`/api/v1/signup`, { data: { ...model, roleId: '572d7765cbb4e22d164579b9' } }),
     data: {
       model
     }
@@ -42,16 +42,14 @@ export function createWithPortal(model) {
   return dispatch => {
     return dispatch(
       create(model))
-      .then(()=> dispatch(login(model)))
+      .then(()=> dispatch(silentLogin(model)))
       .then((res)=> dispatch(portalCreate({
         ...model,
         name: model.portalName,
         privacy: model.isPublic ? 'Public' : 'Private',
-        type: model.isPersonal ? 'Personal' : 'Company'
+        type: model.isPersonal ? 'Personal' : 'Company',
+        ownerId: res.userId,
       }, res.sessionToken)))
-      .then(()=> {
-        alert('Done!');
-      })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });
