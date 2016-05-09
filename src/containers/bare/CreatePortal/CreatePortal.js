@@ -4,21 +4,26 @@ import { CreatePortalForm } from 'components';
 import { connect } from 'react-redux';
 import { createPortal } from 'redux/modules/portal';
 
-@connect(null, { createPortal })
+@connect(
+  ({ auth }) => ({ userId: auth.get('userId') }),
+  { createPortal }
+)
 export default class CreatePortal extends Component {
 
   static propTypes = {
+    userId: PropTypes.string.isRequired,
     createPortal: PropTypes.func.isRequired,
   };
 
   render() {
+    const {userId} = this.props;
     return (
       <div>
         <Helmet title="Create Portal"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
-              <CreatePortalForm onSubmit={ model => this.props.createPortal(model) }/>
+              <CreatePortalForm onSubmit={ model => this.props.createPortal(model, userId) }/>
             </div>
           </div>
         </div>

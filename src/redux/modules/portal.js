@@ -72,7 +72,8 @@ export function create(model, sessionToken) {
   };
 }
 
-export function createPortal(model) {
+export function createPortal(model, ownerId) {
+  model.ownerId = ownerId;
   return dispatch => {
     return dispatch(create(model))
       .then((res)=> {
