@@ -3,16 +3,18 @@ import {IndexRoute, Route} from 'react-router';
 import {
   App,
   Home,
-  NotFound,
   AccountPortalCreate,
-  Login,
   VerifyRegistration,
   CreatePortal,
   PasswordForget,
   PasswordReset,
 } from '../containers/bare';
+import {
+  Login,
+  Root,
+  NotFound,
+} from '../containers/shared';
 
-import Root from '../containers/Root/Root';
 
 export default (params) => {
   const {requireLogin} = params;

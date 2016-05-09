@@ -12,10 +12,10 @@ import {
   CourseList,
 } from '../containers/portal';
 import {
-  NotFound
-} from '../containers/bare';
-
-import Root from '../containers/Root/Root';
+  Login,
+  Root,
+  NotFound,
+} from '../containers/shared';
 
 export default (params) => {
   const {store, subdomain, requireLogin} = params;
@@ -28,6 +28,7 @@ export default (params) => {
       <Route path="/" component={App} subdomain={subdomain}>
         { /* Sub routes */ }
         <IndexRoute component={Dashboard}/>
+        <Route path="login" component={Login}/>
         <Route onEnter={requireLogin}>
           <Route path="course/create" component={CourseCreate}/>
           <Route path="course/list" component={CourseList}/>
