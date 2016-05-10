@@ -14,7 +14,6 @@ import {
   CourseCreate,
   CourseList,
   CourseEdit,
-  CourseAuthorView,
 } from '../containers/portal';
 import {
   Root,
@@ -34,13 +33,14 @@ export default (params) => {
         <IndexRoute component={Home}/>
 
         <Route path="login" component={PortalLogin}/>
-        <Route path="author" onEnter={(nextState, replace, cb)=>requirePortalOwner(store, nextState, replace, cb)}>
+        <Route path="author" onEnter={(nextState, replace, cb)=>{requirePortalOwner(store, nextState, replace, cb);}}>
           <IndexRoute component={Dashboard}/>
           <Route path="course">
             <Route path="create" component={CourseCreate}/>
             <Route path="list" component={CourseList}/>
-            <Route path=":courseName" onEnter={(nextState, replace, cb)=>requireLoadCourse(store, nextState, replace, cb)} >
-              <IndexRoute component={CourseAuthorView}/>
+            <Route path=":courseName"
+                   onEnter={(nextState, replace, cb)=>requireLoadCourse(store, nextState, replace, cb)}>
+              <IndexRoute component={CourseEdit}/>
               <Route path="goals" component={CourseEdit}/>
               <Route path="lesson/list" component={LessonList}/>
               <Route path="lesson/add" component={LessonAdd}/>
