@@ -3,7 +3,13 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
-import {CourseListItem} from 'components';
+import {
+  PortalLayout,
+  PortalAuthorLayout,
+} from '../index';
+import {
+  CourseListItem,
+} from 'components';
 import { load, isLoaded } from 'redux/modules/course/list';
 
 @asyncConnect([{
@@ -32,20 +38,28 @@ export default class CourseList extends Component {
 
   render() {
     const {list, author} = this.props;
+    const breadcrumbs = [
+      { url: '/author', name: 'Author' },
+      { url: '/author/course/list', name: 'Course Mgr' }
+    ];
     return (
       <div>
-        <Helmet title="Home"/>
-        <div className="content-group">
-          <h6 className="text-semibold">Course List </h6>
-        </div>
-        <div className="content-group">
-          <Link to="/course/create" className="btn bg-blue">Create Course</Link>
-        </div>
-        <div className="row">
-          {list.map(course=> {
-            return (<CourseListItem key={course.get('Id')} course={course} author={author}/>);
-          })}
-        </div>
+        <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
+          <PortalAuthorLayout>
+            <Helmet title="Home"/>
+            <div className="content-group">
+              <h6 className="text-semibold">Course List </h6>
+            </div>
+            <div className="content-group">
+              <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
+            </div>
+            <div className="row">
+              {list.map(course=> {
+                return (<CourseListItem key={course.get('Id')} course={course} author={author}/>);
+              })}
+            </div>
+          </PortalAuthorLayout>
+        </PortalLayout>
       </div>
     );
   }

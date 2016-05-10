@@ -6,6 +6,7 @@ import superagent from 'superagent';
 
 @reduxForm({
   form: 'LessonForm',
+  overwriteOnInitialValuesChange: false,
 })
 export default class LessonForm extends Component {
   static propTypes = {

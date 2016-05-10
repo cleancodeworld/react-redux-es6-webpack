@@ -62,7 +62,7 @@ export function editLesson(model, courseId, courseName, lessonName) {
     return dispatch(edit(model, lessonName))
       .then(()=> {
         setTimeout(function timedDispatch() {
-          dispatch(push('/course/' + courseName + '/lesson/list'));
+          dispatch(push('/author/course/' + courseName + '/lesson/list'));
         }, 2500);
       })
       .catch(res => {

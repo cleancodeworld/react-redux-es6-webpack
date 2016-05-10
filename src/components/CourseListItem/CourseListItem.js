@@ -15,7 +15,7 @@ const CourseListItem = ({course, author}) => {
           </div>
         </div>
         <div className="caption">
-          <h6 className="no-margin-top text-semibold"><Link to={'/course/' + course.get('Slug')} className="text-default">{course.get('name')}</Link></h6>
+          <h6 className="no-margin-top text-semibold"><Link to={'/author/course/' + course.get('Slug')} className="text-default">{course.get('name')}</Link></h6>
           <hr className="no-margin-top mb-10"/>
           <div className="clearfix">
             <div className="pull-left">

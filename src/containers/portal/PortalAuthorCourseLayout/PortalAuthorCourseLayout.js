@@ -5,9 +5,9 @@ import {
   CourseRightMenu
 } from 'components';
 
-export default class CourseManagerContainer extends Component {
+export default class PortalAuthorCourseLayout extends Component {
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.array.isRequired,
     params: PropTypes.object,
   };
 
