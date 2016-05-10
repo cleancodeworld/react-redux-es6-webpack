@@ -30,8 +30,10 @@ export default function auth(state = initialState, action) {
         const sessionToken = reactCookie.load('sessionToken');
         const userId = reactCookie.load('userId');
         const username = reactCookie.load('username');
-        const user = Immutable.fromJS({ sessionToken, userId, username });
-        map.set('user', user);
+        if (sessionToken && userId && username) {
+          const user = Immutable.fromJS({ sessionToken, userId, username });
+          map.set('user', user);
+        }
       });
     case LOGIN_SUCCESS:
       return state.withMutations((map)=> {

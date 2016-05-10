@@ -19,14 +19,14 @@ import {
 } from '../../shared';
 
 @connect(
-  state => ({ portal: state.portal }),
+  state => ({ portalCurrentMeta: state.portalCurrent.get('meta') }),
   { logout }
 )
 export default class PortalLayout extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
-    portal: PropTypes.object.isRequired,
+    portalCurrentMeta: PropTypes.object.isRequired,
     logout: PropTypes.func,
     breadcrumbs: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
@@ -40,10 +40,10 @@ export default class PortalLayout extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {portal, breadcrumbs, title, boldTitle} = this.props;
+    const {portalCurrentMeta, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
     let content = this.props.children;
-    if (!portal || !portal.get('data')) {
+    if (!portalCurrentMeta) {
       content = <NotFound />;
     }
     return (
