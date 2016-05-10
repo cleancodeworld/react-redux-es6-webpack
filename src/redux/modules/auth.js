@@ -16,6 +16,7 @@ import { SubmissionError } from 'redux-form';
 import reactCookie from 'react-cookie';
 
 import config from 'config';
+const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -46,9 +47,9 @@ export default function auth(state = initialState, action) {
     case LOGOUT_FAIL:
       return state.withMutations((map)=> {
         map.remove('user');
-        reactCookie.remove('sessionToken');
-        reactCookie.remove('userId');
-        reactCookie.remove('username');
+        reactCookie.remove('sessionToken', cookieOpt);
+        reactCookie.remove('userId', cookieOpt);
+        reactCookie.remove('username', cookieOpt);
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
@@ -94,7 +95,6 @@ export function userLogin(model, continueTo) {
       login(model))
       .then((res)=> {
         const {sessionToken, username, userId} = res;
-        const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
         }
