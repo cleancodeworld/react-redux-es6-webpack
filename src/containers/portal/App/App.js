@@ -3,9 +3,8 @@ import { asyncConnect } from 'redux-async-connect';
 import { load } from 'redux/modules/course/edit';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}, params}) => {
+  promise: ({store: {dispatch}, params}) => {
     const promises = [];
-    const state = getState();
     if (params.courseName !== '') {
       promises.push(dispatch(load(params.courseName)));
     }
