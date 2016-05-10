@@ -106,7 +106,7 @@ export function addLesson(model, courseId, courseName) {
     return dispatch(add(model))
       .then(()=> {
         setTimeout(function timedDispatch() {
-          dispatch(push('/course/' + courseName + '/lesson/list'));
+          dispatch(push('/author/course/' + courseName + '/lesson/list'));
         }, 2500);
       })
       .catch(res => {

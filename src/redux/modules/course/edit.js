@@ -25,12 +25,11 @@ export default function courseEdit(state = initialState, action) {
     case REDUX_FORM_INIT:
       return state.set('submitSuccess', false);
     case LOAD_SUCCESS:
-      return state.set('course', action.result);
+      return state.set('course', Immutable.fromJS(action.result));
     case LOAD_FAIL:
-      return state.set('course', {});
     case LOAD:
     case EDIT:
-      return state.set('course', {});
+      return state;
     case EDIT_SUCCESS:
       return state.set('submitSuccess', true);
     case EDIT_FAIL:

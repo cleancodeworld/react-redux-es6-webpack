@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { connect } from 'react-redux';
+import {
+  PortalLayout,
+  PortalAuthorLayout
+} from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
 
 @connect(
@@ -16,6 +20,10 @@ export default class CourseCreate extends Component {
   };
 
   render() {
+    const breadcrumbs = [
+      { url: '/author', name: 'Author' },
+      { url: '/author/course/list', name: 'Create a Course' }
+    ];
     const initialFormValues = {
       level: 'all',
       language: 'English',
@@ -26,8 +34,12 @@ export default class CourseCreate extends Component {
     };
     return (
       <div>
-        <Helmet title="Home"/>
-        <CourseForm initialValues={initialFormValues} onSubmit={ model => this.props.courseCreate(model)}/>
+        <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
+          <PortalAuthorLayout>
+            <Helmet title="Home"/>
+            <CourseForm initialValues={initialFormValues} onSubmit={ model => this.props.courseCreate(model)}/>
+          </PortalAuthorLayout>
+        </PortalLayout>
       </div>
     );
   }

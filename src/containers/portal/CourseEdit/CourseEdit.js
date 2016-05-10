@@ -4,6 +4,11 @@ import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { load, edit } from 'redux/modules/course/edit';
+import {
+  PortalLayout,
+  PortalAuthorLayout,
+  PortalAuthorCourseLayout,
+} from '../index';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, params}) => {
@@ -31,14 +36,26 @@ export default class CourseEdit extends Component {
   render() {
     const {courseName} = this.props.params;
     const {submitStatus} = this.props;
-    let course = this.props.course;
-    if (typeof course.toJS !== 'undefined') {
-      course = course.toJS();
+    const course = this.props.course;
+    const breadcrumbs = [
+      { url: '/author', name: 'Author' },
+      { url: '/author/course/list', name: 'Course Mgr' },
+      { url: '/author/course/' + courseName, name: course.get('name') },
+    ];
+    let courseValues = course;
+    if (typeof courseValues.toJS !== 'undefined') {
+      courseValues = courseValues.toJS();
     }
     return (
       <div>
-        <Helmet title="Home"/>
-        <CourseForm initialValues={course} submitStatus={submitStatus} onSubmit={model => this.props.edit(model, courseName)}/>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
+          <PortalAuthorLayout>
+            <PortalAuthorCourseLayout params={this.props.params}>
+              <Helmet title="Home"/>
+              <CourseForm initialValues={courseValues} submitStatus={submitStatus} onSubmit={model => this.props.edit(model, courseName)}/>
+            </PortalAuthorCourseLayout>
+          </PortalAuthorLayout>
+        </PortalLayout>
       </div>
     );
   }

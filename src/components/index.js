@@ -12,7 +12,7 @@ export UserNav from './UserNav/UserNav';
 export CourseForm from './CourseForm/CourseForm';
 export TextEditor from './TextEditor/TextEditor';
 export PageHeader from './PortalLayout/PageHeader';
-export Breadcrumb from './PortalLayout/Breadcrumb';
+export BreadcrumbBar from './PortalLayout/BreadcrumbBar';
 export PageHeaderContent from './PortalLayout/PageHeaderContent';
 export SideProfile from './PortalLayout/SideProfile';
 export SideMenu from './PortalLayout/SideMenu';
