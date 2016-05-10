@@ -1,5 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
+import { requireLogin } from './permissions';
 import {
   App,
   Home,
@@ -17,7 +18,7 @@ import {
 
 
 export default (params) => {
-  const {requireLogin} = params;
+  const {store} = params;
 
   /**
    * Please keep routes in alphabetical order
@@ -31,7 +32,7 @@ export default (params) => {
         { /* Routes */ }
         <Route path="account-portal-create" component={AccountPortalCreate}/>
         <Route path="login" component={Login}/>
-        <Route onEnter={requireLogin}>
+        <Route onEnter={(nextState, replace, cb)=>requireLogin(store, nextState, replace, cb)}>
           <Route path="create-portal" component={CreatePortal}/>
         </Route>
         <Route path="password/forget" component={PasswordForget}/>

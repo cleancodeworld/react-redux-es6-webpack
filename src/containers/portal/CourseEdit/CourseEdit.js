@@ -1,25 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-async-connect';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
-import { load, edit } from 'redux/modules/course/edit';
+import { edit } from 'redux/modules/course/edit';
 import {
   PortalLayout,
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
 
-@asyncConnect([{
-  promise: ({store: {dispatch}, params}) => {
-    const promises = [];
-    promises.push(dispatch(load(params.courseName)));
-    return Promise.all(promises);
-  }
-}])
 @connect(
-  ({courseEdit}) => ({
-    course: courseEdit.get('course'),
+  ({courseLoaded, courseEdit}) => ({
+    course: courseLoaded.get('course'),
     submitStatus: courseEdit.get('submitSuccess'),
   }),
   { edit }
