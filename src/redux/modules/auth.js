@@ -31,10 +31,11 @@ export default function auth(state = initialState, action) {
         const sessionToken = reactCookie.load('sessionToken');
         const userId = reactCookie.load('userId');
         const username = reactCookie.load('username');
-        if (sessionToken && userId && username) {
+        if (sessionToken && userId && username && !map.getIn('user', 'sessionToken')) {
           const user = Immutable.fromJS({ sessionToken, userId, username });
           map.set('user', user);
         }
+        map.set('loaded', false);
       });
     case LOGIN_SUCCESS:
       return state.withMutations((map)=> {
@@ -53,7 +54,7 @@ export default function auth(state = initialState, action) {
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
-        const user = Immutable.fromJS(action.result.user);
+        const user = Immutable.fromJS(action.result.user).set('sessionToken', reactCookie.load('sessionToken'));
         map.set('user', user);
         map.set('loaded', true);
       });
@@ -110,7 +111,7 @@ export function userLogin(model, continueTo) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.auth && globalState.auth.get('loaded') || !reactCookie.load('sessionToken');
+  return globalState.auth && globalState.auth.get('loaded');
 }
 
 export function load() {
