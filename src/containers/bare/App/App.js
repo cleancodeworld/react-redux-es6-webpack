@@ -50,12 +50,16 @@ export default class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse eventKey={0}>
               <Nav navbar>
-                <LinkContainer to="/account-portal-create">
+                {!this.context.user
+                  ? <LinkContainer to="/account-portal-create">
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/create-portal">
-                  <NavItem eventKey={3}>Create Portal</NavItem>
-                </LinkContainer>
+                  : null}
+                {this.context.user ?
+                  <LinkContainer to="/create-portal">
+                    <NavItem eventKey={3}>Create Portal</NavItem>
+                  </LinkContainer>
+                  : null }
               </Nav>
               <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
             </Navbar.Collapse>
