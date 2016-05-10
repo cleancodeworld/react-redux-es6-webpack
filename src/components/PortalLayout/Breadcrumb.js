@@ -11,7 +11,7 @@ export default class Breadcrumb extends Component {
     const {breadcrumbs} = this.props;
     return (
       <ul className="breadcrumb">
-        <li><a href="index.html"><i className="icon-home2 position-left"></i> Home</a></li>
+        <li><Link to="/"><i className="icon-home2 position-left"></i> Home</Link></li>
         {breadcrumbs.map((path, index) => {
           return (
             <li key={index}><Link to={path.url}>{path.name}</Link></li>
