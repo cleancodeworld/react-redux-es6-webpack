@@ -25,7 +25,7 @@ import {
 export default class PortalLayout extends Component {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.any.isRequired,
     portal: PropTypes.object.isRequired,
     logout: PropTypes.func,
     breadcrumbs: PropTypes.array.isRequired,

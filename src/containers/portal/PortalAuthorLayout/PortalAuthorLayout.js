@@ -7,7 +7,7 @@ import {
 export default class PortalAuthorLayout extends Component {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.any.isRequired,
   };
 
   render() {
