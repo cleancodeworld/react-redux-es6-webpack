@@ -7,7 +7,7 @@ export default class SideProfile extends Component {
         <div className="sidebar-user-material">
           <div className="category-content">
             <div className="sidebar-user-material-content">
-              <a href="#"><img src="assets/images/placeholder.jpg" className="img-circle img-responsive" alt="" /></a>
+              <a href="#"><img src=" http://placehold.it/150x150" className="img-circle img-responsive" alt="" /></a>
               <h6>Author Name</h6>
               <span className="text-size-small">City, State</span>
             </div>
