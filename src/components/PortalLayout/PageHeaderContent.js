@@ -20,12 +20,9 @@ export default class PageHeaderContent extends Component {
             <a href="javascript:void(0)" onClick={()=>this.props.goBack()}> <i
               className="icon-arrow-left52 position-left"></i>
             </a>&nbsp;
-            {(() => {
-              if (boldTitle) {
-                return (<span className="text-semibold">{boldTitle}</span>);
-              }
-              return '';
-            })()}
+            {
+              boldTitle ? <span className="text-semibold">{boldTitle}</span> : <span></span>
+            }
             {title}
           </h4>
         </div>
