@@ -62,7 +62,7 @@ export default class CourseForm extends Component {
       submitStatus,
     } = this.props;
     return (
-      <div>
+      <div className="panel panel-flat">
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
           <div className="panel panel-body">
             <h2 className="content-group-lg">Basic

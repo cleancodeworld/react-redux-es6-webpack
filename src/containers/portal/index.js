@@ -11,3 +11,4 @@ export LessonEdit from './Lesson/Edit';
 export CourseCreate from './CourseCreate/CourseCreate';
 export CourseList from './CourseList/CourseList';
 export CourseEdit from './CourseEdit/CourseEdit';
+export CourseAccounting from './CourseAccounting/CourseAccounting';
