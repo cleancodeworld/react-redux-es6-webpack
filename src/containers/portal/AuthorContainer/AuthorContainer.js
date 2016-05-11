@@ -18,7 +18,6 @@ export default class AuthorContainer extends React.Component {
 
   componentWillMount() {
     const { userId, ownerId } = this.props;
-    debugger;
     if (userId !== ownerId) {
       let continueTo = this.props.location.pathname + this.props.location.search;
       continueTo = encodeURIComponent(continueTo);
