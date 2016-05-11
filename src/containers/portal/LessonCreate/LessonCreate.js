@@ -44,7 +44,7 @@ export default class LessonAdd extends Component {
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
               <LessonForm initialValues={initialValues}
-                          onSubmit={ model => this.props.addLesson(model, course.get('Id'), courseName).then(()=> this.setState({saved: true}))}
+                          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>

@@ -72,7 +72,7 @@ export default class LessonList extends Component {
                     </thead>
                     <tbody>
                     {list.map(lesson => {
-                      return (<LessonListItem key={lesson.get('Id')} lesson={lesson} onRemove={this.props.removeLesson} courseName={courseName}/>);
+                      return (<LessonListItem key={lesson.get('id')} lesson={lesson} onRemove={this.props.removeLesson} courseName={courseName}/>);
                     })}
                     </tbody>
                   </table>
