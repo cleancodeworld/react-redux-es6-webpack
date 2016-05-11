@@ -9,6 +9,7 @@ export const LOGOUT_FAIL = 'knexpert/auth/LOGOUT_FAIL';
 export const LOAD = 'knexpert/auth/LOAD';
 export const LOAD_SUCCESS = 'knexpert/auth/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/auth/LOAD_FAIL';
+import {UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 
 import Immutable from 'immutable';
 import { push } from 'react-router-redux';
@@ -54,12 +55,18 @@ export default function auth(state = initialState, action) {
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
-        const user = Immutable.fromJS(action.result.user).set('sessionToken', reactCookie.load('sessionToken'));
-        map.set('user', user);
+        const { user } = action.result;
+        if (!user.image) {
+          user.image = 'http://placehold.it/150x150';
+        }
+        const me = Immutable.fromJS(user).set('sessionToken', reactCookie.load('sessionToken'));
+        map.set('user', me);
         map.set('loaded', true);
       });
     case LOAD_FAIL:
       return state.set('loaded', true);
+    case UPDATE_COVER_IMAGE_SUCCESS:
+      return state.setIn(['user', 'image'], action.data.image);
     case LOGIN:
     default:
       return state;
