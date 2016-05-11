@@ -8,11 +8,7 @@ const REDUX_FORM_INIT = 'redux-form/INITIALIZE';
 
 import Immutable from 'immutable';
 
-const initialState = Immutable.fromJS({
-  course: null,
-  courseName: '',
-  loaded: false
-});
+const initialState = Immutable.fromJS({});
 
 export default function courseLoad(state = initialState, action) {
   switch (action.type) {
@@ -23,16 +19,11 @@ export default function courseLoad(state = initialState, action) {
       return state.set('submitSuccess', false);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
-        map.set('course', Immutable.fromJS(action.result));
-        map.set('loaded', true);
+        map.set(action.data.courseName, Immutable.fromJS(action.result));
       });
     case LOAD_FAIL:
-      return state.set('loaded', true);
+      return state.remove(action.data.courseName);
     case LOAD:
-      return state.withMutations(map=> {
-        map.set('loaded', false);
-        map.set('courseName', action.data.courseName);
-      });
     default:
       return state;
   }
@@ -48,7 +39,7 @@ export function load(courseName) {
   };
 }
 
-export function isLoaded(globalState) {
-  return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get('loaded');
+export function isLoaded(globalState, courseName) {
+  return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get(courseName);
 }
 

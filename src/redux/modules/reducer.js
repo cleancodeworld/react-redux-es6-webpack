@@ -10,8 +10,9 @@ import courseList from './course/list';
 import courseEdit from './course/edit';
 import auth from './auth';
 import portal from './portal';
-import lessons from './lessons/lessons';
-import lessonEdit from './lessons/edit';
+import lessonCreate from './lesson/create';
+import lessonEdit from './lesson/edit';
+import lessonLoaded from './lesson/loaded';
 import passwordReset from './password/reset';
 import passwordForget from './password/forget';
 import portalCurrent from './portal/current';
@@ -41,7 +42,8 @@ export default combineReducers({
   }),
   auth,
   portal,
-  lessons,
+  lessonCreate,
+  lessonLoaded,
   lessonEdit,
   courseCreate,
   courseList,

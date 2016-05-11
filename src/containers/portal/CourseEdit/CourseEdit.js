@@ -10,9 +10,8 @@ import {
 } from '../index';
 
 @connect(
-  ({courseLoaded, courseEdit}) => ({
-    course: courseLoaded.get('course'),
-    submitStatus: courseEdit.get('submitSuccess'),
+  ({courseLoaded}, ownProps) => ({
+    course: courseLoaded.get(ownProps.params.courseName),
   }),
   { edit }
 )
@@ -22,13 +21,14 @@ export default class CourseEdit extends Component {
     course: PropTypes.object.isRequired,
     edit: PropTypes.func,
     params: PropTypes.object.isRequired,
-    submitStatus: PropTypes.bool,
   };
+  state = {
+    saved: false
+  }
 
   render() {
-    const {courseName} = this.props.params;
-    const {submitStatus} = this.props;
-    const course = this.props.course;
+    const { course, params } = this.props;
+    const {courseName} = params;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -40,11 +40,12 @@ export default class CourseEdit extends Component {
     }
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={`- ${course.get('name')}` }>
           <PortalAuthorLayout>
-            <PortalAuthorCourseLayout params={this.props.params}>
+            <PortalAuthorCourseLayout params={params}>
               <Helmet title="Home"/>
-              <CourseForm initialValues={courseValues} submitStatus={submitStatus} onSubmit={model => this.props.edit(model, courseName)}/>
+              <CourseForm initialValues={courseValues} submitStatus={this.state.saved}
+                          onSubmit={model => this.props.edit(model, courseName).then(()=> this.setState({saved: true}))}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>

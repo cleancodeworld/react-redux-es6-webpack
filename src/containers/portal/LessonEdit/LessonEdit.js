@@ -7,8 +7,8 @@ import {
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
-import { editLesson } from 'redux/modules/lessons/edit';
-import { load as loadLesson } from 'redux/modules/lessons/edit';
+import { editLesson } from 'redux/modules/lesson/edit';
+import { load as loadLesson } from 'redux/modules/lesson/edit';
 
 @asyncConnect([{
   promise: ({store: {dispatch}, params}) => {
@@ -32,11 +32,14 @@ export default class LessonEdit extends Component {
     params: PropTypes.object.isRequired
   };
 
+  state = {
+    saved: false
+  }
+
   render() {
     const {courseName, lessonName} = this.props.params;
-    const {lessonEdit, lessons, courseEdit} = this.props;
+    const {lessonEdit, courseEdit} = this.props;
     const course = courseEdit.get('course');
-    const submitStatus = lessons.get('submitSuccess');
     let lesson = lessonEdit.get('lesson');
     if (typeof lesson.toJS !== 'undefined') {
       lesson = lesson.toJS();
@@ -52,7 +55,8 @@ export default class LessonEdit extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={lesson} submitStatus={submitStatus} onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName)} />
+              <LessonForm initialValues={lesson} submitStatus={this.state.saved}
+                          onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName).then(()=>this.setState({saved: true}))}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>

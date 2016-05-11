@@ -5,9 +5,9 @@ export PortalAuthorCourseLayout from './PortalAuthorCourseLayout/PortalAuthorCou
 export Home from './Home/Home';
 export PortalLogin from './PortalLogin/PortalLogin';
 export Dashboard from './Dashboard/Dashboard';
-export LessonList from './Lesson/List';
-export LessonAdd from './Lesson/Add';
-export LessonEdit from './Lesson/Edit';
+export LessonList from './LessonList/LessonList';
+export LessonAdd from './LessonCreate/LessonCreate';
+export LessonEdit from './LessonEdit/LessonEdit';
 export CourseCreate from './CourseCreate/CourseCreate';
 export CourseList from './CourseList/CourseList';
 export CourseEdit from './CourseEdit/CourseEdit';
