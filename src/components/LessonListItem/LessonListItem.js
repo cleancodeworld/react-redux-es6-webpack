@@ -14,12 +14,12 @@ const LessonListItem = ({lesson, courseName, onRemove}) => {
         <ul className="icons-list">
           <li className="text-primary-600">
             <Link
-              to={`/author/course/${courseName}/lesson/${lesson.get('Slug')}/edit`}><i
+              to={`/author/course/${courseName}/lesson/${lesson.get('slug')}/edit`}><i
               className="icon-pencil7"></i></Link>
           </li>
           <li className="text-danger-600">
             <LessonRemoveButton lesson={lesson}
-                                onRemove={()=> onRemove(courseName, lesson.get('Slug'))}/>
+                                onRemove={()=> onRemove(courseName, lesson.get('slug'))}/>
           </li>
         </ul>
       </td>

@@ -1,21 +1,31 @@
 import React, { Component, PropTypes } from 'react';
+
+import {connect} from 'react-redux';
+import {updateCoverImage} from 'redux/modules/portal/edit';
+
+
 import {
   ProfileCover,
   ProfileToolbar,
   CourseRightMenu
 } from 'components';
 
+@connect(({portalCurrent})=>({ portalCurrent: portalCurrent.get('meta') }), { updateCoverImage })
+
 export default class PortalAuthorCourseLayout extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     params: PropTypes.object,
+    portalCurrent: PropTypes.object,
+    updateCoverImage: PropTypes.func.isRequired,
   };
 
   render() {
+    const { portalCurrent } = this.props;
     const {courseName} = this.props.params;
     return (
       <div>
-        <ProfileCover />
+        <ProfileCover portal={portalCurrent} updateCoverImage={this.props.updateCoverImage}/>
         <ProfileToolbar />
         <div className="row">
           <div className="col-lg-9">
@@ -28,7 +38,7 @@ export default class PortalAuthorCourseLayout extends Component {
             </div>
           </div>
           <div className="col-lg-3">
-            <CourseRightMenu courseName={courseName} />
+            <CourseRightMenu courseName={courseName}/>
           </div>
         </div>
       </div>

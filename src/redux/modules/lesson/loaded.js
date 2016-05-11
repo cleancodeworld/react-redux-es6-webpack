@@ -37,7 +37,7 @@ export default function lessonLoaded(state = initialState, action) {
       return state.withMutations(map => {
         const {courseName, lessonName} = action.data;
         const course = map.get(courseName);
-        const lessonIndex = course.findIndex(lesson => lesson.get('Slug') === lessonName);
+        const lessonIndex = course.findIndex(lesson => lesson.get('slug') === lessonName);
         map.set(courseName, course.remove(lessonIndex));
       });
     case EDIT_SUCCESS:
