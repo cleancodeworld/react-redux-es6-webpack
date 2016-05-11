@@ -21,7 +21,7 @@ import { load, edit } from 'redux/modules/course/price';
 }])
 @connect(
   ({courseLoaded, coursePrice}, ownProps) => ({
-    price: coursePrice.get('price'),
+    price: coursePrice.get(ownProps.params.courseName),
     course: courseLoaded.get(ownProps.params.courseName),
   }),
   { edit }
