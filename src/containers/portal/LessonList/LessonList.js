@@ -9,6 +9,7 @@ import {
   PortalAuthorCourseLayout,
 } from '../index';
 import { isLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
+import { remove as removeLesson } from 'redux/modules/lesson/remove';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}, params}) => {
@@ -24,7 +25,8 @@ import { isLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
   ({lessonLoaded, courseEdit}, ownProps) => ({
     list: lessonLoaded.get(ownProps.params.courseName),
     course: courseEdit.get('course')
-  })
+  }),
+  { removeLesson }
 )
 export default class LessonList extends Component {
 
@@ -32,6 +34,7 @@ export default class LessonList extends Component {
     list: PropTypes.object,
     course: PropTypes.object,
     params: PropTypes.object.isRequired,
+    removeLesson: PropTypes.func.isRequired,
   };
 
   render() {
@@ -69,7 +72,7 @@ export default class LessonList extends Component {
                     </thead>
                     <tbody>
                     {list.map(lesson => {
-                      return (<LessonListItem key={lesson.get('Id')} lesson={lesson} courseName={courseName}/>);
+                      return (<LessonListItem key={lesson.get('Id')} lesson={lesson} onRemove={this.props.removeLesson} courseName={courseName}/>);
                     })}
                     </tbody>
                   </table>
