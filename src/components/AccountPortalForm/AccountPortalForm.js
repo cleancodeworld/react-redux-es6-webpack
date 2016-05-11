@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
+import {Link} from 'react-router';
 
 @reduxForm({
   form: 'AccountPortalForm',
@@ -177,9 +178,9 @@ export default class AccountPortalForm extends Component {
                     </div>
                   </div>
                   <div>
-                    <button type="submit" className="btn btn-link"><i className="icon-arrow-left13 position-left"></i>
+                    <Link to="/login" className="btn btn-link"><i className="icon-arrow-left13 position-left"></i>
                       Already a Knexpert? click to login
-                    </button>
+                    </Link>
                     <button type="submit" className="btn bg-teal-400 btn-labeled btn-labeled-right ml-10 pull-right">
                       <b><i className="icon-plus3"></i></b> Create account
                     </button>
