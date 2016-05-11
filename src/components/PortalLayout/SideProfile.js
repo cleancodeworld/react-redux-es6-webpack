@@ -4,6 +4,7 @@ export default class SideProfile extends Component {
 
   static propTypes = {
     name: PropTypes.string,
+    logout: PropTypes.func,
   };
 
   constructor(props) {
@@ -21,7 +22,7 @@ export default class SideProfile extends Component {
   }
 
   render() {
-    const {name} = this.props;
+    const {name, logout} = this.props;
     const {opened} = this.state;
     return (
       <div className="sidebar-category sidebar-category-visible">
@@ -37,12 +38,7 @@ export default class SideProfile extends Component {
           </div>
           <div className={'navigation-wrapper collapse' + (opened ? ' in' : '')} id="user-nav">
             <ul className="navigation">
-              <li><a href="#"><i className="icon-user-plus"></i> <span>My profile</span></a></li>
-              <li><a href="#"><i className="icon-coins"></i> <span>My balance</span></a></li>
-              <li><a href="#"><i className="icon-comment-discussion"></i> <span><span className="badge bg-teal-400 pull-right">58</span> Messages</span></a></li>
-              <li className="divider"></li>
-              <li><a href="#"><i className="icon-cog5"></i> <span>Account settings</span></a></li>
-              <li><a href="#"><i className="icon-switch2"></i> <span>Logout</span></a></li>
+              <li><a onClick={()=>logout()} href="javascript:void(0)"><i className="icon-switch2"></i> <span>Logout</span></a></li>
             </ul>
           </div>
         </div>

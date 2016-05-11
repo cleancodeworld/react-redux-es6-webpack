@@ -4,15 +4,18 @@ import {
   SideProfile,
   SideMenu,
 } from 'components';
+import { logout } from 'redux/modules/auth';
 
 @connect(
-  ({auth}) => ({ user: auth.get('user') })
+  ({auth}) => ({ user: auth.get('user') }),
+  { logout },
 )
 export default class PortalAuthorLayout extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
     user: PropTypes.object,
+    logout: PropTypes.func,
   };
 
   render() {
@@ -21,7 +24,7 @@ export default class PortalAuthorLayout extends Component {
       <div className="page-content">
         <div className="sidebar sidebar-main sidebar-default">
           <div className="sidebar-content">
-            <SideProfile name={user.get('firstName') + ' ' + user.get('lastName')} />
+            <SideProfile name={user.get('firstName') + ' ' + user.get('lastName')} logout={this.props.logout}/>
             <SideMenu />
           </div>
         </div>
