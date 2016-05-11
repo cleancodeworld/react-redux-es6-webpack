@@ -5,6 +5,7 @@ export const LOAD_SUCCESS = 'knexpert/lessons/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/lessons/LOAD_FAIL';
 import {ADD_SUCCESS} from './create';
 import {EDIT_SUCCESS} from './edit';
+import {REMOVE_SUCCESS} from './remove';
 
 import Immutable from 'immutable';
 
@@ -31,6 +32,13 @@ export default function lessonLoaded(state = initialState, action) {
         const {createdLesson} = action.result;
         const immutableCreatedLesson = Immutable.fromJS(createdLesson);
         map.update(courseName, lessons=>lessons.push(immutableCreatedLesson));
+      });
+    case REMOVE_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName} = action.data;
+        const course = map.get(courseName);
+        const lessonIndex = course.findIndex(lesson => lesson.get('Slug') === lessonName);
+        map.set(courseName, course.remove(lessonIndex));
       });
     case EDIT_SUCCESS:
       return state.withMutations(map => {

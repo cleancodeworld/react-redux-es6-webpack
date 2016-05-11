@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {LessonRemoveButton} from 'components';
 import moment from 'moment';
 
-const LessonListItem = ({lesson, courseName}) => {
+const LessonListItem = ({lesson, courseName, onRemove}) => {
   const createdAt = lesson.get('CreatedAt');
 
   return (
@@ -12,10 +12,15 @@ const LessonListItem = ({lesson, courseName}) => {
       <td className="col-md-3 col-sm-3">{moment(createdAt).format('L')}</td>
       <td className="col-md-3 col-sm-3 text-center">
         <ul className="icons-list">
-          <li className="text-primary-600"><Link
-            to={`/author/course/${courseName}/lesson/${lesson.get('Slug')}/edit`}><i
-            className="icon-pencil7"></i></Link></li>
-          <li className="text-danger-600"><LessonRemoveButton lesson={lesson} onRemove={()=>alert(lesson.get('title'))}/></li>
+          <li className="text-primary-600">
+            <Link
+              to={`/author/course/${courseName}/lesson/${lesson.get('Slug')}/edit`}><i
+              className="icon-pencil7"></i></Link>
+          </li>
+          <li className="text-danger-600">
+            <LessonRemoveButton lesson={lesson}
+                                onRemove={()=> onRemove(courseName, lesson.get('Slug'))}/>
+          </li>
         </ul>
       </td>
     </tr>
