@@ -48,8 +48,16 @@ export default class CourseAccounting extends Component {
       { url: '/author/course/' + courseName, name: course.get('name') },
     ];
     let price = this.props.price;
-    if (typeof price.toJS !== 'undefined') {
-      price = price.toJS();
+    if (price) {
+      if (typeof price.toJS !== 'undefined') {
+        price = price.toJS();
+      }
+    } else {
+      price = {
+        paid: true,
+        currency: 'USD',
+        price: 30
+      };
     }
     return (
       <div>

@@ -55,8 +55,9 @@ export default class LessonEdit extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={lesson} submitStatus={this.state.saved}
-                          onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName).then(()=>this.setState({saved: true}))}/>
+              <LessonForm initialValues={lesson}
+                          onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName).then(()=>this.setState({saved: true}))}
+                          submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>

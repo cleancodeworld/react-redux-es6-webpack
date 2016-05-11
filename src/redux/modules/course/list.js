@@ -3,6 +3,7 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LIST = 'knexpert/course/LIST';
 export const LIST_SUCCESS = 'knexpert/course/LIST_SUCCESS';
 export const LIST_FAIL = 'knexpert/course/LIST_FAIL';
+export const LIST_REFRESH = 'knexpert/course/LIST_REFRESH';
 
 import Immutable from 'immutable';
 
@@ -16,6 +17,8 @@ export default function courseCreate(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case LIST_REFRESH:
+      return state.set('loaded', false);
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         map.set('list', Immutable.fromJS(action.result.courses));
@@ -35,6 +38,13 @@ export function load(name) {
     promise: (client) => client.get(`/api/v1/course/author/${name}`)
   };
 }
+
 export function isLoaded(globalState) {
   return globalState.auth && globalState.auth.getIn(['user', 'username']) && globalState.courseList && globalState.courseList.get('loaded');
+}
+
+export function refresh() {
+  return {
+    type: LIST_REFRESH
+  };
 }

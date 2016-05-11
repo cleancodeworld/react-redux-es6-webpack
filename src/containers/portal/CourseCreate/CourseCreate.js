@@ -19,6 +19,10 @@ export default class CourseCreate extends Component {
     courseCreate: PropTypes.func,
   };
 
+  state = {
+    saved: false
+  }
+
   render() {
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
@@ -37,7 +41,9 @@ export default class CourseCreate extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
           <PortalAuthorLayout>
             <Helmet title="Home"/>
-            <CourseForm initialValues={initialFormValues} onSubmit={ model => this.props.courseCreate(model)}/>
+            <CourseForm initialValues={initialFormValues}
+                        onSubmit={ model => this.props.courseCreate(model).then(()=> this.setState({saved: true})) }
+                        submitStatus={this.state.saved}/>
           </PortalAuthorLayout>
         </PortalLayout>
       </div>
