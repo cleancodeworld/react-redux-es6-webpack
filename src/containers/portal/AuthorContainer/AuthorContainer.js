@@ -1,32 +1,32 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import { replace } from 'react-router-redux';
 
 @connect(({auth, portalCurrent})=> ({
   userId: auth.getIn(['user', 'userId']),
   ownerId: portalCurrent.getIn(['meta', 'ownerId'])
-}))
-export default class AuthorContainer extends Component {
+}), { replace })
+
+export default class AuthorContainer extends React.Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
+    location: PropTypes.object.isRequired,
     ownerId: PropTypes.string.isRequired,
   }
 
-  render() {
+  componentWillMount() {
     const { userId, ownerId } = this.props;
-    let res;
-    if (userId === ownerId) {
-      res = this.props.children;
-    } else {
-      res = (<div className="container">
-        <h2>You don't have permission <Link to="/login">Login here</Link></h2></div>);
+    debugger;
+    if (userId !== ownerId) {
+      let continueTo = this.props.location.pathname + this.props.location.search;
+      continueTo = encodeURIComponent(continueTo);
+      this.props.replace('/login?continueTo=' + continueTo);
     }
-    return (
-      <div>
-        {res}
-      </div>
-    );
+  }
+
+  render() {
+    return this.props.children;
   }
 }

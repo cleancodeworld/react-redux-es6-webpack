@@ -43,7 +43,7 @@ export default class SideProfile extends Component {
     const {logout, user} = this.props;
     const {opened} = this.state;
     return (
-      <div className="sidebar-category sidebar-category-visible">
+      user ? <div className="sidebar-category sidebar-category-visible">
         <div className="sidebar-user-material">
           <div className="category-content">
 
@@ -71,6 +71,7 @@ export default class SideProfile extends Component {
           </div>
         </div>
       </div>
+        : <span/>
     );
   }
 }
