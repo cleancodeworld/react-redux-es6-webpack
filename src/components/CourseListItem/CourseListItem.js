@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 const CourseListItem = ({course, author}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
+  // const currency = '$';
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="thumbnail">
@@ -15,6 +16,12 @@ const CourseListItem = ({course, author}) => {
         <div className="caption">
           <h6 className="no-margin-top text-semibold"><Link to={'/author/course/' + course.get('slug')} className="text-default">{course.get('name')}</Link></h6>
           <hr className="no-margin-top mb-10"/>
+          {/* <div className="clearfix">
+            <div className="pull-left">
+              Price <b className="clearfix">$35</b>
+            </div>
+          </div>
+          <hr class="no-margin-top mb-10 mt-10"> */}
           <div className="media no-margin-top">
             <div className="media-left media-middle">
               <a href="#">

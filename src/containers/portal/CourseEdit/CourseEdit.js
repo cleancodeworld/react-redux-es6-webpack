@@ -44,8 +44,9 @@ export default class CourseEdit extends Component {
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={params}>
               <Helmet title="Home"/>
-              <CourseForm initialValues={courseValues} submitStatus={this.state.saved}
-                          onSubmit={model => this.props.edit(model, courseName).then(()=> this.setState({saved: true}))}/>
+              <CourseForm initialValues={courseValues}
+                          onSubmit={ model => this.props.edit(model, courseName).then(()=> this.setState({saved: true})) }
+                          submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>
