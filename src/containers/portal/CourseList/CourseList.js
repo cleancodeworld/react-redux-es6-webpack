@@ -55,7 +55,7 @@ export default class CourseList extends Component {
             </div>
             <div className="row">
               {list.map(course=> {
-                return (<CourseListItem key={course.get('Id')} course={course} author={author}/>);
+                return (<CourseListItem key={course.get('id')} course={course} author={author}/>);
               })}
             </div>
           </PortalAuthorLayout>
