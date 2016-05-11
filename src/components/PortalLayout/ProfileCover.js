@@ -37,7 +37,7 @@ export default class ProfileCover extends Component {
             </a>
           </div>
           <div className="media-body">
-            <h1>{`${user.get('firstName')} ${user.get('lastName')} `}
+            <h1>{`${user.get('firstName')} ${user.get('lastName')}`}
               <small className="display-block">{user.get('email')}</small>
             </h1>
           </div>
