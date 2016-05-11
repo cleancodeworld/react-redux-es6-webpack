@@ -10,22 +10,26 @@ import {
   CourseRightMenu
 } from 'components';
 
-@connect(({portalCurrent})=>({ portalCurrent: portalCurrent.get('meta') }), { updateCoverImage })
+@connect(({portalCurrent, auth})=>({
+  portalCurrent: portalCurrent.get('meta'),
+  user: auth.get('user')
+}), { updateCoverImage })
 
 export default class PortalAuthorCourseLayout extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     params: PropTypes.object,
     portalCurrent: PropTypes.object,
+    user: PropTypes.object,
     updateCoverImage: PropTypes.func.isRequired,
   };
 
   render() {
-    const { portalCurrent } = this.props;
+    const { portalCurrent, user } = this.props;
     const {courseName} = this.props.params;
     return (
       <div>
-        <ProfileCover portal={portalCurrent} updateCoverImage={this.props.updateCoverImage}/>
+        <ProfileCover portal={portalCurrent} user={user} updateCoverImage={this.props.updateCoverImage}/>
         <ProfileToolbar />
         <div className="row">
           <div className="col-lg-9">

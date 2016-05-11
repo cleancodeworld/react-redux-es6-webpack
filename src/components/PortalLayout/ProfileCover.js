@@ -6,6 +6,7 @@ export default class ProfileCover extends Component {
   static propTypes = {
     updateCoverImage: PropTypes.func.isRequired,
     portal: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   };
 
   onDrop = (files)=> {
@@ -24,7 +25,7 @@ export default class ProfileCover extends Component {
   }
 
   render() {
-    const { portal } = this.props;
+    const { portal, user } = this.props;
     return (
       <div className="profile-cover">
         <div className="profile-cover-img"
@@ -32,12 +33,12 @@ export default class ProfileCover extends Component {
         <div className="media">
           <div className="media-left">
             <a href="#" className="profile-thumb">
-              <img src="https://pbs.twimg.com/profile_images/1868773314/image.jpg" className="img-circle" alt=""/>
+              <img src={user.get('image')} className="img-circle" alt=""/>
             </a>
           </div>
           <div className="media-body">
-            <h1>John Curtis
-              <small className="display-block">CEO Curtis Digital, Inc.</small>
+            <h1>{`${user.get('firstName')} ${user.get('lastName')} `}
+              <small className="display-block">{user.get('email')}</small>
             </h1>
           </div>
           <div className="media-right media-middle">
