@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
-import Select from 'react-select';
 import Switch from 'react-bootstrap-switch';
+import { SelectComponent } from 'components';
 
 @reduxForm({
   form: 'CourseAccountingForm',
@@ -13,6 +13,7 @@ export default class CourseAccountingForm extends Component {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
     error: PropTypes.string,
+    submitStatus: PropTypes.bool,
   }
 
   errorRender = (error) => {
@@ -25,9 +26,9 @@ export default class CourseAccountingForm extends Component {
     return res;
   }
 
-  successRender(error) {
+  successRender(submitStatus, error) {
     let res = '';
-    if (!error) {
+    if (submitStatus && !error) {
       res = (<div className="alert bg-success alert-styled-left" role="alert">
         <strong>Success!</strong>
       </div> );
@@ -40,8 +41,8 @@ export default class CourseAccountingForm extends Component {
       handleSubmit,
       submitting,
       error,
+      submitStatus,
     } = this.props;
-    this.successRender(Field, handleSubmit, submitting, error);
     return (
       <div className="panel panel-flat">
         <div className="panel-body">
@@ -51,32 +52,45 @@ export default class CourseAccountingForm extends Component {
             <div className="row">
               <div className="col-md-12">
                 {this.errorRender(error)}
-                {/* this.successRender(error) */}
+                {this.successRender(submitStatus, error)}
                 <div className="form-group">
                   <div className="clearfix">
                     <label className="control-label">Price Settings</label>
                     <span className="pull-right"><a href="#">Learn more about pricing</a></span>
                   </div>
-                  <label>
-                    <Switch onText="Paid" offText="Free" labelText="&nbsp;" />
-                  </label>
+                  <Field name="paid" component={paid =>
+                    <label>
+                      <Switch state={paid.value} {...paid} onText="Paid" offText="Free" labelText="&nbsp;" />
+                    </label>
+                  }/>
                 </div>
               </div>
               <div className="paid-contents" id="collapseExample">
                 <div className="col-md-2">
-                  <Select
-                    options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
-                  />
+                  <Field name="currency" component={currency => {
+                    return (
+                      <div>
+                        <SelectComponent
+                          {...currency}
+                          options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
+                        />
+                      </div>
+                    );
+                  }}/>
                 </div>
                 <div className="col-md-6">
-                  <Select
-                    options={['20.00', '30.00', '40.00', '50.00'].map( value => ({ value: value, label: '$' + value}))}
-                  />
+                  <Field name="price" component={price =>
+                    <div>
+                      <SelectComponent
+                        {...price}
+                        options={[20, 30, 40, 50].map( value => ({ value: value, label: '$' + value}))}
+                      />
+                    </div>
+                  }/>
                 </div>
               </div>
               <div className="col-md-12 text-right">
-                <button type="reset" className="btn btn-danger legitRipple">Cancel</button>&nbsp;
-                <button type="submit" className="btn btn-primary legitRipple">Save</button>
+                <button type="submit" disabled={submitting} className="btn bg-blue">Save</button>
               </div>
             </div>
           </form>
