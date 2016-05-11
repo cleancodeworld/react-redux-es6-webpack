@@ -9,7 +9,7 @@ const CourseListItem = ({course, author}) => {
           <img src={course.get('thumbnail')} alt="Course Thumbnail"/>
         </div>
         <div className="caption">
-          <h6 className="no-margin-top text-semibold"><Link to={'/author/course/' + course.get('Slug')} className="text-default">{course.get('name')}</Link></h6>
+          <h6 className="no-margin-top text-semibold"><Link to={'/author/course/' + course.get('slug')} className="text-default">{course.get('name')}</Link></h6>
           <hr className="no-margin-top mb-10"/>
           <div className="media no-margin-top">
             <div className="media-left media-middle">

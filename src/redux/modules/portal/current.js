@@ -6,6 +6,7 @@ export const LOAD_SUCCESS = 'knexpert/portal/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/portal/LOAD_FAIL';
 
 import Immutable from 'immutable';
+import { UPDATE_COVER_IMAGE_SUCCESS } from './edit';
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -20,13 +21,18 @@ export default function portal(state = initialState, action) {
       return Immutable.fromJS(state);
     case SET_REQ_SUBDOMAIN:
       return state.set('reqSubdomain', action.subdomain);
-    case LOAD:
+    case UPDATE_COVER_IMAGE_SUCCESS:
+      return state.setIn(['meta', 'coverImage'], action.data.coverImage);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
+        if (action.result && !action.result.coverImage) {
+          action.result.coverImage = 'https://udemy-images.udemy.com/course/750x422/129118_fab9_7.jpg';
+        }
         const meta = Immutable.fromJS(action.result);
         map.set('meta', meta);
         map.set('loaded', true);
       });
+    case LOAD:
     case LOAD_FAIL:
     default:
       return state;
