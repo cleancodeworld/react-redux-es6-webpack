@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Switch from 'react-bootstrap-switch';
-import { SelectComponent } from 'components';
+import Select from 'react-select';
 
 @reduxForm({
   form: 'CourseAccountingForm',
@@ -70,8 +70,10 @@ export default class CourseAccountingForm extends Component {
                   <Field name="currency" component={currency => {
                     return (
                       <div>
-                        <SelectComponent
+                        <Select
                           {...currency}
+                          onBlur={() => {}}
+                          onBlurResetsInput={false}
                           options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
                         />
                       </div>
@@ -81,8 +83,10 @@ export default class CourseAccountingForm extends Component {
                 <div className="col-md-6">
                   <Field name="price" component={price =>
                     <div>
-                      <SelectComponent
+                      <Select
                         {...price}
+                        onBlur={() => {}}
+                        onBlurResetsInput={false}
                         options={[20, 30, 40, 50].map( value => ({ value: value, label: '$' + value}))}
                       />
                     </div>
