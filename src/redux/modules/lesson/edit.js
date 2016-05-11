@@ -26,6 +26,14 @@ export default function lessonEdit(state = initialState, action) {
         map.set('loaded', true);
         map.set('lesson', action.result);
       });
+    case EDIT_SUCCESS:
+      return state.withMutations(map => {
+        map.set('loaded', false);
+        map.set('submitSuccess', true);
+      });
+    case EDIT:
+    case EDIT_FAIL:
+      return state;
     case LOAD_FAIL:
       return state.withMutations(map => {
         map.set('loaded', false);

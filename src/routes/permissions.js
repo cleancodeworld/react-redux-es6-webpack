@@ -49,17 +49,19 @@ export const requirePortalOwner = (store, nextState, replace, cb) => {
 
 
 export const requireLoadCourse = (store, nextState, replace, cb) => {
+  const {courseName} = nextState.params;
+
   function checkAuth() {
     const { courseLoaded } = store.getState();
-    const course = courseLoaded.get('course');
+    const course = courseLoaded.get(courseName);
     if (!course) {
       replace('/not-found');
     }
     cb();
   }
 
-  if (!isCourseLoaded(store.getState())) {
-    store.dispatch(loadCourse(nextState.params.courseName))
+  if (!isCourseLoaded(store.getState(), courseName)) {
+    store.dispatch(loadCourse(courseName))
       .then(checkAuth)
       .catch(checkAuth);
   } else {
