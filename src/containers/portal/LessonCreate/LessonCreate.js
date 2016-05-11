@@ -9,12 +9,12 @@ import {
 import { add as addLesson } from 'redux/modules/lesson/create';
 
 @connect(
-  state => ({ lessons: state.courseLoaded }),
+  (state, ownProps) => ({ course: state.courseLoaded.get(ownProps.params.courseName) }),
   { addLesson }
 )
 export default class LessonAdd extends Component {
   static propTypes = {
-    lessons: PropTypes.object,
+    course: PropTypes.object,
     addLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
@@ -25,8 +25,7 @@ export default class LessonAdd extends Component {
 
   render() {
     const {courseName} = this.props.params;
-    const {lessons} = this.props;
-    const course = lessons.get('course');
+    const {course} = this.props;
     const initialValues = {
       title: '',
       thumbnail: '',
@@ -36,12 +35,12 @@ export default class LessonAdd extends Component {
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
-      { url: '/author/course/' + courseName, name: course.get('name') },
-      { url: '/author/course/' + courseName + '/lesson/list', name: 'Lessons' },
+      { url: `/author/course/${courseName}`, name: course.get('name') },
+      { url: `/author/course/${courseName}/lesson/list`, name: 'Lessons' },
     ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={` - course.get('name')`}>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={` - ${course.get('name')}`}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
               <LessonForm initialValues={initialValues}
