@@ -7,7 +7,7 @@ export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 const REDUX_FORM_INIT = 'redux-form/INITIALIZE';
 
 import Immutable from 'immutable';
-
+import { LIST_SUCCESS } from './list'
 const initialState = Immutable.fromJS({});
 
 export default function courseLoad(state = initialState, action) {
@@ -20,6 +20,12 @@ export default function courseLoad(state = initialState, action) {
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
         map.set(action.data.courseName, Immutable.fromJS(action.result));
+      });
+    case LIST_SUCCESS:
+      return state.withMutations(map=> {
+        action.result.courses.map((course=> {
+          map.set(course.name, Immutable.fromJS(course));
+        }))
       });
     case LOAD_FAIL:
       return state.remove(action.data.courseName);
