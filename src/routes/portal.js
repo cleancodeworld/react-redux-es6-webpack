@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal/current';
-import { requirePortalOwner, requireLoadCourse } from './permissions';
+import { requireLoadCourse } from './permissions';
 
 import {
   App,
@@ -15,6 +15,7 @@ import {
   CourseList,
   CourseEdit,
   CourseAccounting,
+  AuthorContainer,
 } from '../containers/portal';
 import {
   Root,
@@ -34,7 +35,7 @@ export default (params) => {
         <IndexRoute component={Home}/>
 
         <Route path="login" component={PortalLogin}/>
-        <Route path="author" onEnter={(nextState, replace, cb)=>{requirePortalOwner(store, nextState, replace, cb);}}>
+        <Route path="author" component={AuthorContainer}>
           <IndexRoute component={Dashboard}/>
           <Route path="course">
             <Route path="create" component={CourseCreate}/>
@@ -51,7 +52,7 @@ export default (params) => {
           </Route>
         </Route>
         { /* Catch all route */ }
-        <Route path="*" component={NotFound} status={404}/>
+        <Route path="*" component={NotFound}/>
       </Route>
     </Route>
   );
