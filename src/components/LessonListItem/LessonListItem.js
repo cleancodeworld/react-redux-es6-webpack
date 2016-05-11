@@ -4,7 +4,7 @@ import {LessonRemoveButton} from 'components';
 import moment from 'moment';
 
 const LessonListItem = ({lesson, courseName, onRemove}) => {
-  const createdAt = lesson.get('CreatedAt');
+  const createdAt = lesson.get('createdAt');
 
   return (
     <tr>
