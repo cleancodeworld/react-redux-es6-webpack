@@ -1,16 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {LessonRemoveButton} from 'components';
+import moment from 'moment';
 
 const LessonListItem = ({lesson, courseName}) => {
+  const createdAt = lesson.get('CreatedAt');
+
   return (
     <tr>
       <td className="col-md-6 col-sm-6">{lesson.get('title')}</td>
-      <td className="col-md-3 col-sm-3">{lesson.get('CreatedAt')}</td>
+      <td className="col-md-3 col-sm-3">{moment(createdAt).format('L')}</td>
       <td className="col-md-3 col-sm-3 text-center">
         <ul className="icons-list">
-          <li className="text-primary-600"><Link to={'/author/course/' + courseName + '/lesson/' + lesson.get('Slug') + '/edit'}><i className="icon-pencil7"></i></Link></li>
-          <li className="text-danger-600"><a href="#"><i className="icon-trash"></i></a></li>
-          <li className="text-teal-600"><a href="#"><i className="icon-cog7"></i></a></li>
+          <li className="text-primary-600"><Link
+            to={`/author/course/${courseName}/lesson/${lesson.get('Slug')}/edit`}><i
+            className="icon-pencil7"></i></Link></li>
+          <li className="text-danger-600"><LessonRemoveButton lesson={lesson} onRemove={()=>alert(lesson.get('title'))}/></li>
         </ul>
       </td>
     </tr>

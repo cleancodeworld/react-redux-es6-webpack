@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { asyncConnect } from 'redux-async-connect';
 import { LessonForm } from 'components';
 import { connect } from 'react-redux';
 import {
@@ -7,19 +6,10 @@ import {
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
-import { addLesson, getCourse } from 'redux/modules/lessons/lessons';
+import { add as addLesson } from 'redux/modules/lesson/create';
 
-@asyncConnect([{
-  promise: ({store: {dispatch}, params}) => {
-    const promises = [];
-    if (params.courseName) {
-      promises.push(dispatch(getCourse(params.courseName)));
-    }
-    return Promise.all(promises);
-  }
-}])
 @connect(
-  state => ({ lessons: state.lessons }),
+  state => ({ lessons: state.courseLoaded }),
   { addLesson }
 )
 export default class LessonAdd extends Component {
@@ -29,11 +19,14 @@ export default class LessonAdd extends Component {
     params: PropTypes.object.isRequired
   };
 
+  state = {
+    saved: false
+  }
+
   render() {
     const {courseName} = this.props.params;
     const {lessons} = this.props;
     const course = lessons.get('course');
-    const submitStatus = lessons.get('submitSuccess');
     const initialValues = {
       title: '',
       thumbnail: '',
@@ -48,10 +41,12 @@ export default class LessonAdd extends Component {
     ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={` - course.get('name')`}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={initialValues} onSubmit={ model => this.props.addLesson(model, course.get('Id'), courseName)} submitStatus={submitStatus} />
+              <LessonForm initialValues={initialValues}
+                          onSubmit={ model => this.props.addLesson(model, course.get('Id'), courseName).then(()=> this.setState({saved: true}))}
+                          submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>

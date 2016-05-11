@@ -25,3 +25,4 @@ export CourseListItem from './CourseListItem/CourseListItem';
 export PasswordForgetForm from './PasswordForgetForm/PasswordForgetForm';
 export PasswordResetForm from './PasswordResetForm/PasswordResetForm';
 export CourseAccountingForm from './CourseAccountingForm/CourseAccountingForm';
+export LessonRemoveButton from './LessonRemoveButton/LessonRemoveButton';
