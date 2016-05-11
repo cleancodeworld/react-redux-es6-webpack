@@ -12,7 +12,6 @@ import { isLoaded, load } from 'redux/modules/portal/current';
     return Promise.all(promises);
   }
 }])
-
 export default class App extends Component {
 
   static propTypes = {

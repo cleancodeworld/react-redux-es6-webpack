@@ -62,7 +62,7 @@ export default class CourseForm extends Component {
       submitStatus,
     } = this.props;
     return (
-      <div>
+      <div className="panel panel-flat">
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
           <div className="panel panel-body">
             <h2 className="content-group-lg">Basic
@@ -76,11 +76,11 @@ export default class CourseForm extends Component {
                   Title
                 </div>
                 <Field name="name" component={name =>
-                <div>
-                  <input type="text" className="form-control" placeholder="Title" {...name} />
-                  {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
-                </div>
-              }/>
+                  <div>
+                    <input type="text" className="form-control" placeholder="Title" {...name} />
+                    {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
+                  </div>
+                }/>
               </div>
             </div>
             <div className="col-md-12">
@@ -89,11 +89,11 @@ export default class CourseForm extends Component {
                   Subtitle
                 </div>
                 <Field name="subtitle" component={subtitle =>
-                <div>
-                  <input type="text" className="form-control" placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle} />
-                  {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
-                </div>
-              }/>
+                  <div>
+                    <input type="text" className="form-control" placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle} />
+                    {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
+                  </div>
+                }/>
               </div>
             </div>
             <div className="col-md-12">
@@ -103,18 +103,16 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="thumbnail" component={thumbnail =>
                   <div>
-                   <Dropzone
-                            {...thumbnail}
-                            accept="image/*" className="action btn bg-warning"
-                            style={{height: 60}}
-                            multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
-                    <div>Drop thumbnail here, or click to select file to upload.</div>
-                  </Dropzone>
-                  {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                </div>
-
+                    <Dropzone
+                              {...thumbnail}
+                              accept="image/*" className="action btn bg-warning"
+                              style={{height: 60}}
+                              multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
+                      <div>Drop thumbnail here, or click to select file to upload.</div>
+                    </Dropzone>
+                    {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
+                  </div>
                 }/>
-
               </div>
             </div>
 
