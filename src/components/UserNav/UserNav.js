@@ -6,9 +6,6 @@ const UserNav = ({loggedIn = false, logout}) => {
   if (loggedIn) {
     res = (<ul className="nav navbar-nav pull-right">
       <li className="nav-item">
-        <Link className="nav-link" to="/my-profile">User Profile</Link>
-      </li>
-      <li className="nav-item">
         <a className="nav-link" onClick={()=>logout()} href="javascript:void(0)">Logout</a>
       </li>
     </ul>);
