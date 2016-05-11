@@ -16,7 +16,7 @@ const initialState = Immutable.fromJS({
   loaded: false
 });
 
-export default function lessonEdit(state = initialState, action) {
+export default function lessonEditReducer(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
@@ -29,7 +29,7 @@ export default function lessonEdit(state = initialState, action) {
     case EDIT_SUCCESS:
       return state.withMutations(map => {
         map.set('loaded', false);
-        map.set('submitSuccess', true);
+        map.remove('lesson');
       });
     case EDIT:
     case EDIT_FAIL:
@@ -37,7 +37,7 @@ export default function lessonEdit(state = initialState, action) {
     case LOAD_FAIL:
       return state.withMutations(map => {
         map.set('loaded', false);
-        map.set('lesson', {});
+        map.remove('lesson');
       });
     case LOAD:
     default:
@@ -52,27 +52,22 @@ export function load(lessonName) {
   };
 }
 
-function edit(model, lessonName) {
+function edit(model, lessonName, courseName) {
   return {
     types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
     promise: (client) => client.put(`/api/v1/lesson/name/${lessonName}`, { data: model }),
     data: {
-      model
+      model,
+      courseName,
+      lessonName,
     }
   };
 }
 
 export function editLesson(model, courseId, courseName, lessonName) {
-  model.courseId = courseId;
-  // test values
-  model.order = 1;
   return dispatch => {
-    return dispatch(edit(model, lessonName))
-      .then(()=> {
-        setTimeout(function timedDispatch() {
-          dispatch(push('/author/course/' + courseName + '/lesson/list'));
-        }, 2500);
-      })
+    return dispatch(edit({ ...model, order: 1, courseId }, lessonName, courseName))
+      .then(()=> setTimeout(()=> dispatch(push(`/author/course/${courseName}/lesson/list`)), 2500))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });
