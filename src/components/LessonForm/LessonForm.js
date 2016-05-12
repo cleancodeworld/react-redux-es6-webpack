@@ -5,8 +5,7 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 
 @reduxForm({
-  form: 'LessonForm',
-  overwriteOnInitialValuesChange: false,
+  form: 'LessonForm'
 })
 export default class LessonForm extends Component {
   static propTypes = {
