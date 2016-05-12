@@ -105,6 +105,8 @@ export function userLogin(model, continueTo) {
         const {sessionToken, username, userId} = res.data;
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
+        } else {
+          cookieOpt.maxAge = 0;
         }
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
