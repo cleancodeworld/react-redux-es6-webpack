@@ -7,8 +7,7 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 
 @reduxForm({
-  form: 'CourseForm',
-  overwriteOnInitialValuesChange: false,
+  form: 'CourseForm'
 })
 export default class CourseForm extends Component {
 
