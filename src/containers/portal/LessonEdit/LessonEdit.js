@@ -40,7 +40,6 @@ export default class LessonEdit extends Component {
 
   render() {
     const {params: { courseName, lessonName }, lessonEdit, course} = this.props;
-    debugger;
     const initialValues = lessonEdit ? lessonEdit.toJS() : {};
     const breadcrumbs = [
       { url: '/author', name: 'Author' },

@@ -5,19 +5,12 @@ import { reducer as formReducer } from 'redux-form';
 
 import userCreate from './user/create';
 import userVerify from './user/verify';
-import courseCreate from './course/create';
-import courseList from './course/list';
-import courseEdit from './course/edit';
 import auth from './auth';
 import portal from './portal';
-import lessonCreate from './lesson/create';
-import lessonEdit from './lesson/edit';
-import lessonLoaded from './lesson/loaded';
 import passwordReset from './password/reset';
 import passwordForget from './password/forget';
 import portalCurrent from './portal/current';
 import courseLoaded from './course/loaded';
-import coursePrice from './course/price';
 
 import AccountPortalValidation from 'components/AccountPortalForm/validate';
 import LoginFormValidation from 'components/LoginForm/validate';
@@ -41,17 +34,10 @@ export default combineReducers({
     PasswordResetForm: PasswordResetFormValidation,
     PasswordForgetForm: PasswordForgetFormValidation,
   }),
+  courseLoaded,
   auth,
   portal,
-  lessonCreate,
-  lessonLoaded,
-  lessonEdit,
-  courseCreate,
-  courseList,
-  courseEdit,
   passwordReset,
   passwordForget,
   portalCurrent,
-  courseLoaded,
-  coursePrice,
 });

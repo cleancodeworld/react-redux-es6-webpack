@@ -50,7 +50,6 @@ export default function courseLoad(state = initialState, action) {
       });
     case LOAD_LESSONS_SUCCESS:
       return state.withMutations(map => {
-        debugger;
         const {courseName} = action.data;
         const lessons = lessonsNormalize(action.result.lessons);
         map.mergeIn(['entities', courseName, 'lessons'], Immutable.fromJS(lessons));

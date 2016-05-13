@@ -7,43 +7,8 @@ export const EDIT = 'knexpert/lessons/EDIT';
 export const EDIT_SUCCESS = 'knexpert/lessons/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/lessons/EDIT_FAIL';
 
-import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-
-const initialState = Immutable.fromJS({
-  lesson: {},
-  loaded: false
-});
-
-export default function lessonEditReducer(state = initialState, action) {
-  switch (action.type) {
-    case INIT:
-    case REDUX_INIT:
-      return Immutable.fromJS(state);
-    case LOAD_SUCCESS:
-      return state.withMutations(map => {
-        map.set('loaded', true);
-        map.set('lesson', Immutable.fromJS(action.result));
-      });
-    case EDIT_SUCCESS:
-      return state.withMutations(map => {
-        map.set('loaded', false);
-        map.remove('lesson');
-      });
-    case EDIT:
-    case EDIT_FAIL:
-      return state;
-    case LOAD_FAIL:
-      return state.withMutations(map => {
-        map.set('loaded', false);
-        map.remove('lesson');
-      });
-    case LOAD:
-    default:
-      return state;
-  }
-}
 
 export function load(lessonName) {
   return {
