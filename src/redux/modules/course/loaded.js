@@ -112,4 +112,3 @@ export function load(courseName) {
 export function isLoaded(globalState, courseName) {
   return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get(courseName);
 }
-

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 
