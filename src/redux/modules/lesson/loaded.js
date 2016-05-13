@@ -3,9 +3,6 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/lessons/LOAD';
 export const LOAD_SUCCESS = 'knexpert/lessons/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/lessons/LOAD_FAIL';
-import {ADD_SUCCESS} from './create';
-import {EDIT_SUCCESS} from './edit';
-import {REMOVE_SUCCESS} from './remove';
 
 import Immutable from 'immutable';
 
@@ -16,35 +13,6 @@ export default function lessonLoaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
-    case LOAD_SUCCESS:
-      return state.withMutations(map => {
-        const {courseName} = action.data;
-        map.set(courseName, Immutable.fromJS(action.result.lessons));
-      });
-    case LOAD_FAIL:
-      return state.withMutations(map => {
-        const {courseName} = action.data;
-        map.remove(courseName);
-      });
-    case ADD_SUCCESS:
-      return state.withMutations(map => {
-        const {courseName} = action.data;
-        const {createdLesson} = action.result;
-        const immutableCreatedLesson = Immutable.fromJS(createdLesson);
-        map.update(courseName, lessons=>lessons.push(immutableCreatedLesson));
-      });
-    case REMOVE_SUCCESS:
-      return state.withMutations(map => {
-        const {courseName, lessonName} = action.data;
-        const course = map.get(courseName);
-        const lessonIndex = course.findIndex(lesson => lesson.get('slug') === lessonName);
-        map.set(courseName, course.remove(lessonIndex));
-      });
-    case EDIT_SUCCESS:
-      return state.withMutations(map => {
-        const {courseName} = action.data;
-        map.remove(courseName);
-      });
     case LOAD:
     default:
       return state;

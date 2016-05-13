@@ -20,9 +20,9 @@ import { load as loadLesson } from 'redux/modules/lesson/edit';
   }
 }])
 @connect(
-  ({courseLoaded, lessonEdit}, ownProps) => ({
-    lessonEdit,
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName])
+  ({courseLoaded}, ownProps) => ({
+    lessonEdit: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'entities', ownProps.params.lessonName]),
+    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
   }),
   { editLesson }
 )
@@ -40,7 +40,8 @@ export default class LessonEdit extends Component {
 
   render() {
     const {params: { courseName, lessonName }, lessonEdit, course} = this.props;
-    const initialValues = lessonEdit.get('lesson') ? lessonEdit.get('lesson').toJS() : {};
+    debugger;
+    const initialValues = lessonEdit ? lessonEdit.toJS() : {};
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
