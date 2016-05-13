@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-const CourseListItem = ({course}) => {
+const CourseListPublicItem = ({course}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   const price = course.get('coursePrice');
@@ -13,10 +13,16 @@ const CourseListItem = ({course}) => {
         <div className="thumb-wrapper" style={{ backgroundImage: 'url(' + coursePlaceholderImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="thumb" style={{ backgroundImage: 'url(' + courseImage + ')', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100%' }}>
             <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
+            <div className="caption-overflow">
+              <span>
+                <a href="#" className="btn border-white text-white btn-flat btn-icon btn-rounded"><i className="icon-plus3"></i></a>
+                <a href="#" className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i className="icon-heart5"></i></a>
+              </span>
+            </div>
           </div>
         </div>
         <div className="caption">
-          <h6 className="no-margin-top text-semibold"><Link to={'/author/course/' + course.get('slug')} className="text-default">{course.get('name')}</Link></h6>
+          <h6 className="no-margin-top text-semibold"><Link to={'/course/' + course.get('slug')} className="text-default">{course.get('name')}</Link></h6>
           <hr className="no-margin-top mb-10"/>
           <div className="clearfix">
             <div className="pull-left">
@@ -38,4 +44,4 @@ const CourseListItem = ({course}) => {
     </div>
   );
 };
-export default CourseListItem;
+export default CourseListPublicItem;
