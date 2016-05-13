@@ -21,8 +21,7 @@ import { load, edit } from 'redux/modules/course/price';
 }])
 @connect(
   ({courseLoaded, coursePrice}, ownProps) => ({
-    price: coursePrice.get(ownProps.params.courseName),
-    course: courseLoaded.get(ownProps.params.courseName),
+    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
   }),
   { edit }
 )
@@ -30,7 +29,6 @@ export default class CourseAccounting extends Component {
 
   static propTypes = {
     params: PropTypes.object.isRequired,
-    price: PropTypes.object.isRequired,
     course: PropTypes.object.isRequired,
     edit: PropTypes.func.isRequired,
   };
@@ -40,25 +38,19 @@ export default class CourseAccounting extends Component {
   }
 
   render() {
-    const {courseName} = this.props.params;
-    const {course} = this.props;
+    const {params: { courseName }, course} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
       { url: '/author/course/' + courseName, name: course.get('name') },
     ];
-    let price = this.props.price;
-    if (price) {
-      if (typeof price.toJS !== 'undefined') {
-        price = price.toJS();
-      }
-    } else {
-      price = {
-        paid: true,
-        currency: 'USD',
-        price: 30
-      };
-    }
+    const defaultPrice = {
+      paid: true,
+      currency: 'USD',
+      price: 30
+    };
+    const price = course.get('price') ? course.get('price').toJS() : defaultPrice;
+
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
@@ -71,7 +63,7 @@ export default class CourseAccounting extends Component {
                 onSubmit={model => {
                   this.setState({saved: false});
                   return this.props.edit(model, courseName).then(() => this.setState({saved: true}));
-                }} />
+                }}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>

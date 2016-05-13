@@ -8,8 +8,6 @@ import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 
-import { refresh } from './list';
-
 const initialState = Immutable.fromJS({});
 
 export default function courseCreate(state = initialState, action) {
@@ -40,7 +38,6 @@ export function create(model) {
     return dispatch(
       _create(model))
       .then(()=> {
-        dispatch(refresh());
         setTimeout(()=> dispatch(push('/author/course/list')), 2500);
       })
       .catch(res => {

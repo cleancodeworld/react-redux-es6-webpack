@@ -23,21 +23,21 @@ import { load, isLoaded } from 'redux/modules/course/list';
   }
 }])
 @connect(
-  ({courseList}) => ({
-    list: courseList.get('list'),
-    author: courseList.get('author')
+  ({courseLoaded}) => ({
+    entities: courseLoaded.get('entities'),
+    order: courseLoaded.get('order'),
   }),
   null
 )
 export default class CourseList extends Component {
 
   static propTypes = {
-    list: PropTypes.object,
-    author: PropTypes.object,
+    entities: PropTypes.object,
+    order: PropTypes.object,
   };
 
   render() {
-    const {list, author} = this.props;
+    const {entities, order} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' }
@@ -54,8 +54,8 @@ export default class CourseList extends Component {
               <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
             </div>
             <div className="row">
-              {list.map(course=> {
-                return (<CourseListItem key={course.get('id')} course={course} author={author}/>);
+              {order.map(course=> {
+                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
               })}
             </div>
           </PortalAuthorLayout>

@@ -24,7 +24,7 @@ export default function lessonEditReducer(state = initialState, action) {
     case LOAD_SUCCESS:
       return state.withMutations(map => {
         map.set('loaded', true);
-        map.set('lesson', action.result);
+        map.set('lesson', Immutable.fromJS(action.result));
       });
     case EDIT_SUCCESS:
       return state.withMutations(map => {

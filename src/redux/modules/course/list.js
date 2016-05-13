@@ -9,7 +9,6 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
   loaded: false,
-  list: []
 });
 
 export default function courseCreate(state = initialState, action) {
@@ -21,8 +20,6 @@ export default function courseCreate(state = initialState, action) {
       return state.set('loaded', false);
     case LIST_SUCCESS:
       return state.withMutations(map=> {
-        map.set('list', Immutable.fromJS(action.result.courses));
-        map.set('author', Immutable.fromJS(action.result.author));
         map.set('loaded', true);
       });
     case LIST:

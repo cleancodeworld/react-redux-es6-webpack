@@ -11,7 +11,7 @@ import {
 
 @connect(
   ({courseLoaded}, ownProps) => ({
-    course: courseLoaded.get(ownProps.params.courseName),
+    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
   }),
   { edit }
 )
