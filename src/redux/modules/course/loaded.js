@@ -7,6 +7,7 @@ export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 import { LIST_SUCCESS } from './list';
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
+import { PUBLIC_LIST_SUCCESS } from './publiclist';
 import {
   LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
 } from './../lesson/loaded';
@@ -47,6 +48,12 @@ export default function courseLoad(state = initialState, action) {
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
         const course = action.result.data;
+        map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
+      });
+    case PUBLIC_LIST_SUCCESS:
+      /// problem! should be differentiated from public list
+      return state.withMutations(map=> {
+        const course = action.result;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case EDIT_SUCCESS:
