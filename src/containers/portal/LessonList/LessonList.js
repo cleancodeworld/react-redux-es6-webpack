@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import { LessonListItem } from 'components';
