@@ -23,7 +23,8 @@ import { remove as removeLesson } from 'redux/modules/lesson/remove';
 
 @connect(
   ({lessonLoaded, courseLoaded}, ownProps) => ({
-    list: lessonLoaded.get(ownProps.params.courseName),
+    lessons: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'entities']),
+    order: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'order']),
     course: courseLoaded.getIn(['entities', ownProps.params.courseName])
   }),
   { removeLesson }
@@ -31,14 +32,15 @@ import { remove as removeLesson } from 'redux/modules/lesson/remove';
 export default class LessonList extends Component {
 
   static propTypes = {
-    list: PropTypes.object,
+    lessons: PropTypes.object,
+    order: PropTypes.object,
     course: PropTypes.object,
     params: PropTypes.object.isRequired,
     removeLesson: PropTypes.func.isRequired,
   };
 
   render() {
-    const {params: { courseName }, list, course, params} = this.props;
+    const {params: { courseName }, lessons, course, params, order} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -70,8 +72,9 @@ export default class LessonList extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {list.map(lesson => {
-                      return (<LessonListItem key={lesson.get('id')} lesson={lesson} onRemove={this.props.removeLesson}
+                    {order.map(lesson => {
+                      return (<LessonListItem key={lessons.getIn([lesson, 'id'])} lesson={lessons.get(lesson)}
+                                              onRemove={this.props.removeLesson}
                                               courseName={courseName}/>);
                     })}
                     </tbody>

@@ -7,25 +7,7 @@ export const EDIT = 'knexpert/course/price/EDIT';
 export const EDIT_SUCCESS = 'knexpert/course/price/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/course/price/EDIT_FAIL';
 
-import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
-
-const initialState = Immutable.fromJS({});
-
-export default function coursePrice(state = initialState, action) {
-  switch (action.type) {
-    case INIT:
-    case REDUX_INIT:
-      return Immutable.fromJS(state);
-    case LOAD_FAIL:
-    case LOAD:
-    case EDIT:
-    case EDIT_SUCCESS:
-    case EDIT_FAIL:
-    default:
-      return state;
-  }
-}
 
 export function load(courseName) {
   return {

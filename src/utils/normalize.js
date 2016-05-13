@@ -8,5 +8,15 @@ export function courses(arrayOfCourses) {
   });
   const entities = _.get(results, 'entities.courses', {});
   const order = _.get(results, 'result.courses', []);
-  return { order, entities };
+  return { order, entities, listLoaded: true };
+}
+
+export function lessons(arrayOfLessons) {
+  const lessonsSchema = new Schema('lessons', { idAttribute: 'slug' });
+  const results = normalize({ lessons: arrayOfLessons }, {
+    lessons: arrayOf(lessonsSchema)
+  });
+  const entities = _.get(results, 'entities.lessons', {});
+  const order = _.get(results, 'result.lessons', []);
+  return { order, entities, listLoaded: true };
 }

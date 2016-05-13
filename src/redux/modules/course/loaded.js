@@ -4,15 +4,24 @@ export const LOAD = 'knexpert/course/LOAD';
 export const LOAD_SUCCESS = 'knexpert/course/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 
-import Immutable from 'immutable';
-import {courses as coursesNormalize} from 'utils/normalize';
 import { LIST_SUCCESS } from './list';
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
 import {
+  LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
+} from './../lesson/loaded';
+import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
+import {EDIT_SUCCESS as EDIT_LESSON_SUCCESS } from './../lesson/edit';
+import {REMOVE_SUCCESS as REMOVE_LESSON_SUCCESS} from './../lesson/remove';
+
+import {
   LOAD_SUCCESS as LOAD_PRICE_SUCCESS,
   EDIT_SUCCESS as EDIT_PRICE_SUCCESS,
 } from './price';
+
+
+import Immutable from 'immutable';
+import {courses as coursesNormalize, lessons as lessonsNormalize} from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
   order: [],
@@ -38,6 +47,31 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const courses = coursesNormalize(action.result.courses);
         map.merge(courses);
+      });
+    case LOAD_LESSONS_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName} = action.data;
+        const lessons = lessonsNormalize(action.result.lessons);
+        map.mergeIn(['entities', courseName, 'lessons'], Immutable.fromJS(lessons));
+      });
+    case ADD_LESSON_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName} = action.data;
+        const {createdLesson} = action.result;
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', createdLesson.slug], Immutable.fromJS(createdLesson));
+        map.updateIn(['entities', courseName, 'lessons', 'order'], array=> array ? array.push(createdLesson.slug) : [createdLesson.slug]);
+      });
+    case EDIT_LESSON_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName} = action.data;
+        const {updatedLesson} = action.result;
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', updatedLesson.slug], Immutable.fromJS(updatedLesson));
+      });
+    case REMOVE_LESSON_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName} = action.data;
+        map.removeIn(['entities', courseName, 'lessons', 'entities', lessonName]);
+        map.updateIn(['entities', courseName, 'lessons', 'order'], array=>array.filter((lesson)=> lesson !== lessonName));
       });
     case CREATE_SUCCESS:
       return state.withMutations(map=> {

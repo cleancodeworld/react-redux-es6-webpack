@@ -4,25 +4,9 @@ export const ADD = 'knexpert/lessons/ADD';
 export const ADD_SUCCESS = 'knexpert/lessons/ADD_SUCCESS';
 export const ADD_FAIL = 'knexpert/lessons/ADD_FAIL';
 
-import Immutable from 'immutable';
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 
-const initialState = Immutable.fromJS({
-});
-
-export default function lessonAdd(state = initialState, action) {
-  switch (action.type) {
-    case INIT:
-    case REDUX_INIT:
-      return Immutable.fromJS(state);
-    case ADD_SUCCESS:
-    case ADD:
-    case ADD_FAIL:
-    default:
-      return state;
-  }
-}
 
 export function _add(model, courseName) {
   return {
