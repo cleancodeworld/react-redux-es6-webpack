@@ -29,7 +29,11 @@ import {
 } from './wish-list';
 
 import Immutable from 'immutable';
-import {courses as coursesNormalize, lessons as lessonsNormalize} from 'utils/normalize';
+import {
+  courses as coursesNormalize,
+  lessons as lessonsNormalize,
+  coursesPublic as publicCoursesNormalize,
+} from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
   wishList: {
@@ -50,12 +54,6 @@ export default function courseLoad(state = initialState, action) {
         const course = action.result.data;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
-    case PUBLIC_LIST_SUCCESS:
-      /// problem! should be differentiated from public list
-      return state.withMutations(map=> {
-        const course = action.result;
-        map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
-      });
     case EDIT_SUCCESS:
       return state.withMutations(map=> {
         const { updatedCourse } = action.result.data;
@@ -64,6 +62,11 @@ export default function courseLoad(state = initialState, action) {
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         const courses = coursesNormalize(action.result.data.courses);
+        map.merge(courses);
+      });
+    case PUBLIC_LIST_SUCCESS:
+      return state.withMutations(map=> {
+        const courses = publicCoursesNormalize(action.result.courses);
         map.merge(courses);
       });
     case LOAD_LESSONS_SUCCESS:

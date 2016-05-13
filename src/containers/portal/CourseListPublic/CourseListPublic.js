@@ -1,30 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import {Link} from 'react-router';
 import { asyncConnect } from 'redux-async-connect';
 import { connect } from 'react-redux';
 import {
   PortalLayout,
+  CourseListCategories,
 } from '../index';
 import {
-  CourseListItem,
+  CourseListPublicItem,
 } from 'components';
 import { load } from 'redux/modules/course/publiclist';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({store: {dispatch}}) => {
     const promises = [];
-    const state = getState();
-    if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.auth.getIn(['user', 'username']))));
-    }
+    promises.push(dispatch(load()));
     return Promise.all(promises);
   }
 }])
 @connect(
-  ({courseLoaded}) => ({
+  ({courseLoaded, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('order'),
+    order: courseLoaded.get('orderPublic'),
+    portalMeta: portalCurrent.get('meta'),
   }),
   null
 )
@@ -33,31 +31,33 @@ export default class CourseListPublic extends Component {
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    portalMeta: PropTypes.object,
   };
 
   render() {
-    const {entities, order} = this.props;
+    const {entities, order, portalMeta} = this.props;
     const breadcrumbs = [
-      { url: '/author', name: 'Author' },
-      { url: '/author/course/list', name: 'Course Mgr' }
+      { url: '/courses', name: 'Courses' },
     ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
-          <PortalAuthorLayout>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalMeta.get('name')} title=" - Browse Courses">
+          <div className="sidebar sidebar-main sidebar-default">
+            <div className="sidebar-content">
+              <CourseListCategories/>
+            </div>
+          </div>
+          <div className="content-wrapper">
             <Helmet title="Home"/>
             <div className="content-group">
               <h6 className="text-semibold">Course List </h6>
             </div>
-            <div className="content-group">
-              <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
-            </div>
             <div className="row">
               {order.map(course=> {
-                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
+                return (<CourseListPublicItem key={entities.get(course)} course={entities.get(course)}/>);
               })}
             </div>
-          </PortalAuthorLayout>
+          </div>
         </PortalLayout>
       </div>
     );
