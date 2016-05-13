@@ -1,7 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal/current';
-import { requireLoadCourse } from './permissions';
 
 import {
   App,
@@ -20,6 +19,7 @@ import {
 import {
   Root,
   NotFound,
+  Course
 } from '../containers/shared';
 
 export default (params) => {
@@ -40,8 +40,7 @@ export default (params) => {
           <Route path="course">
             <Route path="create" component={CourseCreate}/>
             <Route path="list" component={CourseList}/>
-            <Route path=":courseName"
-                   onEnter={(nextState, replace, cb)=>requireLoadCourse(store, nextState, replace, cb)}>
+            <Route path=":courseName" component={Course}>
               <IndexRoute component={CourseEdit}/>
               <Route path="goals" component={CourseEdit}/>
               <Route path="accounting" component={CourseAccounting}/>
