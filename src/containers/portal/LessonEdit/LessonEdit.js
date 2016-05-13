@@ -20,14 +20,16 @@ import { load as loadLesson } from 'redux/modules/lesson/edit';
   }
 }])
 @connect(
-  state => ({ lessonEdit: state.lessonEdit, lessons: state.lessons, courseEdit: state.courseEdit }),
+  ({courseLoaded, lessonEdit}, ownProps) => ({
+    lessonEdit,
+    course: courseLoaded.getIn(['entities', ownProps.params.courseName])
+  }),
   { editLesson }
 )
 export default class LessonEdit extends Component {
   static propTypes = {
     lessonEdit: PropTypes.object,
-    lessons: PropTypes.object,
-    courseEdit: PropTypes.object,
+    course: PropTypes.object,
     editLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
@@ -37,13 +39,8 @@ export default class LessonEdit extends Component {
   }
 
   render() {
-    const {courseName, lessonName} = this.props.params;
-    const {lessonEdit, courseEdit} = this.props;
-    const course = courseEdit.get('course');
-    let lesson = lessonEdit.get('lesson');
-    if (typeof lesson.toJS !== 'undefined') {
-      lesson = lesson.toJS();
-    }
+    const {params: { courseName, lessonName }, lessonEdit, course} = this.props;
+    const initialValues = lessonEdit.get('lesson') ? lessonEdit.get('lesson').toJS() : {};
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -55,8 +52,8 @@ export default class LessonEdit extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={lesson}
-                          onSubmit={ model => this.props.editLesson(model, lesson.courseId, courseName, lessonName).then(()=>this.setState({saved: true}))}
+              <LessonForm initialValues={initialValues}
+                          onSubmit={ model => this.props.editLesson(model, initialValues.courseId, courseName, lessonName).then(()=>this.setState({saved: true}))}
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>

@@ -9,7 +9,7 @@ import {
 import { add as addLesson } from 'redux/modules/lesson/create';
 
 @connect(
-  (state, ownProps) => ({ course: state.courseLoaded.get(ownProps.params.courseName) }),
+  ({courseLoaded}, ownProps) => ({ course: courseLoaded.getIn(['entities', ownProps.params.courseName]) }),
   { addLesson }
 )
 export default class LessonAdd extends Component {

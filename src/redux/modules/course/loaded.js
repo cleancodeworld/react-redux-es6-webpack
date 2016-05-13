@@ -4,26 +4,58 @@ export const LOAD = 'knexpert/course/LOAD';
 export const LOAD_SUCCESS = 'knexpert/course/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 
-const REDUX_FORM_INIT = 'redux-form/INITIALIZE';
-
 import Immutable from 'immutable';
+import {courses as coursesNormalize} from 'utils/normalize';
 import { LIST_SUCCESS } from './list';
-const initialState = Immutable.fromJS({});
+import { CREATE_SUCCESS } from './create';
+import { EDIT_SUCCESS } from './edit';
+import {
+  LOAD_SUCCESS as LOAD_PRICE_SUCCESS,
+  EDIT_SUCCESS as EDIT_PRICE_SUCCESS,
+} from './price';
+
+const initialState = Immutable.fromJS({
+  order: [],
+  entities: {}
+});
 
 export default function courseLoad(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
-    case REDUX_FORM_INIT:
-      return state.set('submitSuccess', false);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
-        map.set(action.data.courseName, Immutable.fromJS(action.result));
+        const course = action.result;
+        map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
+      });
+    case EDIT_SUCCESS:
+      return state.withMutations(map=> {
+        const { updatedCourse } = action.result;
+        map.mergeIn(['entities', updatedCourse.slug], Immutable.fromJS(updatedCourse));
       });
     case LIST_SUCCESS:
       return state.withMutations(map=> {
-        action.result.courses.map(course=> map.set(course.name, Immutable.fromJS(course)));
+        const courses = coursesNormalize(action.result.courses);
+        map.merge(courses);
+      });
+    case CREATE_SUCCESS:
+      return state.withMutations(map=> {
+        const { createdCourse } = action.result;
+        map.mergeIn(['entities', createdCourse.slug], createdCourse);
+        map.update('order', array=>array.push(createdCourse.slug));
+      });
+    case LOAD_PRICE_SUCCESS:
+      return state.withMutations(map=> {
+        const course = action.result;
+        const {courseName} = action.data;
+        map.mergeIn(['entities', courseName, 'price'], course);
+      });
+    case EDIT_PRICE_SUCCESS:
+      return state.withMutations(map=> {
+        const {updatedPrice} = action.result;
+        const {courseName} = action.data;
+        map.mergeIn(['entities', courseName, 'price'], updatedPrice);
       });
     case LOAD_FAIL:
       return state.remove(action.data.courseName);

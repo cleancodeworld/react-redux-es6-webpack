@@ -17,11 +17,6 @@ export default function coursePrice(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
-    case LOAD_SUCCESS:
-      return state.withMutations(map => {
-        const {courseName} = action.data;
-        map.set(courseName, Immutable.fromJS(action.result));
-      });
     case LOAD_FAIL:
     case LOAD:
     case EDIT:
@@ -45,7 +40,10 @@ export function load(courseName) {
 function _edit(model, courseName) {
   return {
     types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
-    promise: (client) => client.put(`/api/v1/course/price/${courseName}`, { data: model })
+    promise: (client) => client.put(`/api/v1/course/price/${courseName}`, { data: model }),
+    data: {
+      courseName
+    }
   };
 }
 

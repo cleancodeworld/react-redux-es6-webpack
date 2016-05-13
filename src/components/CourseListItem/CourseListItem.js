@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-const CourseListItem = ({course, author}) => {
+const CourseListItem = ({course}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   // const currency = '$';
@@ -27,9 +27,6 @@ const CourseListItem = ({course, author}) => {
               <a href="#">
                 <img src={'https://placehold.it/40x40'} className="img-responsive" alt=""/>
               </a>
-            </div>
-            <div className="media-body">
-              <div className="media-heading text-semibold">{author.get('name')}</div>
             </div>
           </div>
         </div>

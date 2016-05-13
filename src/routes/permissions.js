@@ -27,7 +27,7 @@ export const requireLoadCourse = (store, nextState, replace, cb) => {
 
   function checkAuth() {
     const { courseLoaded } = store.getState();
-    const course = courseLoaded.get(courseName);
+    const course = courseLoaded.getIn(['entities', courseName]);
     if (!course) {
       replace('/not-found');
     }

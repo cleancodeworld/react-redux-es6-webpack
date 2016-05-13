@@ -22,9 +22,9 @@ import { remove as removeLesson } from 'redux/modules/lesson/remove';
 }])
 
 @connect(
-  ({lessonLoaded, courseEdit}, ownProps) => ({
+  ({lessonLoaded, courseLoaded}, ownProps) => ({
     list: lessonLoaded.get(ownProps.params.courseName),
-    course: courseEdit.get('course')
+    course: courseLoaded.getIn(['entities', ownProps.params.courseName])
   }),
   { removeLesson }
 )
@@ -38,8 +38,7 @@ export default class LessonList extends Component {
   };
 
   render() {
-    const {courseName} = this.props.params;
-    const {list, course, params} = this.props;
+    const {params: { courseName }, list, course, params} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -72,7 +71,8 @@ export default class LessonList extends Component {
                     </thead>
                     <tbody>
                     {list.map(lesson => {
-                      return (<LessonListItem key={lesson.get('id')} lesson={lesson} onRemove={this.props.removeLesson} courseName={courseName}/>);
+                      return (<LessonListItem key={lesson.get('id')} lesson={lesson} onRemove={this.props.removeLesson}
+                                              courseName={courseName}/>);
                     })}
                     </tbody>
                   </table>
