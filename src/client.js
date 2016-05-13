@@ -10,7 +10,7 @@ import getSubDomain from './helpers/subDomain';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { ReduxAsyncConnect } from 'redux-async-connect';
+import { ReduxAsyncConnect } from 'redux-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 import getRoutes from './routes';

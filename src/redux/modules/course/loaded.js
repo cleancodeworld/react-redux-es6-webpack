@@ -98,8 +98,6 @@ export default function courseLoad(state = initialState, action) {
         const {courseName} = action.data;
         map.mergeIn(['entities', courseName, 'price'], updatedPrice);
       });
-    case LOAD_FAIL:
-      return state.remove(action.data.courseName);
     case LOAD:
     default:
       return state;
@@ -117,6 +115,5 @@ export function load(courseName) {
 }
 
 export function isLoaded(globalState, courseName) {
-  return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get(courseName);
+  return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get(['entities', courseName]);
 }
-

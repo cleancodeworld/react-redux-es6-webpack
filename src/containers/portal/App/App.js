@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { asyncConnect } from 'redux-async-connect';
+import { asyncConnect } from 'redux-connect';
 import { isLoaded, load } from 'redux/modules/portal/current';
 
 @asyncConnect([{

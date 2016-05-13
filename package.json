@@ -129,7 +129,7 @@
     "react-rte": "^0.1.14",
     "react-select": "^1.0.0-beta13",
     "redux": "^3.0.4",
-    "redux-async-connect": "^1.0.0-rc2",
+    "redux-connect": "^2.3.0",
     "redux-form": "6.0.0-alpha.4",
     "scroll-behavior": "^0.3.2",
     "serialize-javascript": "^1.1.2",
