@@ -8,12 +8,12 @@ import {
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
-import { load, edit } from 'redux/modules/course/price';
+import { load, edit, isLoaded } from 'redux/modules/course/price';
 
 @asyncConnect([{
-  promise: ({store: {dispatch}, params}) => {
+  promise: ({store: {getState, dispatch}, params}) => {
     const promises = [];
-    if (params.courseName) {
+    if (!isLoaded(getState(), params.courseName)) {
       promises.push(dispatch(load(params.courseName)));
     }
     return Promise.all(promises);

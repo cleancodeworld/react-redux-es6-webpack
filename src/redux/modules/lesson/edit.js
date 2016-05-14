@@ -10,11 +10,19 @@ export const EDIT_FAIL = 'knexpert/lessons/EDIT_FAIL';
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 
-export function load(lessonName) {
+export function load(courseName, lessonName) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/lesson/name/${lessonName}`)
+    promise: (client) => client.get(`/api/v1/lesson/name/${lessonName}`),
+    data: {
+      courseName,
+      lessonName,
+    }
   };
+}
+
+export function isLoaded(globalState, courseName, lessonName) {
+  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName, 'lessons', 'entities', lessonName]);
 }
 
 function edit(model, lessonName, courseName) {

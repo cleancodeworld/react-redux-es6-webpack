@@ -11,7 +11,10 @@ import {
   LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
 } from './../lesson/loaded';
 import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
-import {EDIT_SUCCESS as EDIT_LESSON_SUCCESS } from './../lesson/edit';
+import {
+  EDIT_SUCCESS as EDIT_LESSON_SUCCESS,
+  LOAD_SUCCESS as LOAD_LESSON_SUCCESS,
+} from './../lesson/edit';
 import {REMOVE_SUCCESS as REMOVE_LESSON_SUCCESS} from './../lesson/remove';
 
 import {
@@ -53,6 +56,12 @@ export default function courseLoad(state = initialState, action) {
         const {courseName} = action.data;
         const lessons = lessonsNormalize(action.result.lessons);
         map.mergeIn(['entities', courseName, 'lessons'], Immutable.fromJS(lessons));
+      });
+    case LOAD_LESSON_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName} = action.data;
+        const lesson = action.result;
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', lessonName], Immutable.fromJS(lesson));
       });
     case ADD_LESSON_SUCCESS:
       return state.withMutations(map => {
@@ -108,5 +117,5 @@ export function load(courseName) {
 }
 
 export function isLoaded(globalState, courseName) {
-  return !globalState.courseLoaded || globalState.courseLoaded && globalState.courseLoaded.get(['entities', courseName]);
+  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName]);
 }

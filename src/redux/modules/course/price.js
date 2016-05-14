@@ -42,3 +42,7 @@ export function edit(model, courseName) {
       });
   };
 }
+
+export function isLoaded(globalState, courseName) {
+  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName, 'coursePrice']);
+}
