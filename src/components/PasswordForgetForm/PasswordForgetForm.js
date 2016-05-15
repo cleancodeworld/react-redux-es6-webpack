@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
+import validate from './validate';
 
 @reduxForm({
   form: 'PasswordForgetForm',
+  validate,
 })
 
 export default class PasswordForgetForm extends Component {

@@ -3,10 +3,12 @@ import {reduxForm, Field} from 'redux-form';
 import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
+import validate from './validate';
 
 @reduxForm({
   form: 'LessonForm',
-  overwriteOnInitialValuesChange: false,
+  overwriteOnInitialValuesChange: true,
+  validate
 })
 export default class LessonForm extends Component {
   static propTypes = {
@@ -57,7 +59,7 @@ export default class LessonForm extends Component {
       submitting,
       error,
       submitStatus,
-    } = this.props;
+      } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
@@ -102,7 +104,8 @@ export default class LessonForm extends Component {
               </div>
             }/>
             <div className="text-right">
-              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i className="icon-arrow-right14 position-right"></i></button>
+              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i
+                className="icon-arrow-right14 position-right"></i></button>
             </div>
           </form>
         </div>
