@@ -10,7 +10,6 @@ import validate from './validate';
 @reduxForm({
   form: 'CourseForm',
   validate,
-  overwriteOnInitialValuesChange: true,
 })
 export default class CourseForm extends Component {
 
