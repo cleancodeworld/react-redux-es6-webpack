@@ -10,8 +10,9 @@ import {
 } from '../index';
 
 @connect(
-  ({courseLoaded}, ownProps) => ({
+  ({courseLoaded, portalCurrent}, ownProps) => ({
     course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
+    portalId: portalCurrent.getIn(['meta', 'id']),
   }),
   { edit }
 )
@@ -19,6 +20,7 @@ export default class CourseEdit extends Component {
 
   static propTypes = {
     course: PropTypes.object.isRequired,
+    portalId: PropTypes.string.isRequired,
     edit: PropTypes.func,
     params: PropTypes.object.isRequired,
   };
@@ -27,7 +29,7 @@ export default class CourseEdit extends Component {
   }
 
   render() {
-    const { course, params } = this.props;
+    const { course, params, portalId } = this.props;
     const {courseName} = params;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
@@ -41,7 +43,7 @@ export default class CourseEdit extends Component {
             <PortalAuthorCourseLayout params={params}>
               <Helmet title="Home"/>
               <CourseForm initialValues={course.toJS()}
-                          onSubmit={ model => this.props.edit(model, courseName).then(()=> this.setState({saved: true})) }
+                          onSubmit={ model => this.props.edit(model, courseName, portalId).then(()=> this.setState({saved: true})) }
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
