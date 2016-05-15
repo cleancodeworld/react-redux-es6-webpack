@@ -34,17 +34,13 @@ export default class CourseEdit extends Component {
       { url: '/author/course/list', name: 'Course Mgr' },
       { url: '/author/course/' + courseName, name: course.get('name') },
     ];
-    let courseValues = course;
-    if (typeof courseValues.toJS !== 'undefined') {
-      courseValues = courseValues.toJS();
-    }
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={`- ${course.get('name')}` }>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={params}>
               <Helmet title="Home"/>
-              <CourseForm initialValues={courseValues}
+              <CourseForm initialValues={course.toJS()}
                           onSubmit={ model => this.props.edit(model, courseName).then(()=> this.setState({saved: true})) }
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>

@@ -26,12 +26,7 @@ export default class LessonAdd extends Component {
   render() {
     const {courseName} = this.props.params;
     const {course} = this.props;
-    const initialValues = {
-      title: '',
-      thumbnail: '',
-      description: '',
-      content: '',
-    };
+
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -43,8 +38,7 @@ export default class LessonAdd extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={` - ${course.get('name')}`}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={initialValues}
-                          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
+              <LessonForm onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>

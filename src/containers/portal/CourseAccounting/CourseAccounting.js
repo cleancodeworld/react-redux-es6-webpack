@@ -8,6 +8,7 @@ import {
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
+import Immutable from 'immutable';
 import { load, edit, isLoaded } from 'redux/modules/course/price';
 
 @asyncConnect([{
@@ -44,12 +45,12 @@ export default class CourseAccounting extends Component {
       { url: '/author/course/list', name: 'Course Mgr' },
       { url: '/author/course/' + courseName, name: course.get('name') },
     ];
-    const defaultPrice = {
-      paid: true,
-      currency: 'USD',
-      price: 30
-    };
-    const price = course.get('price') ? course.get('price').toJS() : defaultPrice;
+    const price = course.get('coursePrice')
+      || Immutable.fromJS({
+        paid: true,
+        currency: 'USD',
+        price: 30
+      });
 
     return (
       <div>
@@ -58,7 +59,7 @@ export default class CourseAccounting extends Component {
             <PortalAuthorCourseLayout params={this.props.params}>
               <Helmet title="Home"/>
               <CourseAccountingForm
-                initialValues={price}
+                initialValues={price.toJS()}
                 submitStatus={this.state.saved}
                 onSubmit={model => {
                   this.setState({saved: false});
