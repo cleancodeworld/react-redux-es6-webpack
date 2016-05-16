@@ -5,7 +5,6 @@ import Select from 'react-select';
 
 @reduxForm({
   form: 'CourseAccountingForm',
-  overwriteOnInitialValuesChange: false,
 })
 export default class CourseAccountingForm extends Component {
 

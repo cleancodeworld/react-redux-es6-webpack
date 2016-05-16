@@ -38,23 +38,23 @@ export default function courseLoad(state = initialState, action) {
       return Immutable.fromJS(state);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
-        const course = action.result;
+        const course = action.result.data;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case EDIT_SUCCESS:
       return state.withMutations(map=> {
-        const { updatedCourse } = action.result;
+        const { updatedCourse } = action.result.data;
         map.mergeIn(['entities', updatedCourse.slug], Immutable.fromJS(updatedCourse));
       });
     case LIST_SUCCESS:
       return state.withMutations(map=> {
-        const courses = coursesNormalize(action.result.courses);
+        const courses = coursesNormalize(action.result.data.courses);
         map.merge(courses);
       });
     case LOAD_LESSONS_SUCCESS:
       return state.withMutations(map => {
         const {courseName} = action.data;
-        const lessons = lessonsNormalize(action.result.lessons);
+        const lessons = lessonsNormalize(action.result.data.lessons);
         map.mergeIn(['entities', courseName, 'lessons'], Immutable.fromJS(lessons));
       });
     case LOAD_LESSON_SUCCESS:
@@ -84,19 +84,19 @@ export default function courseLoad(state = initialState, action) {
       });
     case CREATE_SUCCESS:
       return state.withMutations(map=> {
-        const { createdCourse } = action.result;
+        const { createdCourse } = action.result.data;
         map.mergeIn(['entities', createdCourse.slug], createdCourse);
         map.update('order', array=>array.push(createdCourse.slug));
       });
     case LOAD_PRICE_SUCCESS:
       return state.withMutations(map=> {
-        const course = action.result;
+        const course = action.result.data;
         const {courseName} = action.data;
         map.mergeIn(['entities', courseName, 'price'], course);
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
-        const {updatedPrice} = action.result;
+        const {updatedPrice} = action.result.data;
         const {courseName} = action.data;
         map.mergeIn(['entities', courseName, 'price'], updatedPrice);
       });

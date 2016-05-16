@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {Link} from 'react-router';
+import validate from './validate';
 
 @reduxForm({
   form: 'PasswordResetForm',
+  validate,
 })
 export default class PasswordForgetForm extends Component {
   static propTypes = {

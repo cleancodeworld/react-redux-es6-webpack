@@ -6,19 +6,19 @@ export const EDIT_FAIL = 'knexpert/course/EDIT_FAIL';
 
 import {SubmissionError} from 'redux-form';
 
-function _edit(model, courseName) {
+function _edit(model, courseName, portalId) {
   return {
     types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
-    promise: (client) => client.put(`/api/v1/course/name/${courseName}`, { data: model }),
+    promise: (client) => client.put(`/api/v1/course/name/${courseName}`, { data: { ...model, portalId } }),
     data: {
       model
     }
   };
 }
 
-export function edit(model, courseName) {
+export function edit(model, courseName, portalId) {
   return dispatch => {
-    return dispatch(_edit(model, courseName))
+    return dispatch(_edit(model, courseName, portalId))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

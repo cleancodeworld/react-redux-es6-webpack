@@ -5,10 +5,11 @@ import classnames from 'classnames';
 import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
+import validate from './validate';
 
 @reduxForm({
   form: 'CourseForm',
-  overwriteOnInitialValuesChange: false,
+  validate,
 })
 export default class CourseForm extends Component {
 
