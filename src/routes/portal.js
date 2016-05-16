@@ -15,6 +15,7 @@ import {
   CourseEdit,
   CourseAccounting,
   AuthorContainer,
+  CourseListPublic,
 } from '../containers/portal';
 import {
   Root,
@@ -35,6 +36,12 @@ export default (params) => {
         <IndexRoute component={Home}/>
 
         <Route path="login" component={PortalLogin}/>
+
+        <Route path="courses">
+          <IndexRoute component={CourseListPublic}/>
+          <Route path=":categoryName" component={CourseListPublic}/>
+        </Route>
+
         <Route path="author" component={AuthorContainer}>
           <IndexRoute component={Dashboard}/>
           <Route path="course">

@@ -58,7 +58,7 @@ export default class LessonForm extends Component {
       submitting,
       error,
       submitStatus,
-      } = this.props;
+    } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
@@ -103,8 +103,7 @@ export default class LessonForm extends Component {
               </div>
             }/>
             <div className="text-right">
-              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i
-                className="icon-arrow-right14 position-right"></i></button>
+              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i className="icon-arrow-right14 position-right"></i></button>
             </div>
           </form>
         </div>

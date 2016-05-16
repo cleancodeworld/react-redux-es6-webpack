@@ -7,6 +7,7 @@ export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 import { LIST_SUCCESS } from './list';
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
+import { PUBLIC_LIST_SUCCESS } from './publiclist';
 import {
   LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
 } from './../lesson/loaded';
@@ -28,7 +29,11 @@ import {
 } from './wish-list';
 
 import Immutable from 'immutable';
-import {courses as coursesNormalize, lessons as lessonsNormalize} from 'utils/normalize';
+import {
+  courses as coursesNormalize,
+  lessons as lessonsNormalize,
+  coursesPublic as publicCoursesNormalize,
+} from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
   wishList: {
@@ -51,12 +56,17 @@ export default function courseLoad(state = initialState, action) {
       });
     case EDIT_SUCCESS:
       return state.withMutations(map=> {
-        const { updatedCourse } = action.result.data;
-        map.mergeIn(['entities', updatedCourse.slug], Immutable.fromJS(updatedCourse));
+        const { course } = action.result.data;
+        map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         const courses = coursesNormalize(action.result.data.courses);
+        map.merge(courses);
+      });
+    case PUBLIC_LIST_SUCCESS:
+      return state.withMutations(map=> {
+        const courses = publicCoursesNormalize(action.result.data.courses);
         map.merge(courses);
       });
     case LOAD_LESSONS_SUCCESS:
@@ -74,15 +84,15 @@ export default function courseLoad(state = initialState, action) {
     case ADD_LESSON_SUCCESS:
       return state.withMutations(map => {
         const {courseName} = action.data;
-        const {createdLesson} = action.result;
-        map.mergeIn(['entities', courseName, 'lessons', 'entities', createdLesson.slug], Immutable.fromJS(createdLesson));
-        map.updateIn(['entities', courseName, 'lessons', 'order'], array=> array ? array.push(createdLesson.slug) : [createdLesson.slug]);
+        const {lesson} = action.result;
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
+        map.updateIn(['entities', courseName, 'lessons', 'order'], array=> array ? array.push(lesson.slug) : [lesson.slug]);
       });
     case EDIT_LESSON_SUCCESS:
       return state.withMutations(map => {
         const {courseName} = action.data;
-        const {updatedLesson} = action.result;
-        map.mergeIn(['entities', courseName, 'lessons', 'entities', updatedLesson.slug], Immutable.fromJS(updatedLesson));
+        const {lesson} = action.result.data;
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
       });
     case REMOVE_LESSON_SUCCESS:
       return state.withMutations(map => {
@@ -92,9 +102,9 @@ export default function courseLoad(state = initialState, action) {
       });
     case CREATE_SUCCESS:
       return state.withMutations(map=> {
-        const { createdCourse } = action.result.data;
-        map.mergeIn(['entities', createdCourse.slug], createdCourse);
-        map.update('order', array=>array.push(createdCourse.slug));
+        const { course } = action.result.data;
+        map.mergeIn(['entities', course.slug], course);
+        map.update('order', array=>array.push(course.slug));
       });
     case LOAD_PRICE_SUCCESS:
       return state.withMutations(map=> {
@@ -104,9 +114,9 @@ export default function courseLoad(state = initialState, action) {
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
-        const {updatedPrice} = action.result.data;
+        const {price} = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], updatedPrice);
+        map.mergeIn(['entities', courseName, 'price'], price);
       });
     case ADD_TO_WISH_LIST_FAIL:
     case ADD_TO_WISH_LIST_SUCCESS:

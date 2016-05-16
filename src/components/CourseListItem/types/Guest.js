@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
+import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const CourseListItem = ({course}) => {
+const Guest = ({course}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
-  // const currency = '$';
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="thumbnail">
@@ -16,12 +16,32 @@ const CourseListItem = ({course}) => {
               <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
             </div>
           </div>
-          <div className="caption">
-            <h6 className="no-margin-top text-semibold">{course.get('name')}</h6>
-          </div>
         </Link>
+        <div className="caption">
+          <Link to={'/course/' + course.get('slug')} className="text-default">
+            <h6 className="no-margin-top text-semibold">{course.get('name')}</h6>
+          </Link>
+          <hr className="no-margin-top mb-10"/>
+          <div className="clearfix">
+            <div className="pull-left">
+              Price <strong className="btn-block clearfix">
+              <PriceDisplay coursePrice={course.get('coursePrice')}/></strong>
+            </div>
+          </div>
+          <hr className="no-margin-top mb-10 mt-10"/>
+          <div className="media no-margin-top">
+            <div className="media-left media-middle">
+              <a href="#">
+                <img src="/assets/images/placeholder.jpg" className="img-responsive" alt=""/>
+              </a>
+            </div>
+            <div className="media-body">
+              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-export default CourseListItem;
+export default Guest;

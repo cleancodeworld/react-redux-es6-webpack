@@ -20,3 +20,13 @@ export function lessons(arrayOfLessons) {
   const order = _.get(results, 'result.lessons', []);
   return { order, entities, listLoaded: true };
 }
+
+export function coursesPublic(arrayOfCourses) {
+  const coursesSchema = new Schema('courses', { idAttribute: 'slug' });
+  const results = normalize({ courses: arrayOfCourses }, {
+    courses: arrayOf(coursesSchema)
+  });
+  const entities = _.get(results, 'entities.courses', {});
+  const orderPublic = _.get(results, 'result.courses', []);
+  return { orderPublic, entities, listLoaded: true };
+}
