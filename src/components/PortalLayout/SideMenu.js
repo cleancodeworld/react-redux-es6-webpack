@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import activeComponent from 'react-router-active-component';
+const NavLink = activeComponent('li');
 
 export default class SideMenu extends Component {
   render() {
@@ -7,8 +8,9 @@ export default class SideMenu extends Component {
       <div className="category-content no-padding">
         <ul className="navigation navigation-main navigation-accordion">
           <li className="navigation-header"><span>Main</span> <i className="icon-menu" title="Main pages"></i></li>
-          <li><Link to="/author"><i className="icon-home4"></i> <span>Dashboard</span></Link></li>
-          <li><Link to="/author/course/list"><i className="icon-home4"></i> <span>Course Mgr</span></Link></li>
+          <NavLink to="/author" onlyActiveOnIndex><i className="icon-home4"></i> <span>Dashboard</span></NavLink>
+          <NavLink to="/author/course"><i className="icon-home4"></i>
+            <span>Course Mgr</span></NavLink>
         </ul>
       </div>
     );
