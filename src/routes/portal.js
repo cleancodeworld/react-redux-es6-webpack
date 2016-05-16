@@ -4,7 +4,6 @@ import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal/current';
 
 import {
   App,
-  Home,
   PortalLogin,
   Dashboard,
   LessonList,
@@ -33,7 +32,7 @@ export default (params) => {
     <Route component={Root}>
       <Route path="/" component={App}>
         { /* Sub routes */ }
-        <IndexRoute component={Home}/>
+        <IndexRoute component={CourseListPublic}/>
 
         <Route path="login" component={PortalLogin}/>
 
