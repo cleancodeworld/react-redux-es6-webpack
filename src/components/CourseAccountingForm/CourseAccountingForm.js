@@ -4,7 +4,7 @@ import Switch from 'react-bootstrap-switch';
 import Select from 'react-select';
 
 @reduxForm({
-  form: 'CourseAccountingForm'
+  form: 'CourseAccountingForm',
 })
 export default class CourseAccountingForm extends Component {
 

@@ -8,7 +8,7 @@ import { load as loadCourse, isLoaded as isCourseLoaded } from 'redux/modules/co
   promise: ({params, store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isCourseLoaded(state)) {
+    if (!isCourseLoaded(state, params.courseName)) {
       promises.push(dispatch(loadCourse(params.courseName)));
     }
     return Promise.all(promises);

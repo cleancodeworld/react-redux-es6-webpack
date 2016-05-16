@@ -58,7 +58,6 @@ export function verifyEmail(token) {
   };
 }
 
-
 export function resend(email) {
   return {
     types: [SEND_VERIFY_EMAIL, SEND_VERIFY_EMAIL_SUCCESS, SEND_VERIFY_EMAIL_FAIL],

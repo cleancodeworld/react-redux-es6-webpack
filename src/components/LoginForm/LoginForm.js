@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {Link} from 'react-router';
-
+import validate from './validate';
 @reduxForm({
   form: 'LoginForm',
+  validate,
 })
 export default class LoginForm extends Component {
   static propTypes = {

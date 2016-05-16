@@ -44,6 +44,7 @@ export default (params) => {
         <Route path="author" component={AuthorContainer}>
           <IndexRoute component={Dashboard}/>
           <Route path="course">
+            <IndexRoute component={CourseList}/>
             <Route path="create" component={CourseCreate}/>
             <Route path="list" component={CourseList}/>
             <Route path=":courseName" component={Course}>

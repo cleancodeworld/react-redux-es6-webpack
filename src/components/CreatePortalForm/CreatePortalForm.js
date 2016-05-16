@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
+import validate from './validate';
 
 @reduxForm({
   form: 'CreatePortalForm',
+  validate,
   asyncValidate,
   asyncBlurFields: ['name']
 })

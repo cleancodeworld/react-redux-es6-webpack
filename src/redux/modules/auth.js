@@ -40,7 +40,7 @@ export default function auth(state = initialState, action) {
       });
     case LOGIN_SUCCESS:
       return state.withMutations((map)=> {
-        const user = Immutable.fromJS(action.result);
+        const user = Immutable.fromJS(action.result.data);
         map.set('user', user);
       });
     case LOGIN_FAIL:
@@ -55,7 +55,7 @@ export default function auth(state = initialState, action) {
       });
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
-        const { user } = action.result;
+        const { user } = action.result.data;
         if (!user.image) {
           user.image = 'http://placehold.it/150x150';
         }
@@ -102,7 +102,7 @@ export function userLogin(model, continueTo) {
     return dispatch(
       login(model))
       .then((res)=> {
-        const {sessionToken, username, userId} = res;
+        const {sessionToken, username, userId} = res.data;
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
         } else {

@@ -2,12 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
 import {Link} from 'react-router';
+import validate from './validate';
 
 @reduxForm({
   form: 'AccountPortalForm',
+  validate,
   asyncValidate,
   asyncBlurFields: ['username', 'portalName']
 })
+
 export default class AccountPortalForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
