@@ -7,7 +7,7 @@ export const LIST_FAIL = 'knexpert/course/LIST_FAIL';
 export function load(name) {
   return {
     types: [LIST, LIST_SUCCESS, LIST_FAIL],
-    promise: (client) => client.get(`/api/v1/course/author/eeeee`)
+    promise: (client) => client.get(`/api/v1/course/author/${name}`)
   };
 }
 
