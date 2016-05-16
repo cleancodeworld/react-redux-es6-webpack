@@ -9,15 +9,19 @@ import {
 import {
   CourseListItem,
 } from 'components';
-import { load } from 'redux/modules/course/publiclist';
+import { load, loadByCategory } from 'redux/modules/course/publiclist';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}}) => {
+  promise: ({store: {dispatch, getState}, params}) => {
     const promises = [];
     const state = getState();
     const portalCurrent = state.portalCurrent;
     const portalMeta = portalCurrent.get('meta');
-    promises.push(dispatch(load(portalMeta.get('slug'))));
+    if (params.categoryName) {
+      promises.push(dispatch(loadByCategory(portalMeta.get('slug'), params.categoryName)));
+    } else {
+      promises.push(dispatch(load(portalMeta.get('slug'))));
+    }
     return Promise.all(promises);
   }
 }])
