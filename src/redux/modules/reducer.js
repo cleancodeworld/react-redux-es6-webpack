@@ -3,17 +3,19 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';
 import { reducer as formReducer } from 'redux-form';
 
+import wishList from './wish-list';
 import userVerify from './user/verify';
 import auth from './auth';
 import portalCurrent from './portal/current';
 import courseLoaded from './course/loaded';
 
 export default combineReducers({
-  routing: routerReducer,
-  reduxAsyncConnect,
+  wishList,
   userVerify,
   courseLoaded,
-  form: formReducer,
   auth,
   portalCurrent,
+  routing: routerReducer,
+  form: formReducer,
+  reduxAsyncConnect,
 });

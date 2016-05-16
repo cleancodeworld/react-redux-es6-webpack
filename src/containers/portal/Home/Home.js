@@ -4,9 +4,8 @@ import { PortalLayout } from '../index';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import { load, isLoaded } from 'redux/modules/course/list';
-import { addToWishList } from 'redux/modules/course/wish-list';
 import {
-  CourseListItem,
+  CourseList,
 } from 'components';
 
 @asyncConnect([{
@@ -22,33 +21,24 @@ import {
 @connect(
   ({courseLoaded}) => ({
     entities: courseLoaded.get('entities'),
-    wishList: courseLoaded.getIn(['wishList', 'entities']),
     order: courseLoaded.get('order'),
-  }),
-  { addToWishList }
+  })
 )
 export default class Home extends Component {
   static propTypes = {
     entities: PropTypes.object,
-    wishList: PropTypes.object,
-    addToWishList: PropTypes.func.isRequired,
     order: PropTypes.object,
   };
 
   render() {
-    const {entities, order, wishList} = this.props;
+    const {entities, order} = this.props;
 
     const breadcrumbs = [];
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
           <Helmet title="Home"/>
-          <div className="row">
-            {order.map(course=> {
-              return (<CourseListItem addToWishList={this.props.addToWishList} isWishListItem={!!wishList.get(course)} key={entities.get(course)}
-                                      course={entities.get(course)}/>);
-            })}
-          </div>
+          <CourseList entities={entities} order={order}/>
         </PortalLayout>
       </div>
     );

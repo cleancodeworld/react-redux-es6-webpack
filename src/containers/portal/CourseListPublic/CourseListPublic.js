@@ -7,7 +7,7 @@ import {
   CourseListCategories,
 } from '../index';
 import {
-  CourseListItem,
+  CourseList,
 } from 'components';
 import { load, loadByCategory } from 'redux/modules/course/publiclist';
 
@@ -30,8 +30,7 @@ import { load, loadByCategory } from 'redux/modules/course/publiclist';
     entities: courseLoaded.get('entities'),
     order: courseLoaded.get('orderPublic'),
     portalMeta: portalCurrent.get('meta'),
-  }),
-  null
+  })
 )
 export default class CourseListPublic extends Component {
 
@@ -59,11 +58,7 @@ export default class CourseListPublic extends Component {
             <div className="content-group">
               <h6 className="text-semibold">Course List </h6>
             </div>
-            <div className="row">
-              {order.map(course=> {
-                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
-              })}
-            </div>
+            <CourseList entities={entities} order={order}/>
           </div>
         </PortalLayout>
       </div>
