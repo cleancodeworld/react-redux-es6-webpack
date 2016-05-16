@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Created by noursammour on 16/05/16.
  */
@@ -16,7 +18,7 @@ const PriceDisplay = ({coursePrice}) => {
     }
     res += coursePrice.get('price');
   }
-  return res;
+  return <span>{res}</span>;
 };
 
 export default PriceDisplay;
