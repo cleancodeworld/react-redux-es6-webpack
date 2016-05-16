@@ -30,3 +30,13 @@ export function coursesPublic(arrayOfCourses) {
   const orderPublic = _.get(results, 'result.courses', []);
   return { orderPublic, entities, listLoaded: true };
 }
+
+export function categories(arrayOfCategories) {
+  const categoriesSchema = new Schema('categories', { idAttribute: 'slug' });
+  const results = normalize({ categories: arrayOfCategories }, {
+    categories: arrayOf(categoriesSchema)
+  });
+  const entities = _.get(results, 'entities.categories', {});
+  const order = _.get(results, 'result.categories', []);
+  return { order, entities, listLoaded: true };
+}
