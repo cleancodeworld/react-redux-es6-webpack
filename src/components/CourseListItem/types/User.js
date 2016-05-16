@@ -1,9 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
-import classNames from 'classnames';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const User = ({course, addToWishList, isWishListItem}) => {
+const User = ({course, addToWishList, isWishListItem, removeFromWishList}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -16,12 +15,15 @@ const User = ({course, addToWishList, isWishListItem}) => {
             <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
             <div className="caption-overflow">
               <span>
-                <a href="javascript:void(0)" onClick={()=> addToWishList(course.get('name'))}
-                   className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
-                  className={classNames({
-                    'icon-heart6': !isWishListItem,
-                    'icon-heart5': isWishListItem,
-                  }) }></i></a>
+                {!isWishListItem ?
+                  <a href="javascript:void(0)" onClick={()=> addToWishList(course)}
+                     className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+                    className="icon-heart6"></i></a>
+                  :
+                  <a href="javascript:void(0)" onClick={()=> removeFromWishList(course)}
+                     className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+                    className="icon-heart5"></i></a>
+                }
               </span>
             </div>
           </div>
@@ -33,7 +35,8 @@ const User = ({course, addToWishList, isWishListItem}) => {
           <hr className="no-margin-top mb-10"/>
           <div className="clearfix">
             <div className="pull-left">
-              Price <strong className="btn-block clearfix"><PriceDisplay coursePrice={course.get('coursePrice')}/></strong>
+              Price <strong className="btn-block clearfix"><PriceDisplay
+              coursePrice={course.get('coursePrice')}/></strong>
             </div>
           </div>
           <hr className="no-margin-top mb-10 mt-10"/>
