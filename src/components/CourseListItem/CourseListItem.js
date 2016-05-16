@@ -5,9 +5,9 @@ import {
 
 const CourseListItem = (props, context) => {
   const {course} = props;
-  if (course.get('authorId') === context.user.get('userId')) {
+  if (context.user && course.get('authorId') === context.user.get('userId')) {
     return <Owner {...props}/>;
-  } else if (context.user.get('userId')) {
+  } else if (context.user && context.user.get('userId')) {
     return <User {...props}/>;
   }
   return <Guest {...props}/>;
