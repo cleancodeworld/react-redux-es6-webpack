@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import classNames from 'classnames';
+import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const User = ({course, addToWishList, isWishListItem, price}) => {
+const User = ({course, addToWishList, isWishListItem}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -32,7 +33,7 @@ const User = ({course, addToWishList, isWishListItem, price}) => {
           <hr className="no-margin-top mb-10"/>
           <div className="clearfix">
             <div className="pull-left">
-              Price <strong className="btn-block clearfix">{price}</strong>
+              Price <strong className="btn-block clearfix"><PriceDisplay coursePrice={course.get('coursePrice')}/></strong>
             </div>
           </div>
           <hr className="no-margin-top mb-10 mt-10"/>
