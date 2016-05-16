@@ -66,7 +66,7 @@ export default function courseLoad(state = initialState, action) {
       });
     case PUBLIC_LIST_SUCCESS:
       return state.withMutations(map=> {
-        const courses = publicCoursesNormalize(action.result.courses);
+        const courses = publicCoursesNormalize(action.result.data.data.courses);  // temporary data.data
         map.merge(courses);
       });
     case LOAD_LESSONS_SUCCESS:
