@@ -7,14 +7,17 @@ import {
   CourseListCategories,
 } from '../index';
 import {
-  CourseListPublicItem,
+  CourseListItem,
 } from 'components';
 import { load } from 'redux/modules/course/publiclist';
 
 @asyncConnect([{
-  promise: ({store: {dispatch}}) => {
+  promise: ({store: {dispatch, getState}}) => {
     const promises = [];
-    promises.push(dispatch(load()));
+    const state = getState();
+    const portalCurrent = state.portalCurrent;
+    const portalMeta = portalCurrent.get('meta');
+    promises.push(dispatch(load(portalMeta.get('slug'))));
     return Promise.all(promises);
   }
 }])
@@ -54,7 +57,7 @@ export default class CourseListPublic extends Component {
             </div>
             <div className="row">
               {order.map(course=> {
-                return (<CourseListPublicItem key={entities.get(course)} course={entities.get(course)}/>);
+                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
               })}
             </div>
           </div>
