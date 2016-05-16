@@ -117,7 +117,6 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const wishListCourses = action.result.data.map(item => item.Course);
         const courses = coursesNormalize(wishListCourses);
-        console.log(courses);
         map.merge(courses);
       });
     case LOAD:
