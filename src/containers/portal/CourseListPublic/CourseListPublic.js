@@ -10,6 +10,7 @@ import {
   CourseListItem,
 } from 'components';
 import { load, loadByCategory } from 'redux/modules/course/publiclist';
+import { addToWishList } from 'redux/modules/course/wish-list';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}, params}) => {
@@ -29,29 +30,32 @@ import { load, loadByCategory } from 'redux/modules/course/publiclist';
   ({courseLoaded, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
     order: courseLoaded.get('orderPublic'),
+    wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
   }),
-  null
+  { addToWishList }
 )
 export default class CourseListPublic extends Component {
 
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    wishList: PropTypes.object,
     portalMeta: PropTypes.object,
+    addToWishList: PropTypes.func,
+    params: PropTypes.object.isRequired,
   };
 
   render() {
-    const {entities, order, portalMeta} = this.props;
-    const breadcrumbs = [
-      { url: '/courses', name: 'Courses' },
-    ];
+    const {entities, order, wishList, portalMeta, params} = this.props;
+    const breadcrumbs = [];
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalMeta.get('name')} title=" - Browse Courses">
+          <Helmet title="Home"/>
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
-              <CourseListCategories/>
+              <CourseListCategories category={params.categoryName}/>
             </div>
           </div>
           <div className="content-wrapper">
@@ -61,7 +65,11 @@ export default class CourseListPublic extends Component {
             </div>
             <div className="row">
               {order.map(course=> {
-                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
+                return (<CourseListItem
+                  key={entities.get(course)}
+                  course={entities.get(course)}
+                  addToWishList={this.props.addToWishList}
+                  isWishListItem={!!wishList.get(course)}/>);
               })}
             </div>
           </div>
