@@ -9,18 +9,22 @@ import {
 import {
   CourseListItem,
 } from 'components';
-import { load, loadByCategory } from 'redux/modules/course/publiclist';
+import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/publiclist';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 import { addToWishList } from 'redux/modules/course/wish-list';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}, params}) => {
+  promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
     const portalCurrent = state.portalCurrent;
     const portalMeta = portalCurrent.get('meta');
-    if (params.categoryName) {
-      promises.push(dispatch(loadByCategory(portalMeta.get('slug'), params.categoryName)));
-    } else {
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(state.portalCurrent.getIn(['meta', 'slug']))));
+    }
+    // Load all courses
+    if (!isPublicListLoaded(state)) {
       promises.push(dispatch(load(portalMeta.get('slug'))));
     }
     return Promise.all(promises);
@@ -46,6 +50,10 @@ export default class CourseListPublic extends Component {
     params: PropTypes.object.isRequired,
   };
 
+  nameToSlug(name) {
+    return name.replace(' ', '-');
+  }
+
   render() {
     const {entities, order, wishList, portalMeta, params} = this.props;
     const breadcrumbs = [];
@@ -64,12 +72,16 @@ export default class CourseListPublic extends Component {
               <h6 className="text-semibold">Course List </h6>
             </div>
             <div className="row">
-              {order.map(course=> {
-                return (<CourseListItem
-                  key={entities.get(course)}
-                  course={entities.get(course)}
-                  addToWishList={this.props.addToWishList}
-                  isWishListItem={!!wishList.get(course)}/>);
+              {order.map(courseName => {
+                const course = entities.get(courseName);
+                if (!params.categoryName || this.nameToSlug(course.get('category')) === params.categoryName) {
+                  return (<CourseListItem
+                    key={course.get('id')}
+                    course={course}
+                    addToWishList={this.props.addToWishList}
+                    isWishListItem={!!wishList.get(courseName)}/>);
+                }
+                return '';
               })}
             </div>
           </div>

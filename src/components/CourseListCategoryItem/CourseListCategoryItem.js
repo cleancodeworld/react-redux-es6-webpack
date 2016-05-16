@@ -7,7 +7,7 @@ const CourseListCategoryItem = ({category, isActive}) => {
     liProps.className = 'active';
   }
   return (
-    <li {...liProps}><Link to={`/courses/${category.slug}`}><span>{category.name}</span></Link></li>
+    <li {...liProps}><Link to={`/courses/${category.get('slug')}`}><span>{category.get('slug')}</span></Link></li>
   );
 };
 export default CourseListCategoryItem;
