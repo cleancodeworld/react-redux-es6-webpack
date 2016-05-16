@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   CourseListCategoryItem,
 } from 'components';
 
 export default class CourseListCategories extends Component {
 
+  static propTypes = {
+    category: PropTypes.string,
+  }
+
   render() {
+    const activeCategory = this.props.category;
     const categories = [
       { slug: 'business', name: 'Business' },
       { slug: 'development', name: 'Development' },
@@ -16,7 +21,7 @@ export default class CourseListCategories extends Component {
         <ul className="navigation navigation-main navigation-accordion">
           {categories.map(category => {
             return (
-              <CourseListCategoryItem category={category} key={category.slug}/>
+              <CourseListCategoryItem category={category} key={category.slug} isActive={(category.slug === activeCategory)}/>
             );
           })}
         </ul>
