@@ -1,5 +1,3 @@
-export const INIT = '@@INIT';
-export const REDUX_INIT = '@@redux/INIT';
 export const EDIT = 'knexpert/course/EDIT';
 export const EDIT_SUCCESS = 'knexpert/course/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/course/EDIT_FAIL';
