@@ -8,7 +8,7 @@ import {
   PortalAuthorLayout,
 } from '../index';
 import {
-  CourseListItem,
+  CourseList,
 } from 'components';
 import { load, isLoaded } from 'redux/modules/course/list';
 
@@ -26,10 +26,9 @@ import { load, isLoaded } from 'redux/modules/course/list';
   ({courseLoaded}) => ({
     entities: courseLoaded.get('entities'),
     order: courseLoaded.get('order'),
-  }),
-  null
+  })
 )
-export default class CourseList extends Component {
+export default class CourseListContainer extends Component {
 
   static propTypes = {
     entities: PropTypes.object,
@@ -53,11 +52,7 @@ export default class CourseList extends Component {
             <div className="content-group">
               <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
             </div>
-            <div className="row">
-              {order.map(course=> {
-                return (<CourseListItem key={entities.get(course)} course={entities.get(course)}/>);
-              })}
-            </div>
+            <CourseList entities={entities} order={order}/>
           </PortalAuthorLayout>
         </PortalLayout>
       </div>

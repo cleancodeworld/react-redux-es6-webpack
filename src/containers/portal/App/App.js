@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { isLoaded, load } from 'redux/modules/portal/current';
+import { isLoaded as isPortalLoaded, load as portalLoaded } from 'redux/modules/portal/current';
+import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modules/wish-list';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.portalCurrent.get('reqSubdomain'))));
+    if (!isPortalLoaded(state)) {
+      promises.push(dispatch(portalLoaded(state.portalCurrent.get('reqSubdomain'))));
+    }
+    if (!isWishListLoaded(state)) {
+      promises.push(dispatch(wishListLoaded()));
     }
     return Promise.all(promises);
   }
