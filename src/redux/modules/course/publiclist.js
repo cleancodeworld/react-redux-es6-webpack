@@ -10,3 +10,10 @@ export function load(portalName) {
     promise: (client) => client.get(`api/v1/course/portal/${portalName}`)
   };
 }
+
+export function loadByCategory(portalName, categoryName) {  // eslint-disable-line
+  return {
+    types: [PUBLIC_LIST, PUBLIC_LIST_SUCCESS, PUBLIC_LIST_FAIL],
+    promise: (client) => client.get(`api/v1/course/portal/${portalName}`)
+  };
+}
