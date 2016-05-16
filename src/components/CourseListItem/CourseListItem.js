@@ -5,22 +5,12 @@ import {
 
 const CourseListItem = (props, context) => {
   const {course} = props;
-  const coursePrice = course.get('coursePrice');
-  let price = 'Free';
-  if (coursePrice.get('paid')) {
-    if (coursePrice.get('currency').toLowerCase() === 'euro') {
-      price = '€';
-    } else {
-      price = '$';
-    }
-    price += coursePrice.get('price');
-  }
   if (course.get('authorId') === context.user.get('userId')) {
-    return <Owner price={price} {...props}/>;
+    return <Owner {...props}/>;
   } else if (context.user.get('userId')) {
-    return <User price={price} {...props}/>;
+    return <User {...props}/>;
   }
-  return <Guest price={price} {...props}/>;
+  return <Guest {...props}/>;
 };
 
 CourseListItem.contextTypes = {
