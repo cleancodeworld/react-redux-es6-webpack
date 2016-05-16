@@ -23,6 +23,10 @@ import {
   EDIT_SUCCESS as EDIT_PRICE_SUCCESS,
 } from './price';
 
+import {
+  LOAD_MY_WISH_LIST_SUCCESS,
+} from './../wishList';
+
 import Immutable from 'immutable';
 import {
   courses as coursesNormalize,
@@ -108,6 +112,13 @@ export default function courseLoad(state = initialState, action) {
         const {price} = action.result.data;
         const {courseName} = action.data;
         map.mergeIn(['entities', courseName, 'price'], price);
+      });
+    case LOAD_MY_WISH_LIST_SUCCESS:
+      return state.withMutations(map=> {
+        const wishListCourses = action.result.data.map(item => item.Course);
+        const courses = coursesNormalize(wishListCourses);
+        console.log(courses);
+        map.merge(courses);
       });
     case LOAD:
     default:

@@ -15,3 +15,4 @@ export CourseAccounting from './CourseAccounting/CourseAccounting';
 export AuthorContainer from './AuthorContainer/AuthorContainer';
 export CourseListPublic from './CourseListPublic/CourseListPublic';
 export CourseListCategories from './CourseListCategories/CourseListCategories';
+export WishList from './WishList/WishList';

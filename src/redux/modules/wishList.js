@@ -29,12 +29,18 @@ export default function wishList(state = initialState, action) {
         map.update('order', array=>array.push(courseName));
         map.setIn(['entities', courseName], true);
       });
+    case REMOVE_FROM_WISH_LIST:
+      return state.withMutations(map=> {
+        const {courseName} = action.data;
+        map.removeIn(['entities', courseName]);
+        map.update('order', array=>array.filter((item)=> item !== courseName));
+      });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
         const wishListItems = action.result.data;
         wishListItems.map((item)=> {
-          map.setIn(['entities', item.courseId], true);
-          map.update('order', array=>array.push(item.courseId));
+          map.setIn(['entities', item.Course.slug], true);
+          map.update('order', array=>array.push(item.Course.slug));
         });
         map.set('isLoaded', true);
       });
@@ -66,7 +72,7 @@ export function addToWishList(course) {
 export function load() {
   return {
     types: [LOAD_MY_WISH_LIST, LOAD_MY_WISH_LIST_SUCCESS, LOAD_MY_WISH_LIST_FAIL],
-    promise: (client) => client.get(`/api/v1/wishlist`),
+    promise: (client) => client.get(`/api/v1/wishlist?includeCourse=true`),
   };
 }
 
