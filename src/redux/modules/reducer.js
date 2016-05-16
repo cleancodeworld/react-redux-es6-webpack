@@ -8,6 +8,7 @@ import userVerify from './user/verify';
 import auth from './auth';
 import portalCurrent from './portal/current';
 import courseLoaded from './course/loaded';
+import categoriesLoaded from './categories/loaded';
 
 export default combineReducers({
   wishList,
@@ -18,4 +19,5 @@ export default combineReducers({
   routing: routerReducer,
   form: formReducer,
   reduxAsyncConnect,
+  categoriesLoaded,
 });
