@@ -12,7 +12,6 @@ import {
   PageHeader,
   PageHeaderContent,
   BreadcrumbBar,
-  SignupModal,
 } from 'components';
 import {logout} from 'redux/modules/auth';
 import {
@@ -20,7 +19,7 @@ import {
 } from '../../shared';
 
 @connect(
-  ({portalCurrent, auth}) => ({ portalCurrentMeta: portalCurrent.get('meta'), user: auth.get('user') }),
+  ({portalCurrent}) => ({ portalCurrentMeta: portalCurrent.get('meta') }),
   { logout }
 )
 export default class PortalLayout extends Component {
@@ -28,7 +27,6 @@ export default class PortalLayout extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     portalCurrentMeta: PropTypes.object.isRequired,
-    user: PropTypes.object,
     logout: PropTypes.func,
     breadcrumbs: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
@@ -40,28 +38,10 @@ export default class PortalLayout extends Component {
     user: PropTypes.object
   };
 
-  state = {
-    signUpModalOpen: false,
-  }
-
-  onCloseSignupModal = () => {
-    this.setState({ signUpModalOpen: false });
-  }
-
-  onClickLoginRequiredLink = (ev) => {
-    const {user} = this.props;
-    if (!user || !user.get('sessionToken')) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      this.setState({ signUpModalOpen: true });
-    }
-  }
-
   render() {
     const logoImage = require('./knexpert.png');
     const {portalCurrentMeta, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
-    const {signUpModalOpen} = this.state;
     let content = this.props.children;
     if (!portalCurrentMeta) {
       content = <NotFound />;
@@ -98,7 +78,6 @@ export default class PortalLayout extends Component {
           {content}
           <a href="#" onClick={this.onClickLoginRequiredLink}>Click here</a>
         </div>
-        <SignupModal show={signUpModalOpen} onHide={this.onCloseSignupModal}/>
       </div>
     );
   }

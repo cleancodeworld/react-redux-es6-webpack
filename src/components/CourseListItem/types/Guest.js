@@ -2,18 +2,25 @@ import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const Guest = ({course}) => {
+const Guest = ({course, onClickLoginRequiredLink}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="thumbnail">
-        <Link to={'/author/course/' + course.get('slug')} className="text-default">
+        <Link to={'/author/course/' + course.get('slug')} className="text-default" onClick={onClickLoginRequiredLink}>
           <div className="thumb-wrapper"
                style={{ backgroundImage: 'url(' + coursePlaceholderImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className="thumb"
                  style={{ backgroundImage: 'url(' + courseImage + ')', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100%' }}>
               <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
+              <div className="caption-overflow">
+                <span>
+                  <a href="javascript:void(0)" onClick={onClickLoginRequiredLink}
+                    className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+                    className="icon-heart6"></i></a>
+                </span>
+              </div>
             </div>
           </div>
         </Link>
