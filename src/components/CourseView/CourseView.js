@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';
 import {
-  PriceDisplay
+  PriceDisplay,
+  CourseRate,
 } from './../index';
 
 const CourseView = (props) => {
-  const {course} = props;
+  const {course, onRate} = props;
   return (<div className="page-content">
       <div className="content-wrapper">
         <div className="panel panel-flat">
@@ -18,16 +19,7 @@ const CourseView = (props) => {
                   <h1>{course.get('name')}</h1>
                   <p>{course.get('subtitle')}</p>
                   <ul className="list list-inline">
-                    <li>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-half-o"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                    </li>
-                    <li>
-                      1,553 ratings, 10,657 students enrolled
-                    </li>
+                    <CourseRate avgRate={course.get('avgRate')} onChange={onRate}/>
                     <li>
                       Instructed by <a href="#">[author]</a>
                     </li>
@@ -191,6 +183,7 @@ CourseView.contextTypes = {
 
 CourseView.propTypes = {
   course: PropTypes.object.isRequired,
+  onRate: PropTypes.func,
 };
 
 export default CourseView;

@@ -31,3 +31,4 @@ export CourseList from './CourseList/CourseList';
 export CourseView from './CourseView/CourseView';
 export PriceDisplay from './PriceDisplay/PriceDisplay';
 export SignupModal from './SignupModal/SignupModal';
+export CourseRate from './CourseRate/CourseRate';
