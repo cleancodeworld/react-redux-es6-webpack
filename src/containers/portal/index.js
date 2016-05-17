@@ -2,7 +2,6 @@ export App from './App/App';
 export PortalLayout from './PortalLayout/PortalLayout';
 export PortalAuthorLayout from './PortalAuthorLayout/PortalAuthorLayout';
 export PortalAuthorCourseLayout from './PortalAuthorCourseLayout/PortalAuthorCourseLayout';
-export Home from './Home/Home';
 export PortalLogin from './PortalLogin/PortalLogin';
 export Dashboard from './Dashboard/Dashboard';
 export LessonList from './LessonList/LessonList';

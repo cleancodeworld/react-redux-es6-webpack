@@ -30,4 +30,4 @@ export CourseListCategoryItem from './CourseListCategoryItem/CourseListCategoryI
 export CourseList from './CourseList/CourseList';
 export CourseView from './CourseView/CourseView';
 export PriceDisplay from './PriceDisplay/PriceDisplay';
-
+export SignupModal from './SignupModal/SignupModal';

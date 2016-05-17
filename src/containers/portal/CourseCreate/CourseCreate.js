@@ -9,13 +9,14 @@ import {
 import { create as courseCreate } from 'redux/modules/course/create';
 
 @connect(
-  state => ({ auth: state.auth }),
+  ({auth, portalCurrent}) => ({ userId: auth.getIn(['user', 'userId']), portalId: portalCurrent.getIn(['meta', 'id']) }),
   { courseCreate }
 )
 export default class CourseCreate extends Component {
 
   static propTypes = {
-    auth: PropTypes.object,
+    userId: PropTypes.string,
+    portalId: PropTypes.string,
     courseCreate: PropTypes.func,
   };
 
@@ -34,15 +35,16 @@ export default class CourseCreate extends Component {
       category: 'General',
       duration: 500,
       thumbnail: '',
-      authorId: this.props.auth.getIn(['user', 'userId'])
+      authorId: this.props.userId
     };
+    const {portalId} = this.props;
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
           <PortalAuthorLayout>
             <Helmet title="Home"/>
             <CourseForm initialValues={initialFormValues}
-                        onSubmit={ model => this.props.courseCreate(model).then(()=> this.setState({saved: true})) }
+                        onSubmit={ model => this.props.courseCreate(portalId, model).then(()=> this.setState({saved: true})) }
                         submitStatus={this.state.saved}/>
           </PortalAuthorLayout>
         </PortalLayout>
