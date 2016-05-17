@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
 import { isLoaded as isPortalLoaded, load as portalLoaded } from 'redux/modules/portal/current';
-import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modules/wish-list';
+import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modules/wishList';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
