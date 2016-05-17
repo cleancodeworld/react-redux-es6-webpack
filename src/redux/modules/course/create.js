@@ -17,10 +17,10 @@ function _create(model) {
   };
 }
 
-export function create(model) {
+export function create(portalId, model) {
   return dispatch => {
     return dispatch(
-      _create(model))
+      _create({portalId, ...model}))
       .then(()=> {
         setTimeout(()=> dispatch(push('/author/course/list')), 2500);
       })

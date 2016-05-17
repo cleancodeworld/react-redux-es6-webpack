@@ -7,19 +7,23 @@ import {
   CourseListCategories,
 } from '../index';
 import {
-  CourseList,
+  CourseListItem,
 } from 'components';
-import { load, loadByCategory } from 'redux/modules/course/publiclist';
+import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/publiclist';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 
 @asyncConnect([{
-  promise: ({store: {dispatch, getState}, params}) => {
+  promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
     const portalCurrent = state.portalCurrent;
     const portalMeta = portalCurrent.get('meta');
-    if (params.categoryName) {
-      promises.push(dispatch(loadByCategory(portalMeta.get('slug'), params.categoryName)));
-    } else {
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(portalMeta.get('slug'))));
+    }
+    // Load all courses
+    if (!isPublicListLoaded(state)) {
       promises.push(dispatch(load(portalMeta.get('slug'))));
     }
     return Promise.all(promises);
@@ -29,28 +33,35 @@ import { load, loadByCategory } from 'redux/modules/course/publiclist';
   ({courseLoaded, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
     order: courseLoaded.get('orderPublic'),
+    wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
-  })
+  }),
+  { addToWishList }
 )
 export default class CourseListPublic extends Component {
 
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    wishList: PropTypes.object,
     portalMeta: PropTypes.object,
+    params: PropTypes.object.isRequired,
   };
 
+  nameToSlug(name) {
+    return name.replace(' ', '-');
+  }
+
   render() {
-    const {entities, order, portalMeta} = this.props;
-    const breadcrumbs = [
-      { url: '/courses', name: 'Courses' },
-    ];
+    const {entities, order, portalMeta, params} = this.props;
+    const breadcrumbs = [];
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalMeta.get('name')} title=" - Browse Courses">
+          <Helmet title="Home"/>
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
-              <CourseListCategories/>
+              <CourseListCategories category={params.categoryName}/>
             </div>
           </div>
           <div className="content-wrapper">
@@ -58,7 +69,10 @@ export default class CourseListPublic extends Component {
             <div className="content-group">
               <h6 className="text-semibold">Course List </h6>
             </div>
-            <CourseList entities={entities} order={order}/>
+            <CourseList
+              entities={entities}
+              order={order}
+              categoryName={params.categoryName}/>
           </div>
         </PortalLayout>
       </div>
