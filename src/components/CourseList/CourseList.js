@@ -5,13 +5,15 @@ import {
 } from 'components';
 import { connect } from 'react-redux';
 import { addToWishList, removeFromWishList } from 'redux/modules/wishList';
+import { addToCart, removeFromCart } from 'redux/modules/cart';
 
 @connect(
-  ({wishList, auth}) => ({
+  ({wishList, cart, auth}) => ({
     wishList: wishList.get('entities'),
+    cart: cart.get('entities'),
     user: auth.get('user')
   }),
-  { addToWishList, removeFromWishList }
+  { addToWishList, removeFromWishList, addToCart, removeFromCart }
 )
 export default class CourseList extends Component {
   static propTypes = {
@@ -19,11 +21,13 @@ export default class CourseList extends Component {
     order: PropTypes.object,
     wishList: PropTypes.object,
     user: PropTypes.object,
+    cart: PropTypes.object,
     addToWishList: PropTypes.func,
     removeFromWishList: PropTypes.func,
+    addToCart: PropTypes.func,
+    removeFromCart: PropTypes.func,
     categoryName: PropTypes.string,
   };
-
 
   state = {
     signUpModalOpen: false,
@@ -47,7 +51,7 @@ export default class CourseList extends Component {
   }
 
   render() {
-    const { wishList, entities, order, categoryName } = this.props;
+    const { wishList, entities, order, categoryName, cart } = this.props;
     const { signUpModalOpen } = this.state;
     return (
       <div>
@@ -59,6 +63,9 @@ export default class CourseList extends Component {
                 <CourseListItem addToWishList={this.props.addToWishList}
                                 removeFromWishList={this.props.removeFromWishList}
                                 isWishListItem={!!wishList.get(courseName)}
+                                addToCart={this.props.addToCart}
+                                removeFromCart={this.props.removeFromCart}
+                                isCartItem={!!cart.get(courseName)}
                                 key={course.get('id')}
                                 course={course}
                                 onClickLoginRequiredLink={this.onClickLoginRequiredLink}/>

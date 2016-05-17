@@ -27,6 +27,10 @@ import {
   LOAD_MY_WISH_LIST_SUCCESS,
 } from './../wishList';
 
+import {
+  LOAD_MY_CART_SUCCESS,
+} from './../cart';
+
 import Immutable from 'immutable';
 import {
   courses as coursesNormalize,
@@ -117,6 +121,12 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const wishListCourses = action.result.data.map(item => item.Course);
         const courses = coursesNormalize(wishListCourses);
+        map.merge(courses);
+      });
+    case LOAD_MY_CART_SUCCESS:
+      return state.withMutations(map=> {
+        const cartCourses = action.result.data.map(item => item.Course);
+        const courses = coursesNormalize(cartCourses);
         map.merge(courses);
       });
     case LOAD:

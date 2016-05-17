@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const User = ({course, addToWishList, isWishListItem, removeFromWishList}) => {
+const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToCart, isCartItem, removeFromCart}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -15,6 +15,15 @@ const User = ({course, addToWishList, isWishListItem, removeFromWishList}) => {
             <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
             <div className="caption-overflow">
               <span>
+                {!isCartItem ?
+                  <a href="javascript:void(0)" onClick={()=> addToCart(course)}
+                    className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
+                    className="icon-plus3"></i></a>
+                  :
+                  <a href="javascript:void(0)" onClick={()=> removeFromCart(course)}
+                    className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
+                    className="icon-plus3"></i></a>
+                }
                 {!isWishListItem ?
                   <a href="javascript:void(0)" onClick={()=> addToWishList(course)}
                      className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i

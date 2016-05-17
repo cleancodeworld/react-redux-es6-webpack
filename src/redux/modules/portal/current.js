@@ -40,7 +40,7 @@ export default function portal(state = initialState, action) {
 }
 
 export function isLoaded(globalState) {
-  return !globalState.portalCurrent || globalState.portalCurrent && globalState.portalCurrent.get('loaded') && globalState.portalCurrent.get('reqSubdomain');
+  return globalState.portalCurrent && globalState.portalCurrent.get('loaded') && globalState.portalCurrent.get('reqSubdomain');
 }
 
 export function load(portalName) {

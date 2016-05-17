@@ -38,11 +38,13 @@ export default function wishList(state = initialState, action) {
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
         const wishListItems = action.result.data;
-        wishListItems.map((item)=> {
-          map.setIn(['entities', item.Course.slug], true);
-          map.update('order', array=>array.push(item.Course.slug));
-        });
-        map.set('isLoaded', true);
+        if (wishListItems) {
+          wishListItems.map((item)=> {
+            map.setIn(['entities', item.Course.slug], true);
+            map.update('order', array=>array.push(item.Course.slug));
+          });
+          map.set('isLoaded', true);
+        }
       });
     default:
       return state;
