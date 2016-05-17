@@ -4,7 +4,7 @@ import {
   SignupModal,
 } from 'components';
 import { connect } from 'react-redux';
-import { addToWishList, removeFromWishList } from 'redux/modules/wish-list';
+import { addToWishList, removeFromWishList } from 'redux/modules/wishList';
 
 @connect(
   ({wishList, auth}) => ({

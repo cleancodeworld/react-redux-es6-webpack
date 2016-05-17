@@ -7,7 +7,7 @@ import {
   CourseListCategories,
 } from '../index';
 import {
-  CourseList,
+  CourseListItem,
 } from 'components';
 import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/publiclist';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
@@ -33,17 +33,24 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
   ({courseLoaded, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
     order: courseLoaded.get('orderPublic'),
+    wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
-  })
+  }),
+  { addToWishList }
 )
 export default class CourseListPublic extends Component {
 
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    wishList: PropTypes.object,
     portalMeta: PropTypes.object,
     params: PropTypes.object.isRequired,
   };
+
+  nameToSlug(name) {
+    return name.replace(' ', '-');
+  }
 
   render() {
     const {entities, order, portalMeta, params} = this.props;

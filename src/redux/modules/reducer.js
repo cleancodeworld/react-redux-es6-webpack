@@ -3,7 +3,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';
 import { reducer as formReducer } from 'redux-form';
 
-import wishList from './wish-list';
+import wishList from './wishList';
 import userVerify from './user/verify';
 import auth from './auth';
 import portalCurrent from './portal/current';
