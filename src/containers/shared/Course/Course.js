@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { replace } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
 import { load as loadCourse, isLoaded as isCourseLoaded } from 'redux/modules/course/loaded';
+import { isLoaded as isLessonsLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
 
 @asyncConnect([{
   promise: ({params, store: {dispatch, getState}}) => {
@@ -10,6 +11,9 @@ import { load as loadCourse, isLoaded as isCourseLoaded } from 'redux/modules/co
     const state = getState();
     if (!isCourseLoaded(state, params.courseName)) {
       promises.push(dispatch(loadCourse(params.courseName)));
+    }
+    if (!isLessonsLoaded(getState(), params.courseName)) {
+      promises.push(dispatch(loadLessons(params.courseName)));
     }
     return Promise.all(promises);
   }
