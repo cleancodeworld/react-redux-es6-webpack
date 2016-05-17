@@ -115,7 +115,8 @@ export default function courseLoad(state = initialState, action) {
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
-        const wishListCourses = action.result.data.map(item => item.Course);
+        const {wishlistItems} = action.result.data;
+        const wishListCourses = wishlistItems.map(item => item.course);
         const courses = coursesNormalize(wishListCourses);
         map.merge(courses);
       });
