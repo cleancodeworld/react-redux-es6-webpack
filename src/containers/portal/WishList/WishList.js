@@ -16,7 +16,7 @@ import {
     order: wishList.get('order'),
   })
 )
-export default class CourseListPublic extends Component {
+export default class WishList extends Component {
 
   static propTypes = {
     entities: PropTypes.object,
