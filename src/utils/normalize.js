@@ -28,7 +28,7 @@ export function coursesPublic(arrayOfCourses) {
   });
   const entities = _.get(results, 'entities.courses', {});
   const orderPublic = _.get(results, 'result.courses', []);
-  return { orderPublic, entities, listLoaded: true };
+  return { orderPublic, entities, publicListLoaded: true };
 }
 
 export function categories(arrayOfCategories) {

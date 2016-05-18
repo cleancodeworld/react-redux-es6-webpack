@@ -37,10 +37,10 @@ export default function cart(state = initialState, action) {
       });
     case LOAD_MY_CART_SUCCESS:
       return state.withMutations(map=> {
-        const cartItems = action.result.data;
-        cartItems.map((item)=> {
-          map.setIn(['entities', item.Course.slug], true);
-          map.update('order', array=>array.push(item.Course.slug));
+        const {userCartItems} = action.result.data;
+        userCartItems.map((item)=> {
+          map.setIn(['entities', item.course.slug], true);
+          map.update('order', array=>array.push(item.course.slug));
         });
         map.set('isLoaded', true);
       });

@@ -12,5 +12,5 @@ export function load(portalName) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.courseLoaded && globalState.courseLoaded.get('listLoaded');
+  return globalState.courseLoaded && globalState.courseLoaded.get('publicListLoaded');
 }
