@@ -10,6 +10,8 @@ import portalCurrent from './portal/current';
 import courseLoaded from './course/loaded';
 import categoriesLoaded from './categories/loaded';
 import cart from './cart';
+import coursesByAuthor from './course/byAuthor';
+import coursesByPortal from './course/byPortal';
 
 export default combineReducers({
   wishList,
@@ -22,4 +24,6 @@ export default combineReducers({
   reduxAsyncConnect,
   categoriesLoaded,
   cart,
+  coursesByAuthor,
+  coursesByPortal,
 });

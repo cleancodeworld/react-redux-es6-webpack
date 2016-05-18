@@ -4,18 +4,22 @@ export const LOAD = 'knexpert/course/LOAD';
 export const LOAD_SUCCESS = 'knexpert/course/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
 
-import { LIST_SUCCESS } from './list';
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
-import { PUBLIC_LIST_SUCCESS } from './publiclist';
+import { BY_AUTHOR_LIST_SUCCESS } from './byAuthor';
+import { BY_PORTAL_LIST_SUCCESS } from './byPortal';
+
 import {
   LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
 } from './../lesson/loaded';
+
 import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
+
 import {
   EDIT_SUCCESS as EDIT_LESSON_SUCCESS,
   LOAD_SUCCESS as LOAD_LESSON_SUCCESS,
 } from './../lesson/edit';
+
 import {REMOVE_SUCCESS as REMOVE_LESSON_SUCCESS} from './../lesson/remove';
 
 import {
@@ -32,15 +36,12 @@ import {
 } from './../cart';
 
 import Immutable from 'immutable';
+
 import {
-  courses as coursesNormalize,
   lessons as lessonsNormalize,
-  coursesPublic as publicCoursesNormalize,
 } from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
-  order: [],
-  publicOrder: [],
   entities: {}
 });
 
@@ -59,15 +60,13 @@ export default function courseLoad(state = initialState, action) {
         const { course } = action.result.data;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
-    case LIST_SUCCESS:
+    case BY_AUTHOR_LIST_SUCCESS:
+    case BY_PORTAL_LIST_SUCCESS:
       return state.withMutations(map=> {
-        const courses = coursesNormalize(action.result.data.courses);
-        map.merge(courses);
-      });
-    case PUBLIC_LIST_SUCCESS:
-      return state.withMutations(map=> {
-        const courses = publicCoursesNormalize(action.result.data.courses);
-        map.merge(courses);
+        const {courses} = action.result.data;
+        courses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
       });
     case LOAD_LESSONS_SUCCESS:
       return state.withMutations(map => {
@@ -103,38 +102,36 @@ export default function courseLoad(state = initialState, action) {
     case CREATE_SUCCESS:
       return state.withMutations(map=> {
         const { course } = action.result.data;
-        map.mergeIn(['entities', course.slug], course);
+        map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
         map.update('order', array=>array.push(course.slug));
       });
     case LOAD_PRICE_SUCCESS:
       return state.withMutations(map=> {
         const course = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], course);
+        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(course));
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
         const {price} = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], price);
+        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(price));
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
-        if (action.result.data) {
-          const {wishlistItems} = action.result.data;
-          const wishListCourses = wishlistItems.map(item => item.course);
-          const {entities} = coursesNormalize(wishListCourses);
-          map.merge({ entities });
-        }
+        const {wishlistItems} = action.result.data;
+        const courses = wishlistItems.map(item => item.course);
+        courses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
       });
     case LOAD_MY_CART_SUCCESS:
       return state.withMutations(map=> {
-        if (action.result.data) {
-          const {userCartItems} = action.result.data;
-          const cartCourses = userCartItems.map(item => item.course);
-          const courses = coursesNormalize(cartCourses);
-          map.merge(courses);
-        }
+        const {userCartItems} = action.result.data;
+        const cartCourses = userCartItems.map(item => item.course);
+        cartCourses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
       });
     case LOAD:
     default:
