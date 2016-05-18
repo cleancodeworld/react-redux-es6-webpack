@@ -57,7 +57,7 @@ export default function courseLoad(state = initialState, action) {
       });
     case EDIT_SUCCESS:
       return state.withMutations(map=> {
-        const { course } = actcion.result.data;
+        const { course } = action.result.data;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case BY_AUTHOR_LIST_SUCCESS:
