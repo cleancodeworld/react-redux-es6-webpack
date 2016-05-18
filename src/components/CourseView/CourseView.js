@@ -19,9 +19,14 @@ const CourseView = (props) => {
                   <h1>{course.get('name')}</h1>
                   <p>{course.get('subtitle')}</p>
                   <ul className="list list-inline">
-                    <CourseRate avgRate={course.get('avgRate')} onChange={onRate}/>
                     <li>
-                      Instructed by <a href="#">[author]</a>
+                      <CourseRate avgRate={course.get('avgRate')}
+                                  onChange={onRate}/>
+                    </li>
+                    <li>{course.get('ratesCount')} students enrolled</li>
+                    <li>
+                      Instructed by <a
+                      href="#">{`${course.getIn(['author', `firstName`])} ${course.getIn(['author', `lastName`])}`}</a>
                     </li>
                   </ul>
                 </div>
@@ -150,7 +155,7 @@ const CourseView = (props) => {
                            data-course-id="B0YceF1Q" data-user-id="A0MTdVhUTHg="
                            data-target-selector-className="js-discover-tracker-elm">
                         <a className="js-discover-tracker-elm" href="/user/bentristem/">
-                          <img src="https://udemy-images.udemy.com/user/75x75/4355282_676b.jpg"/>
+                          <img src={course.get(['author', 'image'])}/>
                         </a>
                       </div>
                       <div className="pos-r fxdc">
@@ -159,7 +164,7 @@ const CourseView = (props) => {
                              data-target-selector-className="js-simple-collapse-more-btn">
                           <div className="mt10 js-simple-collapse empty-p" data-more="Full biography">
                             <div className="js-simple-collapse-inner">
-                              <p>[Author Description]</p>
+                              <p>{`${course.getIn(['author', `firstName`])} ${course.getIn(['author', `lastName`])}`}</p>
                               <p></p>
                             </div>
                           </div>

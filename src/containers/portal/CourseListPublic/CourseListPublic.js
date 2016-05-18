@@ -24,7 +24,7 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
     }
     // Load all courses
     if (!isPublicListLoaded(state)) {
-      promises.push(dispatch(load(portalMeta.get('slug'))));
+      promises.push(dispatch(load(portalMeta.get('slug'), portalMeta.getIn(['owner']))));
     }
     return Promise.all(promises);
   }
