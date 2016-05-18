@@ -12,6 +12,7 @@ import categoriesLoaded from './categories/loaded';
 import cart from './cart';
 import coursesByAuthor from './course/byAuthor';
 import coursesByPortal from './course/byPortal';
+import myCourses from './myCourses';
 
 export default combineReducers({
   wishList,
@@ -26,4 +27,5 @@ export default combineReducers({
   cart,
   coursesByAuthor,
   coursesByPortal,
+  myCourses,
 });

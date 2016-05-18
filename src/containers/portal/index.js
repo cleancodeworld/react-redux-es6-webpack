@@ -17,3 +17,4 @@ export CourseListCategories from './CourseListCategories/CourseListCategories';
 export WishList from './WishList/WishList';
 export Cart from './Cart/Cart';
 export CourseView from './CourseView/CourseView';
+export MyCourses from './MyCourses/MyCourses';

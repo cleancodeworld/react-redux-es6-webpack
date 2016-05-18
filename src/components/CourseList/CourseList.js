@@ -29,6 +29,7 @@ export default class CourseList extends Component {
     removeFromCart: PropTypes.func,
     categoryName: PropTypes.string,
     signup: PropTypes.func,
+    myCourses: PropTypes.bool,
   };
 
   state = {
@@ -60,7 +61,7 @@ export default class CourseList extends Component {
   }
 
   render() {
-    const { wishList, entities, order, categoryName, cart } = this.props;
+    const { wishList, entities, order, categoryName, cart, myCourses } = this.props;
     const { signUpModalOpen, signUpSubmitting } = this.state;
     return (
       <div>
@@ -79,7 +80,8 @@ export default class CourseList extends Component {
                                   isCartItem={!!cart.get(courseName)}
                                   key={course.get('id')}
                                   course={course}
-                                  onClickLoginRequiredLink={this.onClickLoginRequiredLink}/>
+                                  onClickLoginRequiredLink={this.onClickLoginRequiredLink}
+                                  myCourses={myCourses}/>
                 );
               }
               return '';
