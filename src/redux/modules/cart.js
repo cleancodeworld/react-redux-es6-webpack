@@ -49,7 +49,7 @@ export default function cart(state = initialState, action) {
   }
 }
 
-export function removeFromcart(course) {
+export function removeFromCart(course) {
   return {
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
     promise: (client) => client.del(`/api/v1/cart/${course.get('slug')}`),
@@ -59,7 +59,7 @@ export function removeFromcart(course) {
   };
 }
 
-export function addTocart(course) {
+export function addToCart(course) {
   return {
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
     promise: (client) => client.post(`/api/v1/cart`, { data: { courseId: course.get('id') } }),

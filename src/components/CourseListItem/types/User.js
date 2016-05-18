@@ -20,7 +20,7 @@ const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToC
                     className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
                     className="icon-plus3"></i></a>
                   :
-                  <a href="javascript:void(0)" onClick={()=> removeFromCart(course)}
+                  <a href="javascript:void(1)" onClick={()=> removeFromCart(course)}
                     className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
                     className="icon-plus3"></i></a>
                 }
