@@ -16,6 +16,7 @@ import {
   AuthorContainer,
   CourseListPublic,
   WishList,
+  Cart,
   CourseView,
 } from '../containers/portal';
 import {
@@ -38,6 +39,7 @@ export default (params) => {
 
         <Route path="login" component={PortalLogin}/>
         <Route path="wish-list" component={WishList}/>
+        <Route path="cart" component={Cart}/>
 
         <Route path="courses">
           <IndexRoute component={CourseListPublic}/>

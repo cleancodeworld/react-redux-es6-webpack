@@ -9,6 +9,7 @@ import auth from './auth';
 import portalCurrent from './portal/current';
 import courseLoaded from './course/loaded';
 import categoriesLoaded from './categories/loaded';
+import cart from './cart';
 
 export default combineReducers({
   wishList,
@@ -20,4 +21,5 @@ export default combineReducers({
   form: formReducer,
   reduxAsyncConnect,
   categoriesLoaded,
+  cart,
 });

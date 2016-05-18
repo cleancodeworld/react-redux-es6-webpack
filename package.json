@@ -132,7 +132,7 @@
     "react-select": "^1.0.0-beta13",
     "redux": "^3.0.4",
     "redux-connect": "^2.3.0",
-    "redux-form": "^6.0.0-alpha.10",
+    "redux-form": "^6.0.0-alpha.13",
     "scroll-behavior": "^0.3.2",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",

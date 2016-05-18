@@ -17,7 +17,6 @@ export function create(model) {
   };
 }
 
-
 export function createWithPortal(model) {
   return dispatch => {
     return dispatch(
@@ -30,6 +29,17 @@ export function createWithPortal(model) {
         type: model.isPersonal ? 'Personal' : 'Company',
         ownerId: res.userId,
       }, res.sessionToken)))
+      .catch(res => {
+        throw new SubmissionError({ _error: res.error });
+      });
+  };
+}
+
+export function signup(model) {
+  return dispatch => {
+    return dispatch(
+      create({...model, roleId: '5724386acbb4e23adde20249'}))
+      .then(()=> dispatch(silentLogin(model)))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

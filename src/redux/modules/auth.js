@@ -90,7 +90,13 @@ export function login(model) {
 export function silentLogin(model) {
   return {
     types: [LOGIN, LOGIN, LOGIN],
-    promise: (client) => client.post(`/api/v1/login`, { data: model }),
+    promise: (client) => client.post(`/api/v1/login`, { data: model }).then((res) => {
+      const {sessionToken, username, userId} = res.data;
+      cookieOpt.maxAge = 60 * 60 * 24;
+      reactCookie.save('sessionToken', sessionToken, cookieOpt);
+      reactCookie.save('userId', userId, cookieOpt);
+      reactCookie.save('username', username, cookieOpt);
+    }),
     data: {
       model
     }
@@ -106,7 +112,7 @@ export function userLogin(model, continueTo) {
         if (model.remember) {
           cookieOpt.maxAge = 60 * 60 * 24 * 42;
         } else {
-          cookieOpt.maxAge = 0;
+          cookieOpt.maxAge = 60 * 60 * 24;
         }
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);

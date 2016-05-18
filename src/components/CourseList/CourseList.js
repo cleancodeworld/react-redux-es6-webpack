@@ -5,13 +5,16 @@ import {
 } from 'components';
 import { connect } from 'react-redux';
 import { addToWishList, removeFromWishList } from 'redux/modules/wishList';
+import { addToCart, removeFromCart } from 'redux/modules/cart';
+import { signup } from 'redux/modules/user/create';
 
 @connect(
-  ({wishList, auth}) => ({
+  ({wishList, cart, auth}) => ({
     wishList: wishList.get('entities'),
+    cart: cart.get('entities'),
     user: auth.get('user')
   }),
-  { addToWishList, removeFromWishList }
+  { addToWishList, removeFromWishList, addToCart, removeFromCart, signup }
 )
 export default class CourseList extends Component {
   static propTypes = {
@@ -19,18 +22,22 @@ export default class CourseList extends Component {
     order: PropTypes.object,
     wishList: PropTypes.object,
     user: PropTypes.object,
+    cart: PropTypes.object,
     addToWishList: PropTypes.func,
     removeFromWishList: PropTypes.func,
+    addToCart: PropTypes.func,
+    removeFromCart: PropTypes.func,
     categoryName: PropTypes.string,
+    signup: PropTypes.func,
   };
-
 
   state = {
     signUpModalOpen: false,
+    signUpSubmitting: false,
   }
 
   onCloseSignupModal = () => {
-    this.setState({ signUpModalOpen: false });
+    this.setState({ signUpModalOpen: false, signUpSubmitting: this.state.signUpSubmitting });
   }
 
   onClickLoginRequiredLink = (ev) => {
@@ -38,8 +45,14 @@ export default class CourseList extends Component {
     if (!user || !user.get('sessionToken')) {
       ev.preventDefault();
       ev.stopPropagation();
-      this.setState({ signUpModalOpen: true });
+      this.setState({ signUpModalOpen: true, signUpSubmitting: this.state.signUpSubmitting });
     }
+  }
+
+  onSignupFormSubmit = (model) => {
+    this.setState({ signUpModalOpen: true, signUpSubmitting: true });
+    return this.props.signup(model)
+      .then(() => this.setState({ signUpModalOpen: false, signUpSubmitting: false }));
   }
 
   nameToSlug(name) {
@@ -47,27 +60,39 @@ export default class CourseList extends Component {
   }
 
   render() {
-    const { wishList, entities, order, categoryName } = this.props;
-    const { signUpModalOpen } = this.state;
+    const { wishList, entities, order, categoryName, cart } = this.props;
+    const { signUpModalOpen, signUpSubmitting } = this.state;
     return (
       <div>
         <div className="row">
-          {order.map(courseName => {
-            const course = entities.get(courseName);
-            if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
-              return (
-                <CourseListItem addToWishList={this.props.addToWishList}
-                                removeFromWishList={this.props.removeFromWishList}
-                                isWishListItem={!!wishList.get(courseName)}
-                                key={course.get('id')}
-                                course={course}
-                                onClickLoginRequiredLink={this.onClickLoginRequiredLink}/>
-              );
-            }
-            return '';
-          })}
+          {
+            order && order.map ?
+            order.map(courseName => {
+              const course = entities.get(courseName);
+              if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
+                return (
+                  <CourseListItem addToWishList={this.props.addToWishList}
+                                  removeFromWishList={this.props.removeFromWishList}
+                                  isWishListItem={!!wishList.get(courseName)}
+                                  addToCart={this.props.addToCart}
+                                  removeFromCart={this.props.removeFromCart}
+                                  isCartItem={!!cart.get(courseName)}
+                                  key={course.get('id')}
+                                  course={course}
+                                  onClickLoginRequiredLink={this.onClickLoginRequiredLink}/>
+                );
+              }
+              return '';
+            })
+            :
+            ''
+          }
         </div>
-        <SignupModal show={signUpModalOpen} onHide={this.onCloseSignupModal}/>
+        <SignupModal
+          show={signUpModalOpen}
+          onHide={this.onCloseSignupModal}
+          onSubmit={this.onSignupFormSubmit}
+          submitting={signUpSubmitting}/>
       </div>
     );
   }
