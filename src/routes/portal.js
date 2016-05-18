@@ -22,7 +22,8 @@ import {
 import {
   Root,
   NotFound,
-  Course
+  Course,
+  CheckOut,
 } from '../containers/shared';
 
 export default (params) => {
@@ -45,6 +46,7 @@ export default (params) => {
           <IndexRoute component={CourseListPublic}/>
           <Route path=":categoryName" component={CourseListPublic}/>
         </Route>
+        <Route path="check-out" component={CheckOut}/>
 
         <Route path="course">
           <Route path=":courseName" component={Course}>

@@ -9,7 +9,7 @@ import {
 import {
   CourseList,
 } from 'components';
-import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/publiclist';
+import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/byPortal';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 
 @asyncConnect([{
@@ -30,9 +30,9 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
   }
 }])
 @connect(
-  ({courseLoaded, portalCurrent}) => ({
+  ({courseLoaded, portalCurrent, coursesByPortal}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('orderPublic'),
+    order: coursesByPortal.get('order'),
     wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
   })

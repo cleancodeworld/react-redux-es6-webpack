@@ -10,14 +10,14 @@ import {
 import {
   CourseList,
 } from 'components';
-import { load, isLoaded } from 'redux/modules/course/list';
+import { load, isLoaded } from 'redux/modules/course/byPortal';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
     if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.auth.getIn(['user', 'username']))));
+      promises.push(dispatch(load(state.portalCurrent.get('reqSubdomain'))));
     }
     return Promise.all(promises);
   }
@@ -25,7 +25,7 @@ import { load, isLoaded } from 'redux/modules/course/list';
 @connect(
   ({courseLoaded}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('order'),
+    order: courseLoaded.get('orderPublic'),
   })
 )
 export default class CourseListContainer extends Component {

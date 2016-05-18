@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { PortalLayout } from '../index';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
-import { load, isLoaded } from 'redux/modules/course/list';
+import { load, isLoaded } from 'redux/modules/course/byAuthor';
 import {
   CourseList,
 } from 'components';
@@ -19,9 +19,9 @@ import {
   }
 }])
 @connect(
-  ({courseLoaded}) => ({
+  ({courseLoaded, coursesByAuthor}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('order'),
+    order: coursesByAuthor.get('order'),
   })
 )
 export default class Home extends Component {
@@ -32,6 +32,8 @@ export default class Home extends Component {
 
   render() {
     const {entities, order} = this.props;
+    console.log('order');
+    console.log(order);
 
     const breadcrumbs = [];
     return (
