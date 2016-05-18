@@ -11,7 +11,7 @@ export function isLoaded(globalState, courseName) {
 export function load(courseName) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/lesson/course/${courseName}`),
+    promise: (client) => client.get(`/api/v1/lesson/${courseName}`),
     data: {
       courseName
     }

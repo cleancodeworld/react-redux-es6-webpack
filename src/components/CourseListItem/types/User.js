@@ -38,7 +38,7 @@ const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToC
           </div>
         </div>
         <div className="caption">
-          <Link to={'/author/course/' + course.get('slug')} className="text-default">
+          <Link to={`/course/${course.get('slug')}`} className="text-default">
             <h6 className="no-margin-top text-semibold">{course.get('name')}</h6>
           </Link>
           <hr className="no-margin-top mb-10"/>
