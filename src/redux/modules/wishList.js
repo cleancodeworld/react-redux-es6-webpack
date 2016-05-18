@@ -12,6 +12,8 @@ export const LOAD_MY_WISH_LIST_FAIL = 'knexpert/wishlist/LOAD_MY_WISH_LIST_FAIL'
 
 import Immutable from 'immutable';
 
+import { LOGOUT_SUCCESS } from './auth';
+
 const initialState = Immutable.fromJS({
   isLoaded: false,
   order: [],
@@ -44,6 +46,8 @@ export default function wishList(state = initialState, action) {
         });
         map.set('isLoaded', true);
       });
+    case LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

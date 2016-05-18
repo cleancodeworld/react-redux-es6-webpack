@@ -12,6 +12,8 @@ export const LOAD_MY_CART_FAIL = 'knexpert/cart/LOAD_MY_CART_FAIL';
 
 import Immutable from 'immutable';
 
+import { LOGOUT_SUCCESS } from './auth';
+
 const initialState = Immutable.fromJS({
   isLoaded: false,
   order: [],
@@ -44,6 +46,8 @@ export default function cart(state = initialState, action) {
         });
         map.set('isLoaded', true);
       });
+    case LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }
