@@ -28,6 +28,7 @@ export default function byPortal(state = initialState, action) {
           map.setIn(['entities', course], true);
         });
         map.set('order', Immutable.fromJS(order));
+        map.set('loaded', true);
       });
     default:
       return state;
