@@ -16,8 +16,8 @@ export function rate(model) {
   return dispatch => {
     return dispatch(
       _rate(model))
-      .then((res)=> {
-        alert(JSON.stringify(res));
+      .then(()=> {
+        alert('saved');
       })
       .catch(res => {
         alert(JSON.stringify(res));

@@ -3,12 +3,12 @@ import React, {PropTypes} from 'react';
 import Rating from 'react-rating';
 
 const CourseRate = ({avgRate, onChange}) => {
-  return (<li>
+  return (
     <Rating empty={<i className="fa fa-star-o"/>}
             full={<i className="fa fa-star"/>}
             initialRate={avgRate}
             onChange={onChange}/>
-  </li>);
+  );
 };
 
 CourseRate.propTypes = {
