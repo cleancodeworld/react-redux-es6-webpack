@@ -12,7 +12,6 @@ import {
   PageHeader,
   PageHeaderContent,
   BreadcrumbBar,
-  SignupModal,
 } from 'components';
 import {logout} from 'redux/modules/auth';
 import {
@@ -40,28 +39,10 @@ export default class PortalLayout extends Component {
     user: PropTypes.object
   };
 
-  state = {
-    signUpModalOpen: false,
-  }
-
-  onCloseSignupModal = () => {
-    this.setState({ signUpModalOpen: false });
-  }
-
-  onClickLoginRequiredLink = (ev) => {
-    const {user} = this.props;
-    if (!user || !user.get('sessionToken')) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      this.setState({ signUpModalOpen: true });
-    }
-  }
-
   render() {
     const logoImage = require('./knexpert.png');
     const {portalCurrentMeta, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
-    const {signUpModalOpen} = this.state;
     let content = this.props.children;
     if (!portalCurrentMeta) {
       content = <NotFound />;
@@ -103,7 +84,6 @@ export default class PortalLayout extends Component {
         <div className="page-container">
           {content}
         </div>
-        <SignupModal show={signUpModalOpen} onHide={this.onCloseSignupModal}/>
       </div>
     );
   }

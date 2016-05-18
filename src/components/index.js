@@ -29,3 +29,4 @@ export LessonRemoveButton from './LessonRemoveButton/LessonRemoveButton';
 export CourseListCategoryItem from './CourseListCategoryItem/CourseListCategoryItem';
 export CourseList from './CourseList/CourseList';
 export SignupModal from './SignupModal/SignupModal';
+export SignupForm from './SignupForm/SignupForm';
