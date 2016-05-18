@@ -36,6 +36,7 @@ import {
 
 const initialState = Immutable.fromJS({
   order: [],
+  publicOrder: [],
   entities: {}
 });
 
@@ -117,8 +118,8 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const {wishlistItems} = action.result.data;
         const wishListCourses = wishlistItems.map(item => item.course);
-        const courses = coursesNormalize(wishListCourses);
-        map.merge(courses);
+        const {entities} = coursesNormalize(wishListCourses);
+        map.merge({ entities });
       });
     case LOAD:
     default:

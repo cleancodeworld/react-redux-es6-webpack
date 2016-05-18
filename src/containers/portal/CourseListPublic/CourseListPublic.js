@@ -32,7 +32,7 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
 @connect(
   ({courseLoaded, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('order'),
+    order: courseLoaded.get('orderPublic'),
     wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
   })
