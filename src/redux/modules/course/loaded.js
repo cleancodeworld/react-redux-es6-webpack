@@ -120,16 +120,21 @@ export default function courseLoad(state = initialState, action) {
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
-        const {wishlistItems} = action.result.data;
-        const wishListCourses = wishlistItems.map(item => item.course);
-        const {entities} = coursesNormalize(wishListCourses);
-        map.merge({ entities });
+        if (action.result.data) {
+          const {wishlistItems} = action.result.data;
+          const wishListCourses = wishlistItems.map(item => item.course);
+          const {entities} = coursesNormalize(wishListCourses);
+          map.merge({ entities });
+        }
       });
     case LOAD_MY_CART_SUCCESS:
       return state.withMutations(map=> {
-        const cartCourses = action.result.data.map(item => item.Course);
-        const courses = coursesNormalize(cartCourses);
-        map.merge(courses);
+        if (action.result.data) {
+          const {userCartItems} = action.result.data;
+          const cartCourses = userCartItems.map(item => item.course);
+          const courses = coursesNormalize(cartCourses);
+          map.merge(courses);
+        }
       });
     case LOAD:
     default:
