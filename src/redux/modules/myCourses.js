@@ -3,6 +3,10 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/mycourses/LOAD';
 export const LOAD_SUCCESS = 'knexpert/mycourses/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/mycourses/LOAD_FAIL';
+export const ADD = 'knexpert/mycourses/ADD';
+export const ADD_SUCCESS = 'knexpert/mycourses/ADD_SUCCESS';
+export const ADD_FAIL = 'knexpert/mycourses/ADD_FAIL';
+
 
 import Immutable from 'immutable';
 
@@ -30,6 +34,15 @@ export default function myCourses(state = initialState, action) {
       });
     case LOGOUT_SUCCESS:
       return initialState;
+    case ADD:
+      return state.withMutations(map=> {
+        const {courseName} = action.data;
+        map.setIn(['entities', courseName], true);
+        map.update('order', array=>array.push(courseName));
+      });
+    case ADD_FAIL:
+      alert(JSON.stringify(action.result, null, 4));
+      return state;
     default:
       return state;
   }
@@ -42,6 +55,18 @@ export function load() {
   };
 }
 
+
 export function isLoaded(globalState) {
   return globalState.myCourses && globalState.myCourses.get('isLoaded');
+}
+
+
+export function add(courseName, transactionId, courseId) {
+  return {
+    types: [ADD, ADD_SUCCESS, ADD_FAIL],
+    promise: (client) => client.post(`/api/v1/mycourses`, { data: { transactionId, courseId } }),
+    data: {
+      courseName
+    }
+  };
 }
