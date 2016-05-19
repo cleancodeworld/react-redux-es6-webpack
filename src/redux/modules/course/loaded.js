@@ -82,13 +82,13 @@ export default function courseLoad(state = initialState, action) {
     case LOAD_LESSON_SUCCESS:
       return state.withMutations(map => {
         const {courseName, lessonName} = action.data;
-        const lesson = action.result;
+        const lesson = action.result.data;
         map.mergeIn(['entities', courseName, 'lessons', 'entities', lessonName], Immutable.fromJS(lesson));
       });
     case ADD_LESSON_SUCCESS:
       return state.withMutations(map => {
         const {courseName} = action.data;
-        const {lesson} = action.result;
+        const {lesson} = action.result.data;
         map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
         map.updateIn(['entities', courseName, 'lessons', 'order'], array=> array ? array.push(lesson.slug) : [lesson.slug]);
       });
@@ -108,7 +108,6 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const { course } = action.result.data;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
-        map.update('order', array=>array.push(course.slug));
       });
     case LOAD_PRICE_SUCCESS:
       return state.withMutations(map=> {

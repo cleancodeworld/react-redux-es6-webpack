@@ -9,6 +9,9 @@ import {
   courses as coursesNormalize,
 } from 'utils/normalize';
 
+import { CREATE_SUCCESS } from './create';
+import { EDIT_SUCCESS } from './edit';
+
 const initialState = Immutable.fromJS({
   loaded: false,
   order: [],
@@ -29,6 +32,12 @@ export default function byPortal(state = initialState, action) {
         });
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);
+      });
+    case CREATE_SUCCESS:
+    case EDIT_SUCCESS:
+      return state.withMutations(map=> {
+        const { course } = action.result.data;
+        map.update('order', array=>array.push(course.slug));
       });
     default:
       return state;
