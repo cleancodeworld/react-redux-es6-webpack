@@ -6,6 +6,9 @@ export const LOAD_FAIL = 'knexpert/mycourses/LOAD_FAIL';
 export const ADD = 'knexpert/mycourses/ADD';
 export const ADD_SUCCESS = 'knexpert/mycourses/ADD_SUCCESS';
 export const ADD_FAIL = 'knexpert/mycourses/ADD_FAIL';
+export const STRIPE_CHARGE = 'knexpert/mycourses/STRIPE_CHARGE';
+export const STRIPE_CHARGE_SUCCESS = 'knexpert/mycourses/STRIPE_CHARGE_SUCCESS';
+export const STRIPE_CHARGE_FAIL = 'knexpert/mycourses/STRIPE_CHARGE_FAIL';
 
 
 import Immutable from 'immutable';
@@ -60,13 +63,38 @@ export function isLoaded(globalState) {
   return globalState.myCourses && globalState.myCourses.get('isLoaded');
 }
 
-
-export function add(courseName, courseId, transactionId) {
+function stripeCharge(course, stripeToken) {
+  return {
+    types: [STRIPE_CHARGE, STRIPE_CHARGE_SUCCESS, STRIPE_CHARGE_FAIL],
+    promise: (client) => client.post(`/stripe/charge`, {
+      data: {
+        stripeToken,
+        amount: course.getIn(['coursePrice', 'price']) * 100,
+        currency: 'usd'
+      }
+    })
+  };
+}
+function _add(course, transactionId) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
-    promise: (client) => client.post(`/api/v1/mycourses`, { data: { transactionId, courseId } }),
+    promise: (client) => client.post(`/api/v1/mycourses`, {
+      data: {
+        transactionId,
+        courseId: course.get('id')
+      }
+    }),
     data: {
-      courseName
+      courseName: course.get('slug')
     }
+  };
+}
+export function add(course, tokenId) {
+  return dispatch => {
+    dispatch(stripeCharge(course, tokenId))
+      .then(res=>dispatch(_add(course, res.id)))
+      .catch(err=> {
+        alert(JSON.stringify(err, null, 4));
+      });
   };
 }

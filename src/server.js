@@ -16,6 +16,8 @@ import reactCookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
+import bodyParser from 'body-parser';
+
 const upload = multer({ dest: 'uploads/' });
 
 cloudinary.config({
@@ -39,6 +41,7 @@ const proxy = httpProxy.createProxyServer({
 });
 
 app.use(cookieParser());
+
 app.use((req, res, next) => {
   reactCookie.plugToRequest(req, res);
   next();
@@ -68,6 +71,25 @@ const onProxyReq = (proxyReq, req) => {
   }
 };
 
+app.post('/stripe/charge', bodyParser.json(), (req, res)=> {
+  const stripe = require('stripe')('sk_test_AopgwkZFwvtosTZE1BSRFAo1');
+  const stripeToken = req.body.stripeToken;
+  const amount = req.body.amount;
+  const currency = req.body.currency;
+  stripe.charges.create({
+    amount: amount,
+    currency: currency,
+    source: stripeToken,
+    description: 'Example charge'
+  }, (err, charge) => {
+    if (err) {
+      res.status(400).json(err.raw);
+    } else {
+      res.status(200).json(charge);
+    }
+  });
+});
+
 proxy.on('proxyReq', onProxyReq);
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
@@ -77,10 +99,10 @@ proxy.on('error', (error, req, res) => {
     console.error('proxy error', error);
   }
   if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
+    res.writeHead(500, { 'content-type': 'application/json' });
   }
 
-  json = {error: 'proxy_error', reason: error.message};
+  json = { error: 'proxy_error', reason: error.message };
   res.end(JSON.stringify(json));
 });
 
@@ -107,7 +129,11 @@ app.use((req, res) => {
 
   const subDomain = getSubDomain(req.header('host'));
 
-  match({ history, routes: getRoutes(store, subDomain), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({
+    history,
+    routes: getRoutes(store, subDomain),
+    location: req.originalUrl
+  }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -115,7 +141,7 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
+      loadOnServer({ ...renderProps, store, helpers: { client } }).then(() => {
         const component = (
           <Provider store={store} key="provider">
             <ReduxAsyncConnect {...renderProps} />
@@ -124,10 +150,11 @@ app.use((req, res) => {
 
         res.status(200);
 
-        global.navigator = {userAgent: req.headers['user-agent']};
+        global.navigator = { userAgent: req.headers['user-agent'] };
 
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
+                                        store={store}/>));
       });
     } else {
       res.status(404).send('Not found');
