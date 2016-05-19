@@ -1,9 +1,9 @@
 import React from 'react';
-import {StripeCheckOut} from 'components';
+import {StripeCheckout} from 'components';
 
 export default class CheckOut extends React.Component {
 
   render() {
-    return (<StripeCheckOut/>);
+    return (<StripeCheckout/>);
   }
 }

@@ -73,7 +73,8 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const {courses, author} = action.result.data;
         courses.map(course=> {
-          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+          const immutableCourse = Immutable.fromJS(course).set('author', Immutable.fromJS(author));
+          map.setIn(['entities', course.slug], immutableCourse);
         });
         if (author) {
           map.set('author', Immutable.fromJS(author));

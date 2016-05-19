@@ -64,15 +64,19 @@ export default class PortalLayout extends Component {
               <LinkContainer to="/courses">
                 <NavItem eventKey={2}>Courses</NavItem>
               </LinkContainer>
-              <LinkContainer to="/wish-list">
-                <NavItem eventKey={3}>My wishlist</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/cart">
-                <NavItem eventKey={4}>Cart</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/my-courses">
-                <NavItem eventKey={5}>My Courses</NavItem>
-              </LinkContainer>
+              {user ?
+                <LinkContainer to="/wish-list">
+                  <NavItem eventKey={3}>My wishlist</NavItem>
+                </LinkContainer> : null}
+                <LinkContainer to="/cart">
+                  <NavItem eventKey={4}>Cart</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/my-courses">
+                  <NavItem eventKey={5}>My Courses</NavItem>
+                </LinkContainer>
+                :
+                null
+              }
               <LinkContainer to="/author">
                 <NavItem eventKey={6}>Author Admin Panel</NavItem>
               </LinkContainer>
@@ -81,7 +85,7 @@ export default class PortalLayout extends Component {
           </Navbar.Collapse>
         </Navbar>
         <PageHeader>
-          <BreadcrumbBar breadcrumbs={breadcrumbs} />
+          <BreadcrumbBar breadcrumbs={breadcrumbs}/>
           <PageHeaderContent boldTitle={boldTitle} title={title}/>
         </PageHeader>
         <div className="page-container">
