@@ -44,7 +44,7 @@ const Guest = ({course, onClickLoginRequiredLink}) => {
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+              <div className="media-heading text-semibold">{`${course.getIn(['author', 'firstName'])} ${course.getIn(['author', 'lastName'])}`}</div>
             </div>
           </div>
         </div>

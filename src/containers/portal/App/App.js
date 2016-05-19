@@ -3,6 +3,7 @@ import { asyncConnect } from 'redux-connect';
 import { isLoaded as isPortalLoaded, load as portalLoaded } from 'redux/modules/portal/current';
 import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modules/wishList';
 import { isLoaded as isCartLoaded, load as cartLoaded } from 'redux/modules/cart';
+import { isLoaded as isMyCoursesLoaded, load as myCoursesLoad } from 'redux/modules/myCourses';
 import { isAuthenticated } from 'redux/modules/auth';
 
 @asyncConnect([{
@@ -18,6 +19,9 @@ import { isAuthenticated } from 'redux/modules/auth';
       }
       if (!isCartLoaded(state)) {
         promises.push(dispatch(cartLoaded()));
+      }
+      if (!isMyCoursesLoaded(state)) {
+        promises.push(dispatch(myCoursesLoad()));
       }
     }
     return Promise.all(promises);

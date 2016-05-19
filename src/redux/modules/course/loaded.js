@@ -35,6 +35,10 @@ import {
   LOAD_MY_CART_SUCCESS,
 } from './../cart';
 
+import {
+  LOAD_SUCCESS as LOAD_MY_COURSES_SUCCESS,
+} from './../myCourses';
+
 import Immutable from 'immutable';
 
 import {
@@ -129,8 +133,16 @@ export default function courseLoad(state = initialState, action) {
     case LOAD_MY_CART_SUCCESS:
       return state.withMutations(map=> {
         const {userCartItems} = action.result.data;
-        const cartCourses = userCartItems.map(item => item.course);
-        cartCourses.map(course=> {
+        const courses = userCartItems.map(item => item.course);
+        courses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
+      });
+    case LOAD_MY_COURSES_SUCCESS:
+      return state.withMutations(map=> {
+        const {wishlistItems} = action.result.data;
+        const courses = wishlistItems.map(item => item.course);
+        courses.map(course=> {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });
       });

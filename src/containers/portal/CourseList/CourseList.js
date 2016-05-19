@@ -23,9 +23,9 @@ import { load, isLoaded } from 'redux/modules/course/byPortal';
   }
 }])
 @connect(
-  ({courseLoaded}) => ({
+  ({courseLoaded, coursesByPortal}) => ({
     entities: courseLoaded.get('entities'),
-    order: courseLoaded.get('orderPublic'),
+    order: coursesByPortal.get('order'),
   })
 )
 export default class CourseListContainer extends Component {
