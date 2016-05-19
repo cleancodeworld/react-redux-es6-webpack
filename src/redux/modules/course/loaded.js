@@ -46,11 +46,7 @@ import {
 } from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
-  entities: {},
-  author: {
-    firstName: '',
-    lastName: ''
-  }
+  entities: {}
 });
 
 export default function courseLoad(state = initialState, action) {
