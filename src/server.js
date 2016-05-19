@@ -16,6 +16,8 @@ import reactCookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
+import bodyParser from 'body-parser';
+
 const upload = multer({ dest: 'uploads/' });
 
 cloudinary.config({
@@ -39,6 +41,9 @@ const proxy = httpProxy.createProxyServer({
 });
 
 app.use(cookieParser());
+
+app.use(bodyParser.json())
+
 app.use((req, res, next) => {
   reactCookie.plugToRequest(req, res);
   next();
@@ -67,6 +72,25 @@ const onProxyReq = (proxyReq, req) => {
     proxyReq.setHeader('Authorization', authorizationHeader);
   }
 };
+
+app.post('/stripe/charge',(req,res)=>{
+  var stripe = require("stripe")("sk_test_AopgwkZFwvtosTZE1BSRFAo1");
+  var stripeToken = req.body.stripeToken;
+  var amount = req.body.amount;
+  var currency = req.body.currency;
+  var charge = stripe.charges.create({
+    amount: amount,
+    currency: currency,
+    source: stripeToken,
+    description: "Example charge"
+  }, function(err, charge) {
+    if(err){
+      return res.status(400).json(err.raw);
+    }else{
+      res.status(200).json(charge);
+    }
+  });
+});
 
 proxy.on('proxyReq', onProxyReq);
 
