@@ -162,5 +162,9 @@ export function load(courseName) {
 }
 
 export function isLoaded(globalState, courseName) {
-  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName]);
+  return globalState.courseLoaded
+    && globalState.courseLoaded.getIn(['entities', courseName])
+    && globalState.courseLoaded.getIn(['entities', courseName, 'lessons'])
+    && globalState.courseLoaded.getIn(['entities', courseName, 'author'])
+    && globalState.courseLoaded.getIn(['entities', courseName, 'coursePrice']);
 }
