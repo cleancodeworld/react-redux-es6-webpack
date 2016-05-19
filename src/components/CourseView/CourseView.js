@@ -4,8 +4,17 @@ import {
   CourseRate,
 } from './../index';
 
-const CourseView = (props) => {
-  const {course, onRate} = props;
+const CourseView = (props, context) => {
+  const {course,
+    onRate,
+    isWishListItem,
+    addToWishList,
+    removeFromWishList,
+    isCartItem,
+    addToCart,
+    removeFromCart,
+    } = props;
+  const {user} = context;
   return (<div className="page-content">
       <div className="content-wrapper">
         <div className="panel panel-flat">
@@ -45,7 +54,40 @@ const CourseView = (props) => {
                       Take This Course
                     </a>
                   </p>
+                  {user ?
+                    <p>
+                      {isWishListItem
+                        ? <a href="javascript:void(0)"
+                             onClick={()=>removeFromWishList(course)}
+                             className="btn btn-primary legitRipple">
+                        Remove from wishlist
+                      </a>
+                        : <a href="javascript:void(0)"
+                             onClick={()=>addToWishList(course)}
+                             className="btn btn-primary legitRipple">
+                        Add to wishlist
+                      </a>
 
+                      }
+                    </p> : null
+                  }
+
+                  {user ?
+                    <p>
+                      {isCartItem
+                        ? <a href="javascript:void(0)"
+                             onClick={()=>removeFromCart(course)}
+                             className="btn btn-primary legitRipple">
+                        Remove from cart
+                      </a>
+                        : <a href="javascript:void(0)"
+                             onClick={()=>addToCart(course)}
+                             className="btn btn-primary legitRipple">
+                        Add to cart
+                      </a>
+                      }
+                    </p> : null
+                  }
                   <p>
                   </p>
                   <hr/>
@@ -189,6 +231,12 @@ CourseView.contextTypes = {
 CourseView.propTypes = {
   course: PropTypes.object.isRequired,
   onRate: PropTypes.func,
+  isWishListItem: PropTypes.bool,
+  addToWishList: PropTypes.func,
+  removeFromWishList: PropTypes.func,
+  isCartItem: PropTypes.bool,
+  addToCart: PropTypes.func,
+  removeFromCart: PropTypes.func,
 };
 
 export default CourseView;
