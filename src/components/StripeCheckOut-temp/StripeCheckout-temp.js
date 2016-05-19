@@ -1,7 +1,7 @@
 import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
+import ReactStripeCheckout from 'react-stripe-checkout';
 
-const ReactStripeCheckout = ({onSuccess, amount})=> {
+const StripeCheckout = ({onSuccess, amount})=> {
   return (
     <StripeCheckout
       name="KNExpert"
@@ -21,4 +21,4 @@ const ReactStripeCheckout = ({onSuccess, amount})=> {
   );
 };
 
-export default ReactStripeCheckout;
+export default StripeCheckout;
