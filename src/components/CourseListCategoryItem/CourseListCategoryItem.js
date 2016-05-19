@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-const CourseListCategoryItem = ({category, isActive}) => {
+const CourseListCategoryItem = ({category, isActiveCategory}) => {
   const liProps = {};
-  if (isActive) {
+  if (isActiveCategory) {
     liProps.className = 'active';
   }
   return (

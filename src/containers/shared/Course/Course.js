@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { replace } from 'react-router-redux';
 import { asyncConnect } from 'redux-connect';
 import { load as loadCourse, isLoaded as isCourseLoaded } from 'redux/modules/course/loaded';
 import { isLoaded as isLessonsLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
@@ -21,7 +20,7 @@ import { isLoaded as isLessonsLoaded, load as loadLessons } from 'redux/modules/
 
 @connect(({courseLoaded}, ownProps)=> ({
   course: courseLoaded.getIn(['entities', ownProps.params.courseName])
-}), { replace })
+}))
 
 export default class Course extends React.Component {
 

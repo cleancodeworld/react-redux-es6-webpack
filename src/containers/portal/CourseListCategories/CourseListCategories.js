@@ -27,7 +27,7 @@ export default class CourseListCategories extends Component {
           {order.map(categoryId => {
             const category = entities.get(categoryId);
             return (
-              <CourseListCategoryItem category={category} key={category.get('slug')} isActive={(category.get('slug') === activeCategory)}/>
+              <CourseListCategoryItem category={category} key={category.get('slug')} isActiveCategory={(category.get('slug') === activeCategory)}/>
             );
           })}
         </ul>
