@@ -76,9 +76,6 @@ export default function courseLoad(state = initialState, action) {
           const immutableCourse = Immutable.fromJS(course).set('author', Immutable.fromJS(author));
           map.setIn(['entities', course.slug], immutableCourse);
         });
-        if (author) {
-          map.set('author', Immutable.fromJS(author));
-        }
       });
     case LOAD_LESSONS_SUCCESS:
       return state.withMutations(map => {

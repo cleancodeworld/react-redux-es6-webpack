@@ -14,7 +14,6 @@ import {
   ({cart, courseLoaded}) => ({
     entities: courseLoaded.get('entities'),
     order: cart.get('order'),
-    author: courseLoaded.get('author'),
   })
 )
 export default class Cart extends Component {
@@ -22,11 +21,10 @@ export default class Cart extends Component {
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
-    author: PropTypes.object,
   };
 
   render() {
-    const {entities, order, author} = this.props;
+    const {entities, order} = this.props;
     const breadcrumbs = [
       { url: '/cart', name: 'Cart' },
     ];
@@ -38,7 +36,7 @@ export default class Cart extends Component {
             <div className="content-group">
               <h6 className="text-semibold">My Cart</h6>
             </div>
-            <CourseList entities={entities} order={order} author={author}/>
+            <CourseList entities={entities} order={order}/>
           </div>
         </PortalLayout>
       </div>
