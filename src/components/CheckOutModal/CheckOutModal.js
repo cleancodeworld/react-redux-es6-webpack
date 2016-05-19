@@ -20,7 +20,8 @@ export default class CheckOutModal extends Component {
     return (
       <Modal show={show} onHide={onHide}>
         <Modal.Body>
-          <StripeCheckout onSuccess={(token)=> this.props.addToMyCourses(course.get('slug'), course.get('id'), token.id)}/>
+          <StripeCheckout amount={course.getIn(['coursePrice', 'price'])}
+                          onSuccess={(token)=> this.props.addToMyCourses(course.get('slug'), course.get('id'), token.id)}/>
         </Modal.Body>
       </Modal>
     );

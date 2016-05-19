@@ -61,7 +61,7 @@ export function isLoaded(globalState) {
 }
 
 
-export function add(courseName, transactionId, courseId) {
+export function add(courseName, courseId, transactionId) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
     promise: (client) => client.post(`/api/v1/mycourses`, { data: { transactionId, courseId } }),
