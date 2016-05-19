@@ -13,7 +13,7 @@ import { push } from 'react-router-redux';
 export function load(courseName, lessonName) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/lesson/name/${lessonName}`),
+    promise: (client) => client.get(`/api/v1/lesson/${courseName}/${lessonName}`),
     data: {
       courseName,
       lessonName,
