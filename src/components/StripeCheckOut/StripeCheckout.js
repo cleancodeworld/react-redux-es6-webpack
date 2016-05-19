@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react';
 
 export default class StripeCheckout extends Component {
   static propTypes = {
-    onChange: PropTypes.func,
-    value: PropTypes.string,
+    onSuccess: PropTypes.func,
+    amount: PropTypes.number
   };
 
   state = {
@@ -20,10 +20,11 @@ export default class StripeCheckout extends Component {
 
   render() {
     let res = (<div>Loading</div>);
+    const {onSuccess, amount} = this.props;
     if (this.state.browser) {
       const ReactStripeCheckout = require('./ReactStripeCheckout');
       res = (
-        <ReactStripeCheckout
+        <ReactStripeCheckout amount={amount} onSuccess={onSuccess}
         />
       );
     }
