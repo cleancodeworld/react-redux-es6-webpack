@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Modal} from 'react-bootstrap';
-import {StripeCheckout} from 'components';
+import {StripeCheckOut} from 'components';
 import {connect} from 'react-redux';
 import {add as addToMyCourses} from 'redux/modules/myCourses';
 
@@ -20,7 +20,7 @@ export default class CheckOutModal extends Component {
     return (
       <Modal show={show} onHide={onHide}>
         <Modal.Body>
-          <StripeCheckout amount={course.getIn(['coursePrice', 'price'])}
+          <StripeCheckOut amount={course.getIn(['coursePrice', 'price'])}
                           onSuccess={(token)=> this.props.addToMyCourses(course.get('slug'), course.get('id'), token.id)}/>
         </Modal.Body>
       </Modal>

@@ -33,5 +33,5 @@ export PriceDisplay from './PriceDisplay/PriceDisplay';
 export SignupModal from './SignupModal/SignupModal';
 export SignupForm from './SignupForm/SignupForm';
 export CourseRate from './CourseRate/CourseRate';
-export StripeCheckout from './StripeCheckout/StripeCheckout';
+export StripeCheckOut from './StripeCheckOut/StripeCheckOut';
 export CheckOutModal from './CheckOutModal/CheckOutModal';
