@@ -64,7 +64,6 @@ export function isLoaded(globalState) {
 }
 
 function stripeCharge(course, stripeToken) {
-  debugger;
   return {
     types: [STRIPE_CHARGE, STRIPE_CHARGE_SUCCESS, STRIPE_CHARGE_FAIL],
     promise: (client) => client.post(`/stripe/charge`, {
