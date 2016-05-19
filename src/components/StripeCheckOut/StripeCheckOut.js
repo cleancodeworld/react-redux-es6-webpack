@@ -1,9 +1,9 @@
 import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
+import ReactStripeCheckout from 'react-stripe-checkout';
 
-const ReactStripeCheckout = ({onSuccess, amount})=> {
+const StripeCheckOut = ({onSuccess, amount})=> {
   return (
-    <StripeCheckout
+    <ReactStripeCheckout
       name="KNExpert"
       description="Knowledge experts"
       image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
@@ -17,8 +17,8 @@ const ReactStripeCheckout = ({onSuccess, amount})=> {
       <button className="btn btn-primary btn-block">
         Pay with Stripe
       </button>
-    </StripeCheckout>
+    </ReactStripeCheckout>
   );
 };
 
-export default ReactStripeCheckout;
+export default StripeCheckOut;
