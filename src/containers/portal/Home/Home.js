@@ -32,8 +32,6 @@ export default class Home extends Component {
 
   render() {
     const {entities, order} = this.props;
-    console.log('order');
-    console.log(order);
 
     const breadcrumbs = [];
     return (

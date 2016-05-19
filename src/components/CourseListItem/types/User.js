@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToCart, isCartItem, removeFromCart, myCourses}) => {
+const User = ({course, author, addToWishList, isWishListItem, removeFromWishList, addToCart, isCartItem, removeFromCart, myCourses}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -69,7 +69,7 @@ const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToC
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+              <div className="media-heading text-semibold">{`${author.get('firstName')} ${author.get('lastName')}`}</div>
             </div>
           </div>
         </div>

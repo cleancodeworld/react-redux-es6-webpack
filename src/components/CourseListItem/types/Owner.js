@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const Owner = ({course}) => {
+const Owner = ({course, author}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -35,7 +35,7 @@ const Owner = ({course}) => {
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+              <div className="media-heading text-semibold">{`${author.get('firstName')} ${author.get('lastName')}`}</div>
             </div>
           </div>
         </div>

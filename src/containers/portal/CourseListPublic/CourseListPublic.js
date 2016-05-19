@@ -33,6 +33,7 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
   ({courseLoaded, portalCurrent, coursesByPortal}) => ({
     entities: courseLoaded.get('entities'),
     order: coursesByPortal.get('order'),
+    author: courseLoaded.get('author'),
     wishList: courseLoaded.getIn(['wishList', 'entities']),
     portalMeta: portalCurrent.get('meta'),
   })
@@ -42,6 +43,7 @@ export default class CourseListPublic extends Component {
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    author: PropTypes.object,
     wishList: PropTypes.object,
     portalMeta: PropTypes.object,
     params: PropTypes.object.isRequired,
@@ -52,7 +54,7 @@ export default class CourseListPublic extends Component {
   }
 
   render() {
-    const {entities, order, portalMeta, params} = this.props;
+    const {entities, order, portalMeta, params, author} = this.props;
     const breadcrumbs = [];
     return (
       <div>
@@ -71,7 +73,8 @@ export default class CourseListPublic extends Component {
             <CourseList
               entities={entities}
               order={order}
-              categoryName={params.categoryName}/>
+              categoryName={params.categoryName}
+              author={author}/>
           </div>
         </PortalLayout>
       </div>

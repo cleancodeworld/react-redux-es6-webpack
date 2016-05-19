@@ -46,7 +46,11 @@ import {
 } from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
-  entities: {}
+  entities: {},
+  author: {
+    firstName: '',
+    lastName: ''
+  }
 });
 
 export default function courseLoad(state = initialState, action) {
@@ -67,10 +71,13 @@ export default function courseLoad(state = initialState, action) {
     case BY_AUTHOR_LIST_SUCCESS:
     case BY_PORTAL_LIST_SUCCESS:
       return state.withMutations(map=> {
-        const {courses} = action.result.data;
+        const {courses, author} = action.result.data;
         courses.map(course=> {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });
+        if (author) {
+          map.set('author', Immutable.fromJS(author));
+        }
       });
     case LOAD_LESSONS_SUCCESS:
       return state.withMutations(map => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
-const Guest = ({course, onClickLoginRequiredLink}) => {
+const Guest = ({course, author, onClickLoginRequiredLink}) => {
   const courseImage = course.get('thumbnail');
   const coursePlaceholderImage = '/assets/images/placeholder.jpg';
   return (
@@ -44,7 +44,7 @@ const Guest = ({course, onClickLoginRequiredLink}) => {
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{course.get('authorId')}</div>
+              <div className="media-heading text-semibold">{`${author.get('firstName')} ${author.get('lastName')}`}</div>
             </div>
           </div>
         </div>

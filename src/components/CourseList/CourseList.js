@@ -20,6 +20,7 @@ export default class CourseList extends Component {
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    author: PropTypes.object,
     wishList: PropTypes.object,
     user: PropTypes.object,
     cart: PropTypes.object,
@@ -61,7 +62,7 @@ export default class CourseList extends Component {
   }
 
   render() {
-    const { wishList, entities, order, categoryName, cart, myCourses } = this.props;
+    const { wishList, entities, order, categoryName, cart, myCourses, author } = this.props;
     const { signUpModalOpen, signUpSubmitting } = this.state;
     return (
       <div>
@@ -80,6 +81,7 @@ export default class CourseList extends Component {
                                   isCartItem={!!cart.get(courseName)}
                                   key={course.get('id')}
                                   course={course}
+                                  author={author}
                                   onClickLoginRequiredLink={this.onClickLoginRequiredLink}
                                   myCourses={myCourses}/>
                 );
