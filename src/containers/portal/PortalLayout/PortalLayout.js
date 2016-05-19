@@ -70,8 +70,11 @@ export default class PortalLayout extends Component {
               <LinkContainer to="/cart">
                 <NavItem eventKey={4}>Cart</NavItem>
               </LinkContainer>
+              <LinkContainer to="/my-courses">
+                <NavItem eventKey={5}>My Courses</NavItem>
+              </LinkContainer>
               <LinkContainer to="/author">
-                <NavItem eventKey={5}>Author Admin Panel</NavItem>
+                <NavItem eventKey={6}>Author Admin Panel</NavItem>
               </LinkContainer>
             </Nav>
             <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>

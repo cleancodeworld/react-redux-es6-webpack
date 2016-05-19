@@ -11,9 +11,9 @@ import {
 } from 'components';
 
 @connect(
-  ({cart, courseLoaded}) => ({
+  ({myCourses, courseLoaded}) => ({
     entities: courseLoaded.get('entities'),
-    order: cart.get('order'),
+    order: myCourses.get('order'),
   })
 )
 export default class MyCourses extends Component {
@@ -30,11 +30,11 @@ export default class MyCourses extends Component {
     ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Cart">
+        <PortalLayout breadcrumbs={breadcrumbs} title="My Courses">
           <div className="content-wrapper">
             <Helmet title="Home"/>
             <div className="content-group">
-              <h6 className="text-semibold">My Cart</h6>
+              <h6 className="text-semibold">My Courses</h6>
             </div>
             <CourseList entities={entities} order={order} myCourses/>
           </div>

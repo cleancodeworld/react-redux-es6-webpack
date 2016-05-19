@@ -122,11 +122,25 @@ export default function courseLoad(state = initialState, action) {
         map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(price));
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
+      return state.withMutations(map=> {
+        const {wishlistItems} = action.result.data;
+        const courses = wishlistItems.map(item => item.course);
+        courses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
+      });
     case LOAD_MY_CART_SUCCESS:
+      return state.withMutations(map=> {
+        const {userCartItems} = action.result.data;
+        const courses = userCartItems.map(item => item.course);
+        courses.map(course=> {
+          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+        });
+      });
     case LOAD_MY_COURSES_SUCCESS:
       return state.withMutations(map=> {
-        const {items} = action.result.data;
-        const courses = items.map(item => item.course);
+        const {wishlistItems} = action.result.data;
+        const courses = wishlistItems.map(item => item.course);
         courses.map(course=> {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });

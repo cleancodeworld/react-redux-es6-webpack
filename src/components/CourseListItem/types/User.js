@@ -18,7 +18,7 @@ const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToC
                 {myCourses ?
                   <Link to={`/course/${course.get('slug')}`}
                     className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
-                    className="icon-plus3"></i></Link>
+                    className="icon-arrow-right7"></i></Link>
                   :
                   ''
                 }

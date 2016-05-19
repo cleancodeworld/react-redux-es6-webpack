@@ -21,8 +21,8 @@ export default function myCourses(state = initialState, action) {
       return Immutable.fromJS(state);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
-        const items = action.result.data;
-        items.map((item)=> {
+        const {wishlistItems} = action.result.data;
+        wishlistItems.map((item)=> {
           map.setIn(['entities', item.course.slug], true);
           map.update('order', array=>array.push(item.course.slug));
         });
