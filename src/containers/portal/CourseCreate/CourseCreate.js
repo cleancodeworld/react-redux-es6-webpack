@@ -42,7 +42,7 @@ export default class CourseCreate extends Component {
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
           <PortalAuthorLayout>
-            <Helmet title="Home"/>
+            <Helmet title="Create Course"/>
             <CourseForm initialValues={initialFormValues}
                         onSubmit={ model => this.props.courseCreate(portalId, model).then(()=> this.setState({saved: true})) }
                         submitStatus={this.state.saved}/>

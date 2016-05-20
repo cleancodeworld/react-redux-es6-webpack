@@ -19,25 +19,27 @@ import {
   }
 }])
 @connect(
-  ({courseLoaded, coursesByAuthor}) => ({
+  ({courseLoaded, coursesByAuthor, portalCurrent}) => ({
     entities: courseLoaded.get('entities'),
     order: coursesByAuthor.get('order'),
+    portalName: portalCurrent.getIn(['meta', 'name'])
   })
 )
 export default class Home extends Component {
   static propTypes = {
     entities: PropTypes.object,
     order: PropTypes.object,
+    portalName: PropTypes.string,
   };
 
   render() {
-    const {entities, order} = this.props;
-
+    const {entities, order, portalName} = this.props;
     const breadcrumbs = [];
+    console.log(portalName);
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
-          <Helmet title="Home"/>
+          <Helmet title={portalName}/>
           <CourseList entities={entities} order={order}/>
         </PortalLayout>
       </div>

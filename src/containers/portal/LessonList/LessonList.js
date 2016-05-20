@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
+import Helmet from 'react-helmet';
 import { LessonListItem } from 'components';
 import {
   PortalLayout,
@@ -49,6 +50,7 @@ export default class LessonList extends Component {
     ];
     return (
       <div>
+        <Helmet title={`${course.get('name')} lessons`}/>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={params}>

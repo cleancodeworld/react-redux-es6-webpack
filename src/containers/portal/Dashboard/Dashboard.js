@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import {
   PortalLayout,
   PortalAuthorLayout,
@@ -12,6 +13,7 @@ export default class Dashboard extends Component {
     ];
     return (
       <div>
+        <Helmet title="Dashboard"/>
         <PortalLayout breadcrumbs={breadcrumbs} title="Author Dashboard">
           <PortalAuthorLayout>
             <span>Dashboard here</span>

@@ -32,7 +32,7 @@ export default class WishList extends Component {
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle={'nour'} title=" - Browse Courses">
           <div className="content-wrapper">
-            <Helmet title="Home"/>
+            <Helmet title="My Wish List"/>
             <div className="content-group">
               <h6 className="text-semibold">My wish list </h6>
             </div>

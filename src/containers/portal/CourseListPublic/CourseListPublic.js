@@ -34,7 +34,7 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
     entities: courseLoaded.get('entities'),
     order: coursesByPortal.get('order'),
     wishList: courseLoaded.getIn(['wishList', 'entities']),
-    portalMeta: portalCurrent.get('meta'),
+    portalName: portalCurrent.getIn(['meta', 'name']),
   })
 )
 export default class CourseListPublic extends Component {
@@ -43,7 +43,7 @@ export default class CourseListPublic extends Component {
     entities: PropTypes.object,
     order: PropTypes.object,
     wishList: PropTypes.object,
-    portalMeta: PropTypes.object,
+    portalName: PropTypes.string,
     params: PropTypes.object.isRequired,
   };
 
@@ -52,19 +52,18 @@ export default class CourseListPublic extends Component {
   }
 
   render() {
-    const {entities, order, portalMeta, params} = this.props;
+    const {entities, order, portalName, params} = this.props;
     const breadcrumbs = [];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalMeta.get('name')} title=" - Browse Courses">
-          <Helmet title="Home"/>
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalName} title=" - Browse Courses">
+          <Helmet title={portalName}/>
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
               <CourseListCategories category={params.categoryName}/>
             </div>
           </div>
           <div className="content-wrapper">
-            <Helmet title="Home"/>
             <div className="content-group">
               <h6 className="text-semibold">Course List </h6>
             </div>

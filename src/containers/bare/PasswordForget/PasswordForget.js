@@ -19,7 +19,7 @@ export default class PasswordForget extends Component {
     const { saved } = this.state;
     return (
       <div>
-        <Helmet title="Login"/>
+        <Helmet title="Forget Password"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">

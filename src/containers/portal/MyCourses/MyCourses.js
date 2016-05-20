@@ -30,9 +30,9 @@ export default class MyCourses extends Component {
     ];
     return (
       <div>
+        <Helmet title="My Courses"/>
         <PortalLayout breadcrumbs={breadcrumbs} title="My Courses">
           <div className="content-wrapper">
-            <Helmet title="Home"/>
             <div className="content-group">
               <h6 className="text-semibold">My Courses</h6>
             </div>

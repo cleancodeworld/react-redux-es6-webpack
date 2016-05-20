@@ -57,7 +57,7 @@ export default class CourseAccounting extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <Helmet title="Home"/>
+              <Helmet title="Course Account"/>
               <CourseAccountingForm
                 initialValues={price.toJS()}
                 submitStatus={this.state.saved}

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { LessonForm } from 'components';
 import {
   PortalLayout,
@@ -48,6 +49,7 @@ export default class LessonEdit extends Component {
     ];
     return (
       <div>
+        <Helmet title={`Edit Lesson: ${lessonEdit.get('title')}`}/>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>

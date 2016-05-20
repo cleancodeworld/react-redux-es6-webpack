@@ -45,7 +45,7 @@ export default class CourseListContainer extends Component {
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
           <PortalAuthorLayout>
-            <Helmet title="Home"/>
+            <Helmet title="Portal Courses"/>
             <div className="content-group">
               <h6 className="text-semibold">Course List </h6>
             </div>
