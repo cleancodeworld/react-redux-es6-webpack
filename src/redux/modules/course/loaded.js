@@ -117,9 +117,9 @@ export default function courseLoad(state = initialState, action) {
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
-        const {price} = action.result.data;
+        const {coursePrice} = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(price));
+        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(coursePrice));
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
