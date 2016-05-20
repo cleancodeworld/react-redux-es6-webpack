@@ -40,7 +40,7 @@ export default function auth(state = initialState, action) {
       });
     case LOGIN_SUCCESS:
       return state.withMutations((map)=> {
-        const {mode: {email} } = action.data;
+        const {model: {email} } = action.data;
         const {data} = action.result;
         // TODO: should get email from api
         const user = Immutable.fromJS(data).set('email', email);
