@@ -3,51 +3,50 @@ import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
 
 const User = ({course, addToWishList, isWishListItem, removeFromWishList, addToCart, isCartItem, removeFromCart, myCourses}) => {
-  const courseImage = course.get('thumbnail');
-  const coursePlaceholderImage = '/assets/images/placeholder.jpg';
+  let courseImage = course.get('thumbnail');
+  if (!courseImage) {
+    courseImage = '/assets/images/placeholder.jpg';
+  }
   return (
     <div className="col-lg-4 col-sm-6">
       <div className="thumbnail">
-        <div className="thumb-wrapper"
-             style={{ backgroundImage: 'url(' + coursePlaceholderImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-          <div className="thumb"
-               style={{ backgroundImage: 'url(' + courseImage + ')', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100%' }}>
-            <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
-            <div className="caption-overflow">
-              <span>
-                {myCourses ?
-                  <Link to={`/course/${course.get('slug')}`}
+        <div className="thumb"
+             style={{ backgroundImage: 'url(' + courseImage + ')', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100%' }}>
+          <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
+          <div className="caption-overflow">
+            <span>
+              {myCourses ?
+                <Link to={`/course/${course.get('slug')}`}
+                  className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
+                  className="icon-arrow-right7"></i></Link>
+                :
+                ''
+              }
+              {!myCourses ?   // eslint-disable-line no-nested-ternary
+                (!isCartItem ?
+                  <a href="javascript:void(0)" onClick={()=> addToCart(course)}
                     className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
-                    className="icon-arrow-right7"></i></Link>
+                    className="icon-plus3"></i></a>
                   :
-                  ''
-                }
-                {!myCourses ?   // eslint-disable-line no-nested-ternary
-                  (!isCartItem ?
-                    <a href="javascript:void(0)" onClick={()=> addToCart(course)}
-                      className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
-                      className="icon-plus3"></i></a>
-                    :
-                    <a href="javascript:void(0)" onClick={()=> removeFromCart(course)}
-                      className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
-                      className="icon-minus3"></i></a>)
+                  <a href="javascript:void(0)" onClick={()=> removeFromCart(course)}
+                    className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
+                    className="icon-minus3"></i></a>)
+                :
+                ''
+              }
+              {!myCourses ?   // eslint-disable-line no-nested-ternary
+                (!isWishListItem ?
+                  <a href="javascript:void(0)" onClick={()=> addToWishList(course)}
+                     className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+                    className="icon-heart6"></i></a>
                   :
-                  ''
-                }
-                {!myCourses ?   // eslint-disable-line no-nested-ternary
-                  (!isWishListItem ?
-                    <a href="javascript:void(0)" onClick={()=> addToWishList(course)}
-                       className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
-                      className="icon-heart6"></i></a>
-                    :
-                    <a href="javascript:void(0)" onClick={()=> removeFromWishList(course)}
-                       className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
-                      className="icon-heart5"></i></a>)
-                  :
-                  ''
-                }
-              </span>
-            </div>
+                  <a href="javascript:void(0)" onClick={()=> removeFromWishList(course)}
+                     className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+                    className="icon-heart5"></i></a>)
+                :
+                ''
+              }
+            </span>
           </div>
         </div>
         <div className="caption">
