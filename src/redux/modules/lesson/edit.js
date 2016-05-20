@@ -28,7 +28,7 @@ export function isLoaded(globalState, courseName, lessonName) {
 function edit(model, lessonName, courseName) {
   return {
     types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
-    promise: (client) => client.put(`/api/v1/lesson/name/${lessonName}`, { data: model }),
+    promise: (client) => client.put(`/api/v1/lesson/${courseName}/${lessonName}`, { data: model }),
     data: {
       model,
       courseName,
