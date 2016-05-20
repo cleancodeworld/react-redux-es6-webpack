@@ -7,12 +7,14 @@ const checkAvailability = (values) => {
       {
         username: (cb)=> values.username ? superagent.get(`/api/v1/author/${values.username}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
-          if (!body.available) cb({ username: 'This username already token' });
+          const { available } = body.data;
+          if (!available) cb({ username: 'This username already token' });
           else cb(null);
         }) : cb(null),
         portalName: (cb)=> values.portalName ? superagent.get(`/api/v1/portal/${values.portalName}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
-          if (!body.available) cb({ portalName: 'This portal name already token' });
+          const { available } = body.data;
+          if (!available) cb({ portalName: 'This portal name already token' });
           else cb(null);
         }) : cb(null)
       },

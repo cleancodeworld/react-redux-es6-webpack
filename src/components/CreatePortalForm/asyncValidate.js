@@ -7,7 +7,8 @@ const checkAvailability = (values) => {
       {
         name: (cb)=> values.name ? superagent.get(`/api/v1/portal/${values.name}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
-          if (!body.available) cb({ name: 'This portal name already token' });
+          const { available } = body.data;
+          if (!available) cb({ name: 'This portal name already token' });
           else cb(null);
         }) : cb(null)
       },
