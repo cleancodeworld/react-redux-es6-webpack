@@ -48,6 +48,12 @@ export default function byPortal(state = initialState, action) {
 }
 
 
+export function invalidate() {
+  return {
+    type: BY_PORTAL_LIST_INVALIDATE
+  };
+}
+
 export function load(portalName) {
   return {
     types: [BY_PORTAL_LIST, BY_PORTAL_LIST_SUCCESS, BY_PORTAL_LIST_FAIL],

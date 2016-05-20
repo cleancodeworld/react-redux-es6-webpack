@@ -38,6 +38,12 @@ export default function byAuthor(state = initialState, action) {
   }
 }
 
+export function invalidate() {
+  return {
+    type: BY_AUTHOR_LIST_INVALIDATE
+  };
+}
+
 export function load(authorName) {
   return {
     types: [BY_AUTHOR_LIST, BY_AUTHOR_LIST_SUCCESS, BY_AUTHOR_LIST_FAIL],

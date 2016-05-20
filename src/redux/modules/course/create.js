@@ -6,8 +6,8 @@ export const CREATE_FAIL = 'knexpert/course/CREATE_FAIL';
 
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-import { BY_PORTAL_LIST_INVALIDATE } from './byPortal';
-import { BY_AUTHOR_LIST_INVALIDATE } from './byAuthor';
+import { invalidate as invalidateCoursesByPortal } from './byPortal';
+import { invalidate as invalidateCoursesByAuthor } from './byAuthor';
 
 function _create(model) {
   return {
@@ -24,8 +24,8 @@ export function create(portalId, model) {
     return dispatch(
       _create({portalId, ...model}))
       .then(()=> {
-        dispatch(BY_PORTAL_LIST_INVALIDATE);
-        dispatch(BY_AUTHOR_LIST_INVALIDATE);
+        dispatch(invalidateCoursesByPortal());
+        dispatch(invalidateCoursesByAuthor());
         setTimeout(()=> dispatch(push('/author/course/list')), 2500);
       })
       .catch(res => {
