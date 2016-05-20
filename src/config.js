@@ -20,7 +20,7 @@ module.exports = Object.assign({
     title: 'KNExpert',
     description: 'KNExpert',
     head: {
-      titleTemplate: 'KNExpert',
+      titleTemplate: 'KNExpert | %s',
       meta: [
         {name: 'description', content: 'KNExpert.'}
       ]

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import { Login } from '../../shared';
 import { PortalLayout } from '../index';
 import { userLogin } from 'redux/modules/auth';
@@ -20,6 +21,7 @@ export default class PortalLogin extends Component {
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Login">
+          <Helmet title="Login"/>
           <div className="container">
             <div className="row">
               <div className="col-md-4 col-md-offset-4">

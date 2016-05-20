@@ -45,7 +45,7 @@ export default class CourseViewContainer extends Component {
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
-          <Helmet title="Home"/>
+          <Helmet title={course.get('name')}/>
           <CourseView course={course}
                       isWishListItem={!!wishList.get(courseName)}
                       isCartItem={!!cart.get(courseName)}

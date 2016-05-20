@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import config from '../../../config';
-import Helmet from 'react-helmet';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -49,7 +48,6 @@ export default class PortalLayout extends Component {
     }
     return (
       <div className="navbar-bottom portal-container">
-        <Helmet {...config.app.head}/>
         <Navbar className="bg-blue" fluid>
           <Navbar.Header>
             <Navbar.Brand>

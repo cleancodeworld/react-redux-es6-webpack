@@ -41,7 +41,7 @@ export default class CourseEdit extends Component {
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={`- ${course.get('name')}` }>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={params}>
-              <Helmet title="Home"/>
+              <Helmet title={`Edit: ${course.get('name')}`}/>
               <CourseForm initialValues={course.toJS()}
                           onSubmit={ model => this.props.edit(model, courseName, portalId).then(()=> this.setState({saved: true})) }
                           submitStatus={this.state.saved}/>

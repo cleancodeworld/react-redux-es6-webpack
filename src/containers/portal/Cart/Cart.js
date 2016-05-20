@@ -32,7 +32,7 @@ export default class Cart extends Component {
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Cart">
           <div className="content-wrapper">
-            <Helmet title="Home"/>
+            <Helmet title="Cart"/>
             <div className="content-group">
               <h6 className="text-semibold">My Cart</h6>
             </div>

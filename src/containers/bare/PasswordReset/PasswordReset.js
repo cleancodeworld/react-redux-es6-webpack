@@ -20,7 +20,7 @@ export default class PasswordReset extends Component {
     const {saved} = this.state;
     return (
       <div>
-        <Helmet title="Login"/>
+        <Helmet title="Password Reset"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">

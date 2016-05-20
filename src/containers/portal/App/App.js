@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
+import Helmet from 'react-helmet';
+import config from '../../../config';
 import { isLoaded as isPortalLoaded, load as portalLoaded } from 'redux/modules/portal/current';
 import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modules/wishList';
 import { isLoaded as isCartLoaded, load as cartLoaded } from 'redux/modules/cart';
@@ -36,6 +38,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Helmet {...config.app.head}/>
         {this.props.children}
       </div>
     );

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
+
 import {
   CourseListCategoryItem,
 } from 'components';
@@ -23,11 +25,13 @@ export default class CourseListCategories extends Component {
     const {entities, order} = this.props;
     return (
       <div className="category-content no-padding">
+        <Helmet title={activeCategory}/>
         <ul className="navigation navigation-main navigation-accordion">
           {order.map(categoryId => {
             const category = entities.get(categoryId);
             return (
-              <CourseListCategoryItem category={category} key={category.get('slug')} isActiveCategory={(category.get('slug') === activeCategory)}/>
+              <CourseListCategoryItem category={category} key={category.get('slug')}
+                                      isActiveCategory={(category.get('slug') === activeCategory)}/>
             );
           })}
         </ul>

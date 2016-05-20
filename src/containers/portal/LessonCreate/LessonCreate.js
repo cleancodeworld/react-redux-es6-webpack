@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { LessonForm } from 'components';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import {
   PortalLayout,
   PortalAuthorLayout,
@@ -35,11 +36,13 @@ export default class LessonAdd extends Component {
     ];
     return (
       <div>
+        <Helmet title="Create Lesson"/>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={` - ${course.get('name')}`}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
-                          submitStatus={this.state.saved}/>
+              <LessonForm
+                onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
+                submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>
         </PortalLayout>
