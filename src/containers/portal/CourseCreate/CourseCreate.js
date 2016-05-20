@@ -9,13 +9,13 @@ import {
 import { create as courseCreate } from 'redux/modules/course/create';
 
 @connect(
-  ({auth, portalCurrent}) => ({ userId: auth.getIn(['user', 'userId']), portalId: portalCurrent.getIn(['meta', 'id']) }),
+  ({auth, portalCurrent}) => ({ user: auth.get('user'), portalId: portalCurrent.getIn(['meta', 'id']) }),
   { courseCreate }
 )
 export default class CourseCreate extends Component {
 
   static propTypes = {
-    userId: PropTypes.string,
+    user: PropTypes.object,
     portalId: PropTypes.string,
     courseCreate: PropTypes.func,
   };
@@ -29,15 +29,16 @@ export default class CourseCreate extends Component {
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Create a Course' }
     ];
+    const {portalId, user} = this.props;
     const initialFormValues = {
       level: 'all',
       language: 'English',
       category: 'General',
       duration: 500,
       thumbnail: '',
-      authorId: this.props.userId
+      authorId: user.get('userId'),
+      author: user.toJS()
     };
-    const {portalId} = this.props;
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">

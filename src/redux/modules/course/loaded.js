@@ -107,6 +107,13 @@ export default function courseLoad(state = initialState, action) {
     case CREATE_SUCCESS:
       return state.withMutations(map=> {
         const { course } = action.result.data;
+        // TODO: should get course price and author from api response
+        course.coursePrice = {
+          price: 0,
+          currency: '',
+          paid: false
+        };
+        course.author = action.data.model.author;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case LOAD_PRICE_SUCCESS:
