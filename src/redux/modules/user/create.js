@@ -22,13 +22,13 @@ export function createWithPortal(model) {
     return dispatch(
       create(model))
       .then(()=> dispatch(silentLogin(model)))
-      .then((res)=> dispatch(portalCreate({
+      .then(({data})=> dispatch(portalCreate({
         ...model,
         name: model.portalName,
         privacy: model.isPublic ? 'Public' : 'Private',
         type: model.isPersonal ? 'Personal' : 'Company',
-        ownerId: res.userId,
-      }, res.sessionToken)))
+        ownerId: data.userId,
+      }, data.sessionToken)))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });
