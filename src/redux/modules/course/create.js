@@ -8,6 +8,7 @@ import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 import { invalidate as invalidateCoursesByPortal } from './byPortal';
 import { invalidate as invalidateCoursesByAuthor } from './byAuthor';
+import { invalidate as invalidateCategories } from '../categories/loaded';
 
 function _create(model) {
   return {
@@ -26,6 +27,7 @@ export function create(portalId, model) {
       .then(()=> {
         dispatch(invalidateCoursesByPortal());
         dispatch(invalidateCoursesByAuthor());
+        dispatch(invalidateCategories());
         setTimeout(()=> dispatch(push('/author/course/list')), 2500);
       })
       .catch(res => {

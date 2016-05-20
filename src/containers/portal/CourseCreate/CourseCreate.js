@@ -1,15 +1,34 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import {CourseForm} from 'components';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
+import { CourseForm } from 'components';
 import {
   PortalLayout,
   PortalAuthorLayout
 } from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    const promises = [];
+    const state = getState();
+    const portalMeta = state.portalCurrent.get('meta');
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(portalMeta.get('slug'))));
+    }
+    return Promise.all(promises);
+  }
+}])
 @connect(
-  ({auth, portalCurrent}) => ({ userId: auth.getIn(['user', 'userId']), portalId: portalCurrent.getIn(['meta', 'id']) }),
+  ({auth, portalCurrent, categoriesLoaded}) => ({
+    userId: auth.getIn(['user', 'userId']),
+    portalId: portalCurrent.getIn(['meta', 'id']),
+    categoryOrders: categoriesLoaded.get('order'),
+    categoryEntities: categoriesLoaded.get('entities')
+  }),
   { courseCreate }
 )
 export default class CourseCreate extends Component {
@@ -18,6 +37,8 @@ export default class CourseCreate extends Component {
     userId: PropTypes.string,
     portalId: PropTypes.string,
     courseCreate: PropTypes.func,
+    categoryOrders: PropTypes.object,
+    categoryEntities: PropTypes.object
   };
 
   state = {
@@ -37,13 +58,15 @@ export default class CourseCreate extends Component {
       thumbnail: '',
       authorId: this.props.userId
     };
-    const {portalId} = this.props;
+    const {portalId, categoryOrders, categoryEntities} = this.props;
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
           <PortalAuthorLayout>
             <Helmet title="Create Course"/>
             <CourseForm initialValues={initialFormValues}
+                        categoryOrders={categoryOrders}
+                        categoryEntities={categoryEntities}
                         onSubmit={ model => this.props.courseCreate(portalId, model).then(()=> this.setState({saved: true})) }
                         submitStatus={this.state.saved}/>
           </PortalAuthorLayout>

@@ -18,6 +18,8 @@ export default class CourseForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string,
     submitStatus: PropTypes.bool,
+    categoryOrders: PropTypes.object,
+    categoryEntities: PropTypes.object
   }
 
   onDrop = (files, field)=> {
@@ -61,7 +63,13 @@ export default class CourseForm extends Component {
       submitting,
       error,
       submitStatus,
+      categoryOrders,
+      categoryEntities,
     } = this.props;
+    let _categoryOrders = [];
+    if (categoryOrders && categoryOrders.toJS) {
+      _categoryOrders = categoryOrders.toJS();
+    }
     return (
       <div className="panel panel-flat">
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
@@ -147,8 +155,15 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={category.value}
-                  options={['General', 'Languages', 'Programming', 'Health'].map( value => ({ value: value, label: value}))}
-                  />
+                  allowCreate
+                  newOptionCreator={input => ({
+                    value: input.replace(' ', '-'),
+                    label: input
+                  })}
+                  options={_categoryOrders.map(order => {
+                    const categoryObj = categoryEntities.get(order);
+                    return { value: categoryObj.get('slug'), label: categoryObj.get('category') };
+                  })}/>
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
               }/>
