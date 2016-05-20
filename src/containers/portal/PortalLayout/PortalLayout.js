@@ -41,9 +41,9 @@ export default class PortalLayout extends Component {
     const logoImage = require('./knexpert.png');
     const {portalCurrentMeta, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
-    let content = this.props.children;
-    if (!portalCurrentMeta) {
-      content = <NotFound />;
+    let portalExists = true;
+    if (!portalCurrentMeta.get('id')) {
+      portalExists = false;
     }
     return (
       <div className="navbar-bottom portal-container">
@@ -80,13 +80,21 @@ export default class PortalLayout extends Component {
             <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
           </Navbar.Collapse>
         </Navbar>
-        <PageHeader>
-          <BreadcrumbBar breadcrumbs={breadcrumbs}/>
-          <PageHeaderContent boldTitle={boldTitle} title={title}/>
-        </PageHeader>
-        <div className="page-container">
-          {content}
-        </div>
+        {
+          portalExists ? (
+            <div>
+              <PageHeader>
+                <BreadcrumbBar breadcrumbs={breadcrumbs}/>
+                <PageHeaderContent boldTitle={boldTitle} title={title}/>
+              </PageHeader>
+              <div className="page-container">
+                {this.props.children}
+              </div>
+            </div>
+          )
+          :
+          (<NotFound/>)
+        }
       </div>
     );
   }
