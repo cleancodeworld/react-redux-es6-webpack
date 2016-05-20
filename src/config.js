@@ -22,7 +22,15 @@ module.exports = Object.assign({
     head: {
       titleTemplate: 'KNExpert',
       meta: [
-        {name: 'description', content: 'KNExpert.'}
+        {name: 'KNExpert', content: 'KNExpert'},
+        {charset: 'utf-8'},
+        {property: 'og:site_name', content: 'KNExpert'},
+        {property: 'og:image', content: 'http://knexpert.quotient.net/logo.jpg'},
+        {property: 'og:locale', content: 'en_US'},
+        {property: 'og:title', content: 'KNExpert'},
+        {property: 'og:description', content: 'Share knowledge'},
+        {property: 'og:image:width', content: '200'},
+        {property: 'og:image:height', content: '200'}
       ]
     }
   },
