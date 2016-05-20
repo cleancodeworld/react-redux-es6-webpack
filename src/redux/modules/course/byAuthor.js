@@ -3,6 +3,7 @@ export const REDUX_INIT = '@@redux/INIT';
 export const BY_AUTHOR_LIST = 'knexpert/course/By_AUTHOR_LIST';
 export const BY_AUTHOR_LIST_SUCCESS = 'knexpert/course/By_AUTHOR_LIST _SUCCESS';
 export const BY_AUTHOR_LIST_FAIL = 'knexpert/course/By_AUTHOR_LIST _FAIL';
+export const BY_AUTHOR_LIST_INVALIDATE = 'knexpert/course/BY_AUTHOR_LIST_INVALIDATE';
 
 import Immutable from 'immutable';
 import {
@@ -30,6 +31,8 @@ export default function byAuthor(state = initialState, action) {
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);
       });
+    case BY_AUTHOR_LIST_INVALIDATE:
+      return state.set('loaded', false);
     default:
       return state;
   }
