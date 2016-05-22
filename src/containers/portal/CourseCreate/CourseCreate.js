@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import { CourseForm } from 'components';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
+import { asyncConnect } from 'redux-connect';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -22,12 +22,11 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
     return Promise.all(promises);
   }
 }])
+
 @connect(
-  ({auth, portalCurrent, categoriesLoaded}) => ({
+  ({auth, portalCurrent}) => ({
     userId: auth.getIn(['user', 'userId']),
     portalId: portalCurrent.getIn(['meta', 'id']),
-    categoryOrders: categoriesLoaded.get('order'),
-    categoryEntities: categoriesLoaded.get('entities')
   }),
   { courseCreate }
 )

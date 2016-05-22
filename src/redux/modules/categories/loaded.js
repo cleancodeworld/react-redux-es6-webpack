@@ -23,7 +23,7 @@ export default function categoriesLoaded(state = initialState, action) {
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         const categories = categoriesNormalize(action.result.data);
-        map.merge(categories);
+        map.merge(Immutable.fromJS(categories));
       });
     case LIST_INVALIDATE:
       return state.set('listLoaded', false);
