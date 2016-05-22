@@ -4,18 +4,20 @@ import {
   SignupModal,
 } from 'components';
 import { connect } from 'react-redux';
-import { addToWishList, removeFromWishList } from 'redux/modules/wishList';
-import { addToCart, removeFromCart } from 'redux/modules/cart';
+import {withWishList, withCart} from 'hoc';
+
 import { signup } from 'redux/modules/user/create';
 
 @connect(
-  ({wishList, cart, auth}) => ({
-    wishList: wishList.get('entities'),
-    cart: cart.get('entities'),
+  ({auth}) => ({
     user: auth.get('user')
   }),
-  { addToWishList, removeFromWishList, addToCart, removeFromCart, signup }
+  { signup }
 )
+
+@withWishList
+@withCart
+
 export default class CourseList extends Component {
   static propTypes = {
     entities: PropTypes.object,
@@ -23,10 +25,6 @@ export default class CourseList extends Component {
     wishList: PropTypes.object,
     user: PropTypes.object,
     cart: PropTypes.object,
-    addToWishList: PropTypes.func,
-    removeFromWishList: PropTypes.func,
-    addToCart: PropTypes.func,
-    removeFromCart: PropTypes.func,
     categoryName: PropTypes.string,
     signup: PropTypes.func,
     myCourses: PropTypes.bool,
@@ -68,26 +66,26 @@ export default class CourseList extends Component {
         <div className="row">
           {
             order && order.map ?
-            order.map(courseName => {
-              const course = entities.get(courseName);
-              if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
-                return (
-                  <CourseListItem addToWishList={this.props.addToWishList}
-                                  removeFromWishList={this.props.removeFromWishList}
-                                  isWishListItem={!!wishList.get(courseName)}
-                                  addToCart={this.props.addToCart}
-                                  removeFromCart={this.props.removeFromCart}
-                                  isCartItem={!!cart.get(courseName)}
-                                  key={course.get('id')}
-                                  course={course}
-                                  onClickLoginRequiredLink={this.onClickLoginRequiredLink}
-                                  myCourses={myCourses}/>
-                );
-              }
-              return '';
-            })
-            :
-            ''
+              order.map(courseName => {
+                const course = entities.get(courseName);
+                if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
+                  return (
+                    <CourseListItem addToWishList={wishList.addToWishList}
+                                    removeFromWishList={wishList.removeFromWishList}
+                                    isWishListItem={!!wishList.entities.get(courseName)}
+                                    addToCart={cart.addToCart}
+                                    removeFromCart={cart.removeFromCart}
+                                    isCartItem={!!cart.entities.get(courseName)}
+                                    key={course.get('id')}
+                                    course={course}
+                                    onClickLoginRequiredLink={this.onClickLoginRequiredLink}
+                                    myCourses={myCourses}/>
+                  );
+                }
+                return '';
+              })
+              :
+              ''
           }
         </div>
         <SignupModal
