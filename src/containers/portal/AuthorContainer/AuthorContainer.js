@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
-import { replace } from 'react-router-redux';
+import { withRouter } from 'react-router';
 
 @connect(({auth, portalCurrent})=> ({
   userId: auth.getIn(['user', 'userId']),
   ownerId: portalCurrent.getIn(['meta', 'ownerId'])
-}), { replace })
+}))
 
+@withRouter
 export default class AuthorContainer extends React.Component {
 
   static propTypes = {
@@ -18,11 +19,11 @@ export default class AuthorContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { userId, ownerId } = this.props;
+    const { userId, ownerId, router } = this.props;
     if (userId !== ownerId) {
       let continueTo = this.props.location.pathname + this.props.location.search;
       continueTo = encodeURIComponent(continueTo);
-      this.props.replace('/login?continueTo=' + continueTo);
+      router.replace('/login?continueTo=' + continueTo);
     }
   }
 
