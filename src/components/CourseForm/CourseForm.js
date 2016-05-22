@@ -158,7 +158,6 @@ export default class CourseForm extends Component {
                   onBlurResetsInput={false}
                   value={category.value}
                   allowCreate
-                  onChange={value=> console.log(value)}
                   multi
                   newOptionCreator={input => ({
                     value: input.replace(' ', '-'),
