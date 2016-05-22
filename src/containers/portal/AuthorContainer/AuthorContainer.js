@@ -14,6 +14,7 @@ export default class AuthorContainer extends React.Component {
     children: PropTypes.object.isRequired,
     userId: PropTypes.string,
     location: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
     ownerId: PropTypes.string,
     replace: PropTypes.func
   }
