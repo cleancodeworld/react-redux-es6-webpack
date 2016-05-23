@@ -2,24 +2,24 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {CourseView} from 'components';
 import { connect } from 'react-redux';
+import {withWishList, withCart} from 'hoc';
+
 import {
   PortalLayout,
 } from '../index';
 
 import { rate } from 'redux/modules/course/rate';
-import { addToWishList, removeFromWishList } from 'redux/modules/wishList';
-import { addToCart, removeFromCart } from 'redux/modules/cart';
 import { signup } from 'redux/modules/user/create';
 
 @connect(
   ({courseLoaded, portalCurrent, wishList, cart}, ownProps) => ({
     course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
     portalId: portalCurrent.getIn(['meta', 'id']),
-    wishList: wishList.get('entities'),
-    cart: cart.get('entities'),
   }),
-  { rate, addToWishList, removeFromWishList, addToCart, removeFromCart, signup }
+  { rate, signup }
 )
+@withCart
+@withWishList
 export default class CourseViewContainer extends Component {
 
   static propTypes = {
@@ -29,12 +29,6 @@ export default class CourseViewContainer extends Component {
     params: PropTypes.object,
     wishList: PropTypes.object,
     cart: PropTypes.object,
-    isWishListItem: PropTypes.bool,
-    addToWishList: PropTypes.func,
-    removeFromWishList: PropTypes.func,
-    isCartItem: PropTypes.bool,
-    addToCart: PropTypes.func,
-    removeFromCart: PropTypes.func,
   };
 
   render() {
@@ -44,15 +38,15 @@ export default class CourseViewContainer extends Component {
     ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
+        <PortalLayout breadcrumbs={breadcrumbs} title="View Course">
           <Helmet title={course.get('name')}/>
           <CourseView course={course}
-                      isWishListItem={!!wishList.get(courseName)}
-                      isCartItem={!!cart.get(courseName)}
-                      addToWishList={this.props.addToWishList}
-                      removeFromWishList={this.props.removeFromWishList}
-                      addToCart={this.props.addToCart}
-                      removeFromCart={this.props.removeFromCart}
+                      isWishListItem={!!wishList.entities.get(courseName)}
+                      isCartItem={!!cart.entities.get(courseName)}
+                      addToWishList={wishList.addToWishList}
+                      removeFromWishList={wishList.removeFromWishList}
+                      addToCart={cart.addToCart}
+                      removeFromCart={cart.removeFromCart}
                       onRate={(rateValue)=> this.props.rate({rate: rateValue, courseId: course.get('id')})}/>
         </PortalLayout>
       </div>
