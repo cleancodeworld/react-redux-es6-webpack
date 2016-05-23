@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { edit } from 'redux/modules/course/edit';
+import { withCourse, withPortal } from 'hoc';
+
 import {
   PortalLayout,
   PortalAuthorLayout,
@@ -10,17 +12,16 @@ import {
 } from '../index';
 
 @connect(
-  ({courseLoaded, portalCurrent}, ownProps) => ({
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
-    portalId: portalCurrent.getIn(['meta', 'id']),
-  }),
+  null,
   { edit }
 )
+@withPortal
+@withCourse
 export default class CourseEdit extends Component {
 
   static propTypes = {
     course: PropTypes.object.isRequired,
-    portalId: PropTypes.string.isRequired,
+    portal: PropTypes.object.isRequired,
     edit: PropTypes.func,
     params: PropTypes.object.isRequired,
   };
@@ -29,7 +30,7 @@ export default class CourseEdit extends Component {
   }
 
   render() {
-    const { course, params, portalId } = this.props;
+    const { course, params, portal } = this.props;
     const {courseName} = params;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
@@ -43,7 +44,7 @@ export default class CourseEdit extends Component {
             <PortalAuthorCourseLayout params={params}>
               <Helmet title={`Edit: ${course.get('name')}`}/>
               <CourseForm initialValues={course.toJS()}
-                          onSubmit={ model => this.props.edit(model, courseName, portalId).then(()=> this.setState({saved: true})) }
+                          onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')).then(()=> this.setState({saved: true})) }
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>

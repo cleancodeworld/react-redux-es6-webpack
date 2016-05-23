@@ -6,11 +6,13 @@ import {
 } from 'components';
 import { logout } from 'redux/modules/auth';
 import {updateImage} from 'redux/modules/user/edit';
+import { withUser } from 'hoc';
 
 @connect(
-  ({auth}) => ({ user: auth.get('user') }),
+  null,
   { logout, updateImage }
 )
+@withUser
 export default class PortalAuthorLayout extends Component {
 
   static propTypes = {

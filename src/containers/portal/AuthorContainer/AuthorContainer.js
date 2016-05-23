@@ -1,25 +1,24 @@
 import React, { PropTypes } from 'react';
 import {connect} from 'react-redux';
 import { replace } from 'react-router-redux';
+import { withUserId, withPortal} from 'hoc';
 
-@connect(({auth, portalCurrent})=> ({
-  userId: auth.getIn(['user', 'userId']),
-  ownerId: portalCurrent.getIn(['meta', 'ownerId'])
-}), { replace })
-
+@connect(null, { replace })
+@withUserId
+@withPortal
 export default class AuthorContainer extends React.Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
     userId: PropTypes.string,
     location: PropTypes.object.isRequired,
-    ownerId: PropTypes.string,
+    portal: PropTypes.object,
     replace: PropTypes.func
   }
 
   componentWillMount() {
-    const { userId, ownerId } = this.props;
-    if (userId !== ownerId) {
+    const { userId, portal } = this.props;
+    if (userId !== portal.meta.get('ownerId')) {
       let continueTo = this.props.location.pathname + this.props.location.search;
       continueTo = encodeURIComponent(continueTo);
       this.props.replace('/login?continueTo=' + continueTo);

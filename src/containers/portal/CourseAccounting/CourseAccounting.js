@@ -10,7 +10,7 @@ import {
 } from '../index';
 import Immutable from 'immutable';
 import { load, edit, isLoaded } from 'redux/modules/course/price';
-
+import {withCourse} from 'hoc';
 @asyncConnect([{
   promise: ({store: {getState, dispatch}, params}) => {
     const promises = [];
@@ -21,11 +21,10 @@ import { load, edit, isLoaded } from 'redux/modules/course/price';
   }
 }])
 @connect(
-  ({courseLoaded, coursePrice}, ownProps) => ({
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
-  }),
+  null,
   { edit }
 )
+@withCourse
 export default class CourseAccounting extends Component {
 
   static propTypes = {

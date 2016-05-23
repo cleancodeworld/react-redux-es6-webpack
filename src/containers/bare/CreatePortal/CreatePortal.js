@@ -3,11 +3,13 @@ import Helmet from 'react-helmet';
 import { CreatePortalForm } from 'components';
 import { connect } from 'react-redux';
 import { createPortal } from 'redux/modules/portal';
+import {withUserId} from 'hoc';
 
 @connect(
-  ({ auth }) => ({ userId: auth.getIn(['user', 'userId']) }),
+  null,
   { createPortal }
 )
+@withUserId
 export default class CreatePortal extends Component {
 
   static propTypes = {

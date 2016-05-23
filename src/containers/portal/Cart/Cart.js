@@ -10,21 +10,23 @@ import {
   CourseList,
 } from 'components';
 
+import {withCourses} from 'hoc';
+
 @connect(
-  ({cart, courseLoaded}) => ({
-    entities: courseLoaded.get('entities'),
+  ({cart}) => ({
     order: cart.get('order'),
   })
 )
+@withCourses
 export default class Cart extends Component {
 
   static propTypes = {
-    entities: PropTypes.object,
+    courses: PropTypes.object,
     order: PropTypes.object,
   };
 
   render() {
-    const {entities, order} = this.props;
+    const {courses, order} = this.props;
     const breadcrumbs = [
       { url: '/cart', name: 'Cart' },
     ];
@@ -36,7 +38,7 @@ export default class Cart extends Component {
             <div className="content-group">
               <h6 className="text-semibold">My Cart</h6>
             </div>
-            <CourseList entities={entities} order={order}/>
+            <CourseList entities={courses} order={order}/>
           </div>
         </PortalLayout>
       </div>

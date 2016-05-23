@@ -7,16 +7,18 @@ import {
   PortalAuthorLayout
 } from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
-
+import {withPortal, withUser} from 'hoc';
 @connect(
-  ({auth, portalCurrent}) => ({ user: auth.get('user'), portalId: portalCurrent.getIn(['meta', 'id']) }),
+  null,
   { courseCreate }
 )
+@withPortal
+@withUser
 export default class CourseCreate extends Component {
 
   static propTypes = {
     user: PropTypes.object,
-    portalId: PropTypes.string,
+    portal: PropTypes.object,
     courseCreate: PropTypes.func,
   };
 
@@ -29,7 +31,7 @@ export default class CourseCreate extends Component {
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Create a Course' }
     ];
-    const {portalId, user} = this.props;
+    const {portal, user} = this.props;
     const initialFormValues = {
       level: 'all',
       language: 'English',
@@ -45,7 +47,7 @@ export default class CourseCreate extends Component {
           <PortalAuthorLayout>
             <Helmet title="Create Course"/>
             <CourseForm initialValues={initialFormValues}
-                        onSubmit={ model => this.props.courseCreate(portalId, model).then(()=> this.setState({saved: true})) }
+                        onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model).then(()=> this.setState({saved: true})) }
                         submitStatus={this.state.saved}/>
           </PortalAuthorLayout>
         </PortalLayout>
