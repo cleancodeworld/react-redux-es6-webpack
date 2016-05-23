@@ -36,8 +36,6 @@ export default class CourseCreate extends Component {
     userId: PropTypes.string,
     portalId: PropTypes.string,
     courseCreate: PropTypes.func,
-    categoryOrders: PropTypes.object,
-    categoryEntities: PropTypes.object
   };
 
   state = {
@@ -57,15 +55,13 @@ export default class CourseCreate extends Component {
       thumbnail: '',
       authorId: this.props.userId
     };
-    const {portalId, categoryOrders, categoryEntities} = this.props;
+    const {portalId} = this.props;
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
           <PortalAuthorLayout>
             <Helmet title="Create Course"/>
             <CourseForm initialValues={initialFormValues}
-                        categoryOrders={categoryOrders}
-                        categoryEntities={categoryEntities}
                         onSubmit={ model => this.props.courseCreate(portalId, model).then(()=> this.setState({saved: true})) }
                         submitStatus={this.state.saved}/>
           </PortalAuthorLayout>

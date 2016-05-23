@@ -27,8 +27,6 @@ import {
   ({courseLoaded, portalCurrent, categoriesLoaded}, ownProps) => ({
     course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
     portalId: portalCurrent.getIn(['meta', 'id']),
-    categoryOrders: categoriesLoaded.get('order'),
-    categoryEntities: categoriesLoaded.get('entities')
   }),
   { edit }
 )
@@ -39,15 +37,13 @@ export default class CourseEdit extends Component {
     portalId: PropTypes.string.isRequired,
     edit: PropTypes.func,
     params: PropTypes.object.isRequired,
-    categoryOrders: PropTypes.object,
-    categoryEntities: PropTypes.object,
   };
   state = {
     saved: false
   }
 
   render() {
-    const { course, params, portalId, categoryOrders, categoryEntities } = this.props;
+    const { course, params, portalId } = this.props;
     const {courseName} = params;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
@@ -61,8 +57,6 @@ export default class CourseEdit extends Component {
             <PortalAuthorCourseLayout params={params}>
               <Helmet title={`Edit: ${course.get('name')}`}/>
               <CourseForm initialValues={course.toJS()}
-                          categoryOrders={categoryOrders}
-                          categoryEntities={categoryEntities}
                           onSubmit={ model => this.props.edit(model, courseName, portalId).then(()=> this.setState({saved: true})) }
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
