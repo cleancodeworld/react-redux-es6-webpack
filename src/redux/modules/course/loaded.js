@@ -108,6 +108,13 @@ export default function courseLoad(state = initialState, action) {
     case CREATE_SUCCESS:
       return state.withMutations(map=> {
         const { course } = action.result.data;
+        // TODO: should get course price and author from api response
+        course.coursePrice = {
+          price: 0,
+          currency: '',
+          paid: false
+        };
+        course.author = action.data.model.author;
         map.mergeIn(['entities', course.slug], Immutable.fromJS(course));
       });
     case LOAD_PRICE_SUCCESS:
@@ -118,9 +125,9 @@ export default function courseLoad(state = initialState, action) {
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
-        const {price} = action.result.data;
+        const {coursePrice} = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(price));
+        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(coursePrice));
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
