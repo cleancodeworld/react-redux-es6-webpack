@@ -4,19 +4,18 @@ import {
   SignupModal,
 } from 'components';
 import { connect } from 'react-redux';
-import {withWishList, withCart} from 'hoc';
+import {withWishList, withCart, withUser} from 'hoc';
 
 import { signup } from 'redux/modules/user/create';
 
 @connect(
-  ({auth}) => ({
-    user: auth.get('user')
-  }),
+  null,
   { signup }
 )
 
 @withWishList
 @withCart
+@withUser
 
 export default class CourseList extends Component {
   static propTypes = {
