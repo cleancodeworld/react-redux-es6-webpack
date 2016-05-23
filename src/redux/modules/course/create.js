@@ -6,9 +6,7 @@ export const CREATE_FAIL = 'knexpert/course/CREATE_FAIL';
 
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-import { invalidate as invalidateCoursesByPortal } from './byPortal';
-import { invalidate as invalidateCoursesByAuthor } from './byAuthor';
-import { invalidate as invalidateCategories } from '../categories/loaded';
+import {resetCourses} from './loaded';
 
 function _create(model) {
   return {
@@ -25,9 +23,7 @@ export function create(portalId, model) {
     return dispatch(
       _create({portalId, ...model}))
       .then(()=> {
-        dispatch(invalidateCoursesByPortal());
-        dispatch(invalidateCoursesByAuthor());
-        dispatch(invalidateCategories());
+        dispatch(resetCourses());
         setTimeout(()=> dispatch(push('/author/course/list')), 2500);
       })
       .catch(res => {

@@ -3,6 +3,7 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/course/LOAD';
 export const LOAD_SUCCESS = 'knexpert/course/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/course/LOAD_FAIL';
+export const RESET_COURSES = 'knexpert/course/RESET_COURSES';
 
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
@@ -145,7 +146,8 @@ export default function courseLoad(state = initialState, action) {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });
       });
-    case LOAD:
+    case RESET_COURSES:
+      return initialState;
     default:
       return state;
   }
@@ -167,4 +169,10 @@ export function isLoaded(globalState, courseName) {
     && globalState.courseLoaded.getIn(['entities', courseName, 'lessons'])
     && globalState.courseLoaded.getIn(['entities', courseName, 'author'])
     && globalState.courseLoaded.getIn(['entities', courseName, 'coursePrice']);
+}
+
+export function resetCourses() {
+  return {
+    type: RESET_COURSES
+  };
 }

@@ -3,7 +3,6 @@ export const REDUX_INIT = '@@redux/INIT';
 export const BY_PORTAL_LIST = 'knexpert/course/BY_PORTAL_LIST';
 export const BY_PORTAL_LIST_SUCCESS = 'knexpert/course/BY_PORTAL_LIST_SUCCESS';
 export const BY_PORTAL_LIST_FAIL = 'knexpert/course/BY_PORTAL_LIST_FAIL';
-export const BY_PORTAL_LIST_INVALIDATE = 'knexpert/course/BY_PORTAL_LIST_INVALIDATE';
 
 import Immutable from 'immutable';
 import {
@@ -12,6 +11,7 @@ import {
 
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
+import { RESET_COURSES } from './loaded';
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -40,18 +40,11 @@ export default function byPortal(state = initialState, action) {
         const { course } = action.result.data;
         map.update('order', array=>array.push(course.slug));
       });
-    case BY_PORTAL_LIST_INVALIDATE:
-      return state.set('loaded', false);
+    case RESET_COURSES:
+      return initialState;
     default:
       return state;
   }
-}
-
-
-export function invalidate() {
-  return {
-    type: BY_PORTAL_LIST_INVALIDATE
-  };
 }
 
 export function load(portalName) {
