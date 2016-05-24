@@ -153,8 +153,8 @@ export default function courseLoad(state = initialState, action) {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });
       });
-    case RESET_COURSES:
-      return initialState;
+    /* case RESET_COURSES:
+      return initialState; */
     default:
       return state;
   }

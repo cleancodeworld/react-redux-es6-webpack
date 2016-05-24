@@ -32,7 +32,7 @@ export default function byAuthor(state = initialState, action) {
         map.set('loaded', true);
       });
     case RESET_COURSES:
-      return initialState;
+      return state.set('loaded', false);
     default:
       return state;
   }

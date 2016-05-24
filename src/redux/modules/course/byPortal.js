@@ -41,7 +41,7 @@ export default function byPortal(state = initialState, action) {
         map.update('order', array=>array.push(course.slug));
       });
     case RESET_COURSES:
-      return initialState;
+      return state.set('loaded', false);
     default:
       return state;
   }
