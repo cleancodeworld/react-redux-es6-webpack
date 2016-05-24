@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { edit } from 'redux/modules/course/edit';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 import { withCourse, withPortal } from 'hoc';
 
 import {
@@ -11,6 +13,18 @@ import {
   PortalAuthorCourseLayout,
 } from '../index';
 
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    const promises = [];
+    const state = getState();
+    const portalMeta = state.portalCurrent.get('meta');
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(portalMeta.get('slug'))));
+    }
+    return Promise.all(promises);
+  }
+}])
 @connect(
   null,
   { edit }

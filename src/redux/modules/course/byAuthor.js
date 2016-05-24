@@ -8,6 +8,7 @@ import Immutable from 'immutable';
 import {
   courses as coursesNormalize,
 } from 'utils/normalize';
+import { RESET_COURSES } from './loaded';
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -30,6 +31,8 @@ export default function byAuthor(state = initialState, action) {
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);
       });
+    case RESET_COURSES:
+      return initialState;
     default:
       return state;
   }

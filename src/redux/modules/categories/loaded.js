@@ -9,6 +9,8 @@ import {
   categories as categoriesNormalize,
 } from 'utils/normalize';
 
+import { RESET_COURSES } from '../course/loaded';
+
 const initialState = Immutable.fromJS({
   order: [],
   entities: {}
@@ -22,8 +24,10 @@ export default function categoriesLoaded(state = initialState, action) {
     case LIST_SUCCESS:
       return state.withMutations(map=> {
         const categories = categoriesNormalize(action.result.data);
-        map.merge(categories);
+        map.merge(Immutable.fromJS(categories));
       });
+    case RESET_COURSES:
+      return initialState;
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import {
 
 import { CREATE_SUCCESS } from './create';
 import { EDIT_SUCCESS } from './edit';
+import { RESET_COURSES } from './loaded';
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -39,11 +40,12 @@ export default function byPortal(state = initialState, action) {
         const { course } = action.result.data;
         map.update('order', array=>array.push(course.slug));
       });
+    case RESET_COURSES:
+      return initialState;
     default:
       return state;
   }
 }
-
 
 export function load(portalName) {
   return {

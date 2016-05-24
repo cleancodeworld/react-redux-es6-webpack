@@ -6,7 +6,13 @@ import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
+import { connect } from 'react-redux';
 
+@connect(
+  ({categoriesLoaded}) => ({
+    categoryOrders: categoriesLoaded.get('order'),
+    categoryEntities: categoriesLoaded.get('entities')
+  }))
 @reduxForm({
   form: 'CourseForm',
   validate,
@@ -18,6 +24,8 @@ export default class CourseForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string,
     submitStatus: PropTypes.bool,
+    categoryOrders: PropTypes.object,
+    categoryEntities: PropTypes.object
   }
 
   onDrop = (files, field)=> {
@@ -61,7 +69,9 @@ export default class CourseForm extends Component {
       submitting,
       error,
       submitStatus,
-    } = this.props;
+      categoryOrders,
+      categoryEntities,
+      } = this.props;
     return (
       <div className="panel panel-flat">
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
@@ -147,8 +157,13 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={category.value}
-                  options={['General', 'Languages', 'Programming', 'Health'].map( value => ({ value: value, label: value}))}
-                  />
+                  allowCreate
+                  multi
+                  newOptionCreator={input => ({
+                    value: input.replace(' ', '-'),
+                    label: input
+                  })}
+                  options={categoryOrders.map(order => ({value: categoryEntities.getIn([order, 'slug']) || 'slug', label: categoryEntities.getIn([order, 'category'])})).toJS()}/>
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
               }/>
