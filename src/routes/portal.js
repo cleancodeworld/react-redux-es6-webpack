@@ -14,7 +14,7 @@ import {
   CourseEdit,
   CourseAccounting,
   AuthorContainer,
-  CourseListPublic,
+  CoursesByCategory,
   WishList,
   Cart,
   CourseView,
@@ -37,7 +37,7 @@ export default (params) => {
     <Route component={Root}>
       <Route path="/" component={App}>
         { /* Sub routes */ }
-        <IndexRoute component={CourseListPublic}/>
+        <IndexRoute component={CoursesByCategory}/>
 
         <Route path="login" component={PortalLogin}/>
         <Route path="wish-list" component={WishList}/>
@@ -45,8 +45,8 @@ export default (params) => {
         <Route path="my-courses" component={MyCourses}/>
 
         <Route path="courses">
-          <IndexRoute component={CourseListPublic}/>
-          <Route path=":categoryName" component={CourseListPublic}/>
+          <IndexRoute component={CoursesByCategory}/>
+          <Route path=":categoryName" component={CoursesByCategory}/>
         </Route>
         <Route path="check-out" component={CheckOut}/>
 

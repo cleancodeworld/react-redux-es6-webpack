@@ -7,7 +7,7 @@ import {
 import { withCourseCategories } from 'hoc';
 
 @withCourseCategories
-export default class CourseListCategories extends Component {
+export default class CategoriesList extends Component {
 
   static propTypes = {
     categories: PropTypes.object,
@@ -18,7 +18,7 @@ export default class CourseListCategories extends Component {
     const {activeCategory, categories: {entities, order}} = this.props;
     return (
       <div className="category-content no-padding">
-        <Helmet title={activeCategory}/>
+        {activeCategory ? <Helmet title={activeCategory.get('category')}/> : <span/>}
         <ul className="navigation navigation-main navigation-accordion">
           {order.map(categoryId => {
             const category = entities.get(categoryId);

@@ -17,7 +17,7 @@ export default class PortalAuthorLayout extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     logout: PropTypes.func,
     updateImage: PropTypes.func,
   };
