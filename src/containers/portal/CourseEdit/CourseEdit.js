@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { edit } from 'redux/modules/course/edit';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
-import { withCourse, withPortal } from 'hoc';
+import { withCourse, withPortal, withCourseCategories } from 'hoc';
 
 import {
   PortalLayout,
@@ -31,6 +31,8 @@ import {
 )
 @withPortal
 @withCourse
+@withCourseCategories
+
 export default class CourseEdit extends Component {
 
   static propTypes = {

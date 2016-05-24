@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { LessonForm } from 'components';
@@ -9,27 +8,19 @@ import {
   PortalAuthorCourseLayout,
 } from '../index';
 import { editLesson } from 'redux/modules/lesson/edit';
-import { load as loadLesson, isLoaded as isLessonLoaded } from 'redux/modules/lesson/edit';
+import {withLesson, withCourse} from 'hoc';
 
-@asyncConnect([{
-  promise: ({store: {getState, dispatch}, params}) => {
-    const promises = [];
-    if (!isLessonLoaded(getState(), params.courseName, params.lessonName)) {
-      promises.push(dispatch(loadLesson(params.courseName, params.lessonName)));
-    }
-    return Promise.all(promises);
-  }
-}])
 @connect(
-  ({courseLoaded}, ownProps) => ({
-    lessonEdit: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'entities', ownProps.params.lessonName]),
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
-  }),
+  null,
   { editLesson }
 )
+
+@withCourse
+@withLesson
+
 export default class LessonEdit extends Component {
   static propTypes = {
-    lessonEdit: PropTypes.object,
+    lesson: PropTypes.object,
     course: PropTypes.object,
     editLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
@@ -40,7 +31,7 @@ export default class LessonEdit extends Component {
   }
 
   render() {
-    const {params: { courseName, lessonName }, lessonEdit, course} = this.props;
+    const {params: { courseName, lessonName }, lesson, course} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -49,12 +40,12 @@ export default class LessonEdit extends Component {
     ];
     return (
       <div>
-        <Helmet title={`Edit Lesson: ${lessonEdit.get('title')}`}/>
+        <Helmet title={`Edit Lesson: ${lesson.get('title')}`}/>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
           <PortalAuthorLayout>
             <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={lessonEdit.toJS()}
-                          onSubmit={ model => this.props.editLesson(model, lessonEdit.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
+              <LessonForm initialValues={lesson.toJS()}
+                          onSubmit={ model => this.props.editLesson(model, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
                           submitStatus={this.state.saved}/>
             </PortalAuthorCourseLayout>
           </PortalAuthorLayout>

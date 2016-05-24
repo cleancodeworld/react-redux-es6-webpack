@@ -9,7 +9,7 @@ import {
 import {
   CourseList,
 } from 'components';
-import {withCourses} from 'hoc';
+import {withCourses, withWishList, withCart} from 'hoc';
 
 @connect(
   ({wishList}) => ({
@@ -17,6 +17,8 @@ import {withCourses} from 'hoc';
   })
 )
 @withCourses
+@withWishList
+@withCart
 export default class WishList extends Component {
 
   static propTypes = {
