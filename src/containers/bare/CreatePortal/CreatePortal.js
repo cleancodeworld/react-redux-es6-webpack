@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { CreatePortalForm } from 'components';
 import { connect } from 'react-redux';
-import { createPortal } from 'redux/modules/portal';
+import { createPortal } from 'redux/modules/portal/create';
 import {withUserId} from 'hoc';
 
 @connect(

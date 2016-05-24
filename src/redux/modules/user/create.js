@@ -3,7 +3,7 @@ export const SIGNUP_SUCCESS = 'knexpert/auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'knexpert/auth/SIGNUP_FAIL';
 
 import {SubmissionError} from 'redux-form';
-import {create as portalCreate} from '../portal';
+import {create as portalCreate} from '../portal/create';
 import {silentLogin} from '../auth';
 
 
