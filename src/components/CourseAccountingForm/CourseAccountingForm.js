@@ -86,7 +86,7 @@ export default class CourseAccountingForm extends Component {
                         {...price}
                         onBlur={() => {}}
                         onBlurResetsInput={false}
-                        options={[20, 30, 40, 50].map( value => ({ value: value, label: '$' + value}))}
+                        options={['20', '30', '40', '50'].map( value => ({ value: value, label: '$' + value}))}
                       />
                     </div>
                   }/>
