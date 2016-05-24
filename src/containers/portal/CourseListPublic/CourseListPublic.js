@@ -31,8 +31,9 @@ import {withCourses, withPortal} from 'hoc';
   }
 }])
 @connect(
-  ({coursesByPortal}) => ({
+  ({coursesByPortal, categoriesLoaded}, ownProps) => ({
     order: coursesByPortal.get('order'),
+    activeCategory: categoriesLoaded.getIn(['entities', ownProps.params.categoryName]),
   })
 )
 @withCourses
@@ -44,15 +45,11 @@ export default class CourseListPublic extends Component {
     courses: PropTypes.object,
     order: PropTypes.object,
     portal: PropTypes.object,
-    params: PropTypes.object.isRequired,
+    activeCategory: PropTypes.object,
   };
 
-  nameToSlug(name) {
-    return name.replace(' ', '-');
-  }
-
   render() {
-    const {courses, order, portal, params} = this.props;
+    const {courses, order, portal, activeCategory} = this.props;
     const portalName = portal.meta.get('name');
     const breadcrumbs = [];
     return (
@@ -61,7 +58,7 @@ export default class CourseListPublic extends Component {
           <Helmet title={portalName}/>
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
-              <CourseListCategories category={params.categoryName}/>
+              <CourseListCategories activeCategory={activeCategory}/>
             </div>
           </div>
           <div className="content-wrapper">
@@ -71,7 +68,7 @@ export default class CourseListPublic extends Component {
             <CourseList
               entities={courses}
               order={order}
-              categoryName={params.categoryName}/>
+              activeCategory={activeCategory}/>
           </div>
         </PortalLayout>
       </div>

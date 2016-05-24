@@ -11,12 +11,11 @@ export default class CourseListCategories extends Component {
 
   static propTypes = {
     categories: PropTypes.object,
-    category: PropTypes.string,
+    activeCategory: PropTypes.object,
   }
 
   render() {
-    const activeCategory = this.props.category;
-    const {entities, order} = this.props.categories;
+    const {activeCategory, categories: {entities, order}} = this.props;
     return (
       <div className="category-content no-padding">
         <Helmet title={activeCategory}/>
@@ -25,7 +24,7 @@ export default class CourseListCategories extends Component {
             const category = entities.get(categoryId);
             return (
               <CourseListCategoryItem category={category} key={category.get('slug')}
-                                      isActiveCategory={(category.get('slug') === activeCategory)}/>
+                                      isActiveCategory={activeCategory && category.get('slug') === activeCategory.get('slug')}/>
             );
           })}
         </ul>

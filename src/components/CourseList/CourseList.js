@@ -24,7 +24,7 @@ export default class CourseList extends Component {
     wishList: PropTypes.object,
     user: PropTypes.object,
     cart: PropTypes.object,
-    categoryName: PropTypes.string,
+    activeCategory: PropTypes.object,
     signup: PropTypes.func,
     myCourses: PropTypes.bool,
   };
@@ -53,21 +53,16 @@ export default class CourseList extends Component {
       .then(() => this.setState({ signUpModalOpen: false, signUpSubmitting: false }));
   }
 
-  nameToSlug(name) {
-    return name.replace(' ', '-');
-  }
-
   render() {
-    const { wishList, entities, order, categoryName, cart, myCourses } = this.props;
+    const { wishList, entities, order, activeCategory, cart, myCourses } = this.props;
     const { signUpModalOpen, signUpSubmitting } = this.state;
     return (
       <div>
         <div className="row">
           {
-
             order.map(courseName => {
               const course = entities.get(courseName);
-              if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
+              if (!activeCategory || course.get('category').indexOf(activeCategory.get('category')) > -1) {
                 return (
                   <CourseListItem addToWishList={wishList.addToWishList}
                                   removeFromWishList={wishList.removeFromWishList}
@@ -83,7 +78,6 @@ export default class CourseList extends Component {
               }
               return '';
             })
-
           }
         </div>
         <SignupModal
