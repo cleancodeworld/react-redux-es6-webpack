@@ -51,10 +51,9 @@ export default class CourseListPublic extends Component {
   render() {
     const {courses, order, portal, activeCategory} = this.props;
     const portalName = portal.meta.get('name');
-    const breadcrumbs =
-      activeCategory ? [
-        { url: `/courses/${activeCategory.get('slug')}`, name: activeCategory.get('category') },
-      ] : [];
+    const breadcrumbs = [
+      { url: `/courses/${activeCategory.get('slug')}`, name: activeCategory.get('category') },
+    ];
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalName} title=" - Browse Courses">

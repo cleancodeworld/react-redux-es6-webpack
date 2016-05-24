@@ -18,3 +18,4 @@ export WishList from './WishList/WishList';
 export Cart from './Cart/Cart';
 export CourseView from './CourseView/CourseView';
 export MyCourses from './MyCourses/MyCourses';
+export Home from './Home/Home';

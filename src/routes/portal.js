@@ -19,6 +19,7 @@ import {
   Cart,
   CourseView,
   MyCourses,
+  Home,
 } from '../containers/portal';
 import {
   Root,
@@ -37,15 +38,14 @@ export default (params) => {
     <Route component={Root}>
       <Route path="/" component={App}>
         { /* Sub routes */ }
-        <IndexRoute component={CoursesByCategory}/>
-
+        <IndexRoute component={Home}/>
         <Route path="login" component={PortalLogin}/>
         <Route path="wish-list" component={WishList}/>
         <Route path="cart" component={Cart}/>
         <Route path="my-courses" component={MyCourses}/>
 
         <Route path="courses">
-          <IndexRoute component={CoursesByCategory}/>
+          <IndexRoute component={Home}/>
           <Route path=":categoryName" component={CoursesByCategory}/>
         </Route>
         <Route path="check-out" component={CheckOut}/>

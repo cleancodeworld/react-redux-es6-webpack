@@ -1,46 +1,72 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import { PortalLayout } from '../index';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
-import { load, isLoaded } from 'redux/modules/course/byAuthor';
+import {
+  PortalLayout,
+  CategoriesList,
+} from '../index';
 import {
   CourseList,
 } from 'components';
+import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/byPortal';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
+import {withCourses, withPortal} from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.auth.getIn(['user', 'username']))));
+    const portalCurrent = state.portalCurrent;
+    const portalMeta = portalCurrent.get('meta');
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(portalMeta.get('slug'))));
+    }
+    // Load all courses
+    if (!isPublicListLoaded(state)) {
+      promises.push(dispatch(load(portalMeta.get('slug'))));
     }
     return Promise.all(promises);
   }
 }])
 @connect(
-  ({courseLoaded, coursesByAuthor, portalCurrent}) => ({
-    entities: courseLoaded.get('entities'),
-    order: coursesByAuthor.get('order'),
-    portalName: portalCurrent.getIn(['meta', 'name'])
+  ({coursesByPortal}) => ({
+    order: coursesByPortal.get('order')
   })
 )
+@withCourses
+@withPortal
+
 export default class Home extends Component {
+
   static propTypes = {
-    entities: PropTypes.object,
+    courses: PropTypes.object,
     order: PropTypes.object,
-    portalName: PropTypes.string,
+    portal: PropTypes.object
   };
 
   render() {
-    const {entities, order, portalName} = this.props;
+    const {courses, order, portal} = this.props;
+    const portalName = portal.meta.get('name');
     const breadcrumbs = [];
-    console.log(portalName);
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
+        <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalName} title=" - Browse Courses">
           <Helmet title={portalName}/>
-          <CourseList entities={entities} order={order}/>
+          <div className="sidebar sidebar-main sidebar-default">
+            <div className="sidebar-content">
+              <CategoriesList />
+            </div>
+          </div>
+          <div className="content-wrapper">
+            <div className="content-group">
+              <h6 className="text-semibold">Course List </h6>
+            </div>
+            <CourseList
+              entities={courses}
+              order={order}/>
+          </div>
         </PortalLayout>
       </div>
     );
