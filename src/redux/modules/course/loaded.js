@@ -121,13 +121,13 @@ export default function courseLoad(state = initialState, action) {
       return state.withMutations(map=> {
         const course = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(course));
+        map.mergeIn(['entities', courseName, 'coursePrice'], Immutable.fromJS(course));
       });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
         const {coursePrice} = action.result.data;
         const {courseName} = action.data;
-        map.mergeIn(['entities', courseName, 'price'], Immutable.fromJS(coursePrice));
+        map.mergeIn(['entities', courseName, 'coursePrice'], Immutable.fromJS(coursePrice));
       });
     case LOAD_MY_WISH_LIST_SUCCESS:
       return state.withMutations(map=> {
