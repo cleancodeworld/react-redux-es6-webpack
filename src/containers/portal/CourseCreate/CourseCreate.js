@@ -1,13 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
+import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {
   PortalLayout,
   PortalAuthorLayout
 } from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
-import {withPortal, withUser} from 'hoc';
+import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
+import { withPortal, withUser } from 'hoc';
+
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    const promises = [];
+    const state = getState();
+    const portalMeta = state.portalCurrent.get('meta');
+    // Load categories
+    if (!isCategoriesLoaded(state)) {
+      promises.push(dispatch(loadCategories(portalMeta.get('slug'))));
+    }
+    return Promise.all(promises);
+  }
+}])
 @connect(
   null,
   { courseCreate }
