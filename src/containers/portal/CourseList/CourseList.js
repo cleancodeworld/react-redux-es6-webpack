@@ -11,7 +11,7 @@ import {
   CourseList,
 } from 'components';
 import { load, isLoaded } from 'redux/modules/course/byPortal';
-
+import {withCourses} from 'hoc';
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
@@ -23,20 +23,20 @@ import { load, isLoaded } from 'redux/modules/course/byPortal';
   }
 }])
 @connect(
-  ({courseLoaded, coursesByPortal}) => ({
-    entities: courseLoaded.get('entities'),
+  ({coursesByPortal}) => ({
     order: coursesByPortal.get('order'),
   })
 )
+@withCourses
 export default class CourseListContainer extends Component {
 
   static propTypes = {
-    entities: PropTypes.object,
+    courses: PropTypes.object,
     order: PropTypes.object,
   };
 
   render() {
-    const {entities, order} = this.props;
+    const {courses, order} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' }
@@ -52,7 +52,7 @@ export default class CourseListContainer extends Component {
             <div className="content-group">
               <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
             </div>
-            <CourseList entities={entities} order={order}/>
+            <CourseList entities={courses} order={order}/>
           </PortalAuthorLayout>
         </PortalLayout>
       </div>

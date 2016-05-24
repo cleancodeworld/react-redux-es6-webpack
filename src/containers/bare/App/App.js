@@ -19,7 +19,7 @@ import {logout} from 'redux/modules/auth';
   }
 }])
 
-@connect(()=>({}), { logout })
+@connect(null, { logout })
 
 export default class App extends Component {
   static propTypes = {

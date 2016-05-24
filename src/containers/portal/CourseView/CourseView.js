@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import {CourseView} from 'components';
 import { connect } from 'react-redux';
-import {withWishList, withCart} from 'hoc';
+import {withWishList, withCart, withCourse} from 'hoc';
 
 import {
   PortalLayout,
@@ -12,14 +12,12 @@ import { rate } from 'redux/modules/course/rate';
 import { signup } from 'redux/modules/user/create';
 
 @connect(
-  ({courseLoaded, portalCurrent, wishList, cart}, ownProps) => ({
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName]),
-    portalId: portalCurrent.getIn(['meta', 'id']),
-  }),
+  null,
   { rate, signup }
 )
 @withCart
 @withWishList
+@withCourse
 export default class CourseViewContainer extends Component {
 
   static propTypes = {

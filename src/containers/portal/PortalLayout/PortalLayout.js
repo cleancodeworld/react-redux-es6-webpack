@@ -15,16 +15,18 @@ import {logout} from 'redux/modules/auth';
 import {
   NotFound
 } from '../../shared';
-
+import {withPortal, withUser} from 'hoc';
 @connect(
-  ({portalCurrent}) => ({ portalCurrentMeta: portalCurrent.get('meta') }),
+  null,
   { logout }
 )
+@withPortal
+@withUser
 export default class PortalLayout extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
-    portalCurrentMeta: PropTypes.object.isRequired,
+    portal: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func,
     breadcrumbs: PropTypes.array.isRequired,
@@ -39,10 +41,10 @@ export default class PortalLayout extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {portalCurrentMeta, breadcrumbs, title, boldTitle} = this.props;
+    const {portal, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
     let portalExists = true;
-    if (!portalCurrentMeta.get('id')) {
+    if (!portal.meta.get('id')) {
       portalExists = false;
     }
     return (
@@ -92,8 +94,8 @@ export default class PortalLayout extends Component {
               </div>
             </div>
           )
-          :
-          (<NotFound/>)
+            :
+            (<NotFound/>)
         }
       </div>
     );

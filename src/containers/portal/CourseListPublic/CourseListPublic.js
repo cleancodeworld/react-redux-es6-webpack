@@ -11,6 +11,7 @@ import {
 } from 'components';
 import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/byPortal';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
+import {withCourses, withPortal} from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -30,20 +31,19 @@ import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/mo
   }
 }])
 @connect(
-  ({courseLoaded, portalCurrent, coursesByPortal}) => ({
-    entities: courseLoaded.get('entities'),
+  ({coursesByPortal}) => ({
     order: coursesByPortal.get('order'),
-    wishList: courseLoaded.getIn(['wishList', 'entities']),
-    portalName: portalCurrent.getIn(['meta', 'name']),
   })
 )
+@withCourses
+@withPortal
+
 export default class CourseListPublic extends Component {
 
   static propTypes = {
-    entities: PropTypes.object,
+    courses: PropTypes.object,
     order: PropTypes.object,
-    wishList: PropTypes.object,
-    portalName: PropTypes.string,
+    portal: PropTypes.object,
     params: PropTypes.object.isRequired,
   };
 
@@ -52,7 +52,8 @@ export default class CourseListPublic extends Component {
   }
 
   render() {
-    const {entities, order, portalName, params} = this.props;
+    const {courses, order, portal, params} = this.props;
+    const portalName = portal.meta.get('name');
     const breadcrumbs = [];
     return (
       <div>
@@ -68,7 +69,7 @@ export default class CourseListPublic extends Component {
               <h6 className="text-semibold">Course List </h6>
             </div>
             <CourseList
-              entities={entities}
+              entities={courses}
               order={order}
               categoryName={params.categoryName}/>
           </div>

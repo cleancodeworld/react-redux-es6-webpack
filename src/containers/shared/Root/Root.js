@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { connect } from 'react-redux';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
+import {withUser} from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -12,7 +12,7 @@ import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
     return Promise.all(promises);
   }
 }])
-@connect(({auth})=>({ user: auth.get('user') }))
+@withUser
 export default class Root extends React.Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
