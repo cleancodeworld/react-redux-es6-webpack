@@ -18,7 +18,7 @@ export default class PortalAuthorCourseLayout extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     params: PropTypes.object,
-    portalCurrent: PropTypes.object,
+    portal: PropTypes.object,
     user: PropTypes.object,
     updateCoverImage: PropTypes.func.isRequired,
   };
