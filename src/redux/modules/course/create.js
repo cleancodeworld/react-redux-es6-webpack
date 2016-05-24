@@ -23,8 +23,10 @@ export function create(portalId, model) {
     return dispatch(
       _create({portalId, ...model}))
       .then(()=> {
-        dispatch(resetCourses());
-        setTimeout(()=> dispatch(push('/author/course/list')), 2500);
+        setTimeout(() => {
+          dispatch(resetCourses());
+          dispatch(push('/author/course/list'));
+        }, 2500);
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
