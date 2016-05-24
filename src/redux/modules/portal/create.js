@@ -22,7 +22,7 @@ export function createPortal(model, ownerId) {
   return dispatch => {
     return dispatch(create(model))
       .then((res)=> {
-        window.location.href = `${location.protocol}//${res.createdPortal.name}.${config.mainDomain}`;
+        window.location.href = `${location.protocol}//${res.data.portal.name}.${config.mainDomain}`;
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
