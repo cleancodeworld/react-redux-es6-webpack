@@ -1,28 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import {
   CourseListCategoryItem,
 } from 'components';
+import { withCourseCategories } from 'hoc';
 
-@connect(
-  ({categoriesLoaded}) => ({
-    entities: categoriesLoaded.get('entities'),
-    order: categoriesLoaded.get('order'),
-  })
-)
+@withCourseCategories
 export default class CourseListCategories extends Component {
 
   static propTypes = {
+    categories: PropTypes.object,
     category: PropTypes.string,
-    entities: PropTypes.object,
-    order: PropTypes.object,
   }
 
   render() {
     const activeCategory = this.props.category;
-    const {entities, order} = this.props;
+    const {entities, order} = this.props.categories;
     return (
       <div className="category-content no-padding">
         <Helmet title={activeCategory}/>

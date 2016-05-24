@@ -6,17 +6,13 @@ import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
-import { connect } from 'react-redux';
+import { withCourseCategories } from 'hoc';
 
-@connect(
-  ({categoriesLoaded}) => ({
-    categoryOrders: categoriesLoaded.get('order'),
-    categoryEntities: categoriesLoaded.get('entities')
-  }))
 @reduxForm({
   form: 'CourseForm',
   validate,
 })
+@withCourseCategories
 export default class CourseForm extends Component {
 
   static propTypes = {
@@ -24,8 +20,7 @@ export default class CourseForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string,
     submitStatus: PropTypes.bool,
-    categoryOrders: PropTypes.object,
-    categoryEntities: PropTypes.object
+    categories: PropTypes.object,
   }
 
   onDrop = (files, field)=> {
@@ -69,9 +64,9 @@ export default class CourseForm extends Component {
       submitting,
       error,
       submitStatus,
-      categoryOrders,
-      categoryEntities,
+      categories,
       } = this.props;
+    const { entities, order } = categories;
     return (
       <div className="panel panel-flat">
         <form onSubmit={handleSubmit} className="form-horizontal" autoComplete="off">
@@ -163,7 +158,7 @@ export default class CourseForm extends Component {
                     value: input.replace(' ', '-'),
                     label: input
                   })}
-                  options={categoryOrders.map(order => ({value: categoryEntities.getIn([order, 'slug']) || 'slug', label: categoryEntities.getIn([order, 'category'])})).toJS()}/>
+                  options={order.map(slug => ({value: entities.getIn([slug, 'slug']) || 'slug', label: entities.getIn([slug, 'category'])})).toJS()}/>
                   {category.touched && category.error && <label className="validation-error-label">{category.error}</label>}
                 </div>
               }/>
