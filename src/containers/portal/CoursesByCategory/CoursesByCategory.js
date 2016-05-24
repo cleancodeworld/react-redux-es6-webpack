@@ -4,7 +4,7 @@ import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {
   PortalLayout,
-  CourseListCategories,
+  CategoriesList,
 } from '../index';
 import {
   CourseList,
@@ -51,14 +51,17 @@ export default class CourseListPublic extends Component {
   render() {
     const {courses, order, portal, activeCategory} = this.props;
     const portalName = portal.meta.get('name');
-    const breadcrumbs = [];
+    const breadcrumbs =
+      activeCategory ? [
+        { url: `/courses/${activeCategory.get('slug')}`, name: activeCategory.get('category') },
+      ] : [];
     return (
       <div>
         <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalName} title=" - Browse Courses">
           <Helmet title={portalName}/>
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
-              <CourseListCategories activeCategory={activeCategory}/>
+              <CategoriesList activeCategory={activeCategory}/>
             </div>
           </div>
           <div className="content-wrapper">
