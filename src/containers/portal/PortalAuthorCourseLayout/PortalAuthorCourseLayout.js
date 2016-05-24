@@ -24,11 +24,11 @@ export default class PortalAuthorCourseLayout extends Component {
   };
 
   render() {
-    const { portalCurrent, user } = this.props;
+    const { portal, user } = this.props;
     const {courseName} = this.props.params;
     return (
       <div>
-        <ProfileCover portal={portalCurrent.meta} user={user} updateCoverImage={this.props.updateCoverImage}/>
+        <ProfileCover portal={portal.meta} user={user} updateCoverImage={this.props.updateCoverImage}/>
         <ProfileToolbar />
         <div className="row">
           <div className="col-lg-9">
