@@ -65,27 +65,26 @@ export default class CourseList extends Component {
       <div>
         <div className="row">
           {
-            order && order.map ?
-              order.map(courseName => {
-                const course = entities.get(courseName);
-                if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
-                  return (
-                    <CourseListItem addToWishList={wishList.addToWishList}
-                                    removeFromWishList={wishList.removeFromWishList}
-                                    isWishListItem={!!wishList.entities.get(courseName)}
-                                    addToCart={cart.addToCart}
-                                    removeFromCart={cart.removeFromCart}
-                                    isCartItem={!!cart.entities.get(courseName)}
-                                    key={course.get('id')}
-                                    course={course}
-                                    onClickLoginRequiredLink={this.onClickLoginRequiredLink}
-                                    myCourses={myCourses}/>
-                  );
-                }
-                return '';
-              })
-              :
-              ''
+
+            order.map(courseName => {
+              const course = entities.get(courseName);
+              if (!categoryName || this.nameToSlug(course.get('category')) === categoryName) {
+                return (
+                  <CourseListItem addToWishList={wishList.addToWishList}
+                                  removeFromWishList={wishList.removeFromWishList}
+                                  isWishListItem={!!wishList.entities.get(courseName)}
+                                  addToCart={cart.addToCart}
+                                  removeFromCart={cart.removeFromCart}
+                                  isCartItem={!!cart.entities.get(courseName)}
+                                  key={course.get('id')}
+                                  course={course}
+                                  onClickLoginRequiredLink={this.onClickLoginRequiredLink}
+                                  myCourses={myCourses}/>
+                );
+              }
+              return '';
+            })
+
           }
         </div>
         <SignupModal
