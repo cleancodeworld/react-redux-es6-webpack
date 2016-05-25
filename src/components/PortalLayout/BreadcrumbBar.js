@@ -9,9 +9,6 @@ export default class BreadcrumbBar extends Component {
 
   render() {
     const {breadcrumbs} = this.props;
-    console.log('BreadcrumbBar');
-    console.log(breadcrumbs);
-    console.log(this.props);
     return (
       <div className="breadcrumb-line">
         <Breadcrumb breadcrumbs={breadcrumbs}/>

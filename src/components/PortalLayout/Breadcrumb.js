@@ -9,7 +9,6 @@ export default class Breadcrumb extends Component {
 
   render() {
     const {breadcrumbs} = this.props;
-    console.log(breadcrumbs);
     return (
       <ul className="breadcrumb">
         <li><Link to="/"><i className="icon-home2 position-left"></i> Home</Link></li>
