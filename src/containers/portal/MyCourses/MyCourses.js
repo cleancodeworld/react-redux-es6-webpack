@@ -3,10 +3,6 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import {
-  PortalLayout,
-} from '../index';
-
-import {
   CourseList,
 } from 'components';
 
@@ -28,22 +24,21 @@ export default class MyCourses extends Component {
     order: PropTypes.object,
   };
 
+  static pageHeader = {
+    boldTitle: 'My Courses'
+  };
+
   render() {
     const {courses, order} = this.props;
-    const breadcrumbs = [
-      { url: '/my-courses', name: 'My Courses' },
-    ];
     return (
-      <div>
+      <div className="page-container">
         <Helmet title="My Courses"/>
-        <PortalLayout breadcrumbs={breadcrumbs} title="My Courses">
-          <div className="content-wrapper">
-            <div className="content-group">
-              <h6 className="text-semibold">My Courses</h6>
-            </div>
-            <CourseList entities={courses} order={order} myCourses/>
+        <div className="content-wrapper">
+          <div className="content-group">
+            <h6 className="text-semibold">My Courses</h6>
           </div>
-        </PortalLayout>
+          <CourseList entities={courses} order={order} myCourses/>
+        </div>
       </div>
     );
   }

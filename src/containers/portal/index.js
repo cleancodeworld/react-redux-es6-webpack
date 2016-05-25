@@ -12,7 +12,6 @@ export CourseList from './CourseList/CourseList';
 export CourseEdit from './CourseEdit/CourseEdit';
 export CourseAccounting from './CourseAccounting/CourseAccounting';
 export AuthorContainer from './AuthorContainer/AuthorContainer';
-export CategoriesList from './CategoriesList/CategoriesList';
 export CoursesByCategory from './CoursesByCategory/CoursesByCategory';
 export WishList from './WishList/WishList';
 export Cart from './Cart/Cart';

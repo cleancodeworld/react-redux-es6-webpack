@@ -2,11 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { LessonForm } from 'components';
-import {
-  PortalLayout,
-  PortalAuthorLayout,
-  PortalAuthorCourseLayout,
-} from '../index';
 import { editLesson } from 'redux/modules/lesson/edit';
 import {withLesson, withCourse} from 'hoc';
 
@@ -30,26 +25,19 @@ export default class LessonEdit extends Component {
     saved: false
   }
 
+  static pageHeader = {
+    title: ' - Edit',
+    boldTitle: 'Lesson'
+  }
+
   render() {
-    const {params: { courseName, lessonName }, lesson, course} = this.props;
-    const breadcrumbs = [
-      { url: '/author', name: 'Author' },
-      { url: '/author/course/list', name: 'Course Mgr' },
-      { url: '/author/course/' + courseName, name: course.get('name') },
-      { url: '/author/course/' + courseName + '/lesson/list', name: 'Lessons' },
-    ];
+    const {params: { courseName, lessonName }, lesson} = this.props;
     return (
       <div>
         <Helmet title={`Edit Lesson: ${lesson.get('title')}`}/>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={' - ' + course.get('name')}>
-          <PortalAuthorLayout>
-            <PortalAuthorCourseLayout params={this.props.params}>
-              <LessonForm initialValues={lesson.toJS()}
-                          onSubmit={ model => this.props.editLesson(model, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
-                          submitStatus={this.state.saved}/>
-            </PortalAuthorCourseLayout>
-          </PortalAuthorLayout>
-        </PortalLayout>
+        <LessonForm initialValues={lesson.toJS()}
+                    onSubmit={ model => this.props.editLesson(model, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
+                    submitStatus={this.state.saved}/>
       </div>
     );
   }

@@ -5,16 +5,14 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
+import Breadcrumbs from 'react-breadcrumbs';
+import * as _ from 'lodash';
 import {
   UserNav,
   PageHeader,
   PageHeaderContent,
-  BreadcrumbBar,
 } from 'components';
 import {logout} from 'redux/modules/auth';
-import {
-  NotFound
-} from '../../shared';
 import {withPortal, withUser} from 'hoc';
 @connect(
   null,
@@ -28,10 +26,9 @@ export default class PortalLayout extends Component {
     children: PropTypes.any.isRequired,
     portal: PropTypes.object.isRequired,
     user: PropTypes.object,
+    params: PropTypes.object,
+    routes: PropTypes.array,
     logout: PropTypes.func,
-    breadcrumbs: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    boldTitle: PropTypes.string,
   };
 
   static contextTypes = {
@@ -41,12 +38,8 @@ export default class PortalLayout extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {portal, breadcrumbs, title, boldTitle} = this.props;
     const {user} = this.context;
-    let portalExists = true;
-    if (!portal.meta.get('id')) {
-      portalExists = false;
-    }
+    const lastRoute = _.last(this.props.routes);
     return (
       <div className="navbar-bottom portal-container">
         <Navbar className="bg-blue" fluid>
@@ -82,21 +75,22 @@ export default class PortalLayout extends Component {
             <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
           </Navbar.Collapse>
         </Navbar>
-        {
-          portalExists ? (
-            <div>
-              <PageHeader>
-                <BreadcrumbBar breadcrumbs={breadcrumbs}/>
-                <PageHeaderContent boldTitle={boldTitle} title={title}/>
-              </PageHeader>
-              <div className="page-container">
-                {this.props.children}
-              </div>
+        <div>
+          <PageHeader>
+            <div className="breadcrumb-line">
+              <Breadcrumbs
+                customClass="breadcrumb"
+                wrapperElement="ul" itemElement="li"
+                routes={this.props.routes}
+                params={this.props.params}
+                separator=""
+                activeItemClass="active"
+              />
             </div>
-          )
-            :
-            (<NotFound/>)
-        }
+            <PageHeaderContent pageHeader={lastRoute.component.pageHeader}/>
+          </PageHeader>
+          {this.props.children}
+        </div>
       </div>
     );
   }
