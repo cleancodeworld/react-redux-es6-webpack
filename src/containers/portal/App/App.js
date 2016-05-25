@@ -12,20 +12,15 @@ import { isAuthenticated } from 'redux/modules/auth';
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isPortalLoaded(state)) {
-      promises.push(dispatch(portalLoaded(state.portalCurrent.get('reqSubdomain'))));
-    }
+
+    if (!isPortalLoaded(state)) promises.push(dispatch(portalLoaded(state.portalCurrent.get('reqSubdomain'))));
+
     if (isAuthenticated(state)) {
-      if (!isWishListLoaded(state)) {
-        promises.push(dispatch(wishListLoaded()));
-      }
-      if (!isCartLoaded(state)) {
-        promises.push(dispatch(cartLoaded()));
-      }
-      if (!isMyCoursesLoaded(state)) {
-        promises.push(dispatch(myCoursesLoad()));
-      }
+      if (!isWishListLoaded(state)) promises.push(dispatch(wishListLoaded()));
+      if (!isCartLoaded(state)) promises.push(dispatch(cartLoaded()));
+      if (!isMyCoursesLoaded(state)) promises.push(dispatch(myCoursesLoad()));
     }
+
     return Promise.all(promises);
   }
 }])

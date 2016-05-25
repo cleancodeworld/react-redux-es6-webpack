@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import Helmet from 'react-helmet';
@@ -9,39 +8,27 @@ import {
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
 } from '../index';
-import { isLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
 import { remove as removeLesson } from 'redux/modules/lesson/remove';
-
-@asyncConnect([{
-  promise: ({store: {dispatch, getState}, params}) => {
-    const promises = [];
-    if (!isLoaded(getState(), params.courseName)) {
-      promises.push(dispatch(loadLessons(params.courseName)));
-    }
-    return Promise.all(promises);
-  }
-}])
+import {withLessons, withCourse} from 'hoc';
 
 @connect(
-  ({lessonLoaded, courseLoaded}, ownProps) => ({
-    lessons: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'entities']),
-    order: courseLoaded.getIn(['entities', ownProps.params.courseName, 'lessons', 'order']),
-    course: courseLoaded.getIn(['entities', ownProps.params.courseName])
-  }),
+  null,
   { removeLesson }
 )
+
+@withCourse
+@withLessons
 export default class LessonList extends Component {
 
   static propTypes = {
     lessons: PropTypes.object,
-    order: PropTypes.object,
     course: PropTypes.object,
     params: PropTypes.object.isRequired,
     removeLesson: PropTypes.func.isRequired,
   };
 
   render() {
-    const {params: { courseName }, lessons, course, params, order} = this.props;
+    const {params: { courseName }, lessons, course, params} = this.props;
     const breadcrumbs = [
       { url: '/author', name: 'Author' },
       { url: '/author/course/list', name: 'Course Mgr' },
@@ -74,8 +61,8 @@ export default class LessonList extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {order.map(lesson => {
-                      return (<LessonListItem key={lessons.getIn([lesson, 'id'])} lesson={lessons.get(lesson)}
+                    {lessons.order.map(lesson => {
+                      return (<LessonListItem key={lessons.entities.getIn([lesson, 'id'])} lesson={lessons.entities.get(lesson)}
                                               onRemove={this.props.removeLesson}
                                               courseName={courseName}/>);
                     })}

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import config from '../../../config';
-import { asyncConnect } from 'redux-connect';
 import Helmet from 'react-helmet';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
@@ -12,12 +11,6 @@ import {connect} from 'react-redux';
 
 import {logout} from 'redux/modules/auth';
 
-@asyncConnect([{
-  promise: ({store: {}}) => {
-    const promises = [];
-    return Promise.all(promises);
-  }
-}])
 
 @connect(null, { logout })
 

@@ -8,11 +8,15 @@ import {
   PortalAuthorCourseLayout,
 } from '../index';
 import { add as addLesson } from 'redux/modules/lesson/create';
+import {withCourse} from 'hoc';
 
 @connect(
-  ({courseLoaded}, ownProps) => ({ course: courseLoaded.getIn(['entities', ownProps.params.courseName]) }),
+  null,
   { addLesson }
 )
+
+@withCourse
+
 export default class LessonAdd extends Component {
   static propTypes = {
     course: PropTypes.object,

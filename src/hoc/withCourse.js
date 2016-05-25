@@ -14,7 +14,8 @@ export default function withCourse(WrappedComponent) {
 
     render() {
       const props = this.props;
-      return (<WrappedComponent { ...props }/>);
+      const {course} = props;
+      return course ? (<WrappedComponent { ...props }/>) : <div>Course not found</div>;
     }
   }
   return hoistStatics(WithCourse, WrappedComponent);
