@@ -6,18 +6,16 @@ export default class SignupModal extends Component {
 
   static propTypes = {
     show: PropTypes.bool,
+    onSubmit: PropTypes.func,
     onHide: PropTypes.func,
-    onSubmit: PropTypes.func.isRequired,
-    submitting: PropTypes.bool,
-    error: PropTypes.string
   }
 
   render() {
-    const {show, onHide, onSubmit, submitting, error} = this.props;
+    const {show, onSubmit, onHide} = this.props;
     return (
       <Modal show={show} onHide={onHide}>
         <Modal.Body>
-          <SignupForm onSubmit={onSubmit} submitting={submitting} error={error}/>
+          <SignupForm onSubmit={onSubmit}/>
         </Modal.Body>
       </Modal>
     );
