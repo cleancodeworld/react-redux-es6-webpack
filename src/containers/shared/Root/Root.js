@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 import {withUser} from 'hoc';
+import {Notifications} from 'components';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -34,6 +35,7 @@ export default class Root extends React.Component {
     const lastCommit = String(__LAST_COMMIT__).replace(/['"]+/g, ''); // eslint-disable-line no-undef
     const repoUrl = require('../../../../package.json').homepage;
     return (<div>
+      <Notifications/>
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">
         <ul className="nav navbar-nav visible-xs-block">

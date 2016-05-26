@@ -7,7 +7,9 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
 import { withCourseCategories } from 'hoc';
-
+import { success } from 'redux/modules/notifications';
+import {connect} from 'react-redux';
+@connect(() => ({}), { success })
 @reduxForm({
   form: 'CourseForm',
   validate,
@@ -17,6 +19,7 @@ export default class CourseForm extends Component {
 
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    success: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
     submitStatus: PropTypes.bool,
@@ -32,7 +35,10 @@ export default class CourseForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        alert('Uploaded successfully');
+        this.props.success({
+          title: 'Uploaded ',
+          message: 'Upload image successfully',
+        });
         field.onChange(body.url);
       }
     });
@@ -48,22 +54,12 @@ export default class CourseForm extends Component {
     return res;
   }
 
-  successRender(submitStatus, error) {
-    let res = '';
-    if (submitStatus && !error) {
-      res = (<div className="alert bg-success alert-styled-left" role="alert">
-        <strong>Success!</strong>
-      </div> );
-    }
-    return res;
-  }
 
   render() {
     const {
       handleSubmit,
       submitting,
       error,
-      submitStatus,
       categories,
       } = this.props;
     const { entities, order } = categories;
@@ -75,7 +71,6 @@ export default class CourseForm extends Component {
             </h2>
             <p className="text-muted">Help Students find your course. <a href="#">Learn best Practices</a></p>
             {this.errorRender(error)}
-            {this.successRender(submitStatus, error)}
             <div className="col-md-12">
               <div className="form-group">
                 <div className="control-label">

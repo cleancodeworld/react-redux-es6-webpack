@@ -7,6 +7,7 @@ export const CREATE_FAIL = 'knexpert/course/CREATE_FAIL';
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 import {resetCourses} from './loaded';
+import { success } from 'redux/modules/notifications';
 
 function _create(model) {
   return {
@@ -21,13 +22,13 @@ function _create(model) {
 export function create(portalId, model) {
   return dispatch => {
     return dispatch(
-      _create({portalId, ...model}))
-      .then(()=> {
-        setTimeout(() => {
-          dispatch(resetCourses());
-          dispatch(push('/author/course/list'));
-        }, 2500);
-      })
+      _create({ portalId, ...model }))
+      .then(()=>dispatch(success({
+        title: 'Saved',
+        message: 'Created course successfully',
+      })))
+      .then(()=>dispatch(resetCourses()))
+      .then(()=> dispatch(push('/author/course/list')))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

@@ -1,10 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
+import {connect} from 'react-redux';
+import { success } from 'redux/modules/notifications';
 
+@connect(() => ({}), { success })
 export default class ProfileCover extends Component {
   static propTypes = {
     updateCoverImage: PropTypes.func.isRequired,
+    success: PropTypes.func,
     portal: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   };
@@ -19,6 +23,10 @@ export default class ProfileCover extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
+        this.props.success({
+          title: 'Uploaded ',
+          message: 'Upload image successfully',
+        });
         this.props.updateCoverImage(portal.toJS(), body.url);
       }
     });
