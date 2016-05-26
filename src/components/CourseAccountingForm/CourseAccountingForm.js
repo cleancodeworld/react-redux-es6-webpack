@@ -41,7 +41,7 @@ export default class CourseAccountingForm extends Component {
       submitting,
       error,
       submitStatus,
-    } = this.props;
+      } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-body">

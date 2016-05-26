@@ -11,7 +11,7 @@ export default class BreadcrumbBar extends Component {
     const {breadcrumbs} = this.props;
     return (
       <div className="breadcrumb-line">
-        <Breadcrumb breadcrumbs={breadcrumbs} />
+        <Breadcrumb breadcrumbs={breadcrumbs}/>
       </div>
     );
   }

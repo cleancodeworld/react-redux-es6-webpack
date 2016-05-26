@@ -6,13 +6,14 @@ import {connect} from 'react-redux';
 export default class PageHeaderContent extends Component {
 
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    boldTitle: PropTypes.string,
+    pageHeader: PropTypes.object,
     goBack: PropTypes.func,
   }
 
   render() {
-    const {title, boldTitle} = this.props;
+    const {pageHeader} = this.props;
+    if (!pageHeader) return <span/>;
+    const { title, boldTitle} = pageHeader;
     return (
       <div className="page-header-content">
         <div className="page-title">

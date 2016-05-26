@@ -25,15 +25,17 @@ export default class PortalAuthorLayout extends Component {
   render() {
     const {user} = this.props;
     return (
-      <div className="page-content">
-        <div className="sidebar sidebar-main sidebar-default">
-          <div className="sidebar-content">
-            <SideProfile logout={this.props.logout} updateImage={this.props.updateImage} user={user}/>
-            <SideMenu />
+      <div className="page-container">
+        <div className="page-content">
+          <div className="sidebar sidebar-main sidebar-default">
+            <div className="sidebar-content">
+              <SideProfile logout={this.props.logout} updateImage={this.props.updateImage} user={user}/>
+              <SideMenu />
+            </div>
           </div>
-        </div>
-        <div className="content-wrapper">
-          {this.props.children}
+          <div className="content-wrapper">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );

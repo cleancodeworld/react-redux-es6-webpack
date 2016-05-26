@@ -3,10 +3,6 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import {
-  PortalLayout,
-} from '../index';
-
-import {
   CourseList,
 } from 'components';
 
@@ -24,23 +20,22 @@ export default class Cart extends Component {
     courses: PropTypes.object,
     order: PropTypes.object,
   };
+  static pageHeader = {
+    title: ' - Cart',
+    boldTitle: 'User'
+  }
 
   render() {
     const {courses, order} = this.props;
-    const breadcrumbs = [
-      { url: '/cart', name: 'Cart' },
-    ];
     return (
-      <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Cart">
-          <div className="content-wrapper">
-            <Helmet title="Cart"/>
-            <div className="content-group">
-              <h6 className="text-semibold">My Cart</h6>
-            </div>
-            <CourseList entities={courses} order={order}/>
+      <div className="page-container">
+        <Helmet title="Cart"/>
+        <div className="content-wrapper">
+          <div className="content-group">
+            <h6 className="text-semibold">My Cart</h6>
           </div>
-        </PortalLayout>
+          <CourseList entities={courses} order={order}/>
+        </div>
       </div>
     );
   }

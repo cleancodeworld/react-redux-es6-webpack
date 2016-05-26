@@ -3,10 +3,7 @@ import Helmet from 'react-helmet';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {
-  PortalLayout,
   CategoriesList,
-} from '../index';
-import {
   CourseList,
 } from 'components';
 import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/byPortal';
@@ -48,31 +45,31 @@ export default class CourseListPublic extends Component {
     activeCategory: PropTypes.object,
   };
 
+  static pageHeader = {
+    title: ' - List',
+    boldTitle: 'Courses'
+  };
+
   render() {
     const {courses, order, portal, activeCategory} = this.props;
     const portalName = portal.meta.get('name');
-    const breadcrumbs = [
-      { url: `/courses/${activeCategory.get('slug')}`, name: activeCategory.get('category') },
-    ];
     return (
-      <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle={portalName} title=" - Browse Courses">
-          <Helmet title={portalName}/>
-          <div className="sidebar sidebar-main sidebar-default">
-            <div className="sidebar-content">
-              <CategoriesList activeCategory={activeCategory}/>
-            </div>
+      <div className="page-container">
+        <Helmet title={portalName}/>
+        <div className="sidebar sidebar-main sidebar-default">
+          <div className="sidebar-content">
+            <CategoriesList activeCategory={activeCategory}/>
           </div>
-          <div className="content-wrapper">
-            <div className="content-group">
-              <h6 className="text-semibold">Course List </h6>
-            </div>
-            <CourseList
-              entities={courses}
-              order={order}
-              activeCategory={activeCategory}/>
+        </div>
+        <div className="content-wrapper">
+          <div className="content-group">
+            <h6 className="text-semibold">Course List </h6>
           </div>
-        </PortalLayout>
+          <CourseList
+            entities={courses}
+            order={order}
+            activeCategory={activeCategory}/>
+        </div>
       </div>
     );
   }

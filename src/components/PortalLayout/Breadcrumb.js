@@ -12,10 +12,10 @@ export default class Breadcrumb extends Component {
     return (
       <ul className="breadcrumb">
         <li><Link to="/"><i className="icon-home2 position-left"></i> Home</Link></li>
-        {breadcrumbs.map((path, index) => {
-          return (
-            <li key={index}><Link to={path.url}>{path.name}</Link></li>
-          );
+        {breadcrumbs.map((breadcrumb, index) => {
+          return breadcrumb ? (
+            <li key={index}><Link to={breadcrumb.path}>{breadcrumb.title}</Link></li>
+          ) : null;
         })}
       </ul>
     );

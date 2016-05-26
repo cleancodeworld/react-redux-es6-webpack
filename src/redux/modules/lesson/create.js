@@ -6,6 +6,7 @@ export const ADD_FAIL = 'knexpert/lessons/ADD_FAIL';
 
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
+import { success } from 'redux/modules/notifications';
 
 
 export function _add(model, courseName) {
@@ -22,9 +23,11 @@ export function _add(model, courseName) {
 export function add(model, courseId, courseName) {
   return dispatch => {
     return dispatch(_add({ ...model, order: 1, courseId }, courseName))
-      .then(()=> {
-        setTimeout(()=> dispatch(push('/author/course/' + courseName + '/lesson/list')), 2500);
-      })
+      .then(()=>dispatch(success({
+        title: 'Saved',
+        message: 'Created lesson successfully',
+      })))
+      .then(()=> dispatch(push('/author/course/' + courseName + '/lesson/list')))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

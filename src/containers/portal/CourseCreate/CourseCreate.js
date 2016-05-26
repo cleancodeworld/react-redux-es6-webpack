@@ -3,10 +3,6 @@ import Helmet from 'react-helmet';
 import {CourseForm} from 'components';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
-import {
-  PortalLayout,
-  PortalAuthorLayout
-} from '../index';
 import { create as courseCreate } from 'redux/modules/course/create';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 import { withPortal, withUser } from 'hoc';
@@ -39,13 +35,14 @@ export default class CourseCreate extends Component {
 
   state = {
     saved: false
-  }
+  };
+
+  static pageHeader = {
+    title: ' - Create',
+    boldTitle: 'Course'
+  };
 
   render() {
-    const breadcrumbs = [
-      { url: '/author', name: 'Author' },
-      { url: '/author/course/list', name: 'Create a Course' }
-    ];
     const {portal, user} = this.props;
     const initialFormValues = {
       level: 'all',
@@ -58,14 +55,10 @@ export default class CourseCreate extends Component {
     };
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Create a Course">
-          <PortalAuthorLayout>
-            <Helmet title="Create Course"/>
-            <CourseForm initialValues={initialFormValues}
-                        onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model).then(()=> this.setState({saved: true})) }
-                        submitStatus={this.state.saved}/>
-          </PortalAuthorLayout>
-        </PortalLayout>
+        <Helmet title="Create Course"/>
+        <CourseForm initialValues={initialFormValues}
+                    onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model).then(()=> this.setState({saved: true})) }
+                    submitStatus={this.state.saved}/>
       </div>
     );
   }

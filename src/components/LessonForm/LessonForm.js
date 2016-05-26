@@ -4,7 +4,10 @@ import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
+import {connect} from 'react-redux';
+import { success } from 'redux/modules/notifications';
 
+@connect(() => ({}), { success })
 @reduxForm({
   form: 'LessonForm',
   validate
@@ -12,9 +15,9 @@ import validate from './validate';
 export default class LessonForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    success: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
-    submitStatus: PropTypes.bool,
   }
 
   onDrop = (files, field)=> {
@@ -26,7 +29,10 @@ export default class LessonForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        alert('Uploaded successfully');
+        this.props.success({
+          title: 'Uploaded ',
+          message: 'Upload image successfully',
+        });
         field.onChange(body.url);
       }
     });
@@ -42,22 +48,11 @@ export default class LessonForm extends Component {
     return res;
   }
 
-  successRender(submitStatus, error) {
-    let res = '';
-    if (submitStatus && !error) {
-      res = (<div className="alert bg-success alert-styled-left" role="alert">
-        <strong>Success!</strong>
-      </div> );
-    }
-    return res;
-  }
-
   render() {
     const {
       handleSubmit,
       submitting,
       error,
-      submitStatus,
     } = this.props;
     return (
       <div className="panel panel-flat">
@@ -66,7 +61,6 @@ export default class LessonForm extends Component {
         </div>
         <div className="panel-body">
           {this.errorRender(error)}
-          {this.successRender(submitStatus, error)}
           <form onSubmit={handleSubmit} autoComplete="off">
             <Field name="title" component={title =>
               <div className="form-group">

@@ -71,7 +71,7 @@ export default function courseLoad(state = initialState, action) {
         const {courses, author} = action.result.data;
         courses.map(course=> {
           const immutableCourse = Immutable.fromJS(course).set('author', Immutable.fromJS(author));
-          map.setIn(['entities', course.slug], immutableCourse);
+          map.mergeIn(['entities', course.slug], immutableCourse);
         });
       });
     case LOAD_LESSONS_SUCCESS:
@@ -153,8 +153,7 @@ export default function courseLoad(state = initialState, action) {
           map.setIn(['entities', course.slug], Immutable.fromJS(course));
         });
       });
-    /* case RESET_COURSES:
-      return initialState; */
+    case RESET_COURSES:
     default:
       return state;
   }

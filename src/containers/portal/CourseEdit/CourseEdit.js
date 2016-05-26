@@ -7,12 +7,6 @@ import { edit } from 'redux/modules/course/edit';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
 import { withCourse, withPortal, withCourseCategories } from 'hoc';
 
-import {
-  PortalLayout,
-  PortalAuthorLayout,
-  PortalAuthorCourseLayout,
-} from '../index';
-
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
@@ -44,27 +38,20 @@ export default class CourseEdit extends Component {
   state = {
     saved: false
   }
+  static pageHeader = {
+    title: ' - Edit',
+    boldTitle: 'Course'
+  };
 
   render() {
     const { course, params, portal } = this.props;
     const {courseName} = params;
-    const breadcrumbs = [
-      { url: '/author', name: 'Author' },
-      { url: '/author/course/list', name: 'Course Mgr' },
-      { url: '/author/course/' + courseName, name: course.get('name') },
-    ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} boldTitle="Course Mgr" title={`- ${course.get('name')}` }>
-          <PortalAuthorLayout>
-            <PortalAuthorCourseLayout params={params}>
-              <Helmet title={`Edit: ${course.get('name')}`}/>
-              <CourseForm initialValues={course.toJS()}
-                          onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')).then(()=> this.setState({saved: true})) }
-                          submitStatus={this.state.saved}/>
-            </PortalAuthorCourseLayout>
-          </PortalAuthorLayout>
-        </PortalLayout>
+        <Helmet title={`Edit: ${course.get('name')}`}/>
+        <CourseForm initialValues={course.toJS()}
+                    onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')).then(()=> this.setState({saved: true})) }
+                    submitStatus={this.state.saved}/>
       </div>
     );
   }

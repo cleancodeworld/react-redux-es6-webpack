@@ -4,10 +4,6 @@ import {Link} from 'react-router';
 import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {
-  PortalLayout,
-  PortalAuthorLayout,
-} from '../index';
-import {
   CourseList,
 } from 'components';
 import { load, isLoaded } from 'redux/modules/course/byPortal';
@@ -35,26 +31,23 @@ export default class CourseListContainer extends Component {
     order: PropTypes.object,
   };
 
+  static pageHeader = {
+    title: ' - List',
+    boldTitle: 'Courses'
+  };
+
   render() {
     const {courses, order} = this.props;
-    const breadcrumbs = [
-      { url: '/author', name: 'Author' },
-      { url: '/author/course/list', name: 'Course Mgr' }
-    ];
     return (
       <div>
-        <PortalLayout breadcrumbs={breadcrumbs} title="Course List">
-          <PortalAuthorLayout>
-            <Helmet title="Portal Courses"/>
-            <div className="content-group">
-              <h6 className="text-semibold">Course List </h6>
-            </div>
-            <div className="content-group">
-              <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
-            </div>
-            <CourseList entities={courses} order={order}/>
-          </PortalAuthorLayout>
-        </PortalLayout>
+        <Helmet title="Portal Courses"/>
+        <div className="content-group">
+          <h6 className="text-semibold">Course List </h6>
+        </div>
+        <div className="content-group">
+          <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
+        </div>
+        <CourseList entities={courses} order={order}/>
       </div>
     );
   }
