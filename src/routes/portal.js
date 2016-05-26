@@ -67,14 +67,14 @@ export default (params) => {
                 <IndexRoute component={CourseList}/>
                 <Route path="create" component={CourseCreate}/>
                 <Route path="list" component={CourseList}/>
-                <Route name="Edit" staticName path=":courseName" component={Course}>
+                <Route path=":courseName" component={Course}>
                   <Route component={PortalAuthorCourseLayout}>
-                    <IndexRoute component={CourseEdit}/>
-                    <Route path="goals" component={CourseEdit}/>
-                    <Route path="accounting" component={CourseAccounting}/>
-                    <Route path="lesson/list" component={LessonList}/>
-                    <Route path="lesson/add" component={LessonAdd}/>
-                    <Route path="lesson/:lessonName/edit" component={LessonEdit}/>
+                    <IndexRoute name="Goals" component={CourseEdit}/>
+                    <Route name="Goals" path="goals" component={CourseEdit}/>
+                    <Route name="Accounting" path="accounting" component={CourseAccounting}/>
+                    <Route name="Lessons" path="lesson/list" component={LessonList}/>
+                    <Route name="Create Lesson" path="lesson/add" component={LessonAdd}/>
+                    <Route name="Edit Lesson" path="lesson/:lessonName/edit" component={LessonEdit}/>
                   </Route>
                 </Route>
               </Route>

@@ -23,8 +23,8 @@ export default class LessonList extends Component {
   };
 
   static pageHeader = {
-    title: '',
-    boldTitle: 'Lessons'
+    title: '- Lessons',
+    boldTitle: 'Course'
   };
 
   render() {
