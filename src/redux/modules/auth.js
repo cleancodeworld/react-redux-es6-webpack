@@ -9,6 +9,8 @@ export const LOGOUT_FAIL = 'knexpert/auth/LOGOUT_FAIL';
 export const LOAD = 'knexpert/auth/LOAD';
 export const LOAD_SUCCESS = 'knexpert/auth/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/auth/LOAD_FAIL';
+export const SHOW_SIGN_UP_MODAL = 'knexpert/auth/SHOW_SIGN_UP_MODAL';
+export const HIDE_SIGN_UP_MODAL = 'knexpert/auth/HIDE_SIGN_UP_MODAL';
 import {UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 
 import Immutable from 'immutable';
@@ -21,6 +23,7 @@ const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + con
 
 const initialState = Immutable.fromJS({
   loaded: false,
+  isShowSignUpModal: false,
   user: null,
 });
 
@@ -70,6 +73,11 @@ export default function auth(state = initialState, action) {
       return state.set('loaded', true);
     case UPDATE_COVER_IMAGE_SUCCESS:
       return state.setIn(['user', 'image'], action.data.image);
+    case SHOW_SIGN_UP_MODAL:
+      return state.set('isShowSignUpModal', true);
+    case HIDE_SIGN_UP_MODAL:
+    case '@@router/LOCATION_CHANGE':
+      return state.set('isShowSignUpModal', false);
     case LOGIN:
     default:
       return state;
@@ -141,5 +149,18 @@ export function logout() {
     }).then(()=> {
       return dispatch(push('/'));
     });
+  };
+}
+
+export function showSignUpModal() {
+  return {
+    type: SHOW_SIGN_UP_MODAL,
+  };
+}
+
+
+export function hideSignUpModal() {
+  return {
+    type: HIDE_SIGN_UP_MODAL,
   };
 }

@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
+import { connect } from 'react-redux';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 import {withUser} from 'hoc';
-import {Notifications} from 'components';
+import {Notifications, SignupModal} from 'components';
+import { signup } from 'redux/modules/user/create';
+import { hideSignUpModal } from 'redux/modules/auth';
+import { push } from 'react-router-redux';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -13,11 +17,23 @@ import {Notifications} from 'components';
     return Promise.all(promises);
   }
 }])
+
+@connect(
+  ({auth})=>({ isShowSignUpModal: auth.get('isShowSignUpModal') }),
+  { signup, hideSignUpModal, push }
+)
+
 @withUser
+
 export default class Root extends React.Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    user: PropTypes.object
+    signup: PropTypes.func.isRequired,
+    hideSignUpModal: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    isShowSignUpModal: PropTypes.bool,
+
   };
   static childContextTypes = {
     user: PropTypes.object
@@ -36,6 +52,11 @@ export default class Root extends React.Component {
     const repoUrl = require('../../../../package.json').homepage;
     return (<div>
       <Notifications/>
+      <SignupModal
+        onSubmit={(modal)=> this.props.signup(modal).then(()=>this.props.hideSignUpModal()).then(()=> this.props.push('/login'))}
+        onHide={()=> this.props.hideSignUpModal()}
+        show={this.props.isShowSignUpModal}
+      />
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">
         <ul className="nav navbar-nav visible-xs-block">

@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
+import {showSignUpModal as showSignUpModalFunc} from 'redux/modules/auth';
+import {connect} from 'react-redux';
 
-const Guest = ({course, onClickLoginRequiredLink}) => {
+const Guest = ({course, showSignUpModal}) => {
   let courseImage = course.get('thumbnail');
   if (!courseImage) {
     courseImage = '/assets/images/placeholder.jpg';
@@ -15,11 +17,11 @@ const Guest = ({course, onClickLoginRequiredLink}) => {
           <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
           <div className="caption-overflow">
             <span>
-              <a href="javascript:void(0)" onClick={onClickLoginRequiredLink}
-                className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
+              <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+                 className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
                 className="icon-plus3"></i></a>
-              <a href="javascript:void(0)" onClick={onClickLoginRequiredLink}
-                className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
+              <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+                 className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
                 className="icon-heart6"></i></a>
             </span>
           </div>
@@ -43,7 +45,8 @@ const Guest = ({course, onClickLoginRequiredLink}) => {
               </a>
             </div>
             <div className="media-body">
-              <div className="media-heading text-semibold">{`${course.getIn(['author', 'firstName'])} ${course.getIn(['author', 'lastName'])}`}</div>
+              <div
+                className="media-heading text-semibold">{`${course.getIn(['author', 'firstName'])} ${course.getIn(['author', 'lastName'])}`}</div>
             </div>
           </div>
         </div>
@@ -51,4 +54,4 @@ const Guest = ({course, onClickLoginRequiredLink}) => {
     </div>
   );
 };
-export default Guest;
+export default connect(()=>({}), { showSignUpModal: showSignUpModalFunc })(Guest) ;
