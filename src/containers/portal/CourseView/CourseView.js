@@ -24,6 +24,7 @@ export default class CourseViewContainer extends Component {
     auth: PropTypes.object,
     course: PropTypes.object,
     rate: PropTypes.func,
+    showSignUpModal: PropTypes.func,
     params: PropTypes.object,
     wishList: PropTypes.object,
     cart: PropTypes.object,
@@ -34,7 +35,7 @@ export default class CourseViewContainer extends Component {
   }
 
   render() {
-    const {params: {courseName}, course, wishList, cart, showSignUpModal} = this.props;
+    const {params: {courseName}, course, wishList, cart} = this.props;
     return (
       <div>
         <Helmet title={course.get('name')}/>
@@ -43,7 +44,7 @@ export default class CourseViewContainer extends Component {
                     isCartItem={!!cart.entities.get(courseName)}
                     addToWishList={wishList.addToWishList}
                     removeFromWishList={wishList.removeFromWishList}
-                    showSignUpModal={showSignUpModal}
+                    showSignUpModal={this.props.showSignUpModal}
                     addToCart={cart.addToCart}
                     removeFromCart={cart.removeFromCart}
                     onRate={(rateValue)=> this.props.rate({rate: rateValue, courseId: course.get('id')})}/>
