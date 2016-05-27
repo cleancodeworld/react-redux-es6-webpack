@@ -26,9 +26,6 @@ export default class CourseView extends Component {
         <div className="page-content">
           <div className="content-wrapper">
             <div className="panel panel-flat">
-              <div className="panel-heading">
-                <h6 className="panel-title">Traffic sources</h6>
-              </div>
               <div className="panel-body">
                 <div className="container-fluid">
                   <div className="row">
