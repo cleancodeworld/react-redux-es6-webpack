@@ -59,7 +59,8 @@ export default class CourseView extends Component {
                       <h2>
                         <PriceDisplay coursePrice={course.get('coursePrice')}/>
                       </h2>
-                      <p>
+                      {user
+                        ? <p>
                         {isMyCoursesItem
                           ? <a href="javascript:void(0)"
                                className="btn btn-primary disabled legitRipple">
@@ -70,6 +71,14 @@ export default class CourseView extends Component {
                           Take This Course
                         </a>}
                       </p>
+                        : <p>
+                        <a href="javascript:void(0)" onClick={()=>showSignUpModal(course)}
+                           className="btn btn-primary legitRipple">
+                          Take This Course
+                        </a>
+                      </p>
+                      }
+
                       {user ?
                         <p>
                           {isWishListItem
@@ -198,7 +207,7 @@ export default class CourseView extends Component {
                                       }
                                     </td>
                                     <td className="text-right lec-det">
-                                      [01:33]
+                                      <img src={lesson.get('thumbnail')} style={{maxHeight: 40}} alt=""/>
                                     </td>
                                   </tr>,
                                   <tr className="cur-list-row-detail">
