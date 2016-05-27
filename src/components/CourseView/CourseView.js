@@ -3,7 +3,7 @@ import {
   PriceDisplay,
   CourseRate,
 } from './../index';
-import {CheckOutModal} from 'components';
+import {CheckOutModal, LessonPreviewButton} from 'components';
 
 export default class CourseView extends Component {
   state = {
@@ -19,7 +19,8 @@ export default class CourseView extends Component {
       isCartItem,
       addToCart,
       removeFromCart,
-      showSignUpModal
+      showSignUpModal,
+      isMyCoursesItem,
       } = this.props;
     const {user} = this.context;
     const {checkOutModalOpen} = this.state;
@@ -59,10 +60,15 @@ export default class CourseView extends Component {
                         <PriceDisplay coursePrice={course.get('coursePrice')}/>
                       </h2>
                       <p>
-                        <a href="javascript:void(0)" onClick={()=>this.setState({checkOutModalOpen: true})}
-                           className="btn btn-primary legitRipple">
-                          Take This Course
+                        {isMyCoursesItem
+                          ? <a href="javascript:void(0)"
+                               className="btn btn-primary disabled legitRipple">
+                          Enrolled course
                         </a>
+                          : <a href="javascript:void(0)" onClick={()=>this.setState({checkOutModalOpen: true})}
+                               className="btn btn-primary legitRipple">
+                          Take This Course
+                        </a>}
                       </p>
                       {user ?
                         <p>
@@ -180,15 +186,11 @@ export default class CourseView extends Component {
                                     </td>
 
                                     <td className="lec-title-and-preview">
-                                      {user
-                                        ? <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
-                                        <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
-                                           className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple">
-                                          Preview
-                                        </a>
-                                      </div>
+                                      {user && isMyCoursesItem
+                                        ? <LessonPreviewButton lesson={lesson}/>
                                         : <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
-                                        <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+                                        <a href="javascript:void(0)"
+                                           onClick={()=> !user ? showSignUpModal() : this.setState({checkOutModalOpen: true})}
                                            className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple">
                                           Preview
                                         </a>
@@ -261,6 +263,7 @@ CourseView.contextTypes = {
 CourseView.propTypes = {
   course: PropTypes.object.isRequired,
   onRate: PropTypes.func,
+  isMyCoursesItem: PropTypes.bool,
   isWishListItem: PropTypes.bool,
   addToWishList: PropTypes.func,
   removeFromWishList: PropTypes.func,

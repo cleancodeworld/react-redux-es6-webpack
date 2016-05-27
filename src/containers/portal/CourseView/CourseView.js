@@ -4,12 +4,12 @@ import {
   CourseView,
 } from 'components';
 import { connect } from 'react-redux';
-import {withWishList, withCart, withCourse} from 'hoc';
 
+
+import {withWishList, withCart, withCourse, withMyCourses} from 'hoc';
 import { rate } from 'redux/modules/course/rate';
 import { signup } from 'redux/modules/user/create';
 import {showSignUpModal} from 'redux/modules/auth';
-
 
 @connect(
   null,
@@ -17,6 +17,7 @@ import {showSignUpModal} from 'redux/modules/auth';
 )
 @withCart
 @withWishList
+@withMyCourses
 @withCourse
 export default class CourseViewContainer extends Component {
 
@@ -26,6 +27,7 @@ export default class CourseViewContainer extends Component {
     rate: PropTypes.func,
     showSignUpModal: PropTypes.func,
     params: PropTypes.object,
+    myCourses: PropTypes.object,
     wishList: PropTypes.object,
     cart: PropTypes.object,
   };
@@ -35,13 +37,14 @@ export default class CourseViewContainer extends Component {
   }
 
   render() {
-    const {params: {courseName}, course, wishList, cart} = this.props;
+    const {params: {courseName}, course, wishList, cart, myCourses} = this.props;
     return (
       <div>
         <Helmet title={course.get('name')}/>
         <CourseView course={course}
                     isWishListItem={!!wishList.entities.get(courseName)}
                     isCartItem={!!cart.entities.get(courseName)}
+                    isMyCoursesItem={!!myCourses.entities.get(courseName)}
                     addToWishList={wishList.addToWishList}
                     removeFromWishList={wishList.removeFromWishList}
                     showSignUpModal={this.props.showSignUpModal}
