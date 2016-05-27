@@ -35,9 +35,7 @@ export default class CourseEdit extends Component {
     edit: PropTypes.func,
     params: PropTypes.object.isRequired,
   };
-  state = {
-    saved: false
-  }
+
   static pageHeader = {
     title: ' - Edit',
     boldTitle: 'Course'
@@ -50,8 +48,7 @@ export default class CourseEdit extends Component {
       <div>
         <Helmet title={`Edit: ${course.get('name')}`}/>
         <CourseForm initialValues={course.toJS()}
-                    onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')).then(()=> this.setState({saved: true})) }
-                    submitStatus={this.state.saved}/>
+                    onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')) }/>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import {
   CourseRate,
 } from './../index';
 import {CheckOutModal} from 'components';
+
 export default class CourseView extends Component {
   state = {
     checkOutModalOpen: false
@@ -18,6 +19,7 @@ export default class CourseView extends Component {
       isCartItem,
       addToCart,
       removeFromCart,
+      showSignUpModal
       } = this.props;
     const {user} = this.context;
     const {checkOutModalOpen} = this.state;
@@ -48,7 +50,8 @@ export default class CourseView extends Component {
                       </ul>
                     </div>
                     <div className="col-lg-8">
-                      <div className="asset-container">
+                      <div className="asset-container" className="text-center">
+                        <img src={course.get('thumbnail')} style={{maxHeight: 400}}/>
                       </div>
                     </div>
                     <div className="col-lg-4">
@@ -76,7 +79,13 @@ export default class CourseView extends Component {
                           </a>
 
                           }
-                        </p> : null
+                        </p> : <p>
+                        <a href="javascript:void(0)"
+                           onClick={()=>showSignUpModal(course)}
+                           className="btn btn-primary legitRipple">
+                          Add to wishlsit
+                        </a>
+                      </p>
                       }
 
                       {user ?
@@ -93,7 +102,13 @@ export default class CourseView extends Component {
                             Add to cart
                           </a>
                           }
-                        </p> : null
+                        </p> : <p>
+                        <a href="javascript:void(0)"
+                           onClick={()=>showSignUpModal(course)}
+                           className="btn btn-primary legitRipple">
+                          Add to cart
+                        </a>
+                      </p>
                       }
                       <p>
                       </p>
@@ -106,10 +121,6 @@ export default class CourseView extends Component {
                           <td>{course.getIn(['lessons', 'order']).count()}</td>
                         </tr>
                         <tr>
-                          <td>Video</td>
-                          <td>[we need to add this field]</td>
-                        </tr>
-                        <tr>
                           <td>Skill Level</td>
                           <td>{course.get('level')}</td>
                         </tr>
@@ -118,10 +129,8 @@ export default class CourseView extends Component {
                           <td>{course.get('language')}</td>
                         </tr>
                         <tr>
-                          <td>Includes</td>
-                          <td>
-                            [we need to add this field]
-                          </td>
+                          <td>Duration</td>
+                          <td>{ `${course.get('duration')} min` }</td>
                         </tr>
                         </tbody>
                       </table>
@@ -171,14 +180,20 @@ export default class CourseView extends Component {
                                     </td>
 
                                     <td className="lec-title-and-preview">
-                                      <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
-                                        <a href="/new-lecture/3928580/popup/" data-course-id="657932"
-                                           data-lecture-id="3928580"
-                                           className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple"
-                                           data-tracking-type="lecture-preview">
+                                      {user
+                                        ? <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
+                                        <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+                                           className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple">
                                           Preview
                                         </a>
                                       </div>
+                                        : <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
+                                        <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+                                           className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple">
+                                          Preview
+                                        </a>
+                                      </div>
+                                      }
                                     </td>
                                     <td className="text-right lec-det">
                                       [01:33]
@@ -252,4 +267,5 @@ CourseView.propTypes = {
   isCartItem: PropTypes.bool,
   addToCart: PropTypes.func,
   removeFromCart: PropTypes.func,
+  showSignUpModal: PropTypes.func,
 };

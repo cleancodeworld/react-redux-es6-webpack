@@ -19,10 +19,6 @@ export default class LessonAdd extends Component {
     params: PropTypes.object.isRequired
   };
 
-  state = {
-    saved: false
-  }
-
   static pageHeader = {
     title: ' - Create',
     boldTitle: 'Lesson'
@@ -36,8 +32,7 @@ export default class LessonAdd extends Component {
       <div>
         <Helmet title="Create Lesson"/>
         <LessonForm
-          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName).then(()=> this.setState({saved: true}))}
-          submitStatus={this.state.saved}/>
+          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName)}/>
       </div>
     );
   }

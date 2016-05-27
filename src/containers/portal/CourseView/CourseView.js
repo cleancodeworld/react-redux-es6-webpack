@@ -8,10 +8,12 @@ import {withWishList, withCart, withCourse} from 'hoc';
 
 import { rate } from 'redux/modules/course/rate';
 import { signup } from 'redux/modules/user/create';
+import {showSignUpModal} from 'redux/modules/auth';
+
 
 @connect(
   null,
-  { rate, signup }
+  { rate, signup, showSignUpModal }
 )
 @withCart
 @withWishList
@@ -32,7 +34,7 @@ export default class CourseViewContainer extends Component {
   }
 
   render() {
-    const {params: {courseName}, course, wishList, cart} = this.props;
+    const {params: {courseName}, course, wishList, cart, showSignUpModal} = this.props;
     return (
       <div>
         <Helmet title={course.get('name')}/>
@@ -41,6 +43,7 @@ export default class CourseViewContainer extends Component {
                     isCartItem={!!cart.entities.get(courseName)}
                     addToWishList={wishList.addToWishList}
                     removeFromWishList={wishList.removeFromWishList}
+                    showSignUpModal={showSignUpModal}
                     addToCart={cart.addToCart}
                     removeFromCart={cart.removeFromCart}
                     onRate={(rateValue)=> this.props.rate({rate: rateValue, courseId: course.get('id')})}/>

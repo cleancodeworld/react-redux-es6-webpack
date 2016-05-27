@@ -6,6 +6,7 @@ export const LOAD_FAIL = 'knexpert/course/price/LOAD_FAIL';
 export const EDIT = 'knexpert/course/price/EDIT';
 export const EDIT_SUCCESS = 'knexpert/course/price/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/course/price/EDIT_FAIL';
+import { success } from 'redux/modules/notifications';
 
 import {SubmissionError} from 'redux-form';
 
@@ -22,7 +23,13 @@ export function load(courseName) {
 function _edit(model, courseName) {
   return {
     types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
-    promise: (client) => client.put(`/api/v1/course/price/${courseName}`, { data: model }),
+    promise: (client) => client.put(`/api/v1/course/price/${courseName}`, {
+      data: {
+        ...model,
+        paid: !!model.paid,
+        price: parseFloat(model.price)
+      }
+    }),
     data: {
       courseName
     }
@@ -30,13 +37,12 @@ function _edit(model, courseName) {
 }
 
 export function edit(model, courseName) {
-  const _model = {
-    paid: !!model.paid,
-    price: parseFloat(model.price),
-    currency: model.currency
-  };
   return dispatch => {
-    return dispatch(_edit(_model, courseName))
+    return dispatch(_edit(model, courseName))
+      .then(()=>dispatch(success({
+        title: 'Saved',
+        message: 'Save course price successfully.',
+      })))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

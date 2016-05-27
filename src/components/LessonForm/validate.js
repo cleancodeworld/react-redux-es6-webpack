@@ -1,3 +1,5 @@
+import isURL from 'validator/lib/isURL';
+
 const LessonFormValidation = values => {
   const errors = {};
 
@@ -7,6 +9,11 @@ const LessonFormValidation = values => {
 
   if (!values.thumbnail) {
     errors.thumbnail = 'Required';
+  }
+  if (!values.videoUrl) {
+    errors.videoUrl = 'Required';
+  } else if (!isURL(values.videoUrl)) {
+    errors.videoUrl = 'Invalid Url';
   }
 
   return errors;
