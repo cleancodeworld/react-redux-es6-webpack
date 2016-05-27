@@ -28,10 +28,6 @@ export default class CourseAccounting extends Component {
     edit: PropTypes.func.isRequired,
   };
 
-  state = {
-    saved: false
-  };
-
   static pageHeader = {
     title: ' - Account',
     boldTitle: 'Course'
@@ -52,11 +48,7 @@ export default class CourseAccounting extends Component {
         <Helmet title="Course Account"/>
         <CourseAccountingForm
           initialValues={price.toJS()}
-          submitStatus={this.state.saved}
-          onSubmit={model => {
-            this.setState({saved: false});
-            return this.props.edit(model, courseName).then(() => this.setState({saved: true}));
-          }}/>
+          onSubmit={model => this.props.edit(model, courseName)}/>
       </div>
     );
   }

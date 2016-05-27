@@ -33,10 +33,6 @@ export default class CourseCreate extends Component {
     courseCreate: PropTypes.func,
   };
 
-  state = {
-    saved: false
-  };
-
   static pageHeader = {
     title: ' - Create',
     boldTitle: 'Course'
@@ -48,7 +44,7 @@ export default class CourseCreate extends Component {
       level: 'all',
       language: 'English',
       category: 'General',
-      duration: 500,
+      duration: '',
       thumbnail: '',
       authorId: user.get('userId'),
       author: user.toJS()
@@ -57,8 +53,7 @@ export default class CourseCreate extends Component {
       <div>
         <Helmet title="Create Course"/>
         <CourseForm initialValues={initialFormValues}
-                    onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model).then(()=> this.setState({saved: true})) }
-                    submitStatus={this.state.saved}/>
+                    onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model)}/>
       </div>
     );
   }

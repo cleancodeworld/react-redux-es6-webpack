@@ -42,9 +42,6 @@ export default class CourseListContainer extends Component {
       <div>
         <Helmet title="Portal Courses"/>
         <div className="content-group">
-          <h6 className="text-semibold">Course List </h6>
-        </div>
-        <div className="content-group">
           <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
         </div>
         <CourseList entities={courses} order={order}/>

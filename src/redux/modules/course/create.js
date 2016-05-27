@@ -12,7 +12,7 @@ import { success } from 'redux/modules/notifications';
 function _create(model) {
   return {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
-    promise: (client) => client.post(`/api/v1/course`, { data: model }),
+    promise: (client) => client.post(`/api/v1/course`, { data: { ...model, duration: parseInt(model.duration, 10) } }),
     data: {
       model
     }
