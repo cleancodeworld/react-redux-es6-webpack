@@ -22,7 +22,6 @@ export default class CourseForm extends Component {
     success: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
-    submitStatus: PropTypes.bool,
     categories: PropTypes.object,
   }
 
@@ -215,6 +214,19 @@ export default class CourseForm extends Component {
                   name="description"
                   component={description=> <TextEditor {...description}/>}
                 />
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="form-group">
+                <div className="control-label">
+                  Course Duration
+                </div>
+                <Field name="duration" component={duration =>
+                  <div>
+                    <input type="text" className="form-control" placeholder="Duration in minutes (Numbers only)" {...duration} />
+                    {duration.touched && duration.error && <label className="validation-error-label">{duration.error}</label>}
+                  </div>
+                }/>
               </div>
             </div>
             <div className="col-md-12 text-right">

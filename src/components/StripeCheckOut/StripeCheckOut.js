@@ -8,7 +8,7 @@ const StripeCheckOut = ({onSuccess, amount})=> {
       description="Knowledge experts"
       image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
       panelLabel="Give Money"
-      amount={amount}
+      amount={amount * 100}
       currency="USD"
       stripeKey="pk_test_ZlDhvs1xLhKDXDDwnjj9TiPV"
       email="info@knexeprt.com"

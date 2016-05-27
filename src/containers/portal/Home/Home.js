@@ -53,9 +53,6 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="content-wrapper">
-          <div className="content-group">
-            <h6 className="text-semibold">Course List </h6>
-          </div>
           <CourseList
             entities={courses}
             order={order}/>

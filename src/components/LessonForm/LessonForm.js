@@ -53,7 +53,7 @@ export default class LessonForm extends Component {
       handleSubmit,
       submitting,
       error,
-    } = this.props;
+      } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
@@ -67,6 +67,13 @@ export default class LessonForm extends Component {
                 <label>Title</label>
                 <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
+              </div>
+            }/>
+            <Field name="videoUrl" component={videoUrl =>
+              <div className="form-group">
+                <label className="display-block">Video url</label>
+                <input type="text" name="videoUrl" className="form-control" {...videoUrl} placeholder="Enter Video Url ..." />
+                {videoUrl.touched && videoUrl.error && <span className="validation-error-label">{videoUrl.error}</span>}
               </div>
             }/>
             <Field name="thumbnail" component={thumbnail =>
@@ -97,7 +104,8 @@ export default class LessonForm extends Component {
               </div>
             }/>
             <div className="text-right">
-              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i className="icon-arrow-right14 position-right"></i></button>
+              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i
+                className="icon-arrow-right14 position-right"></i></button>
             </div>
           </form>
         </div>
