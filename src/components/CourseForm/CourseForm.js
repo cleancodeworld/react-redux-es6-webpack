@@ -12,6 +12,7 @@ import { withCourseCategories } from 'hoc';
   form: 'CourseForm',
   validate,
 })
+
 @withCourseCategories
 export default class CourseForm extends Component {
 

@@ -8,7 +8,8 @@ import {
 } from 'components';
 import { load, isLoaded as isPublicListLoaded } from 'redux/modules/course/byPortal';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
-import {withCourses, withPortal} from 'hoc';
+import {withCourses, withPortal, withCourseCategories, withWishList, withCart, withUser} from 'hoc';
+import {showSignUpModal} from 'redux/modules/auth';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -27,22 +28,34 @@ import {withCourses, withPortal} from 'hoc';
     return Promise.all(promises);
   }
 }])
+
+
+@withCourses
+@withPortal
+@withCourseCategories
+@withWishList
+@withCart
+@withUser
+
 @connect(
   ({coursesByPortal, categoriesLoaded}, ownProps) => ({
     order: coursesByPortal.get('order'),
     activeCategory: categoriesLoaded.getIn(['entities', ownProps.params.categoryName]),
-  })
+  }), { showSignUpModal }
 )
-@withCourses
-@withPortal
 
-export default class CourseListPublic extends Component {
+export default class CoursesByCategory extends Component {
 
   static propTypes = {
     courses: PropTypes.object,
+    wishList: PropTypes.object,
+    cart: PropTypes.object,
+    user: PropTypes.object,
     order: PropTypes.object,
     portal: PropTypes.object,
+    categories: PropTypes.object,
     activeCategory: PropTypes.object,
+    showSignUpModal: PropTypes.func,
   };
 
   static pageHeader = {
@@ -51,21 +64,24 @@ export default class CourseListPublic extends Component {
   };
 
   render() {
-    const {courses, order, portal, activeCategory} = this.props;
-    const portalName = portal.meta.get('name');
+    const {courses, order, activeCategory, categories, user, cart, wishList} = this.props;
     return (
       <div className="page-container">
-        <Helmet title={portalName}/>
+        {activeCategory ? <Helmet title={activeCategory.get('category')}/> : null}
         <div className="sidebar sidebar-main sidebar-default">
           <div className="sidebar-content">
-            <CategoriesList activeCategory={activeCategory}/>
+            <CategoriesList categories={categories} activeCategory={activeCategory}/>
           </div>
         </div>
         <div className="content-wrapper">
           <CourseList
             entities={courses}
             order={order}
-            activeCategory={activeCategory}/>
+            activeCategory={activeCategory}
+            wishList={wishList}
+            cart={cart}
+            onSessionRequired={ ()=> this.props.showSignUpModal()}
+            user={user}/>
         </div>
       </div>
     );

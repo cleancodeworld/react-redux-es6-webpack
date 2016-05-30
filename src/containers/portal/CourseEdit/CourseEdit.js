@@ -33,6 +33,7 @@ export default class CourseEdit extends Component {
     course: PropTypes.object.isRequired,
     portal: PropTypes.object.isRequired,
     edit: PropTypes.func,
+    categories: PropTypes.object,
     params: PropTypes.object.isRequired,
   };
 
@@ -42,12 +43,12 @@ export default class CourseEdit extends Component {
   };
 
   render() {
-    const { course, params, portal } = this.props;
+    const { course, params, portal, categories } = this.props;
     const {courseName} = params;
     return (
       <div>
         <Helmet title={`Edit: ${course.get('name')}`}/>
-        <CourseForm initialValues={course.toJS()}
+        <CourseForm initialValues={course.toJS()} categories={categories}
                     onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')) }/>
       </div>
     );

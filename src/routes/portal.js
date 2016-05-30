@@ -10,7 +10,7 @@ import {
   LessonAdd,
   LessonEdit,
   CourseCreate,
-  CourseList,
+  CoursesByPortal,
   CourseEdit,
   CourseAccounting,
   AuthorContainer,
@@ -64,9 +64,9 @@ export default (params) => {
             <Route component={PortalAuthorLayout}>
               <IndexRoute component={Dashboard}/>
               <Route name="Course" path="course">
-                <IndexRoute component={CourseList}/>
+                <IndexRoute component={CoursesByPortal}/>
                 <Route path="create" component={CourseCreate}/>
-                <Route path="list" component={CourseList}/>
+                <Route path="list" component={CoursesByPortal}/>
                 <Route path=":courseName" component={Course}>
                   <Route component={PortalAuthorCourseLayout}>
                     <IndexRoute name="Goals" component={CourseEdit}/>

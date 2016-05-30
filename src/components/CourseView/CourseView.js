@@ -22,6 +22,7 @@ export default class CourseView extends Component {
       showSignUpModal,
       isMyCoursesItem,
       } = this.props;
+
     const {user} = this.context;
     const {checkOutModalOpen} = this.state;
     return (

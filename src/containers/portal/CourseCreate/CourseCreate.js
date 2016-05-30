@@ -5,7 +5,7 @@ import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import { create as courseCreate } from 'redux/modules/course/create';
 import { load as loadCategories, isLoaded as isCategoriesLoaded } from 'redux/modules/categories/loaded';
-import { withPortal, withUser } from 'hoc';
+import { withPortal, withUser, withCourseCategories } from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -25,11 +25,14 @@ import { withPortal, withUser } from 'hoc';
 )
 @withPortal
 @withUser
+@withCourseCategories
+
 export default class CourseCreate extends Component {
 
   static propTypes = {
     user: PropTypes.object,
     portal: PropTypes.object,
+    categories: PropTypes.object,
     courseCreate: PropTypes.func,
   };
 
@@ -39,7 +42,7 @@ export default class CourseCreate extends Component {
   };
 
   render() {
-    const {portal, user} = this.props;
+    const {portal, user, categories} = this.props;
     const initialFormValues = {
       level: 'all',
       language: 'English',
@@ -52,7 +55,7 @@ export default class CourseCreate extends Component {
     return (
       <div>
         <Helmet title="Create Course"/>
-        <CourseForm initialValues={initialFormValues}
+        <CourseForm initialValues={initialFormValues} categories={categories}
                     onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), model)}/>
       </div>
     );

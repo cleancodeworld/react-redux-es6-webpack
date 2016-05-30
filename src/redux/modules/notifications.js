@@ -14,7 +14,7 @@ import {RATE_SUCCESS as COURSE_RATE_SUCCESS, RATE_FAIL as COURSE_RATE_FAIL} from
 import {ADD_SUCCESS as LESSON_ADD_SUCCESS} from './lesson/create';
 import {EDIT_SUCCESS as LESSON_EDIT_SUCCESS} from './lesson/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as PORTAL_UPDATE_COVER_IMAGE_SUCCESS} from './portal/edit';
-import {UPDATE_COVER_IMAGE_SUCCESS as USER_UPDATE_COVER_IMAGE_SUCCESS} from 'user/edit';
+import {UPDATE_COVER_IMAGE_SUCCESS as USER_UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 
 const initialState = Immutable.fromJS([]);
 

@@ -1,10 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import PriceDisplay from '../../PriceDisplay/PriceDisplay';
-import {showSignUpModal as showSignUpModalFunc} from 'redux/modules/auth';
-import {connect} from 'react-redux';
 
-const Guest = ({course, showSignUpModal}) => {
+const Guest = ({course, onSessionRequired}) => {
   let courseImage = course.get('thumbnail');
   if (!courseImage) {
     courseImage = '/assets/images/placeholder.jpg';
@@ -17,10 +15,10 @@ const Guest = ({course, showSignUpModal}) => {
           <img src={courseImage} alt="Course Thumbnail" style={{ display: 'none' }}/>
           <div className="caption-overflow">
             <span>
-              <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+              <a href="javascript:void(0)" onClick={onSessionRequired}
                  className="btn border-white text-white btn-flat btn-icon btn-rounded"><i
                 className="icon-plus3"></i></a>
-              <a href="javascript:void(0)" onClick={()=> showSignUpModal()}
+              <a href="javascript:void(0)" onClick={onSessionRequired}
                  className="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i
                 className="icon-heart6"></i></a>
             </span>
@@ -54,4 +52,4 @@ const Guest = ({course, showSignUpModal}) => {
     </div>
   );
 };
-export default connect(()=>({}), { showSignUpModal: showSignUpModalFunc })(Guest) ;
+export default Guest ;
