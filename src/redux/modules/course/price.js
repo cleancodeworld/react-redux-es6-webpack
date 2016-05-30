@@ -6,7 +6,6 @@ export const LOAD_FAIL = 'knexpert/course/price/LOAD_FAIL';
 export const EDIT = 'knexpert/course/price/EDIT';
 export const EDIT_SUCCESS = 'knexpert/course/price/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/course/price/EDIT_FAIL';
-import { success } from 'redux/modules/notifications';
 
 import {SubmissionError} from 'redux-form';
 
@@ -39,10 +38,6 @@ function _edit(model, courseName) {
 export function edit(model, courseName) {
   return dispatch => {
     return dispatch(_edit(model, courseName))
-      .then(()=>dispatch(success({
-        title: 'Saved',
-        message: 'Save course price successfully.',
-      })))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

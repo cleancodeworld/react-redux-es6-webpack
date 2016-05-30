@@ -253,6 +253,7 @@ export default class CourseView extends Component {
             </div>
           </div>
           <CheckOutModal
+            onSuccess={this.props.onCheckOutSuccess}
             show={checkOutModalOpen}
             course={course}
             onHide={()=>this.setState({checkOutModalOpen: false})}/>
@@ -277,4 +278,5 @@ CourseView.propTypes = {
   addToCart: PropTypes.func,
   removeFromCart: PropTypes.func,
   showSignUpModal: PropTypes.func,
+  onCheckOutSuccess: PropTypes.func
 };

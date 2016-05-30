@@ -1,4 +1,3 @@
-import each from 'lodash/each';
 import React, {PropTypes} from 'react';
 
 import {connect} from 'react-redux';
@@ -12,19 +11,18 @@ import NotifySystem from 'react-notification-system';
 export default class Notifications extends React.Component {
 
   static propTypes = {
-    notifications: PropTypes.array,
+    notifications: PropTypes.object,
     hide: PropTypes.func
   }
 
 
   componentWillReceiveProps(nextProps) {
     const {notifications} = nextProps;
-
-    each(notifications, notification => {
+    notifications.forEach(notification=> {
       this.system().addNotification({
-        ...notification,
+        ...notification.toJS(),
         onRemove: () => {
-          this.props.hide(notification.uid);
+          this.props.hide(notification.get('uid'));
         }
       });
     });

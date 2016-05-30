@@ -4,10 +4,7 @@ import {TextEditor} from 'components';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
-import {connect} from 'react-redux';
-import { success } from 'redux/modules/notifications';
 
-@connect(() => ({}), { success })
 @reduxForm({
   form: 'LessonForm',
   validate
@@ -29,10 +26,6 @@ export default class LessonForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        this.props.success({
-          title: 'Uploaded ',
-          message: 'Upload image successfully',
-        });
         field.onChange(body.url);
       }
     });

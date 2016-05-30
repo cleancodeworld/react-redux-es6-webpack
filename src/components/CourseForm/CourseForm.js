@@ -7,9 +7,7 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
 import { withCourseCategories } from 'hoc';
-import { success } from 'redux/modules/notifications';
-import {connect} from 'react-redux';
-@connect(() => ({}), { success })
+
 @reduxForm({
   form: 'CourseForm',
   validate,
@@ -19,7 +17,7 @@ export default class CourseForm extends Component {
 
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    success: PropTypes.func,
+    onUploadImageSuccess: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
     categories: PropTypes.object,
@@ -34,10 +32,6 @@ export default class CourseForm extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        this.props.success({
-          title: 'Uploaded ',
-          message: 'Upload image successfully',
-        });
         field.onChange(body.url);
       }
     });
