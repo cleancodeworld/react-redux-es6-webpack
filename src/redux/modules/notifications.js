@@ -78,7 +78,7 @@ export default function Notifications(state = initialState, action) {
         map.push(notify);
       });
     case HIDE_NOTIFICATION:
-      return state.filter((notification)=> notification.uid !== action.uid);
+      return state.filter((notification)=> notification.get('uid') !== action.uid);
     default:
       return state;
   }
