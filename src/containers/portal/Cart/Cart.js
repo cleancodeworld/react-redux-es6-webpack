@@ -4,21 +4,33 @@ import { connect } from 'react-redux';
 
 import {
   CourseList,
+
 } from 'components';
 
-import {withCourses} from 'hoc';
+import {showSignUpModal} from 'redux/modules/auth';
 
-@connect(
-  ({cart}) => ({
-    order: cart.get('order'),
-  })
-)
+import {
+  withCourses,
+  withWishList,
+  withCart,
+  withUser} from 'hoc';
+
+
 @withCourses
+@withWishList
+@withCart
+@withUser
+@connect(null, { showSignUpModal })
+
 export default class Cart extends Component {
 
   static propTypes = {
     courses: PropTypes.object,
+    wishList: PropTypes.object,
+    cart: PropTypes.object,
+    user: PropTypes.object,
     order: PropTypes.object,
+    showSignUpModal: PropTypes.func,
   };
   static pageHeader = {
     title: ' - Cart',
@@ -26,7 +38,7 @@ export default class Cart extends Component {
   }
 
   render() {
-    const {courses, order} = this.props;
+    const {courses, user, cart, wishList} = this.props;
     return (
       <div className="page-container">
         <Helmet title="Cart"/>
@@ -34,7 +46,9 @@ export default class Cart extends Component {
           <div className="content-group">
             <h6 className="text-semibold">My Cart</h6>
           </div>
-          <CourseList entities={courses} order={order}/>
+          <CourseList wishList={wishList} cart={cart} user={user} entities={courses} order={cart.order}
+                      onSessionRequired={ ()=> this.props.showSignUpModal()}
+          />
         </div>
       </div>
     );

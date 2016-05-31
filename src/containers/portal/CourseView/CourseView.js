@@ -10,10 +10,11 @@ import {withWishList, withCart, withCourse, withMyCourses} from 'hoc';
 import { rate } from 'redux/modules/course/rate';
 import { signup } from 'redux/modules/user/create';
 import {showSignUpModal} from 'redux/modules/auth';
+import {add as addToMyCourses} from 'redux/modules/myCourses';
 
 @connect(
   null,
-  { rate, signup, showSignUpModal }
+  { rate, signup, showSignUpModal, addToMyCourses }
 )
 @withCart
 @withWishList
@@ -26,6 +27,7 @@ export default class CourseViewContainer extends Component {
     course: PropTypes.object,
     rate: PropTypes.func,
     showSignUpModal: PropTypes.func,
+    addToMyCourses: PropTypes.func,
     params: PropTypes.object,
     myCourses: PropTypes.object,
     wishList: PropTypes.object,
@@ -42,6 +44,7 @@ export default class CourseViewContainer extends Component {
       <div>
         <Helmet title={course.get('name')}/>
         <CourseView course={course}
+                    onCheckOutSuccess={(token)=> this.props.addToMyCourses(course, token.id)}
                     isWishListItem={!!wishList.entities.get(courseName)}
                     isCartItem={!!cart.entities.get(courseName)}
                     isMyCoursesItem={!!myCourses.entities.get(courseName)}

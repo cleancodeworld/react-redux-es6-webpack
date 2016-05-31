@@ -1,27 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import {showSignUpModal} from 'redux/modules/auth';
 
 import {
   CourseList,
 } from 'components';
 
-import {withCourses, withWishList, withCart, withMyCourses} from 'hoc';
+import {withCourses, withWishList, withCart, withUser} from 'hoc';
 
 @connect(
   ({myCourses}) => ({
     order: myCourses.get('order'),
-  })
+  }), { showSignUpModal }
 )
 @withCourses
 @withCart
 @withWishList
-@withMyCourses
+@withUser
+
 export default class MyCourses extends Component {
 
   static propTypes = {
     courses: PropTypes.object,
     order: PropTypes.object,
+    wishList: PropTypes.object,
+    cart: PropTypes.object,
+    showSignUpModal: PropTypes.func,
+    user: PropTypes.object,
   };
 
   static pageHeader = {
@@ -29,7 +35,7 @@ export default class MyCourses extends Component {
   };
 
   render() {
-    const {courses, order} = this.props;
+    const {courses, order, user, cart, wishList} = this.props;
     return (
       <div className="page-container">
         <Helmet title="My Courses"/>
@@ -37,7 +43,12 @@ export default class MyCourses extends Component {
           <div className="content-group">
             <h6 className="text-semibold">My Courses</h6>
           </div>
-          <CourseList entities={courses} order={order} myCourses/>
+          <CourseList entities={courses}
+                      order={order}
+                      wishList={wishList}
+                      cart={cart}
+                      onSessionRequired={ ()=> this.props.showSignUpModal()}
+                      user={user}/>
         </div>
       </div>
     );

@@ -2,11 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import {
   CourseListItem,
 } from 'components';
-import {withWishList, withCart, withUser} from 'hoc';
-
-@withWishList
-@withCart
-@withUser
 
 export default class CourseList extends Component {
   static propTypes = {

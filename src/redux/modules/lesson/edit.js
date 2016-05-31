@@ -9,7 +9,6 @@ export const EDIT_FAIL = 'knexpert/lessons/EDIT_FAIL';
 
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-import { success } from 'redux/modules/notifications';
 
 export function load(courseName, lessonName) {
   return {
@@ -41,10 +40,6 @@ function edit(model, lessonName, courseName) {
 export function editLesson(model, courseId, courseName, lessonName) {
   return dispatch => {
     return dispatch(edit({ ...model, order: 1, courseId }, lessonName, courseName))
-      .then(()=>dispatch(success({
-        title: 'Saved',
-        message: 'Edited lesson successfully',
-      })))
       .then(()=> dispatch(push('/author/course/' + courseName + '/lesson/list')))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });

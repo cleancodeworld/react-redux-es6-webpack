@@ -7,7 +7,7 @@ import {
   CourseList,
 } from 'components';
 import { load, isLoaded } from 'redux/modules/course/byPortal';
-import {withCourses} from 'hoc';
+import {withCourses, withWishList, withCart, withUser} from 'hoc';
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
@@ -23,12 +23,20 @@ import {withCourses} from 'hoc';
     order: coursesByPortal.get('order'),
   })
 )
+
 @withCourses
-export default class CourseListContainer extends Component {
+@withWishList
+@withCart
+@withUser
+
+export default class CoursesByPortal extends Component {
 
   static propTypes = {
     courses: PropTypes.object,
     order: PropTypes.object,
+    wishList: PropTypes.object,
+    cart: PropTypes.object,
+    user: PropTypes.object,
   };
 
   static pageHeader = {
@@ -37,14 +45,18 @@ export default class CourseListContainer extends Component {
   };
 
   render() {
-    const {courses, order} = this.props;
+    const {courses, order, user, cart, wishList} = this.props;
     return (
       <div>
         <Helmet title="Portal Courses"/>
         <div className="content-group">
           <Link to="/author/course/create" className="btn bg-blue">Create Course</Link>
         </div>
-        <CourseList entities={courses} order={order}/>
+        <CourseList entities={courses}
+                    order={order}
+                    wishList={wishList}
+                    cart={cart}
+                    user={user}/>
       </div>
     );
   }

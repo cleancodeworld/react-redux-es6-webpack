@@ -1,10 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
-import { success } from 'redux/modules/notifications';
-import {connect} from 'react-redux';
 
-@connect(() => ({}), { success })
 export default class SideProfile extends Component {
 
   static propTypes = {
@@ -33,10 +30,6 @@ export default class SideProfile extends Component {
       if (err) {
         alert(JSON.stringify(err));
       } else {
-        this.props.success({
-          title: 'Uploaded ',
-          message: 'Upload image successfully',
-        });
         this.props.updateImage(user.toJS(), body.url);
       }
     });

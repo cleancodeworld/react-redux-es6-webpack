@@ -8,7 +8,7 @@ export LessonList from './LessonList/LessonList';
 export LessonAdd from './LessonCreate/LessonCreate';
 export LessonEdit from './LessonEdit/LessonEdit';
 export CourseCreate from './CourseCreate/CourseCreate';
-export CourseList from './CourseList/CourseList';
+export CoursesByPortal from './CoursesByPortal/CoursesByPortal';
 export CourseEdit from './CourseEdit/CourseEdit';
 export CourseAccounting from './CourseAccounting/CourseAccounting';
 export AuthorContainer from './AuthorContainer/AuthorContainer';
