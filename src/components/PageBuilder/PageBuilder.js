@@ -10,7 +10,7 @@ import scriptLoader from 'react-async-script-loader';
 )
 export default class PageBuilder extends Component {
   static propTypes = {
-    isScriptLoaded: PropTypes.func.bool,
+    isScriptLoaded: PropTypes.bool,
   }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
