@@ -32,7 +32,7 @@ export default class App extends Component {
       <div>
         <div className="navbar-bottom login-container">
           <Helmet {...config.app.head}/>
-          <Navbar className="bg-blue" fluid>
+          <Navbar className="bg-blue" fluid inverse>
             <Navbar.Header>
               <Navbar.Brand>
                 <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
