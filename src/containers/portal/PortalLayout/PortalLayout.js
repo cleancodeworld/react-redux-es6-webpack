@@ -42,7 +42,7 @@ export default class PortalLayout extends Component {
     const lastRoute = _.last(this.props.routes);
     return (
       <div className="navbar-bottom portal-container">
-        <Navbar className="bg-blue" fluid>
+        <Navbar className="bg-blue" fluid inverse>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
