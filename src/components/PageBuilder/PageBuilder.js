@@ -482,59 +482,59 @@ export default class PageBuilder extends Component {
             <div className="row" style={{marginBottom: '10px'}}>
               <div className="col-md-2">
                 <div className="widget" data-template="text">
-										<span className="fa-stack fa-2x" style={{color: '#639ac2'}}>
-											<i className="fa fa-circle fa-stack-base"/>
-											<i className="fa fa-file-text fa-light"/>
-										</span>
+                  <span className="fa-stack fa-2x" style={{color: '#639ac2'}}>
+                    <i className="fa fa-circle fa-stack-2x"></i>
+                    <i className="fa fa-file-text fa-stack-1x fa-inverse"></i>
+                  </span>
                   <br/>
                   <small>Text</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="picture">
-										<span className="icon-stack icon-2x" style={{color: '#63a064'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-picture icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="picture">
+										<span className="fa-stack fa-2x" style={{color: '#63a064'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-picture-o fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Picture</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="event">
-										<span className="icon-stack icon-2x" style={{color: '#dd9329'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-calendar icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="event">
+										<span className="fa-stack fa-2x" style={{color: '#dd9329'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-calendar fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Event</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="audio">
-										<span className="icon-stack icon-2x" style={{color: '#cb4c58'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-play-sign icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="audio">
+										<span className=" fa-stack fa-2x" style={{color: '#cb4c58'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-play-circle fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Audio</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="link">
-										<span className="icon-stack icon-2x" style={{color: '#878787'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-link icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="link">
+										<span className=" fa-stack fa-2x" style={{color: '#878787'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-link fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Embed Link</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="form">
-										<span className="icon-stack icon-2x" style={{color: '#c94990'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-list-alt icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="form">
+										<span className=" fa-stack fa-2x" style={{color: '#c94990'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-list-alt fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Form</small>
@@ -542,62 +542,62 @@ export default class PageBuilder extends Component {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-md-2">
-                <div className="widget" data-template="title">
-										<span className="icon-stack icon-2x" style={{color: '#639ac2'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-font icon-light"></i>
+            <div className=" row">
+              <div className=" col-md-2">
+                <div className=" widget" data-template="title">
+										<span className=" fa-stack fa-2x" style={{color: '#639ac2'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-font fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Title</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget" data-template="gallery">
-										<span className="icon-stack icon-2x" style={{color: '#63a064'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-th icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget" data-template="gallery">
+										<span className=" fa-stack fa-2x" style={{color: '#63a064'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-th fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Gallery</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget" data-template="about">
-										<span className="icon-stack icon-2x" style={{color: '#dd9329'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-user icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget" data-template="about">
+										<span className=" fa-stack fa-2x" style={{color: '#dd9329'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-user fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>About Us</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="video">
-										<span className="icon-stack icon-2x" style={{color: '#cb4c58'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-youtube-play icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="video">
+										<span className=" fa-stack fa-2x" style={{color: '#cb4c58'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-youtube-play fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Video</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="button">
-										<span className="icon-stack icon-2x" style={{color: '#878787'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-check-sign icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="button">
+										<span className=" fa-stack fa-2x" style={{color: '#878787'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-check fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Button</small>
                 </div>
               </div>
-              <div className="col-md-2">
-                <div className="widget disabled" data-template="payment">
-										<span className="icon-stack icon-2x" style={{color: '#c94990'}}>
-											<i className="icon-circle icon-stack-base"></i>
-											<i className="icon-credit-card icon-light"></i>
+              <div className=" col-md-2">
+                <div className=" widget disabled" data-template="payment">
+										<span className=" fa-stack fa-2x" style={{color: '#c94990'}}>
+											<i className="fa fa-circle fa-stack-2x"></i>
+											<i className="fa fa-credit-card fa-stack-1x fa-inverse"></i>
 										</span>
                   <br/>
                   <small>Payment</small>
@@ -606,7 +606,6 @@ export default class PageBuilder extends Component {
             </div>
           </footer>
         </div>
-
       </div>
     )
   }
