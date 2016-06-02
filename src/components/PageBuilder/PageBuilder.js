@@ -27,11 +27,11 @@ export default class PageBuilder extends Component {
   }
 
   runPageBuilder() {
-    $('#flyer').on('click', '.preview', ()=> {
+    $('#flyer').on('click', '.preview', function() { // eslint-disable-line func-names
       const section = $(this).closest('section');
 
       if (section.length > 0) {
-        $('[data-selector]', section).each(()=> {
+        $('[data-selector]', section).each(function() { // eslint-disable-line func-names
           const target = section.find($(this).data('selector'));
 
           if ($(this).is('input') === true) {
@@ -50,11 +50,11 @@ export default class PageBuilder extends Component {
       }
     });
 
-    $('#flyer').on('click', '.preview button[data-action="dismiss"]', (event) => {
+    $('#flyer').on('click', '.preview button[data-action="dismiss"]', function(event) { // eslint-disable-line func-names
       const section = $(this).closest('section');
 
       if (section.length > 0) {
-        section.slideUp(250, ()=> {
+        section.slideUp(250, function() { // eslint-disable-line func-names
           section.remove();
         });
       }
@@ -62,11 +62,11 @@ export default class PageBuilder extends Component {
       event.stopImmediatePropagation();
     });
 
-    $('#flyer').on('submit', '.edit form', (event) => {
+    $('#flyer').on('submit', '.edit form', function(event) { // eslint-disable-line func-names
       const section = $(this).closest('section');
 
       if (section.length > 0) {
-        $('[data-selector]', section).each(()=> {
+        $('[data-selector]', section).each(function() { // eslint-disable-line func-names
           section.find($(this).data('selector')).html($(this).val());
         });
 
@@ -77,7 +77,7 @@ export default class PageBuilder extends Component {
       event.preventDefault();
     });
 
-    $('#flyer').on('click', '.edit form button[data-action="cancel"]', () => {
+    $('#flyer').on('click', '.edit form button[data-action="cancel"]', function() { // eslint-disable-line func-names
       const section = $(this).closest('section');
 
       if (section.length > 0) {
@@ -91,7 +91,7 @@ export default class PageBuilder extends Component {
       placeholder: 'dashed'
     }).disableSelection();
 
-    $('.widget').click(()=> {
+    $('.widget').click(function() { // eslint-disable-line func-names
       const template = $('script[data-template="' + $(this).data('template') + '"]');
 
       if (template.length > 0) {
@@ -102,21 +102,21 @@ export default class PageBuilder extends Component {
       $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
     });
 
-    $('[data-action="clear"]').click(()=> {
+    $('[data-action="clear"]').click(function() { // eslint-disable-line func-names
       $('#sortable').empty();
     });
 
-    $('[data-action="export"]').click(() => {
+    $('[data-action="export"]').click(function() { // eslint-disable-line func-names
       const json = [];
 
-      $('#flyer section[data-template]').each(() => {
+      $('#flyer section[data-template]').each(function() { // eslint-disable-line func-names
         const self = this;
         const section = {
           id: $(self).data('template'),
           data: []
         };
 
-        $(self).find('.edit [data-selector]').each(() => {
+        $(self).find('.edit [data-selector]').each(function() { // eslint-disable-line func-names
           section.data.push($.trim($(self).find($(this).data('selector')).html()));
         });
 
@@ -129,16 +129,16 @@ export default class PageBuilder extends Component {
         dataType: 'json',
         type: 'POST',
         url: 'https://httpbin.org/post'
-      }).done((data) => {
+      }).done(function(data) { // eslint-disable-line func-names
         alert('https://httpbin.org/post (POST): ' + data.data);
       });
     });
 
-    $('[data-action="import"]').click(() => {
-      $.getJSON('./data/data.json', (json) => {
+    $('[data-action="import"]').click(function() { // eslint-disable-line func-names
+      $.getJSON('./data/data.json', function(json) { // eslint-disable-line func-names
         $('#sortable').empty();
 
-        $.each(json, ()=> {
+        $.each(json, function() { // eslint-disable-line func-names
           const self = this;
           const template = $('script[data-template="' + this.id + '"]');
 
@@ -149,7 +149,7 @@ export default class PageBuilder extends Component {
 
             const section = $('#flyer section[data-template]').last();
 
-            section.find('[data-selector]').each(()=> {
+            section.find('[data-selector]').each(function() { // eslint-disable-line func-names
               $(this).val(self.data.shift());
             });
           }
