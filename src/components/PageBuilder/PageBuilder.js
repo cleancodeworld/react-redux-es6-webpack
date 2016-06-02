@@ -1,5 +1,5 @@
 /* global $ */
-import React, { Component} from 'react';
+import React, { Component, PropTypes} from 'react';
 import scriptLoader from 'react-async-script-loader';
 
 @scriptLoader(
@@ -9,6 +9,9 @@ import scriptLoader from 'react-async-script-loader';
   '//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.4.5/adapters/jquery.js'
 )
 export default class PageBuilder extends Component {
+  static propTypes = {
+    isScriptLoaded: PropTypes.func.bool,
+  }
 
   componentWillReceiveProps({ isScriptLoaded, isScriptLoadSucceed }) {
     if (isScriptLoaded && !this.props.isScriptLoaded) {
@@ -20,22 +23,20 @@ export default class PageBuilder extends Component {
   }
 
   appendTemplates() {
-    $('#flyer').append(' <script data-template="header" type="text/template"> <section id="header" data-template="header"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h1"> </div> <div class="form-group"> <label>Subtitle</label> <input type="text" class="form-control input-sm" data-selector=".preview > h3"> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview"> <h1>Local News Update</h1> <h3 class="dashed" style="margin: 0; padding: 5px;">Add Subtitle</h3> </div> </section> </script> <script data-template="title" type="text/template"> <section data-template="title"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h2"> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <h2 style="color: #bdbcbe; text-align: center; text-transform: uppercase; margin: 0;">Sample Title</h2> </div> </section> </script> <script data-template="text" type="text/template"> <section data-template="text"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h3"> </div> <div class="form-group"> <label>Text</label> <textarea class="form-control" rows="4" data-selector=".preview > .editable" data-richtext="true"></textarea> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <h3 style="color: #bdbcbe; text-transform: uppercase; margin-top: 0;">Sample Paragraph</h3> <div class="editable" style="color: #bdbcbe;"> Click on this text to edit it. You can add content easily by clicking on the "Add Content" bar at the bottom of the page. Drag this and other boxes around to re-order them. When you are finished, you can play with different designs by using the theme picker on the right. </div> </div> </section> </script> <script data-template="gallery" type="text/template"> <section data-template="gallery"> <div class="edit" style="display: none;"> <form> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(1) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(1) > .editable"></textarea> </div> </div> </div> <hr> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(2) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(2) > .editable"></textarea> </div> </div> </div> <hr> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(3) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(3) > .editable"></textarea> </div> </div> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> </div> </div> </section> </script> <script data-template="about" type="text/template"> <section data-template="about"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview h3"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control" rows="3" data-selector=".preview .editable"></textarea> </div> <div class="row"> <div class="col-md-6"> <div class="form-group"> <label>Address</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-map-marker"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .address > small"> </div> </div> <div class="form-group"> <label>Phone</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-phone"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .phone > small"> </div> </div> <div class="form-group"> <label>Website</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-globe"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .website > small"> </div> </div> </div> <div class="col-md-6"> <div class="form-group"> <label>Email</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-envelope"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .email > small"> </div> </div> <div class="form-group"> <label>Facebook</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-facebook"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .facebook > small"> </div> </div> <div class="form-group"> <label>Twitter</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-twitter"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .twitter > small"> </div> </div> </div> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x180" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <h3 style="color: #bdbcbe; text-transform: uppercase; margin-top: 0;">About Us</h3> <div class="editable" style="color: #bdbcbe;"> I am the one who knocks. Go science! </div> <div class="contacts"> <div class="address"> <i class="icon-fixed-width icon-map-marker"></i> <small class="text-muted">123 Main St.</small> </div> <div class="email"> <i class="icon-fixed-width icon-envelope"></i> <small class="text-muted">contact@yourwebsite.com</small> </div> <div class="phone"> <i class="icon-fixed-width icon-phone"></i> <small class="text-muted">(206) 555-1234</small> </div> <div class="facebook"> <i class="icon-fixed-width icon-facebook"></i> <small class="text-muted">facebook.com/example</small> </div> <div class="website"> <i class="icon-fixed-width icon-globe"></i> <small class="text-muted">yourwebsite.com</small> </div> <div class="twitter"> <i class="icon-fixed-width icon-twitter"></i> <small class="text-muted">@twitter_handle</small> </div> </div> </div> </div> </div> </section> </script>')
+    $('#flyer').append(' <script data-template="header" type="text/template"> <section id="header" data-template="header"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h1"> </div> <div class="form-group"> <label>Subtitle</label> <input type="text" class="form-control input-sm" data-selector=".preview > h3"> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview"> <h1>Local News Update</h1> <h3 class="dashed" style="margin: 0; padding: 5px;">Add Subtitle</h3> </div> </section> </script> <script data-template="title" type="text/template"> <section data-template="title"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h2"> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <h2 style="color: #bdbcbe; text-align: center; text-transform: uppercase; margin: 0;">Sample Title</h2> </div> </section> </script> <script data-template="text" type="text/template"> <section data-template="text"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview > h3"> </div> <div class="form-group"> <label>Text</label> <textarea class="form-control" rows="4" data-selector=".preview > .editable" data-richtext="true"></textarea> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <h3 style="color: #bdbcbe; text-transform: uppercase; margin-top: 0;">Sample Paragraph</h3> <div class="editable" style="color: #bdbcbe;"> Click on this text to edit it. You can add content easily by clicking on the "Add Content" bar at the bottom of the page. Drag this and other boxes around to re-order them. When you are finished, you can play with different designs by using the theme picker on the right. </div> </div> </section> </script> <script data-template="gallery" type="text/template"> <section data-template="gallery"> <div class="edit" style="display: none;"> <form> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(1) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(1) > .editable"></textarea> </div> </div> </div> <hr> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(2) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(2) > .editable"></textarea> </div> </div> </div> <hr> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview .col-md-4:nth-child(3) > h5"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control input-sm" rows="2" data-selector=".preview .col-md-4:nth-child(3) > .editable"></textarea> </div> </div> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> <div class="col-md-4"> <img src="//placehold.it/240x160" class="img-responsive img-thumbnail"> <h5 style="color: #bdbcbe; text-transform: uppercase;">Add a Title</h5> <div class="editable" style="color: #bdbcbe;"> </div> </div> </div> </div> </section> </script> <script data-template="about" type="text/template"> <section data-template="about"> <div class="edit" style="display: none;"> <form> <div class="form-group"> <label>Title</label> <input type="text" class="form-control" data-selector=".preview h3"> </div> <div class="form-group"> <label>Description</label> <textarea class="form-control" rows="3" data-selector=".preview .editable"></textarea> </div> <div class="row"> <div class="col-md-6"> <div class="form-group"> <label>Address</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-map-marker"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .address > small"> </div> </div> <div class="form-group"> <label>Phone</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-phone"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .phone > small"> </div> </div> <div class="form-group"> <label>Website</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-globe"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .website > small"> </div> </div> </div> <div class="col-md-6"> <div class="form-group"> <label>Email</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-envelope"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .email > small"> </div> </div> <div class="form-group"> <label>Facebook</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-facebook"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .facebook > small"> </div> </div> <div class="form-group"> <label>Twitter</label> <div class="input-group input-group-sm"> <span class="input-group-addon"> <i class="icon-fixed-width icon-twitter"></i> </span> <input type="text" class="form-control input-sm" data-selector=".preview .contacts .twitter > small"> </div> </div> </div> </div> <footer class="form-group"> <button type="button" class="btn btn-link btn-sm" data-action="cancel">Cancel</button> <button type="submit" class="btn btn-default btn-sm pull-right">Done</button> </footer> </form> </div> <div class="preview dashed"> <button type="button" class="close" data-action="dismiss">&times;</button> <div class="row"> <div class="col-md-4"> <img src="//placehold.it/240x180" class="img-responsive img-thumbnail"> </div> <div class="col-md-8"> <h3 style="color: #bdbcbe; text-transform: uppercase; margin-top: 0;">About Us</h3> <div class="editable" style="color: #bdbcbe;"> I am the one who knocks. Go science! </div> <div class="contacts"> <div class="address"> <i class="icon-fixed-width icon-map-marker"></i> <small class="text-muted">123 Main St.</small> </div> <div class="email"> <i class="icon-fixed-width icon-envelope"></i> <small class="text-muted">contact@yourwebsite.com</small> </div> <div class="phone"> <i class="icon-fixed-width icon-phone"></i> <small class="text-muted">(206) 555-1234</small> </div> <div class="facebook"> <i class="icon-fixed-width icon-facebook"></i> <small class="text-muted">facebook.com/example</small> </div> <div class="website"> <i class="icon-fixed-width icon-globe"></i> <small class="text-muted">yourwebsite.com</small> </div> <div class="twitter"> <i class="icon-fixed-width icon-twitter"></i> <small class="text-muted">@twitter_handle</small> </div> </div> </div> </div> </div> </section> </script>');
   }
 
   runPageBuilder() {
-    $('#flyer').on('click', '.preview', function() {
-      var section = $(this).closest('section');
+    $('#flyer').on('click', '.preview', ()=> {
+      const section = $(this).closest('section');
 
       if (section.length > 0) {
-        $('[data-selector]', section).each(function(i) {
-          var target = section.find($(this).data('selector'));
+        $('[data-selector]', section).each(()=> {
+          const target = section.find($(this).data('selector'));
 
           if ($(this).is('input') === true) {
             $(this).val(target.text());
-          }
-
-          else if ($(this).is('textarea') === true) {
+          } else if ($(this).is('textarea') === true) {
             $(this).val($.trim(target.html()));
 
             if ($(this).attr('data-richtext') === 'true') {
@@ -49,11 +50,11 @@ export default class PageBuilder extends Component {
       }
     });
 
-    $('#flyer').on('click', '.preview button[data-action="dismiss"]', function(event) {
-      var section = $(this).closest('section');
+    $('#flyer').on('click', '.preview button[data-action="dismiss"]', (event) => {
+      const section = $(this).closest('section');
 
       if (section.length > 0) {
-        section.slideUp(250, function() {
+        section.slideUp(250, ()=> {
           section.remove();
         });
       }
@@ -61,11 +62,11 @@ export default class PageBuilder extends Component {
       event.stopImmediatePropagation();
     });
 
-    $('#flyer').on('submit', '.edit form', function(event) {
-      var section = $(this).closest('section');
+    $('#flyer').on('submit', '.edit form', (event) => {
+      const section = $(this).closest('section');
 
       if (section.length > 0) {
-        $('[data-selector]', section).each(function(i) {
+        $('[data-selector]', section).each(()=> {
           section.find($(this).data('selector')).html($(this).val());
         });
 
@@ -76,8 +77,8 @@ export default class PageBuilder extends Component {
       event.preventDefault();
     });
 
-    $('#flyer').on('click', '.edit form button[data-action="cancel"]', function() {
-      var section = $(this).closest('section');
+    $('#flyer').on('click', '.edit form button[data-action="cancel"]', () => {
+      const section = $(this).closest('section');
 
       if (section.length > 0) {
         $(this).closest('.edit').hide();
@@ -90,8 +91,8 @@ export default class PageBuilder extends Component {
       placeholder: 'dashed'
     }).disableSelection();
 
-    $('.widget').click(function() {
-      var template = $('script[data-template="' + $(this).data('template') + '"]');
+    $('.widget').click(()=> {
+      const template = $('script[data-template="' + $(this).data('template') + '"]');
 
       if (template.length > 0) {
         $('#sortable').append(template.html());
@@ -101,21 +102,21 @@ export default class PageBuilder extends Component {
       $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
     });
 
-    $('[data-action="clear"]').click(function() {
+    $('[data-action="clear"]').click(()=> {
       $('#sortable').empty();
     });
 
-    $('[data-action="export"]').click(function() {
-      var json = [];
+    $('[data-action="export"]').click(() => {
+      const json = [];
 
-      $('#flyer section[data-template]').each(function() {
-        var self = this;
-        var section = {
+      $('#flyer section[data-template]').each(() => {
+        const self = this;
+        const section = {
           id: $(self).data('template'),
           data: []
         };
 
-        $(self).find('.edit [data-selector]').each(function() {
+        $(self).find('.edit [data-selector]').each(() => {
           section.data.push($.trim($(self).find($(this).data('selector')).html()));
         });
 
@@ -128,27 +129,27 @@ export default class PageBuilder extends Component {
         dataType: 'json',
         type: 'POST',
         url: 'https://httpbin.org/post'
-      }).done(function(data) {
+      }).done((data) => {
         alert('https://httpbin.org/post (POST): ' + data.data);
       });
     });
 
-    $('[data-action="import"]').click(function() {
-      $.getJSON('./data/data.json', function(json) {
+    $('[data-action="import"]').click(() => {
+      $.getJSON('./data/data.json', (json) => {
         $('#sortable').empty();
 
-        $.each(json, function() {
-          var self = this;
-          var template = $('script[data-template="' + this.id + '"]');
+        $.each(json, ()=> {
+          const self = this;
+          const template = $('script[data-template="' + this.id + '"]');
 
           if (template.length > 0) {
             if (this.id !== 'header') {
               $('#sortable').append(template.html());
             }
 
-            var section = $('#flyer section[data-template]').last();
+            const section = $('#flyer section[data-template]').last();
 
-            section.find('[data-selector]').each(function() {
+            section.find('[data-selector]').each(()=> {
               $(this).val(self.data.shift());
             });
           }
@@ -160,7 +161,6 @@ export default class PageBuilder extends Component {
   }
 
   render() {
-
     return ( <div>
         <div id="flyer" className="clearfix">
           <section id="header" data-template="header">
@@ -607,6 +607,6 @@ export default class PageBuilder extends Component {
           </footer>
         </div>
       </div>
-    )
+    );
   }
 }
