@@ -16,3 +16,4 @@ export withUser from './withUser';
 export withUserId from './withUserId';
 export withCourseCategories from './withCourseCategories';
 export withMyCourses from './withMyCourses';
+export clientSideOnly from './clientSideOnly';
