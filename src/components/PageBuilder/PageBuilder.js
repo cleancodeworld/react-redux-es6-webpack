@@ -48,7 +48,7 @@ export default class PageBuilder extends Component {
             images_upload_url: 'postAcceptor.php',
             images_upload_base_path: '/some/basepath',
             images_upload_credentials: true,
-            height:480,
+            height: 480,
             file_browser_callback: (fieldName, url, type) =>{
               if (type === 'image') this.refs.dropzone.open();
             }
