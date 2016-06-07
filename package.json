@@ -136,6 +136,7 @@
     "react-rte": "^0.1.14",
     "react-select": "0.9.1",
     "react-stripe-checkout": "^1.8.0",
+    "react-tinymce": "^0.5.1",
     "react-youtube": "^6.1.0",
     "redux": "^3.0.4",
     "redux-connect": "^2.3.0",
