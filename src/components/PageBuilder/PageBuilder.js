@@ -2,7 +2,9 @@
 import React, { Component, PropTypes} from 'react';
 import TinyMCE from 'react-tinymce';
 import scriptLoader from 'react-async-script-loader';
+import Dropzone from 'react-dropzone';
 import {clientSideOnly} from 'hoc';
+import superagent from 'superagent';
 
 @clientSideOnly
 @scriptLoader(
@@ -14,6 +16,19 @@ export default class PageBuilder extends Component {
     isScriptLoaded: PropTypes.bool,
   }
 
+  onDrop = (files)=> {
+    const req = superagent.post('/upload');
+    files.forEach((file)=> {
+      req.attach('thumbnail', file);
+    });
+    req.end((err, { body } = {})=> {
+      if (err) {
+        alert(JSON.stringify(err));
+      } else {
+        $('div[aria-label="Insert/edit image"] input.mce-textbox').first().val(body.url);
+      }
+    });
+  }
 
   handleEditorChange(event) {
     console.log(event.target.getContent());
@@ -24,11 +39,7 @@ export default class PageBuilder extends Component {
     if (!isScriptLoaded) return <div>Loading</div>;
     return (
       <div>
-        <iframe id="form_target" name="form_target" style={{display: 'none'}}></iframe>
-        <form id="my_form" action="/upload/" target="form_target" method="post" encType="multipart/form-data"
-              style={{width: '0', height: '0', overflow: 'hidden'}}>
-          <input name="image" type="file" onChange="$('#my_form').submit();this.value='';"/>
-        </form>
+        <Dropzone ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
         <TinyMCE
           content="<p>This is the initial content of the editor</p>"
           config={{
@@ -38,7 +49,7 @@ export default class PageBuilder extends Component {
             images_upload_base_path: '/some/basepath',
             images_upload_credentials: true,
             file_browser_callback: (fieldName, url, type) =>{
-              if (type === 'image') $('#my_form input').click();
+              if (type === 'image') this.refs.dropzone.open();
             }
           }}
           onChange={this.handleEditorChange}
