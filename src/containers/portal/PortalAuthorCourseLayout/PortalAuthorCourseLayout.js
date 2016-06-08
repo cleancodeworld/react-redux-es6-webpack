@@ -20,6 +20,7 @@ export default class PortalAuthorCourseLayout extends Component {
     children: PropTypes.any.isRequired,
     params: PropTypes.object,
     portal: PropTypes.object,
+    course: PropTypes.object,
     user: PropTypes.object,
     updateCoverImage: PropTypes.func.isRequired,
   };
