@@ -1,13 +1,16 @@
 import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 
 export default class LessonPages extends Component {
 
   static propTypes = {
     show: PropTypes.bool,
+    courseName: PropTypes.string,
+    lesson: PropTypes.object,
   }
 
   render() {
-    const {show} = this.props;
+    const {show, courseName, lesson} = this.props;
     return show
       ? (<tr>
       <td colSpan="3">
@@ -15,7 +18,11 @@ export default class LessonPages extends Component {
           <tbody>
           <tr>
             <td colSpan="3">
-              <strong>Pages</strong>
+              <Link className="btn btn-primary btn-xs"
+                    to={`/author/course/${courseName}/lesson/${lesson.get('slug')}/page/add`}>
+                Add Page
+                <i className="icon-pen-plus position-right"></i>
+              </Link>
             </td>
           </tr>
           <tr>

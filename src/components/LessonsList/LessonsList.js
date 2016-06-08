@@ -33,11 +33,14 @@ export default class LessonListContainer extends Component {
           <tbody>
           {lessons.order.map(lesson => {
             return ([
-              <LessonListItem key={lessons.entities.getIn([lesson, 'id'])} lesson={lessons.entities.get(lesson)}
+              <LessonListItem key={lessons.entities.getIn([lesson, 'id'])}
+                              lesson={lessons.entities.get(lesson)}
                               onRemove={onRemove}
                               onShowLessonPages={(lsn)=> this.showLessonPages(lsn)}
                               courseName={courseName}/>,
               <LessonPages show={lesson === this.state.selectedLessonPages}
+                           lesson={lessons.entities.get(lesson)}
+                           courseName={courseName}
                            key={`${lessons.entities.getIn([lesson, 'id'])}-pages`}/>]);
           })}
           </tbody>

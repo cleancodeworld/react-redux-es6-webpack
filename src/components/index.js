@@ -38,3 +38,4 @@ export CategoriesList from './CategoriesList/CategoriesList';
 export Notifications from './Notifications/Notifications';
 export LessonPreviewButton from './LessonPreviewButton/LessonPreviewButton';
 export TinyMCE from './TinyMCE/TinyMCE';
+export PageForm from './PageForm/PageForm';
