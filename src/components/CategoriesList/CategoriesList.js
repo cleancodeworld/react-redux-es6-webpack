@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import {
-  CourseListCategoryItem,
-} from 'components';
+import Item from './Item/Item';
 
 export default class CategoriesList extends Component {
 
@@ -19,8 +17,8 @@ export default class CategoriesList extends Component {
           {order.map(categoryId => {
             const category = entities.get(categoryId);
             return (
-              <CourseListCategoryItem category={category} key={category.get('slug')}
-                                      isActiveCategory={activeCategory && category.get('slug') === activeCategory.get('slug')}/>
+              <Item category={category} key={category.get('slug')}
+                    isActiveCategory={activeCategory && category.get('slug') === activeCategory.get('slug')}/>
             );
           })}
         </ul>
