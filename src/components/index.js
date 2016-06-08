@@ -19,7 +19,7 @@ export SideMenu from './PortalLayout/SideMenu';
 export ProfileCover from './PortalLayout/ProfileCover';
 export ProfileToolbar from './PortalLayout/ProfileToolbar';
 export CourseRightMenu from './PortalLayout/CourseRightMenu';
-export LessonListItem from './LessonListItem/LessonListItem';
+export LessonsList from './LessonsList/LessonsList';
 export LessonForm from './LessonForm/LessonForm';
 export CourseListItem from './CourseListItem/CourseListItem';
 export PasswordForgetForm from './PasswordForgetForm/PasswordForgetForm';
