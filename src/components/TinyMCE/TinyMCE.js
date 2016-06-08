@@ -1,6 +1,6 @@
 /* global $ */
 import React, { Component, PropTypes} from 'react';
-import TinyMCE from 'react-tinymce';
+import TinyMCEEditor from 'react-tinymce';
 import scriptLoader from 'react-async-script-loader';
 import Dropzone from 'react-dropzone';
 import {clientSideOnly} from 'hoc';
@@ -11,7 +11,7 @@ import superagent from 'superagent';
   '//cdn.tinymce.com/4/tinymce.min.js',
   '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
 )
-export default class PageBuilder extends Component {
+export default class TinyMCE extends Component {
   static propTypes = {
     isScriptLoaded: PropTypes.bool,
   }
@@ -40,7 +40,7 @@ export default class PageBuilder extends Component {
     return (
       <div>
         <Dropzone ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
-        <TinyMCE
+        <TinyMCEEditor
           content="<p>This is the initial content of the editor</p>"
           config={{
             plugins: 'autolink link image lists print preview media',
