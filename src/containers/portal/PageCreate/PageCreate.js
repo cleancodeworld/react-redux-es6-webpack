@@ -3,7 +3,7 @@ import { PageForm } from 'components';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { add as addLesson } from 'redux/modules/lesson/create';
-import {withCourse} from 'hoc';
+import {withCourse, withLesson} from 'hoc';
 
 @connect(
   null,
@@ -11,10 +11,11 @@ import {withCourse} from 'hoc';
 )
 
 @withCourse
-
+@withLesson
 export default class LessonAdd extends Component {
   static propTypes = {
     course: PropTypes.object,
+    lesson: PropTypes.object,
     addLesson: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
@@ -25,11 +26,12 @@ export default class LessonAdd extends Component {
   }
 
   render() {
+    const {course, lesson} = this.props;
     return (
       <div>
         <Helmet title="Create Lesson"/>
         <PageForm
-          onSubmit={ model => alert(JSON.stringify(model, null, 4))}/>
+          onSubmit={ model => this.props.addLesson(model, course, lesson)}/>
       </div>
     );
   }
