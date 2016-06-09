@@ -18,6 +18,10 @@ export default class TinyMCE extends Component {
     onChange: PropTypes.func,
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !nextProps.dirty || (nextProps.isScriptLoaded && !this.props.isScriptLoaded);
+  }
+
   onDrop = (files)=> {
     const req = superagent.post('/upload');
     files.forEach((file)=> {

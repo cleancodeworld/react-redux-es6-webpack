@@ -8,8 +8,6 @@ export default function clientSideOnly(WrappedComponent) {
     }
 
     componentDidMount() {
-      console.log(this.state);
-      console.log(__CLIENT__);
       this.setState({ browser: true }); // eslint-disable-line react/no-did-mount-set-state
     }
 

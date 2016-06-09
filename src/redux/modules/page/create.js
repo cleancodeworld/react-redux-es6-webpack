@@ -11,7 +11,13 @@ import { push } from 'react-router-redux';
 export function _add(model, course, lesson) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
-    promise: (client) => client.post(`/api/v1/page`, { data: model }),
+    promise: (client) => client.post(`/api/v1/page`, {
+      data: {
+        html: model.content,
+        title: model.title,
+        lessonId: lesson.get('id')
+      }
+    }),
     data: {
       model,
       courseName: course.get('slug'),
@@ -21,6 +27,7 @@ export function _add(model, course, lesson) {
 }
 
 export function add(model, course, lesson) {
+  debugger;
   return dispatch => {
     return dispatch(_add({ ...model }, course, lesson))
       .then(()=> dispatch(push(`/author/course/${course.get('slug')}/lesson/list`)))
