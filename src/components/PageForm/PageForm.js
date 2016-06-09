@@ -53,8 +53,10 @@ export default class PageForm extends Component {
               </div>
             }/>
             <div className="text-right">
-              <button type="submit" disabled={submitting} className="btn btn-primary">Save <i
-                className="icon-arrow-right14 position-right"></i></button>
+              <button type="submit" disabled={submitting} className="btn btn-primary">
+                Save
+                <i className="icon-arrow-right14 position-right"></i>
+              </button>
             </div>
           </form>
         </div>

@@ -19,3 +19,4 @@ export CourseView from './CourseView/CourseView';
 export MyCourses from './MyCourses/MyCourses';
 export Home from './Home/Home';
 export PageCreate from './PageCreate/PageCreate';
+export PageEdit from './PageEdit/PageEdit';

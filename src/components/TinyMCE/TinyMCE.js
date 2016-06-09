@@ -14,8 +14,8 @@ import superagent from 'superagent';
 export default class TinyMCE extends Component {
   static propTypes = {
     isScriptLoaded: PropTypes.bool,
+    value: PropTypes.string,
     onChange: PropTypes.func,
-
   }
 
   onDrop = (files)=> {
@@ -33,13 +33,13 @@ export default class TinyMCE extends Component {
   }
 
   render() {
-    const { isScriptLoaded, onChange } = this.props;
+    const { isScriptLoaded, onChange, value } = this.props;
     if (!isScriptLoaded) return <div>Loading</div>;
     return (
       <div>
         <Dropzone ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
         <TinyMCEEditor
-          content="<p>This is the initial content of the editor</p>"
+          content={value}
           config={{
             plugins: 'autolink link image lists print preview media',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
