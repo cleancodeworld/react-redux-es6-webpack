@@ -47,7 +47,7 @@ export default class Home extends Component {
   };
 
   static pageHeader = {
-    title: ' - Browse Courses',
+    title: ' - Portal',
     boldTitle: 'Home'
   }
 
