@@ -25,14 +25,11 @@ export default class LessonAdd extends Component {
   }
 
   render() {
-    const {courseName} = this.props.params;
-    const {course} = this.props;
-
     return (
       <div>
         <Helmet title="Create Lesson"/>
         <PageForm
-          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName)}/>
+          onSubmit={ model => alert(JSON.stringify(model, null, 4))}/>
       </div>
     );
   }

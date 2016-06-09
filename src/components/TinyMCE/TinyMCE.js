@@ -30,12 +30,8 @@ export default class TinyMCE extends Component {
     });
   }
 
-  handleEditorChange(event) {
-    console.log(event.target.getContent());
-  }
-
   render() {
-    const { isScriptLoaded } = this.props;
+    const { isScriptLoaded, onChange } = this.props;
     if (!isScriptLoaded) return <div>Loading</div>;
     return (
       <div>
@@ -53,7 +49,7 @@ export default class TinyMCE extends Component {
               if (type === 'image') this.refs.dropzone.open();
             }
           }}
-          onChange={this.handleEditorChange}
+          onChange={(event)=> onChange(event.target.getContent())}
         />
       </div>
     );
