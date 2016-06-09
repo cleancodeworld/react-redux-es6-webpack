@@ -23,6 +23,7 @@ import {
   Home,
   PortalAuthorLayout,
   PortalAuthorCourseLayout,
+  Courses,
 } from '../containers/portal';
 import {
   Root,
@@ -55,6 +56,7 @@ export default (params) => {
           <Route path="check-out" component={CheckOut}/>
 
           <Route name="Courses" path="course">
+            <IndexRoute name="Courses" component={Courses}/>
             <Route name="View" staticName path=":courseName" component={Course}>
               <IndexRoute component={CourseView}/>
             </Route>
