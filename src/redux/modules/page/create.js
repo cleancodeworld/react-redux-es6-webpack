@@ -27,7 +27,6 @@ export function _add(model, course, lesson) {
 }
 
 export function add(model, course, lesson) {
-  debugger;
   return dispatch => {
     return dispatch(_add({ ...model }, course, lesson))
       .then(()=> dispatch(push(`/author/course/${course.get('slug')}/lesson/list`)))
