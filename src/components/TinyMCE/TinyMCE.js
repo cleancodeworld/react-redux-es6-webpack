@@ -14,6 +14,8 @@ import superagent from 'superagent';
 export default class TinyMCE extends Component {
   static propTypes = {
     isScriptLoaded: PropTypes.bool,
+    onChange: PropTypes.func,
+
   }
 
   onDrop = (files)=> {
