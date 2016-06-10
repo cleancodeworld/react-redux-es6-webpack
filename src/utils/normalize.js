@@ -22,6 +22,20 @@ export function lessons(arrayOfLessons) {
 }
 
 
+export function normalizeBySlug(arrayOfObjects) {
+  const schema = new Schema('objects', { idAttribute: 'slug' });
+  const results = normalize(
+    {
+      objects: arrayOfObjects
+    },
+    {
+      objects: arrayOf(schema)
+    });
+  const entities = _.get(results, 'entities.objects', {});
+  const order = _.get(results, 'result.objects', []);
+  return { order, entities, listLoaded: true };
+}
+
 export function categories(arrayOfCategories) {
   const categoriesSchema = new Schema('categories', { idAttribute: 'slug' });
   const results = normalize({ categories: arrayOfCategories }, {

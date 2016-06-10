@@ -25,11 +25,23 @@ export default class LessonPages extends Component {
               </Link>
             </td>
           </tr>
-          <tr>
-            <td>
-              Page Number One
-            </td>
-          </tr>
+          {
+            lesson.getIn(['pages', 'order'])
+              ?
+              lesson.getIn(['pages', 'order']).map((slug)=> {
+                const page = lesson.getIn(['pages', 'entities', slug]);
+                return (
+                  <tr key={slug}>
+                    <td>
+                      {page.get('title')}
+                    </td>
+                  </tr>);
+              })
+              :
+              (<tr>
+                <td>loading</td>
+              </tr>)
+          }
           </tbody>
         </table>
       </td>

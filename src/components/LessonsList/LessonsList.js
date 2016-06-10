@@ -8,14 +8,16 @@ export default class LessonListContainer extends Component {
     lessons: PropTypes.object,
     courseName: PropTypes.string,
     onRemove: PropTypes.func,
+    onLoadPages: PropTypes.func,
   }
 
   state = {
     selectedLessonPages: null
   };
 
-  showLessonPages = (lesson)=> {
-    this.setState({ selectedLessonPages: this.state.selectedLessonPages === lesson ? null : lesson });
+  showLessonPages = (lessonName)=> {
+    this.props.onLoadPages(lessonName);
+    this.setState({ selectedLessonPages: this.state.selectedLessonPages === lessonName ? null : lessonName });
   }
 
   render() {
@@ -36,7 +38,7 @@ export default class LessonListContainer extends Component {
               <LessonListItem key={lessons.entities.getIn([lesson, 'id'])}
                               lesson={lessons.entities.get(lesson)}
                               onRemove={onRemove}
-                              onShowLessonPages={(lsn)=> this.showLessonPages(lsn)}
+                              onShowLessonPages={(lessonName)=> this.showLessonPages(lessonName)}
                               courseName={courseName}/>,
               <LessonPages show={lesson === this.state.selectedLessonPages}
                            lesson={lessons.entities.get(lesson)}
