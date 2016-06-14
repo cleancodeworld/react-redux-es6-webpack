@@ -21,6 +21,10 @@ import {
 import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
 
 import {
+  EDIT_SUCCESS as EDIT_PAGE_SUCCESS,
+} from './../page/edit';
+
+import {
   EDIT_SUCCESS as EDIT_LESSON_SUCCESS,
   LOAD_SUCCESS as LOAD_LESSON_SUCCESS,
 } from './../lesson/edit';
@@ -109,6 +113,17 @@ export default function courseLoad(state = initialState, action) {
         const {courseName} = action.data;
         const {lesson} = action.result.data;
         map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
+      });
+
+    case EDIT_PAGE_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName, pageName} = action.data;
+        const {page} = action.result.data;
+        // TODO: should remove slug: pageName and get the value from api
+        map.mergeIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages', 'entities', pageName], Immutable.fromJS({
+          ...page,
+          slug: pageName
+        }));
       });
     case REMOVE_LESSON_SUCCESS:
       return state.withMutations(map => {

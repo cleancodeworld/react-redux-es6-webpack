@@ -35,6 +35,16 @@ export default class LessonPages extends Component {
                     <td>
                       {page.get('title')}
                     </td>
+                    <td className="col-md-3 col-sm-3 text-center">
+                      <ul className="icons-list">
+                        <li className="text-primary-600">
+                          <Link
+                            to={`/author/course/${courseName}/lesson/${lesson.get('slug')}/page/${slug}/edit`}>
+                            <i className="icon-pencil7"></i>
+                          </Link>
+                        </li>
+                      </ul>
+                    </td>
                   </tr>);
               })
               :

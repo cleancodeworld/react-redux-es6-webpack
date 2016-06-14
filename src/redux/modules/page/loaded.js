@@ -5,7 +5,7 @@ export const LOAD_SUCCESS = 'knexpert/pages/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/pages/LOAD_FAIL';
 
 export function isLoaded(globalState, courseName, lessonName) {
-  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName, 'lessons', lessonName, 'pages', 'listLoaded']);
+  return globalState.courseLoaded && globalState.courseLoaded.getIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages', 'listLoaded']);
 }
 
 export function load(courseName, lessonName) {

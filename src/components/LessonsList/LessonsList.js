@@ -16,7 +16,10 @@ export default class LessonListContainer extends Component {
   };
 
   showLessonPages = (lessonName)=> {
-    this.props.onLoadPages(lessonName);
+    const {lessons} = this.props;
+    if (!lessons.entities.getIn([lessonName, 'pages', 'listLoaded'])) {
+      this.props.onLoadPages(lessonName);
+    }
     this.setState({ selectedLessonPages: this.state.selectedLessonPages === lessonName ? null : lessonName });
   }
 

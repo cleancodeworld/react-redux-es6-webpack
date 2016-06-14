@@ -2,22 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { PageForm } from 'components';
-import { editLesson } from 'redux/modules/lesson/edit';
-import {withLesson, withCourse} from 'hoc';
+import { edit as editPage } from 'redux/modules/page/edit';
+import {withPage, withLesson, withCourse} from 'hoc';
 
-@connect(
-  null,
-  { editLesson }
-)
 
 @withCourse
 @withLesson
-
+@withPage
+@connect(
+  null,
+  { editPage }
+)
 export default class PageEdit extends Component {
   static propTypes = {
+    page: PropTypes.object,
     lesson: PropTypes.object,
     course: PropTypes.object,
-    editLesson: PropTypes.func.isRequired,
+    editPage: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired
   };
 
@@ -31,12 +32,12 @@ export default class PageEdit extends Component {
   }
 
   render() {
-    const {params: { courseName, lessonName }, lesson} = this.props;
+    const {page, lesson, course} = this.props;
     return (
       <div>
-        <Helmet title={`Edit Lesson: ${lesson.get('title')}`}/>
-        <PageForm initialValues={{content: '<p>Client</p>', title: 'Nour'}}
-                  onSubmit={ model => this.props.editLesson(model, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
+        <Helmet title={`Edit Lesson: ${page.get('title')}`}/>
+        <PageForm initialValues={page.toJS()}
+                  onSubmit={ model => this.props.editPage(model, course, lesson, page).then(()=>this.setState({saved: true}))}
                   submitStatus={this.state.saved}/>
       </div>
     );

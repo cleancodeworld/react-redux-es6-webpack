@@ -1,17 +1,17 @@
 export const INIT = '@@INIT';
 export const REDUX_INIT = '@@redux/INIT';
-export const ADD = 'knexpert/pages/ADD';
-export const ADD_SUCCESS = 'knexpert/pages/ADD_SUCCESS';
-export const ADD_FAIL = 'knexpert/pages/ADD_FAIL';
+export const EDIT = 'knexpert/pages/EDIT';
+export const EDIT_SUCCESS = 'knexpert/pages/EDIT_SUCCESS';
+export const EDIT_FAIL = 'knexpert/pages/EDIT_FAIL';
 
 import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 
 
-export function _add(model, course, lesson) {
+export function _edit(model, course, lesson, page) {
   return {
-    types: [ADD, ADD_SUCCESS, ADD_FAIL],
-    promise: (client) => client.post(`/api/v1/page`, {
+    types: [EDIT, EDIT_SUCCESS, EDIT_FAIL],
+    promise: (client) => client.put(`/api/v1/page/${lesson.get('slug')}/${page.get('slug')}`, {
       data: {
         html: model.html,
         title: model.title,
@@ -22,13 +22,14 @@ export function _add(model, course, lesson) {
       model,
       courseName: course.get('slug'),
       lessonName: lesson.get('slug'),
+      pageName: page.get('slug'),
     }
   };
 }
 
-export function add(model, course, lesson) {
+export function edit(model, course, lesson, page) {
   return dispatch => {
-    return dispatch(_add({ ...model }, course, lesson))
+    return dispatch(_edit(model, course, lesson, page))
       .then(()=> dispatch(push(`/author/course/${course.get('slug')}/lesson/list`)))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });

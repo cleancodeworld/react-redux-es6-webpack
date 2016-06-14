@@ -34,7 +34,7 @@ export default class PageForm extends Component {
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
-          <h6 className="panel-title">Page Detail</h6>
+          <h6 className="panel-t itle">Page Detail</h6>
         </div>
         <div className="panel-body">
           {this.errorRender(error)}
@@ -46,10 +46,10 @@ export default class PageForm extends Component {
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
               </div>
             }/>
-            <Field name="content" component={content =>
+            <Field name="html" component={html =>
               <div className="form-group">
                 <label>Content</label>
-                <TinyMCE {...content}/>
+                <TinyMCE {...html}/>
               </div>
             }/>
             <div className="text-right">
