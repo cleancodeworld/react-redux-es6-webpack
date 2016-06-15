@@ -26,6 +26,7 @@ import {
   PageCreate,
   PageEdit,
   Courses,
+  QuestionAsk,
 } from '../containers/portal';
 import {
   Root,
@@ -46,6 +47,7 @@ export default (params) => {
         <Route name="PortalLayout" staticName component={PortalLayout}>
           { /* Sub routes */ }
           <IndexRoute name="r1" component={Home}/>
+          <Route name="Question Ask" path="question/ask" component={QuestionAsk}/>
           <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
@@ -58,6 +60,7 @@ export default (params) => {
           <Route path="check-out" component={CheckOut}/>
 
           <Route name="Courses" path="course">
+            <IndexRoute name="Courses" component={Courses}/>
             <Route name="View" staticName path=":courseName" component={Course}>
               <IndexRoute component={CourseView}/>
             </Route>
@@ -78,6 +81,8 @@ export default (params) => {
                     <Route name="Lessons" path="lesson/list" component={LessonList}/>
                     <Route name="Create Lesson" path="lesson/add" component={LessonAdd}/>
                     <Route name="Edit Lesson" path="lesson/:lessonName/edit" component={LessonEdit}/>
+                    <Route name="Create Page" path="lesson/:lessonName/page/add" component={PageCreate}/>
+                    <Route name="Edit Page" path="lesson/:lessonName/page/:pageName/edit" component={PageEdit}/>
                   </Route>
                 </Route>
               </Route>
