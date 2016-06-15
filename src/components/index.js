@@ -39,3 +39,4 @@ export Notifications from './Notifications/Notifications';
 export LessonPreviewButton from './LessonPreviewButton/LessonPreviewButton';
 export TinyMCE from './TinyMCE/TinyMCE';
 export PageForm from './PageForm/PageForm';
+export QuestionForm from './QuestionForm/QuestionForm';

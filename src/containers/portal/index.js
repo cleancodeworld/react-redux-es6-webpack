@@ -21,3 +21,4 @@ export Home from './Home/Home';
 export Courses from './Courses/Courses';
 export PageCreate from './PageCreate/PageCreate';
 export PageEdit from './PageEdit/PageEdit';
+export QuestionAsk from './QuestionAsk/QuestionAsk';
