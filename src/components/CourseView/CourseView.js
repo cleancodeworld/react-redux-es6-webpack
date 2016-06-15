@@ -3,7 +3,8 @@ import {
   PriceDisplay,
   CourseRate,
 } from './../index';
-import {CheckOutModal, LessonPreviewButton} from 'components';
+import {LessonPreviewButton, PagePreviewButton, LessonRow, PageRow, LessonDetailsRow} from './components';
+import {CheckOutModal} from 'components';
 
 export default class CourseView extends Component {
   state = {
@@ -179,40 +180,28 @@ export default class CourseView extends Component {
                                  data-course-id="657932"
                                  data-is-more-to-load="1" data-num-displayed-items="100" data-is-seo-traffic="0">
                             <tbody>
-                            {course.getIn(['lessons', 'order']).map(slug=> {
+                            {course.getIn(['lessons', 'order']).map((slug, lessonIndex)=> {
                               const lesson = course.getIn(['lessons', 'entities', slug]);
-                              return (
-                                [
-                                  <tr className="cur-list-row  ">
-                                    <td className="lec-icon tac hm cur-icon wa-force-xs">
-                                      <i className="fa fa-play-circle"></i>
-                                    </td>
-
-                                    <td className="count wa-force-xs">
-                                      {lesson.get('title')}
-                                    </td>
-
-                                    <td className="lec-title-and-preview">
-                                      {user && isMyCoursesItem
-                                        ? <LessonPreviewButton lesson={lesson}/>
-                                        : <div className="lec-title-and-preview-inner dif aic fxjsa-xs pr10-xs fxac-ie">
-                                        <a href="javascript:void(0)"
-                                           onClick={()=> !user ? showSignUpModal() : this.setState({checkOutModalOpen: true})}
-                                           className="btn btn-sm ud-popup ud-courseimpressiontracker preview-btn ml15 btn-primary legitRipple">
-                                          Preview
-                                        </a>
-                                      </div>
-                                      }
-                                    </td>
-                                    <td className="text-right lec-det">
-                                      <img src={lesson.get('thumbnail')} style={{maxHeight: 40}} alt=""/>
-                                    </td>
-                                  </tr>,
-                                  <tr className="cur-list-row-detail">
-                                    <td className="hm"></td>
-                                    <td colSpan="3"><p>{lesson.get('description')}</p></td>
-                                  </tr>
-                                ]);
+                              const res = [];
+                              res.push(<LessonRow lesson={lesson}
+                                                  isMyCoursesItem={isMyCoursesItem}
+                                                  user={user}
+                                                  index={lessonIndex + 1}
+                                                  showSignUpModal={()=>showSignUpModal()}
+                                                  showCheckOutModal={()=>this.setState({checkOutModalOpen: true})}
+                                                  lessonPreviewButton={LessonPreviewButton}/>);
+                              res.push(<LessonDetailsRow lesson={lesson}/>);
+                              lesson.getIn(['pages', 'order']).map((pageSlug, pageIndex)=> {
+                                const page = lesson.getIn(['pages', 'entities', pageSlug]);
+                                res.push(<PageRow user={user}
+                                                  index={pageIndex + 1}
+                                                  isMyCoursesItem={isMyCoursesItem}
+                                                  page={page}
+                                                  showSignUpModal={()=>showSignUpModal()}
+                                                  showCheckOutModal={()=>this.setState({checkOutModalOpen: true})}
+                                                  pagePreviewButton={PagePreviewButton}/>);
+                              });
+                              return res;
                             })}
 
                             </tbody>
