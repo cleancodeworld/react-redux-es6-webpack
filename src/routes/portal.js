@@ -25,6 +25,7 @@ import {
   PortalAuthorCourseLayout,
   PageCreate,
   PageEdit,
+  Courses,
 } from '../containers/portal';
 import {
   Root,
@@ -77,8 +78,6 @@ export default (params) => {
                     <Route name="Lessons" path="lesson/list" component={LessonList}/>
                     <Route name="Create Lesson" path="lesson/add" component={LessonAdd}/>
                     <Route name="Edit Lesson" path="lesson/:lessonName/edit" component={LessonEdit}/>
-                    <Route name="Create Page" path="lesson/:lessonName/page/add" component={PageCreate}/>
-                    <Route name="Edit Page" path="lesson/:lessonName/page/:pageName/edit" component={PageEdit}/>
                   </Route>
                 </Route>
               </Route>
