@@ -17,10 +17,11 @@ export default class QuestionAsk extends Component {
 
   render() {
     return (
-      <div>
-        <Helmet title="Create Lesson"/>
+      <div className="container">
+        <Helmet title="Ask Question"/>
         <QuestionForm
-          onSubmit={ () => ({})}/>
+          initialValues={{tags: []}}
+          onSubmit={ (model) => alert(JSON.stringify(model, null, 4))}/>
       </div>
     );
   }

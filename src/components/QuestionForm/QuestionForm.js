@@ -29,53 +29,107 @@ export default class QuestionForm extends Component {
 
   render() {
     const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
-    const tags = [{ id: 1, name: 'Apples' }];
     const {
       handleSubmit,
       submitting,
       error,
       } = this.props;
     return (
-      <div className="panel panel-flat">
-        <div className="panel-heading">
-          <h6 className="panel-t itle">Page Detail</h6>
-        </div>
+      <div className="panel">
         <div className="panel-body">
-          {this.errorRender(error)}
-          <form onSubmit={handleSubmit} autoComplete="off">
-            <Field name="title" component={title =>
-              <div className="form-group">
-                <label>Title</label>
-                <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
-                {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
-              </div>
-            }/>
-            <Field name="html" component={html =>
-              <div className="form-group">
-                <label>Content</label>
-                <TinyMCE {...html}/>
-              </div>
-            }/>
-            <Field name="html" component={() =>
-              <div className="form-group">
-                <label>Tags</label>
-                <ReactTags
-                suggestions={suggestions}
-                tags={tags}
-                labelField={'name'}
-                handleDelete={()=>({})}
-                handleAddition={()=>({})}
-                removeComponent={()=> <i className="fa fa-close"/>}/>
-              </div>
-            }/>
-            <div className="text-right">
-              <button type="submit" disabled={submitting} className="btn btn-primary">
-                Save
-                <i className="icon-arrow-right14 position-right"></i>
-              </button>
-            </div>
+          <div className="row">
 
-          </form>
+            <div className="col-md-9 col-sm-8">
+              {this.errorRender(error)}
+              <form onSubmit={handleSubmit} autoComplete="off">
+                <Field name="title" component={title =>
+                    <div className="input-group mb-20">
+                      <span className="input-group-addon">Title</span>
+                      <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
+                      {title.touched && title.error && <span className="validation-error-label pull-left">{title.error}</span>}
+                    </div>}/>
+                <Field name="html" component={html =>
+                  <div className="form-group">
+                    <TinyMCE {...html}/>
+                  </div>}/>
+                <Field name="tags" component={(tags) =>
+                    <div className="input-group mb-20">
+                      <span className="input-group-addon">Tags</span>
+                      <ReactTags
+                      suggestions={suggestions}
+                      tags={tags.value}
+                      labelField={'name'}
+                      handleAddition={(tag)=>{
+                        const value = tags.value || [];
+                        value.push({
+                          id: tags.length + 1,
+                          name: tag
+                        });
+                        tags.onChange(value);
+                      }}
+                      handleDelete={(index)=>{
+                        const value = tags.value || [];
+                        value.splice(index, 1);
+                        tags.onChange(value);
+                      }}/>
+                    </div>}/>
+                <div className="input-group mt-20 mb-20">
+                  <div className="checkbox">
+                    <label>
+                      <input type="checkbox"/>
+                      <strong>Send me new responses to my posts via email</strong>
+                      <a href="#">(settings)</a>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">
+                    POST YOUR QUESTION
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="col-md-3 col-sm-4">
+              <div className="sticky-note mb-20">
+                <h5>How to Ask</h5>
+                <p className="text-bold">Is your question about programming?</p>
+
+                <p>We prefer questions that can be answered, not just discussed.</p>
+                <p>Provide details. Share your research.</p>
+                <p>If your question is about this website, ask it on meta instead.</p>
+
+                <div className="text-right">
+                  <a href="#" className="display-block">visit the help center »</a>
+                  <a href="#" className="display-block">asking help »</a>
+                </div>
+              </div>
+              <div className="sticky-note mb-20">
+                <h5>How to Format</h5>
+
+                <p>▸ put returns between paragraphs</p>
+                <p>▸ for linebreak add 2 spaces at end</p>
+                <p>▸ _italic_ or **bold**</p>
+                <p>▸ indent code by 4 spaces</p>
+                <p>▸ backtick escapes `like _so_`</p>
+                <p>▸ quote by placing &gt; at start of line</p>
+                <p>▸ to make links</p>
+
+                <p>
+                  &lt;http://foo.com&gt;<br/>
+                  [foo](http://foo.com)<br/>
+                  &lt;a href="http://foo.com"&gt;foo&lt;/a&gt;
+                </p>
+
+                <p>▸ basic HTML also allowed</p>
+
+                <div className="text-right">
+                  <a href="#" className="display-block">formatting help »</a>
+                  <a href="#" className="display-block">asking help »</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     );
