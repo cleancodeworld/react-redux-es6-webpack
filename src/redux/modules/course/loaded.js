@@ -117,13 +117,8 @@ export default function courseLoad(state = initialState, action) {
 
     case EDIT_PAGE_SUCCESS:
       return state.withMutations(map => {
-        const {courseName, lessonName, pageName} = action.data;
-        const {page} = action.result.data;
-        // TODO: should remove slug: pageName and get the value from api
-        map.mergeIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages', 'entities', pageName], Immutable.fromJS({
-          ...page,
-          slug: pageName
-        }));
+        const {courseName, lessonName} = action.data;
+        map.setIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages'], Immutable.fromJS({}));
       });
     case REMOVE_LESSON_SUCCESS:
       return state.withMutations(map => {
