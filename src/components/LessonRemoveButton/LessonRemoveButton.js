@@ -16,7 +16,8 @@ export default class LessonRemoveButton extends Component {
     const {lesson, onRemove} = this.props;
     return (
       <div>
-        <a href="javascript:void(0)" onClick={()=>this.setState({ showModal: true })}><i className="icon-trash"></i></a>
+        <a href="javascript:void(0)" onClick={()=>this.setState({ showModal: true })}><i
+          className="text-danger-600 icon-trash"></i></a>
         <Modal show={this.state.showModal} onHide={()=>this.setState({ showModal: false })}>
           <Modal.Header closeButton>
             <Modal.Title>Remove confirmation</Modal.Title>

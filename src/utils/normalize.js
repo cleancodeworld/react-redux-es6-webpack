@@ -11,9 +11,24 @@ export function courses(arrayOfCourses) {
   return { order, entities, listLoaded: true };
 }
 
+export function normalizeBySlug(arrayOfObjects) {
+  const schema = new Schema('objects', { idAttribute: 'slug' });
+  const results = normalize(
+    {
+      objects: arrayOfObjects
+    },
+    {
+      objects: arrayOf(schema)
+    });
+  const entities = _.get(results, 'entities.objects', {});
+  const order = _.get(results, 'result.objects', []);
+  return { order, entities, listLoaded: true };
+}
+
 export function lessons(arrayOfLessons) {
   const lessonsSchema = new Schema('lessons', { idAttribute: 'slug' });
-  const results = normalize({ lessons: arrayOfLessons }, {
+  const lessonsWithPages = arrayOfLessons.map(lesson=> ({ ...lesson, pages: normalizeBySlug(lesson.pages) }));
+  const results = normalize({ lessons: lessonsWithPages }, {
     lessons: arrayOf(lessonsSchema)
   });
   const entities = _.get(results, 'entities.lessons', {});

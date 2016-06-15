@@ -10,6 +10,7 @@ export withWishList from './withWishList';
 export withPortal from './withPortal';
 export withCourse from './withCourse';
 export withLesson from './withLesson';
+export withPage from './withPage';
 export withCourses from './withCourses';
 export withLessons from './withLessons';
 export withUser from './withUser';

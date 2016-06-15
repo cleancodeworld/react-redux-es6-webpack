@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import {connect} from 'react-redux';
 import {updateCoverImage} from 'redux/modules/portal/edit';
-import {withPortal, withUser} from 'hoc';
+import {withPortal, withUser, withCourse} from 'hoc';
 
 import {
   ProfileCover,
@@ -14,18 +14,19 @@ import {
 
 @withPortal
 @withUser
+@withCourse
 export default class PortalAuthorCourseLayout extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     params: PropTypes.object,
     portal: PropTypes.object,
+    course: PropTypes.object,
     user: PropTypes.object,
     updateCoverImage: PropTypes.func.isRequired,
   };
 
   render() {
-    const { portal, user } = this.props;
-    const {courseName} = this.props.params;
+    const { portal, user, course } = this.props;
     return (
       <div>
         <ProfileCover portal={portal.meta} user={user} updateCoverImage={this.props.updateCoverImage}/>
@@ -41,7 +42,7 @@ export default class PortalAuthorCourseLayout extends Component {
             </div>
           </div>
           <div className="col-lg-3">
-            <CourseRightMenu courseName={courseName}/>
+            <CourseRightMenu course={course}/>
           </div>
         </div>
       </div>

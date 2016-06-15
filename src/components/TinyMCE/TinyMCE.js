@@ -1,6 +1,6 @@
 /* global $ */
 import React, { Component, PropTypes} from 'react';
-import TinyMCE from 'react-tinymce';
+import TinyMCEEditor from 'react-tinymce';
 import scriptLoader from 'react-async-script-loader';
 import Dropzone from 'react-dropzone';
 import {clientSideOnly} from 'hoc';
@@ -11,9 +11,15 @@ import superagent from 'superagent';
   '//cdn.tinymce.com/4/tinymce.min.js',
   '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'
 )
-export default class PageBuilder extends Component {
+export default class TinyMCE extends Component {
   static propTypes = {
     isScriptLoaded: PropTypes.bool,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !nextProps.dirty || (nextProps.isScriptLoaded && !this.props.isScriptLoaded);
   }
 
   onDrop = (files)=> {
@@ -30,18 +36,14 @@ export default class PageBuilder extends Component {
     });
   }
 
-  handleEditorChange(event) {
-    console.log(event.target.getContent());
-  }
-
   render() {
-    const { isScriptLoaded } = this.props;
+    const { isScriptLoaded, onChange, value } = this.props;
     if (!isScriptLoaded) return <div>Loading</div>;
     return (
       <div>
         <Dropzone ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
-        <TinyMCE
-          content="<p>This is the initial content of the editor</p>"
+        <TinyMCEEditor
+          content={value}
           config={{
             plugins: 'autolink link image lists print preview media',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
@@ -53,7 +55,7 @@ export default class PageBuilder extends Component {
               if (type === 'image') this.refs.dropzone.open();
             }
           }}
-          onChange={this.handleEditorChange}
+          onChange={(event)=> onChange(event.target.getContent())}
         />
       </div>
     );

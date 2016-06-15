@@ -14,7 +14,15 @@ import {
   LOAD_SUCCESS as LOAD_LESSONS_SUCCESS
 } from './../lesson/loaded';
 
+import {
+  LOAD_SUCCESS as LOAD_PAGES_SUCCESS
+} from './../page/loaded';
+
 import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
+
+import {
+  EDIT_SUCCESS as EDIT_PAGE_SUCCESS,
+} from './../page/edit';
 
 import {
   EDIT_SUCCESS as EDIT_LESSON_SUCCESS,
@@ -44,6 +52,7 @@ import Immutable from 'immutable';
 
 import {
   lessons as lessonsNormalize,
+  normalizeBySlug,
 } from 'utils/normalize';
 
 const initialState = Immutable.fromJS({
@@ -80,6 +89,12 @@ export default function courseLoad(state = initialState, action) {
         const lessons = lessonsNormalize(action.result.data.lessons);
         map.mergeIn(['entities', courseName, 'lessons'], Immutable.fromJS(lessons));
       });
+    case LOAD_PAGES_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName} = action.data;
+        const pages = normalizeBySlug(action.result.data.pages);
+        map.setIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages'], Immutable.fromJS(pages));
+      });
     case LOAD_LESSON_SUCCESS:
       return state.withMutations(map => {
         const {courseName, lessonName} = action.data;
@@ -98,6 +113,12 @@ export default function courseLoad(state = initialState, action) {
         const {courseName} = action.data;
         const {lesson} = action.result.data;
         map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
+      });
+
+    case EDIT_PAGE_SUCCESS:
+      return state.withMutations(map => {
+        const {courseName, lessonName} = action.data;
+        map.setIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages'], Immutable.fromJS({}));
       });
     case REMOVE_LESSON_SUCCESS:
       return state.withMutations(map => {
