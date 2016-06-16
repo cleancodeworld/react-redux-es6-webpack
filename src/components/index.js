@@ -40,3 +40,4 @@ export LessonPreviewButton from './LessonPreviewButton/LessonPreviewButton';
 export TinyMCE from './TinyMCE/TinyMCE';
 export PageForm from './PageForm/PageForm';
 export QuestionForm from './QuestionForm/QuestionForm';
+export QuestionView from './QuestionView/QuestionView';

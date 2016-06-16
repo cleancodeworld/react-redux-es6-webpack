@@ -27,6 +27,7 @@ import {
   PageEdit,
   Courses,
   QuestionAsk,
+  QuestionView,
 } from '../containers/portal';
 import {
   Root,
@@ -48,6 +49,7 @@ export default (params) => {
           { /* Sub routes */ }
           <IndexRoute name="r1" component={Home}/>
           <Route name="Question Ask" path="question/ask" component={QuestionAsk}/>
+          <Route name="Question View" path="question/view" component={QuestionView}/>
           <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
