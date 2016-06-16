@@ -11,8 +11,6 @@ export default class QuestionAsk extends Component {
   };
 
   static pageHeader = {
-    title: ' - Ask',
-    boldTitle: 'Question'
   }
 
   render() {
