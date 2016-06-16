@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { QuestionView as QV, AnswerForm } from 'components';
+import { QuestionView, AnswerForm, AnswersList } from 'components';
 import Helmet from 'react-helmet';
 
-export default class QuestionView extends Component {
+export default class QuestionDetailsView extends Component {
   static propTypes = {
     course: PropTypes.object,
     lesson: PropTypes.object,
@@ -18,7 +18,8 @@ export default class QuestionView extends Component {
     return (
       <div className="container">
         <Helmet title="Question"/>
-        <QV/>
+        <QuestionView/>
+        <AnswersList/>
         <AnswerForm/>
       </div>
     );
