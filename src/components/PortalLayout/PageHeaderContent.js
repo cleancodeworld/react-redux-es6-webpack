@@ -12,16 +12,20 @@ export default class PageHeaderContent extends Component {
     if (!pageHeader) return <span/>;
     const { title, boldTitle} = pageHeader;
     return (
-      <div className="page-header-content">
-        <div className="page-title">
-          <h4>
-            {
-              boldTitle ? <span className="text-semibold">{boldTitle}</span> : <span></span>
-            }
-            {title}
-          </h4>
+      title && boldTitle ?
+        <div className="page-header-content">
+          <div className="page-title">
+            <h4>
+              {
+                boldTitle ? <span className="text-semibold">{boldTitle}</span> : <span></span>
+              }
+              {title}
+            </h4>
+          </div>
         </div>
-      </div>
-    );
+        :
+        <span/>
+    )
+      ;
   }
 }

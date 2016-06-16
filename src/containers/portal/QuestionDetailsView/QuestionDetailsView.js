@@ -10,8 +10,6 @@ export default class QuestionDetailsView extends Component {
   };
 
   static pageHeader = {
-    title: ' - View',
-    boldTitle: 'Question'
   }
 
   render() {

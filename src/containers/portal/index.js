@@ -23,3 +23,4 @@ export PageCreate from './PageCreate/PageCreate';
 export PageEdit from './PageEdit/PageEdit';
 export QuestionAsk from './QuestionAsk/QuestionAsk';
 export QuestionDetailsView from './QuestionDetailsView/QuestionDetailsView';
+export QuestionLayout from './QuestionLayout/QuestionLayout';

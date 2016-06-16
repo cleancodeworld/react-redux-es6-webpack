@@ -28,6 +28,7 @@ import {
   Courses,
   QuestionAsk,
   QuestionDetailsView,
+  QuestionLayout,
 } from '../containers/portal';
 import {
   Root,
@@ -48,8 +49,10 @@ export default (params) => {
         <Route name="PortalLayout" staticName component={PortalLayout}>
           { /* Sub routes */ }
           <IndexRoute name="r1" component={Home}/>
-          <Route name="Question Ask" path="question/ask" component={QuestionAsk}/>
-          <Route name="Question View" path="question/view" component={QuestionDetailsView}/>
+          <Route path="question" name="Questions" component={QuestionLayout}>
+            <Route name="Question Ask" path="ask" component={QuestionAsk}/>
+            <Route name="Question View" path="view" component={QuestionDetailsView}/>
+          </Route>
           <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
