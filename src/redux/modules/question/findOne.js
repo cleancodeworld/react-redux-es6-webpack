@@ -14,5 +14,5 @@ export function findOne(questionId) {
 
 export function isLoaded(globalState, questionId) {
   return globalState.questionLoaded
-    && globalState.questionLoaded.getIn(['entities', questionId])
+    && globalState.questionLoaded.getIn(['entities', questionId]);
 }
