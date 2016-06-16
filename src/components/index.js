@@ -41,3 +41,4 @@ export TinyMCE from './TinyMCE/TinyMCE';
 export PageForm from './PageForm/PageForm';
 export QuestionForm from './QuestionForm/QuestionForm';
 export QuestionView from './QuestionView/QuestionView';
+export AnswerForm from './AnswerForm/AnswerForm';
