@@ -48,9 +48,9 @@ export default class QuestionForm extends Component {
                       <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
                       {title.touched && title.error && <span className="validation-error-label pull-left">{title.error}</span>}
                     </div>}/>
-                <Field name="html" component={html =>
+                <Field name="content" component={content =>
                   <div className="form-group">
-                    <TinyMCE {...html}/>
+                    <TinyMCE {...content}/>
                   </div>}/>
                 <Field name="tags" component={(tags) =>
                     <div className="input-group mb-20">
