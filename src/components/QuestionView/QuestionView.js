@@ -1,37 +1,22 @@
 import React from 'react';
 
-const QuestionView = ()=> {
+const QuestionView = ({question})=> {
   return (<div className="panel panel-flat">
       <div className="panel-heading">
-        <h5 className="panel-title">Canvas clipping region and the canvas stack</h5>
+        <h5 className="panel-title">
+          {question.get('title')}
+        </h5>
       </div>
 
       <div className="panel-body">
-        <div>
-          Question
+        <div dangerouslySetInnerHTML={(()=>({__html: question.get('content')}))()}>
         </div>
 
         <div className="content-group">
-          <button type="button" className="btn btn-default btn-sm legitRipple" data-popup="popover" title=""
-                  data-placement="bottom" data-trigger="hover"
-                  data-content="JavaScript (not to be confused with Java) is a dynamic, weakly-typed language used for client-side as well as server-side scripting. Use this tag for questions regarding ECMAScript and its various dialects/implementations (excluding ActionScript and Google-Apps-Script). Unless another tag for a framework/library is also included, a pure JavaScript answer is expected."
-                  data-original-title="287.9k followers, 1.1m questions">javascript
-          </button>
-          <button type="button" className="btn btn-default btn-sm legitRipple" data-popup="popover" title=""
-                  data-placement="bottom" data-trigger="hover"
-                  data-content="HTML5 (Hyper Text Markup Language, version 5) is an umbrella term for recent web technologies. It is also the latest iteration of HTML. It became a W3C Recommendation in October 2014, introducing new elements and APIs."
-                  data-original-title="64k followers, 90.1k questions">html5
-          </button>
-          <button type="button" className="btn btn-default btn-sm legitRipple" data-popup="popover" title=""
-                  data-placement="bottom" data-trigger="hover"
-                  data-content="Canvas is a drawing element introduced to web development with HTML5. For Android or WPF, use android-canvas or WPF-controls."
-                  data-original-title="1.3k followers, 21.4k questions">canvas
-          </button>
-          <button type="button" className="btn btn-default btn-sm legitRipple" data-popup="popover" title=""
-                  data-placement="bottom" data-trigger="hover"
-                  data-content="Canvas is an HTML element that allows for dynamic, scriptable rendering of 2D shapes, and bitmap images."
-                  data-original-title="1.5k followers, 6.1k questions">html5-canvas
-          </button>
+          {question.get('tags').split(',').map(tag=> {
+            return (<button type="button" className="btn btn-default btn-sm legitRipple"> {tag} </button>);
+          })
+          }
         </div>
 
         <div className="row">

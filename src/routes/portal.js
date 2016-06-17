@@ -34,6 +34,7 @@ import {
   Root,
   NotFound,
   Course,
+  Question,
   CheckOut,
 } from '../containers/shared';
 
@@ -48,10 +49,12 @@ export default (params) => {
       <Route name={<span><i className="icon-home2 position-left"/>Home</span>} staticName path="/" component={App}>
         <Route name="PortalLayout" staticName component={PortalLayout}>
           { /* Sub routes */ }
-          <IndexRoute name="r1" component={Home}/>
+          <IndexRoute name="Index" component={Home}/>
           <Route path="question" name="Questions" component={QuestionLayout}>
             <Route name="Question Ask" path="ask" component={QuestionAsk}/>
-            <Route name="Question View" path="view" component={QuestionDetailsView}/>
+            <Route name="View" staticName path=":questionShortId/:questionName" component={Question}>
+              <IndexRoute name="Question" component={QuestionDetailsView}/>
+            </Route>
           </Route>
           <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
