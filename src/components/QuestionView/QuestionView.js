@@ -35,9 +35,7 @@ const QuestionView = ({question})=> {
             </blockquote>
           </div>
         </div>
-
         <hr/>
-
         <ol>
           <li>
             Comment

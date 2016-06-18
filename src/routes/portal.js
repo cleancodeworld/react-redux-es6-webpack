@@ -29,6 +29,7 @@ import {
   QuestionAsk,
   QuestionDetailsView,
   QuestionLayout,
+  QuestionsByPortal,
 } from '../containers/portal';
 import {
   Root,
@@ -51,6 +52,7 @@ export default (params) => {
           { /* Sub routes */ }
           <IndexRoute name="Index" component={Home}/>
           <Route path="question" name="Questions" component={QuestionLayout}>
+            <IndexRoute component={QuestionsByPortal}/>
             <Route name="Question Ask" path="ask" component={QuestionAsk}/>
             <Route name="View" staticName path=":questionShortId/:questionName" component={Question}>
               <IndexRoute name="Question" component={QuestionDetailsView}/>

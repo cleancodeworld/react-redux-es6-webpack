@@ -25,6 +25,20 @@ export function normalizeBySlug(arrayOfObjects) {
   return { order, entities, listLoaded: true };
 }
 
+export function normalizeBy(arrayOfObjects, idAttribute) {
+  const schema = new Schema('objects', { idAttribute });
+  const results = normalize(
+    {
+      objects: arrayOfObjects
+    },
+    {
+      objects: arrayOf(schema)
+    });
+  const entities = _.get(results, 'entities.objects', {});
+  const order = _.get(results, 'result.objects', []);
+  return { order, entities, listLoaded: true };
+}
+
 export function lessons(arrayOfLessons) {
   const lessonsSchema = new Schema('lessons', { idAttribute: 'slug' });
   const lessonsWithPages = arrayOfLessons.map(lesson=> ({ ...lesson, pages: normalizeBySlug(lesson.pages) }));

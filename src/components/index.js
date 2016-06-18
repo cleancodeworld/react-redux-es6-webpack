@@ -43,3 +43,4 @@ export QuestionForm from './QuestionForm/QuestionForm';
 export QuestionView from './QuestionView/QuestionView';
 export AnswerForm from './AnswerForm/AnswerForm';
 export AnswersList from './AnswersList/AnswersList';
+export QuestionsList from './QuestionsList/QuestionsList';

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import {Link} from 'react-router';
+
 export default class QuestionLayout extends Component {
 
   static propTypes = {
@@ -19,7 +21,8 @@ export default class QuestionLayout extends Component {
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Tags</a>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Users</a>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Badges</a>
-                <a href="#" style={style} className="btn btn-flat bg-danger-300 legitRipple btn-xs">Ask Question</a>
+                <Link to="/question/ask" style={style} className="btn btn-flat bg-danger-300 legitRipple btn-xs">
+                  Ask Question</Link>
               </div>
             </div>
           </div>
