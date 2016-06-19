@@ -44,9 +44,9 @@ export default class AnswerForm extends Component {
             <div className="col-md-9 col-sm-8">
               {this.errorRender(error)}
               <form onSubmit={handleSubmit} autoComplete="off">
-                <Field name="html" component={html =>
+                <Field name="content" component={content =>
                   <div className="form-group">
-                    <TinyMCE {...html}/>
+                    <TinyMCE {...content}/>
                   </div>}/>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">

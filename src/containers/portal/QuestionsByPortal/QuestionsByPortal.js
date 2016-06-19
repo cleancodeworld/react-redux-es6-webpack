@@ -36,8 +36,6 @@ export default class QuestionsByPortal extends Component {
 
   render() {
     const {questions, order} = this.props;
-    console.log(questions);
-    console.log(order);
     return (
       <div>
         <Helmet title="Questions"/>

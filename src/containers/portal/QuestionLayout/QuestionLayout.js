@@ -16,7 +16,7 @@ export default class QuestionLayout extends Component {
           <div className="page-header-content">
             <div className="container">
               <div className="page-title pull-right">
-                <a href="#" className="btn btn-flat bg-slate-300 legitRipple btn-xs">Questions</a>
+                <Link to="/question" className="btn btn-flat bg-slate-300 legitRipple btn-xs">Questions</Link>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Jobs</a>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Tags</a>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Users</a>

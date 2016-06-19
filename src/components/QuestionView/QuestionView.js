@@ -13,9 +13,10 @@ const QuestionView = ({question})=> {
         </div>
 
         <div className="content-group">
-          {question.get('tags').split(',').map(tag=> {
-            return (<button type="button" className="btn btn-default btn-sm legitRipple"> {tag} </button>);
-          })
+          {
+            question.get('tags').split(',').map(tag=> {
+              return (<button key={tag} type="button" className="btn btn-default btn-sm legitRipple"> {tag} </button>);
+            })
           }
         </div>
 

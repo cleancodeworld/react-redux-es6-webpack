@@ -1,5 +1,7 @@
 import React from 'react';
 import moment from 'moment';
+import {Link} from 'react-router';
+
 const Item = ({question})=> {
   const createdAt = question.get('createdAt');
   return (<li className="media">
@@ -18,7 +20,10 @@ const Item = ({question})=> {
     </div>
 
     <div className="media-body pl-10">
-      <h6 className="media-heading mb-5"><a href="#">{question.get('title')}</a></h6>
+      <h6 className="media-heading mb-5">
+        <Link to={`question/${question.get('shortId')}/${question.get('slug')}`}>{question.get('title')}
+        </Link>
+      </h6>
       <div className="content-group no-margin clearfix">
         <div className="pull-left">
           {question.get('tags').split(',').map(tag=> <button type="button"

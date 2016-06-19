@@ -17,7 +17,7 @@ export default function loaded(state = initialState, action) {
     case LOAD_QUESTION_SUCCESS:
       return state.withMutations(map=> {
         const question = action.result.data;
-        map.set(question.ShortId, Immutable.fromJS(question));
+        map.set(question.shortId, Immutable.fromJS(question));
       });
     case BY_PORTAL_LIST_SUCCESS:
       return state.withMutations(map=> {
