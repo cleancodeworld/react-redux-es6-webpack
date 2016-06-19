@@ -7,7 +7,7 @@ const AnswersList = ({order, entities})=> {
         <h5 className="panel-title">Answers</h5>
       </div>
       <div className="panel-body">
-        {order.map(answerId=> <AnswerView answer={entities.get(answerId)}/>)}
+        {order.map(answerId=> <AnswerView key={answerId} answer={entities.get(answerId)}/>)}
       </div>
     </div>
   );
