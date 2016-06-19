@@ -33,9 +33,8 @@ const Item = ({question})=> {
 
         </div>
         <div className="pull-right mt-5">
-          <a href="#" className="text-muted">asked {moment(createdAt).fromNow()}</a>
-          <a href="#">Александр Юрьевич Ком</a>
-          1
+          <a href="#" className="text-muted">asked {moment(createdAt).fromNow()} by </a>
+          <a href="#">{question.getIn(['Author', 'username'])}</a>
         </div>
       </div>
     </div>
