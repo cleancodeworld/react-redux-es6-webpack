@@ -1,10 +1,8 @@
 import React from 'react';
 
-const AnswerView = ()=> {
+const AnswerView = ({answer})=> {
   return (<div>
-      <div>
-        Answer
-      </div>
+      <div dangerouslySetInnerHTML={(()=>({__html: answer.get('content')}))()}/>
       <div className="row">
         <div className="col-md-4 pull-right">
           <blockquote className="no-margin no-padding-top">

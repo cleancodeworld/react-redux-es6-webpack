@@ -1,14 +1,13 @@
 import React from 'react';
 import AnswerView from './components/AnswerView/AnswerView';
 
-const AnswersList = ()=> {
+const AnswersList = ({order, entities})=> {
   return (<div className="panel panel-flat">
       <div className="panel-heading">
-        <h5 className="panel-title">2 Answers</h5>
+        <h5 className="panel-title">Answers</h5>
       </div>
       <div className="panel-body">
-        <AnswerView/>
-        <AnswerView/>
+        {order.map(answerId=> <AnswerView answer={entities.get(answerId)}/>)}
       </div>
     </div>
   );

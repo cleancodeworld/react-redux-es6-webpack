@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { findOne, isLoaded } from 'redux/modules/question/findOne';
+import { findOne, isLoaded as isQuestionLoaded } from 'redux/modules/question/findOne';
+import { find, isLoaded as isAnswersLoaded } from 'redux/modules/answer/find';
 
 @asyncConnect([{
   promise: ({params, store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isLoaded(state, params.questionId)) {
+    if (!isQuestionLoaded(state, params.questionId)) {
       promises.push(dispatch(findOne(params.questionShortId, params.questionName)));
+    }
+    if (!isAnswersLoaded(state, params.questionId)) {
+      promises.push(dispatch(find(params.questionShortId, params.questionName)));
     }
     return Promise.all(promises);
   }

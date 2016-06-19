@@ -23,7 +23,7 @@ export default class QuestionDetailsView extends Component {
       <div className="container">
         <Helmet title="Question"/>
         <QuestionView question={question}/>
-        <AnswersList/>
+        <AnswersList order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
         <AnswerForm onSubmit={(model)=> this.props.add({...model, authorId: userId, questionId: question.get('id')})}/>
       </div>
     );
