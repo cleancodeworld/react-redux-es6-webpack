@@ -1,11 +1,14 @@
 import React, {Component, PropTypes} from 'react';
+import QuestionItem from './Item/Item';
 
 export default class QuestionsList extends Component {
   static propTypes = {
-    questions: PropTypes.object,
+    entities: PropTypes.object,
+    order: PropTypes.array,
   }
 
   render() {
+    const {order, entities} = this.props;
     return (<div className="content-group tab-content-bordered navbar-component">
       <div className="navbar navbar-default navbar-xs">
         <ul className="nav navbar-nav no-border visible-xs-block">
@@ -19,36 +22,10 @@ export default class QuestionsList extends Component {
       <div className="tab-content">
         <div className="tab-pane fade has-padding active in" id="tab1">
           <ul className="media-list media-list-bordered">
-            <li className="media">
-              <div className="media-left width-200 pr-5">
-                <div className="heading-btn-group">
-                  <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-                    <div className="counts">0</div>
-                    <span>votes</span></a>
-                  <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-                    <div className="counts">0</div>
-                    <span>answers</span></a>
-                  <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-                    <div className="counts">1</div>
-                    <span>views</span></a>
-                </div>
-              </div>
+            {order.map(key=> {
+              return (<QuestionItem question={entities.get(key)}/>);
+            })}
 
-              <div className="media-body pl-10">
-                <h6 className="media-heading mb-5"><a href="#">Webstorm - errors after pub:build</a></h6>
-                <div className="content-group no-margin clearfix">
-                  <div className="pull-left">
-                    <button type="button" className="btn btn-default btn-xs pt-5 pb-5 legitRipple">Tag
-                    </button>
-                  </div>
-                  <div className="pull-right mt-5">
-                    <a href="#" className="text-muted">asked 1 min ago</a>
-                    <a href="#">Александр Юрьевич Ком</a>
-                    1
-                  </div>
-                </div>
-              </div>
-            </li>
           </ul>
           <hr/>
           <p className="content-group no-margin">Looking for more? Browse the <a href="#" target="_blank">complete list

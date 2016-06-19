@@ -6,7 +6,7 @@ import {
   QuestionsList,
 } from 'components';
 import { load, isLoaded } from 'redux/modules/question/byPortal';
-import {withCourses, withWishList, withCart, withUser} from 'hoc';
+import {withQuestions} from 'hoc';
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
@@ -18,41 +18,33 @@ import {withCourses, withWishList, withCart, withUser} from 'hoc';
   }
 }])
 @connect(
-  ({coursesByPortal}) => ({
-    order: coursesByPortal.get('order'),
+  ({questionsByPortal}) => ({
+    order: questionsByPortal.get('order'),
   })
 )
 
-@withCourses
-@withWishList
-@withCart
-@withUser
+@withQuestions
 
 export default class QuestionsByPortal extends Component {
 
   static propTypes = {
-    courses: PropTypes.object,
     order: PropTypes.object,
-    wishList: PropTypes.object,
-    cart: PropTypes.object,
-    user: PropTypes.object,
+    questions: PropTypes.object,
   };
 
-  static pageHeader = {
-  };
+  static pageHeader = {};
 
   render() {
-    const {courses, order, user, cart, wishList} = this.props;
+    const {questions, order} = this.props;
+    console.log(questions);
+    console.log(order);
     return (
       <div>
-        <Helmet title="Portal Courses"/>
+        <Helmet title="Questions"/>
         <div className="row">
           <div className="col-md-10 col-md-offset-1">
-            <QuestionsList entities={courses}
-                           order={order}
-                           wishList={wishList}
-                           cart={cart}
-                           user={user}/>
+            <QuestionsList entities={questions}
+                           order={order}/>
           </div>
         </div>
       </div>
