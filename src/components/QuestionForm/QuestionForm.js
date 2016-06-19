@@ -74,13 +74,16 @@ export default class QuestionForm extends Component {
                       }}/>
                     </div>}/>
                 <div className="input-group mt-20 mb-20">
+
+                  <Field name="notifyAnswerByEmail" component={(notifyAnswerByEmail) =>
                   <div className="checkbox">
                     <label>
-                      <input type="checkbox"/>
+                      <input type="checkbox" {...notifyAnswerByEmail} />
                       <strong>Send me new responses to my posts via email</strong>
                       <a href="#">(settings)</a>
                     </label>
-                  </div>
+                  </div>}
+                  />
                 </div>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">

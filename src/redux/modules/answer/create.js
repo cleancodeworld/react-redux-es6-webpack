@@ -6,20 +6,20 @@ export const ADD_FAIL = 'knexpert/answers/ADD_FAIL';
 
 import {SubmissionError} from 'redux-form';
 
-export function _add(model, courseName) {
+export function _add(model, questionShortId) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
     promise: (client) => client.post(`/api/v1/answer`, { data: model }),
     data: {
       model,
-      courseName
+      questionShortId
     }
   };
 }
 
-export function add(model, courseId, courseName) {
+export function add(model, questionShortId) {
   return dispatch => {
-    return dispatch(_add({ ...model, courseId }, courseName))
+    return dispatch(_add(model, questionShortId))
       .catch(res => {
         throw new SubmissionError({ _error: res.error });
       });

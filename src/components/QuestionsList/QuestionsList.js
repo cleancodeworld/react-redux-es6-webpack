@@ -23,7 +23,7 @@ export default class QuestionsList extends Component {
         <div className="tab-pane fade has-padding active in" id="tab1">
           <ul className="media-list media-list-bordered">
             {order.map(key=> {
-              return (<QuestionItem question={entities.get(key)}/>);
+              return (<QuestionItem key={key} question={entities.get(key)}/>);
             })}
 
           </ul>

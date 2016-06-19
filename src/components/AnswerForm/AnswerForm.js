@@ -4,7 +4,7 @@ import {TinyMCE} from 'components';
 import validate from './validate';
 
 @reduxForm({
-  form: 'QuestionForm',
+  form: 'AnswerForm',
   validate
 })
 

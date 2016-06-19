@@ -4,6 +4,7 @@ import {LOAD_SUCCESS as LOAD_QUESTION_SUCCESS} from './findOne';
 import Immutable from 'immutable';
 import { BY_PORTAL_LIST_SUCCESS } from './byPortal';
 import {LOAD_SUCCESS as LOAD_ANSWERS_SUCCESS} from '../answer/find';
+import {ADD_SUCCESS as ADD_ANSWER_SUCCESS} from '../answer/create';
 import {
   normalizeBy
 } from 'utils/normalize';
@@ -19,6 +20,13 @@ export default function loaded(state = initialState, action) {
       return state.withMutations(map=> {
         const question = action.result.data;
         map.set(question.shortId, Immutable.fromJS(question));
+      });
+    case ADD_ANSWER_SUCCESS:
+      return state.withMutations(map=> {
+        const answer = action.result.data;
+        const {questionShortId} = action.data;
+        map.setIn([questionShortId, 'answers', 'entities', answer.id], Immutable.fromJS(answer));
+        map.updateIn([questionShortId, 'answers', 'order', answer.id], array=> array ? array.push(answer.id) : [answer.id]);
       });
     case LOAD_ANSWERS_SUCCESS:
       return state.withMutations(map=> {
