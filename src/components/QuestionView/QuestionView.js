@@ -30,7 +30,10 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite}
         </div>
 
         <div className="row">
-          <div className="col-md-offset-8 col-md-4">
+          <div className="col-md-4">
+            <a title="" href="#">improve this question</a>
+          </div>
+          <div className="col-md-4 pull-right">
             <AuthorCardQAndA createdAt={question.get('createdAt')} author={question.get('Author')}/>
           </div>
         </div>
