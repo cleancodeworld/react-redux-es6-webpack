@@ -2,6 +2,7 @@ import React from 'react';
 import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
 import VotingBar from './../VotingBar/VotingBar';
 import Favorite from './Favorite/Favorite';
+import {Link} from 'react-router';
 
 const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite})=> {
   // TODO: camelcase (Author)
@@ -31,7 +32,7 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite}
 
         <div className="row">
           <div className="col-md-4">
-            <a title="" href="#">improve this question</a>
+            <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this question</Link>
           </div>
           <div className="col-md-4 pull-right">
             <AuthorCardQAndA createdAt={question.get('createdAt')} author={question.get('Author')}/>

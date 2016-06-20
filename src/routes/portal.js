@@ -30,6 +30,7 @@ import {
   QuestionDetailsView,
   QuestionLayout,
   QuestionsByPortal,
+  QuestionEdit,
 } from '../containers/portal';
 import {
   Root,
@@ -56,13 +57,13 @@ export default (params) => {
             <Route name="Question Ask" path="ask" component={QuestionAsk}/>
             <Route name="View" staticName path=":questionShortId/:questionName" component={Question}>
               <IndexRoute name="Question" component={QuestionDetailsView}/>
+              <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>
           </Route>
           <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
           <Route name="My Courses" path="my-courses" component={MyCourses}/>
-
           <Route name="Courses" staticName path="courses">
             <IndexRoute name="Courses" staticName component={Home}/>
             <Route path=":categoryName" component={CoursesByCategory}/>

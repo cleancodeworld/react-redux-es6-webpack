@@ -25,3 +25,4 @@ export QuestionAsk from './QuestionAsk/QuestionAsk';
 export QuestionDetailsView from './QuestionDetailsView/QuestionDetailsView';
 export QuestionLayout from './QuestionLayout/QuestionLayout';
 export QuestionsByPortal from './QuestionsByPortal/QuestionsByPortal';
+export QuestionEdit from './QuestionEdit/QuestionEdit';
