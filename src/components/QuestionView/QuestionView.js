@@ -1,8 +1,9 @@
 import React from 'react';
 import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
 import VotingBar from './../VotingBar/VotingBar';
+import Favorite from './Favorite/Favorite';
 
-const QuestionView = ({question})=> {
+const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite})=> {
   // TODO: camelcase (Author)
   return (<div className="panel panel-flat">
       <div className="panel-heading">
@@ -13,7 +14,8 @@ const QuestionView = ({question})=> {
 
       <div className="panel-body">
         <div className="pull-left pt-10">
-          <VotingBar/>
+          <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown}/>
+          <Favorite onFavorite={onFavorite} onUnfavorite={onUnfavorite}/>
         </div>
         <div className="ui-spinner pl-10 pt-20">
           <div dangerouslySetInnerHTML={(()=>({__html: question.get('content')}))()}>

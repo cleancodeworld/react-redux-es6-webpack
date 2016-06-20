@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerView from './components/AnswerView/AnswerView';
+import AnswerView from './../AnswerView/AnswerView';
 
 const AnswersList = ({order, entities})=> {
   return (<div className="panel panel-flat">

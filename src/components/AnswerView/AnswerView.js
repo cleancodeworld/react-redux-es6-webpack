@@ -1,11 +1,13 @@
 import React from 'react';
-import AuthorCardQAndA from './../../../AuthorCardQAndA/AuthorCardQAndA';
-import VotingBar from './../../../VotingBar/VotingBar';
+import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
+import VotingBar from './../VotingBar/VotingBar';
+import CorrectAnswer from './CorrectAnswer/CorrectAnswer';
 
-const AnswerView = ({answer}) => {
+const AnswerView = ({answer, onVoteUp, onVoteDown}) => {
   return (<div>
       <div className="pull-left pt-10">
-        <VotingBar/>
+        <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown}/>
+        <CorrectAnswer/>
       </div>
       <div className="ui-spinner pl-10 pt-20">
         <div dangerouslySetInnerHTML={(()=>({__html: answer.get('content')}))()}/>
