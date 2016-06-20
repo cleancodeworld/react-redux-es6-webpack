@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
+import VotingBar from './../VotingBar/VotingBar';
 
 const QuestionView = ({question})=> {
   // TODO: camelcase (Author)
@@ -11,9 +12,13 @@ const QuestionView = ({question})=> {
       </div>
 
       <div className="panel-body">
-        <div dangerouslySetInnerHTML={(()=>({__html: question.get('content')}))()}>
+        <div className="pull-left pt-10">
+          <VotingBar/>
         </div>
-
+        <div className="ui-spinner pl-10 pt-20">
+          <div dangerouslySetInnerHTML={(()=>({__html: question.get('content')}))()}>
+          </div>
+        </div>
         <div className="content-group">
           {
             question.get('tags').split(',').map(tag=> {
