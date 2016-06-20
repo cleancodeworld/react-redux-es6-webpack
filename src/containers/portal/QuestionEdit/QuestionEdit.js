@@ -3,9 +3,9 @@ import { QuestionForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {withUserId, withPortal, withQuestion} from 'hoc';
-import {create} from 'redux/modules/question/create';
+import {edit} from 'redux/modules/question/edit';
 
-@connect(null, { create })
+@connect(null, { edit })
 @withUserId
 @withPortal
 @withQuestion
@@ -14,7 +14,7 @@ export default class QuestionEdit extends Component {
   static propTypes = {
     userId: PropTypes.string,
     portal: PropTypes.object,
-    create: PropTypes.func,
+    edit: PropTypes.func,
     question: PropTypes.object,
   };
 
@@ -28,7 +28,7 @@ export default class QuestionEdit extends Component {
         <Helmet title="Ask Question"/>
         <QuestionForm
           initialValues={{...values, tags: values.tags && values.tags.split(',').map(item=>({name: item, id: item})) || []}}
-          onSubmit={ model => this.props.create({
+          onSubmit={ model => this.props.edit({
             ...model,
             authorId: userId,
             portalId: portal.meta.get('id'),
