@@ -15,7 +15,7 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite}
 
       <div className="panel-body">
         <div className="pull-left pt-10">
-          <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown}/>
+          <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown} votes={question.get('votes')}/>
           <Favorite onFavorite={onFavorite} onUnfavorite={onUnfavorite}/>
         </div>
         <div className="ui-spinner pl-10 pt-20">

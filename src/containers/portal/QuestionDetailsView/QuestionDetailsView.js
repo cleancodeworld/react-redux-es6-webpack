@@ -27,10 +27,10 @@ export default class QuestionDetailsView extends Component {
     return (
       <div className="container">
         <Helmet title="Question"/>
-        <QuestionView onVoteUp={()=>this.props.voteUp()}
-                      onVoteDown={()=>this.props.voteDown()}
-                      onFavorite={()=>this.props.favorite()}
-                      onUnfavorite={()=>this.props.unfavorite()}
+        <QuestionView onVoteUp={()=>this.props.voteUp(question)}
+                      onVoteDown={()=>this.props.voteDown(question)}
+                      onFavorite={()=>this.props.favorite(question)}
+                      onUnfavorite={()=>this.props.unfavorite(question)}
                       question={question}/>
         <AnswersList order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
         <AnswerForm
