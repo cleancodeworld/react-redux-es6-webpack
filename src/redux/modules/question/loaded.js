@@ -4,7 +4,6 @@ import {LOAD_SUCCESS as LOAD_QUESTION_SUCCESS} from './findOne';
 import Immutable from 'immutable';
 import { BY_PORTAL_LIST_SUCCESS } from './byPortal';
 import {LOAD_SUCCESS as LOAD_ANSWERS_SUCCESS} from '../answer/find';
-import {ADD_SUCCESS as ADD_ANSWER_SUCCESS} from '../answer/create';
 import {
   VOTE_UP_SUCCESS as QUESTION_VOTE_UP_SUCCESS,
   VOTE_DOWN_SUCCESS as QUESTION_VOTE_DOWN_SUCCESS,
@@ -31,7 +30,6 @@ export default function loaded(state = initialState, action) {
       return Immutable.fromJS(state);
     case ANSWER_ADD_SUCCESS:
       return state.withMutations(map => {
-        debugger;
         const {questionShortId} = action.data;
         const {answer} = action.result.data;
         map.mergeIn([questionShortId, 'answers', 'entities', answer.id], Immutable.fromJS(answer));
