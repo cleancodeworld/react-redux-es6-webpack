@@ -6,7 +6,7 @@ import CorrectAnswer from './CorrectAnswer/CorrectAnswer';
 const AnswerView = ({answer, onVoteUp, onVoteDown}) => {
   return (<div>
       <div className="pull-left pt-10">
-        <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown}/>
+        <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown} votes={answer.get('votes')}/>
         <CorrectAnswer/>
       </div>
       <div className="ui-spinner pl-10 pt-20">
@@ -14,7 +14,7 @@ const AnswerView = ({answer, onVoteUp, onVoteDown}) => {
       </div>
       <div className="row">
         <div className="col-md-4 pull-right">
-          <AuthorCardQAndA createdAt={answer.get('createdAt')} author={answer.get('Author')}/>
+          {answer.get('Author') && <AuthorCardQAndA createdAt={answer.get('createdAt')} author={answer.get('Author')}/>}
         </div>
       </div>
       <hr/>
