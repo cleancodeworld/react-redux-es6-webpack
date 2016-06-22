@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {TinyMCE} from 'components';
 import validate from './validate';
-// import {WithContext as ReactTags} from 'react-tag-input';
+import {WithContext as ReactTags} from 'react-tag-input';
 
 @reduxForm({
   form: 'QuestionForm',
@@ -28,7 +28,7 @@ export default class QuestionForm extends Component {
   }
 
   render() {
-    // const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
+    const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
     const {
       handleSubmit,
       submitting,
@@ -64,6 +64,27 @@ export default class QuestionForm extends Component {
                     </label>
                   </div>}
                   />
+                  <Field name="tags" component={(tags) =>
+                    <div className="input-group mb-20">
+                      <span className="input-group-addon">Tags</span>
+                      <ReactTags
+                      suggestions={suggestions}
+                      tags={tags.value}
+                      labelField={'name'}
+                      handleAddition={(tag)=>{
+                        const value = tags ? tags.value : [];
+                        value.push({
+                          id: tags.length + 1,
+                          name: tag
+                        });
+                        tags.onChange(value);
+                      }}
+                      handleDelete={(index)=>{
+                        const value = tags ? tags.value : [];
+                        value.splice(index, 1);
+                        tags.onChange(value);
+                      }}/>
+                    </div>}/>
                 </div>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">
