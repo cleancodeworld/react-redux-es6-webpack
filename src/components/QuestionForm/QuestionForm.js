@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {TinyMCE} from 'components';
 import validate from './validate';
-import {WithContext as ReactTags} from 'react-tag-input';
+// import {WithContext as ReactTags} from 'react-tag-input';
 
 @reduxForm({
   form: 'QuestionForm',
@@ -28,7 +28,7 @@ export default class QuestionForm extends Component {
   }
 
   render() {
-    const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
+    // const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
     const {
       handleSubmit,
       submitting,
