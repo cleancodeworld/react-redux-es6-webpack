@@ -23,6 +23,9 @@ export default class QuestionDetailsView extends Component {
     unfavorite: PropTypes.func,
   };
 
+  state = {
+    saved: false
+  }
   static pageHeader = {}
 
   render() {
@@ -38,14 +41,21 @@ export default class QuestionDetailsView extends Component {
         <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'))}
                      onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'))}
                      order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
-        <AnswerForm
+        {!this.state.saved
+          ? <AnswerForm
           onSubmit={(model)=> this.props.add({
             ...model,
             authorId: userId,
             questionId: question.get('id'),
             winner: false
-          }, question.get('shortId'))}/>
-      </div>
-    );
+          }, question.get('shortId')).then(()=> this.setState({saved: true}))}/>
+          : <div className="panel panel-flat">
+          <div className="panel-heading">
+            <div className="panel-title">
+              <h3 className="text-success">saved</h3>
+            </div>
+          </div>
+        </div>}
+      </div>);
   }
 }
