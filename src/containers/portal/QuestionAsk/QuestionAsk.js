@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { QuestionForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
-import {withUserId, withPortal, clientSideOnly} from 'hoc';
+import {withUserId, withPortal} from 'hoc';
 import {create} from 'redux/modules/question/create';
 
-@clientSideOnly
 @connect(null, { create })
 @withUserId
 @withPortal
