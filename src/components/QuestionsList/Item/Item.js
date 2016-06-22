@@ -26,7 +26,7 @@ const Item = ({question})=> {
       </h6>
       <div className="content-group no-margin clearfix">
         <div className="pull-left">
-          {question.get('tags').split(',').map(tag=> <button type="button"
+          {question.get('tags').split(',').map(tag=> <button type="button" key={tag}
                                                              className="btn btn-default btn-xs pt-5 pb-5 legitRipple">
             {tag}
           </button>)}
@@ -34,7 +34,7 @@ const Item = ({question})=> {
         </div>
         <div className="pull-right mt-5">
           <a href="#" className="text-muted">asked {moment(createdAt).fromNow()} by </a>
-          <a href="#">{question.getIn(['Author', 'username'])}</a>
+          <a href="#">{question.getIn(['author', 'username'])}</a>
         </div>
       </div>
     </div>

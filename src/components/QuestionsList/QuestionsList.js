@@ -4,7 +4,7 @@ import QuestionItem from './Item/Item';
 export default class QuestionsList extends Component {
   static propTypes = {
     entities: PropTypes.object,
-    order: PropTypes.array,
+    order: PropTypes.object,
   }
 
   render() {

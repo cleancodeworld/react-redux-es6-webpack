@@ -14,7 +14,7 @@ const AnswerView = ({answer, onVoteUp, onVoteDown}) => {
       </div>
       <div className="row">
         <div className="col-md-4 pull-right">
-          {answer.get('Author') && <AuthorCardQAndA createdAt={answer.get('createdAt')} author={answer.get('Author')}/>}
+          {answer.get('author') && <AuthorCardQAndA createdAt={answer.get('createdAt')} author={answer.get('author')}/>}
         </div>
       </div>
       <hr/>

@@ -3,6 +3,7 @@ export const REDUX_INIT = '@@redux/INIT';
 export const BY_PORTAL_LIST = 'knexpert/question/BY_PORTAL_LIST';
 export const BY_PORTAL_LIST_SUCCESS = 'knexpert/question/BY_PORTAL_LIST_SUCCESS';
 export const BY_PORTAL_LIST_FAIL = 'knexpert/question/BY_PORTAL_LIST_FAIL';
+import {CREATE_SUCCESS as QUESTION_CREATE_SUCCESS} from './create';
 
 import Immutable from 'immutable';
 import {
@@ -22,12 +23,18 @@ export default function byPortal(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case QUESTION_CREATE_SUCCESS:
+      return state.withMutations(map => {
+        const {question} = action.result.data;
+        map.updateIn(['order'], array=> array ? array.push(question.shortId) : [question.shortId]);
+        map.setIn(['entities', question.shortId], true);
+      });
     case BY_PORTAL_LIST_SUCCESS:
       return state.withMutations(map=> {
         const {questions} = action.result.data;
         const {order} = normalizeBy(questions, 'shortId');
-        order.map(course=> {
-          map.setIn(['entities', course], true);
+        order.map(question=> {
+          map.setIn(['entities', question], true);
         });
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);

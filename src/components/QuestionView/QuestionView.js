@@ -35,7 +35,7 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite}
             <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this question</Link>
           </div>
           <div className="col-md-4 pull-right">
-            <AuthorCardQAndA createdAt={question.get('createdAt')} author={question.get('Author')}/>
+            <AuthorCardQAndA createdAt={question.get('createdAt')} author={question.get('author')}/>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 export const INIT = '@@INIT';
 export const REDUX_INIT = '@@redux/INIT';
+import {CREATE_SUCCESS as QUESTION_CREATE_SUCCESS} from './create';
 import {LOAD_SUCCESS as LOAD_QUESTION_SUCCESS} from './findOne';
 import Immutable from 'immutable';
 import { BY_PORTAL_LIST_SUCCESS } from './byPortal';
@@ -28,6 +29,11 @@ export default function loaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case QUESTION_CREATE_SUCCESS:
+      return state.withMutations(map => {
+        const {question} = action.result.data;
+        map.mergeIn([question.shortId], Immutable.fromJS(question));
+      });
     case ANSWER_ADD_SUCCESS:
       return state.withMutations(map => {
         const {questionShortId} = action.data;
@@ -35,15 +41,12 @@ export default function loaded(state = initialState, action) {
         map.mergeIn([questionShortId, 'answers', 'entities', answer.id], Immutable.fromJS(answer));
         map.updateIn([questionShortId, 'answers', 'order'], array=> array ? array.push(answer.id) : [answer.id]);
       });
+    case ANSWER_VOTE_DOWN_SUCCESS:
     case ANSWER_VOTE_UP_SUCCESS:
       return state.withMutations(map=> {
         const {questionShortId, answerId} = action.data;
-        map.updateIn([questionShortId, 'answers', 'entities', answerId, 'votes'], votes=> votes ? votes + 1 : 1);
-      });
-    case ANSWER_VOTE_DOWN_SUCCESS:
-      return state.withMutations(map=> {
-        const {questionShortId, answerId} = action.data;
-        map.updateIn([questionShortId, 'answers', 'entities', answerId, 'votes'], votes=> votes ? votes - 1 : 0);
+        const {votes} = action.result.data;
+        map.setIn([questionShortId, 'answers', 'entities', answerId, 'votes'], votes);
       });
     case LOAD_QUESTION_SUCCESS:
       return state.withMutations(map=> {
@@ -51,14 +54,11 @@ export default function loaded(state = initialState, action) {
         map.set(question.shortId, Immutable.fromJS(question));
       });
     case QUESTION_VOTE_UP_SUCCESS:
-      return state.withMutations(map=> {
-        const {questionShortId} = action.data;
-        map.updateIn([questionShortId, 'votes'], votes=> votes ? votes + 1 : 1);
-      });
     case QUESTION_VOTE_DOWN_SUCCESS:
       return state.withMutations(map=> {
         const {questionShortId} = action.data;
-        map.updateIn([questionShortId, 'votes'], votes=> votes ? votes - 1 : 0);
+        const {votes} = action.result.data;
+        map.setIn([questionShortId, 'votes'], votes);
       });
     case LOAD_ANSWERS_SUCCESS:
       return state.withMutations(map=> {
