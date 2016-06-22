@@ -5,9 +5,10 @@ import {withQuestion, withUserId} from 'hoc';
 import {add} from 'redux/modules/answer/create';
 import {voteUp as questionVoteUp, voteDown as questionVoteDown} from 'redux/modules/question/voting';
 import {voteUp as answerVoteUp, voteDown as answerVoteDown} from 'redux/modules/answer/voting';
+import {winner as answerWinner} from 'redux/modules/answer/winner';
 import {favorite, unfavorite} from 'redux/modules/question/favorite';
 import {connect} from 'react-redux';
-@connect(null, { add, questionVoteUp, questionVoteDown, answerVoteUp, answerVoteDown, favorite, unfavorite })
+@connect(null, { add, questionVoteUp, questionVoteDown, answerVoteUp, answerVoteDown, favorite, unfavorite, answerWinner })
 @withQuestion
 @withUserId
 export default class QuestionDetailsView extends Component {
@@ -21,6 +22,7 @@ export default class QuestionDetailsView extends Component {
     answerVoteDown: PropTypes.func,
     favorite: PropTypes.func,
     unfavorite: PropTypes.func,
+    answerWinner: PropTypes.func,
   };
 
   state = {
@@ -40,6 +42,7 @@ export default class QuestionDetailsView extends Component {
                       question={question}/>
         <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'))}
                      onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'))}
+                     onWinner={(answer)=>this.props.answerWinner(answer, question.get('shortId'))}
                      order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
         {!this.state.saved
           ? <AnswerForm

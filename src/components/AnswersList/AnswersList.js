@@ -1,7 +1,7 @@
 import React from 'react';
 import AnswerView from './../AnswerView/AnswerView';
 
-const AnswersList = ({order, entities, onVoteUp, onVoteDown})=> {
+const AnswersList = ({order, entities, onVoteUp, onVoteDown, onWinner})=> {
   return (<div className="panel panel-flat">
       <div className="panel-heading">
         <h5 className="panel-title">Answers</h5>
@@ -10,6 +10,7 @@ const AnswersList = ({order, entities, onVoteUp, onVoteDown})=> {
         {order
           ? order.map(answerId=> <AnswerView onVoteUp={()=>onVoteUp(entities.get(answerId))}
                                              onVoteDown={()=>onVoteDown(entities.get(answerId))}
+                                             onWinner={()=>onWinner(entities.get(answerId))}
                                              key={answerId}
                                              answer={entities.get(answerId)}/>)
           : <span>No answers</span>}

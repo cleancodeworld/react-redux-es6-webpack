@@ -1,13 +1,13 @@
 import React from 'react';
 import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
 import VotingBar from './../VotingBar/VotingBar';
-import CorrectAnswer from './CorrectAnswer/CorrectAnswer';
+import WinnerAnswer from './WinnerAnswer/WinnerAnswer';
 
-const AnswerView = ({answer, onVoteUp, onVoteDown}) => {
+const AnswerView = ({answer, onVoteUp, onVoteDown, onWinner}) => {
   return (<div>
       <div className="pull-left pt-10">
         <VotingBar onVoteUp={onVoteUp} onVoteDown={onVoteDown} votes={answer.get('votes')}/>
-        <CorrectAnswer/>
+        <WinnerAnswer onWinner={onWinner} isWinner={answer.get('winner')}/>
       </div>
       <div className="ui-spinner pl-10 pt-20">
         <div dangerouslySetInnerHTML={(()=>({__html: answer.get('content')}))()}/>
