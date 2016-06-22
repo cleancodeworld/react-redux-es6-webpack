@@ -52,27 +52,7 @@ export default class QuestionForm extends Component {
                   <div className="form-group">
                     <TinyMCE {...content}/>
                   </div>}/>
-                <Field name="tags" component={(tags) =>
-                    <div className="input-group mb-20">
-                      <span className="input-group-addon">Tags</span>
-                      <ReactTags
-                      suggestions={suggestions}
-                      tags={tags.value}
-                      labelField={'name'}
-                      handleAddition={(tag)=>{
-                        const value = tags.value || [];
-                        value.push({
-                          id: tags.length + 1,
-                          name: tag
-                        });
-                        tags.onChange(value);
-                      }}
-                      handleDelete={(index)=>{
-                        const value = tags.value || [];
-                        value.splice(index, 1);
-                        tags.onChange(value);
-                      }}/>
-                    </div>}/>
+
                 <div className="input-group mt-20 mb-20">
 
                   <Field name="notifyAnswerByEmail" component={(notifyAnswerByEmail) =>
