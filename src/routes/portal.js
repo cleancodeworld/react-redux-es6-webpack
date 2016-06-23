@@ -55,7 +55,7 @@ export default (params) => {
           <Route path="question" name="Questions" component={QuestionLayout}>
             <IndexRoute component={QuestionsByPortal}/>
             <Route name="Question Ask" path="ask" component={QuestionAsk}/>
-            <Route name="View" staticName path=":questionShortId/:questionName" component={Question}>
+            <Route name="Question View" staticName path=":questionShortId/:questionName" component={Question}>
               <IndexRoute name="Question" component={QuestionDetailsView}/>
               <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>

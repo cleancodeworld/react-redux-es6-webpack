@@ -5,6 +5,8 @@ import {withQuestion, withUserId} from 'hoc';
 import {add} from 'redux/modules/answer/create';
 import {voteUp as questionVoteUp, voteDown as questionVoteDown} from 'redux/modules/question/voting';
 import {voteUp as answerVoteUp, voteDown as answerVoteDown} from 'redux/modules/answer/voting';
+import {remove as removeAnswer} from 'redux/modules/answer/remove';
+
 import {winner as answerWinner} from 'redux/modules/answer/winner';
 import {favorite, unfavorite} from 'redux/modules/question/favorite';
 import { userLogin } from 'redux/modules/auth';
@@ -20,6 +22,7 @@ import {connect} from 'react-redux';
   unfavorite,
   answerWinner,
   userLogin,
+  removeAnswer,
 })
 @withQuestion
 @withUserId
@@ -35,6 +38,7 @@ export default class QuestionDetailsView extends Component {
     favorite: PropTypes.func,
     unfavorite: PropTypes.func,
     answerWinner: PropTypes.func,
+    removeAnswer: PropTypes.func,
     userLogin: PropTypes.func,
   };
 
@@ -77,11 +81,14 @@ export default class QuestionDetailsView extends Component {
                       onVoteDown={()=>this.props.questionVoteDown(question, userId)}
                       onFavorite={()=>this.props.favorite(question, userId)}
                       onUnfavorite={()=>this.props.unfavorite(question, userId)}
+                      userId={userId}
                       question={question}/>
         <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'), userId)}
                      onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'), userId)}
                      onWinner={(answer)=>this.props.answerWinner(answer, question.get('shortId'), userId)}
-                     order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
+                     onRemove={(answer)=>this.props.removeAnswer(answer, question, userId)}
+                     order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}
+                     userId={userId}/>
         {this.newAnswer(question, userId)}
 
       </div>);

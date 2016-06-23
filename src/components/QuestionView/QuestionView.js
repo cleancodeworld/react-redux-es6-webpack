@@ -4,7 +4,7 @@ import VotingBar from './../VotingBar/VotingBar';
 import Favorite from './Favorite/Favorite';
 import {Link} from 'react-router';
 
-const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite})=> {
+const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite, userId})=> {
   // TODO: camelcase (Author)
   return (<div className="panel panel-flat">
       <div className="panel-heading">
@@ -32,7 +32,10 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite}
 
         <div className="row">
           <div className="col-md-4">
-            <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this question</Link>
+            {userId === question.getIn(['author', 'id'])
+              ? <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this
+              question</Link>
+              : <span/>}
           </div>
           <div className="col-md-4 pull-right">
             <AuthorCardQAndA createdAt={question.get('createdAt')} author={question.get('author')}/>

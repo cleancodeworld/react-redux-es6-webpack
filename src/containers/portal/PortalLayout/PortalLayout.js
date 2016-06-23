@@ -57,7 +57,7 @@ export default class PortalLayout extends Component {
                 <NavItem eventKey={2}>Courses</NavItem>
               </LinkContainer>
               <LinkContainer to="/question">
-                <NavItem eventKey={2}>Question</NavItem>
+                <NavItem eventKey={2}>Questions</NavItem>
               </LinkContainer>
               {user ?
                 <LinkContainer to="/wish-list">

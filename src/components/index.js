@@ -25,7 +25,6 @@ export CourseListItem from './CourseListItem/CourseListItem';
 export PasswordForgetForm from './PasswordForgetForm/PasswordForgetForm';
 export PasswordResetForm from './PasswordResetForm/PasswordResetForm';
 export CourseAccountingForm from './CourseAccountingForm/CourseAccountingForm';
-export LessonRemoveButton from './LessonRemoveButton/LessonRemoveButton';
 export CourseList from './CourseList/CourseList';
 export CourseView from './CourseView/CourseView';
 export PriceDisplay from './PriceDisplay/PriceDisplay';

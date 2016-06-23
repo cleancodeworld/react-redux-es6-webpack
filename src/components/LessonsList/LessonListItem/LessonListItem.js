@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {LessonRemoveButton} from 'components';
+import {RemoveButton} from './RemoveButton/RemoveButton';
 import moment from 'moment';
 
 export default class LessonListItem extends Component {
@@ -27,7 +27,7 @@ export default class LessonListItem extends Component {
                 className="icon-pencil7"></i></Link>
             </li>
             <li>
-              <LessonRemoveButton lesson={lesson}
+              <RemoveButton lesson={lesson}
                                   onRemove={()=> onRemove(courseName, lesson.get('slug'))}/>
             </li>
             <li className="text-teal-600">
