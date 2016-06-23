@@ -17,6 +17,9 @@ import {
 import {
   ADD_SUCCESS as ANSWER_ADD_SUCCESS
 } from './../answer/create';
+import {
+  REMOVE_SUCCESS as ANSWER_REMOVE_SUCCESS
+} from './../answer/remove';
 
 import {
   normalizeBy
@@ -29,6 +32,12 @@ export default function loaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case ANSWER_REMOVE_SUCCESS:
+      return state.withMutations(map => {
+        const {answerId, questionShortId} = action.data;
+        map.removeIn([questionShortId, 'answers', 'entities', answerId]);
+        map.updateIn([questionShortId, 'answers', 'order'], array=>array.filter((answer)=> answer !== answerId));
+      });
     case QUESTION_CREATE_SUCCESS:
       return state.withMutations(map => {
         const {question} = action.result.data;

@@ -16,6 +16,7 @@ import {EDIT_SUCCESS as LESSON_EDIT_SUCCESS} from './lesson/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as PORTAL_UPDATE_COVER_IMAGE_SUCCESS} from './portal/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as USER_UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 import {CREATE_SUCCESS as QUESTION_CREATE_SUCCESS} from './question/create';
+import {REMOVE_SUCCESS as ANSWER_REMOVE_SUCCESS} from './answer/remove';
 
 const initialState = Immutable.fromJS([]);
 
@@ -35,6 +36,16 @@ export default function Notifications(state = initialState, action) {
         const notify = Immutable.fromJS({
           level: 'success',
           title: 'Saved',
+          position: 'tc',
+          uid: uid(10)
+        });
+        map.push(notify);
+      });
+    case ANSWER_REMOVE_SUCCESS:
+      return state.withMutations(map=> {
+        const notify = Immutable.fromJS({
+          level: 'success',
+          title: 'Removed',
           position: 'tc',
           uid: uid(10)
         });
