@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {getCurrencySymbol} from 'utils/currency';
 
 const CartCourseList = ({entities, order, cart})=> {
   return (
     <div className="panel panel-flat">
       <div className="panel-body">
         <div className="content-group">
-          <h6 className="text-semibold no-margin">1 Courses in Cart</h6>
+          <h6 className="text-semibold no-margin">{order.count()} {order.count() === 1 ? 'Course' : 'Courses'} in Cart</h6>
         </div>
         <ul className="media-list">
           {
@@ -37,7 +38,7 @@ const CartCourseList = ({entities, order, cart})=> {
                       <div className="col-md-4">
                         <b>{
                           course.getIn(['coursePrice', 'price']) ?
-                          `${course.getIn(['coursePrice', 'currency'])} ${course.getIn(['coursePrice', 'price'])}`
+                          `${getCurrencySymbol(course.getIn(['coursePrice', 'currency']))}${course.getIn(['coursePrice', 'price'])}`
                           :
                           'Free'
                         }</b>
