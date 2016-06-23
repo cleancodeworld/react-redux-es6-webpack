@@ -13,7 +13,7 @@ export default class Login extends Component {
   };
 
   render() {
-    const {continueTo} = this.props.location.query;
+    const {continueTo} = this.props.location.query || '/';
     return (
       <div>
         <Helmet title="Login"/>
