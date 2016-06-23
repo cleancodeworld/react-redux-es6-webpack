@@ -6,7 +6,10 @@ export const VOTE_DOWN = 'knexpert/answer/VOTE_UP';
 export const VOTE_DOWN_SUCCESS = 'knexpert/answer/VOTE_UP_SUCCESS';
 export const VOTE_DOWN_FAIL = 'knexpert/answer/VOTE_UP_FAIL';
 
-export function voteUp(answer, questionShortId) {
+import {showSignUpModal} from '../auth';
+
+export function voteUp(answer, questionShortId, userId) {
+  if (!userId) return showSignUpModal();
   return {
     types: [VOTE_UP, VOTE_UP_SUCCESS, VOTE_UP_FAIL],
     promise: (client) => client.put(`/api/v1/answer/${answer.get('id')}/vote/up`),
@@ -17,7 +20,8 @@ export function voteUp(answer, questionShortId) {
   };
 }
 
-export function voteDown(answer, questionShortId) {
+export function voteDown(answer, questionShortId, userId) {
+  if (!userId) return showSignUpModal();
   return {
     types: [VOTE_DOWN, VOTE_DOWN_SUCCESS, VOTE_DOWN_FAIL],
     promise: (client) => client.put(`/api/v1/answer/${answer.get('id')}/vote/down`),

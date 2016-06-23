@@ -73,14 +73,14 @@ export default class QuestionDetailsView extends Component {
     return (
       <div className="container">
         <Helmet title="Question"/>
-        <QuestionView onVoteUp={()=>this.props.questionVoteUp(question)}
-                      onVoteDown={()=>this.props.questionVoteDown(question)}
-                      onFavorite={()=>this.props.favorite(question)}
-                      onUnfavorite={()=>this.props.unfavorite(question)}
+        <QuestionView onVoteUp={()=>this.props.questionVoteUp(question, userId)}
+                      onVoteDown={()=>this.props.questionVoteDown(question, userId)}
+                      onFavorite={()=>this.props.favorite(question, userId)}
+                      onUnfavorite={()=>this.props.unfavorite(question, userId)}
                       question={question}/>
-        <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'))}
-                     onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'))}
-                     onWinner={(answer)=>this.props.answerWinner(answer, question.get('shortId'))}
+        <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'), userId)}
+                     onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'), userId)}
+                     onWinner={(answer)=>this.props.answerWinner(answer, question.get('shortId'), userId)}
                      order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
         {this.newAnswer(question, userId)}
 
