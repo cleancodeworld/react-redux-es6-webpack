@@ -122,7 +122,7 @@ export function userLogin(model, continueTo) {
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
-        return dispatch(push(continueTo || '/'));
+        return continueTo ? dispatch(push(continueTo)) : null;
       })
       .catch(res => {
         throw new SubmissionError({ _error: res.error });

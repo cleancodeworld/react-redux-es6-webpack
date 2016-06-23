@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { QuestionView, AnswerForm, AnswersList } from 'components';
+import { QuestionView, AnswerForm, AnswersList, LoginForm} from 'components';
 import Helmet from 'react-helmet';
 import {withQuestion, withUserId} from 'hoc';
 import {add} from 'redux/modules/answer/create';
@@ -7,8 +7,20 @@ import {voteUp as questionVoteUp, voteDown as questionVoteDown} from 'redux/modu
 import {voteUp as answerVoteUp, voteDown as answerVoteDown} from 'redux/modules/answer/voting';
 import {winner as answerWinner} from 'redux/modules/answer/winner';
 import {favorite, unfavorite} from 'redux/modules/question/favorite';
+import { userLogin } from 'redux/modules/auth';
 import {connect} from 'react-redux';
-@connect(null, { add, questionVoteUp, questionVoteDown, answerVoteUp, answerVoteDown, favorite, unfavorite, answerWinner })
+
+@connect(null, {
+  add,
+  questionVoteUp,
+  questionVoteDown,
+  answerVoteUp,
+  answerVoteDown,
+  favorite,
+  unfavorite,
+  answerWinner,
+  userLogin,
+})
 @withQuestion
 @withUserId
 export default class QuestionDetailsView extends Component {
@@ -23,12 +35,38 @@ export default class QuestionDetailsView extends Component {
     favorite: PropTypes.func,
     unfavorite: PropTypes.func,
     answerWinner: PropTypes.func,
+    userLogin: PropTypes.func,
   };
 
   state = {
     saved: false
   }
   static pageHeader = {}
+
+  newAnswer(question, userId) {
+    let res;
+    if (this.state.saved) {
+      res = (<div className="panel panel-flat">
+        <div className="panel-heading">
+          <div className="panel-title">
+            <h3 className="text-success">Your answer saved</h3>
+          </div>
+        </div>
+      </div>);
+    } else if (userId) {
+      res =
+        (<AnswerForm
+          onSubmit={(model)=> this.props.add({
+            ...model,
+            authorId: userId,
+            questionId: question.get('id'),
+            winner: false
+          }, question.get('shortId')).then(()=> this.setState({saved: true}))}/>);
+    } else {
+      res = (<LoginForm onSubmit={ model => this.props.userLogin(model, false)}/>);
+    }
+    return res;
+  }
 
   render() {
     const {question, userId} = this.props;
@@ -44,21 +82,8 @@ export default class QuestionDetailsView extends Component {
                      onVoteDown={(answer)=>this.props.answerVoteDown(answer, question.get('shortId'))}
                      onWinner={(answer)=>this.props.answerWinner(answer, question.get('shortId'))}
                      order={question.getIn(['answers', 'order'])} entities={question.getIn(['answers', 'entities'])}/>
-        {!this.state.saved
-          ? <AnswerForm
-          onSubmit={(model)=> this.props.add({
-            ...model,
-            authorId: userId,
-            questionId: question.get('id'),
-            winner: false
-          }, question.get('shortId')).then(()=> this.setState({saved: true}))}/>
-          : <div className="panel panel-flat">
-          <div className="panel-heading">
-            <div className="panel-title">
-              <h3 className="text-success">saved</h3>
-            </div>
-          </div>
-        </div>}
+        {this.newAnswer(question, userId)}
+
       </div>);
   }
 }
