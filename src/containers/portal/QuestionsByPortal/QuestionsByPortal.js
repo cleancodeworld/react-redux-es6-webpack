@@ -37,10 +37,10 @@ export default class QuestionsByPortal extends Component {
   render() {
     const {questions, order} = this.props;
     return (
-      <div>
+      <div className="container">
         <Helmet title="Questions"/>
         <div className="row">
-          <div className="col-md-10 col-md-offset-1">
+          <div className="col-md-12">
             <QuestionsList entities={questions}
                            order={order}/>
           </div>

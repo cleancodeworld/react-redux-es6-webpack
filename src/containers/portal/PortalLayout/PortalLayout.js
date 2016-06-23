@@ -71,9 +71,9 @@ export default class PortalLayout extends Component {
                 <LinkContainer to="/my-courses">
                   <NavItem eventKey={5}>My Courses</NavItem>
                 </LinkContainer> : null}
-              <LinkContainer to="/author">
+              {user ? <LinkContainer to="/author">
                 <NavItem eventKey={6}>Author Admin Panel</NavItem>
-              </LinkContainer>
+              </LinkContainer> : null}
             </Nav>
             <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
           </Navbar.Collapse>
