@@ -3,10 +3,11 @@ import { asyncConnect } from 'redux-connect';
 import { connect } from 'react-redux';
 import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/auth';
 import {withUser} from 'hoc';
-import {Notifications, SignupModal} from 'components';
+import {Notifications, SignupModal, LoginModal} from 'components';
 import { signup } from 'redux/modules/user/create';
-import { hideSignUpModal } from 'redux/modules/auth';
+import { hideSignUpModal, hideLogInModal } from 'redux/modules/auth';
 import { push } from 'react-router-redux';
+import { userLogin } from 'redux/modules/auth';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -19,8 +20,8 @@ import { push } from 'react-router-redux';
 }])
 
 @connect(
-  ({auth})=>({ isShowSignUpModal: auth.get('isShowSignUpModal') }),
-  { signup, hideSignUpModal, push }
+  ({auth})=>({ isShowSignUpModal: auth.get('isShowSignUpModal'), isShowLogInModal: auth.get('isShowLogInModal') }),
+  { signup, hideSignUpModal, hideLogInModal, push, userLogin }
 )
 
 @withUser
@@ -30,10 +31,12 @@ export default class Root extends React.Component {
     children: PropTypes.object.isRequired,
     signup: PropTypes.func.isRequired,
     hideSignUpModal: PropTypes.func.isRequired,
+    hideLogInModal: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
+    userLogin: PropTypes.func.isRequired,
     user: PropTypes.object,
     isShowSignUpModal: PropTypes.bool,
-
+    isShowLogInModal: PropTypes.bool,
   };
   static childContextTypes = {
     user: PropTypes.object
@@ -56,6 +59,11 @@ export default class Root extends React.Component {
         onSubmit={(modal)=> this.props.signup(modal).then(()=>this.props.hideSignUpModal()).then(()=> this.props.push('/login'))}
         onHide={()=> this.props.hideSignUpModal()}
         show={this.props.isShowSignUpModal}
+      />
+      <LoginModal
+        onSubmit={(modal)=> this.props.userLogin(modal).then(()=>this.props.hideLogInModal())}
+        onHide={()=> this.props.hideLogInModal()}
+        show={this.props.isShowLogInModal}
       />
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">

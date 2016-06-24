@@ -5,7 +5,7 @@ export const LOAD_FAIL = 'knexpert/answers/LOAD_FAIL';
 export function find(id, name) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/answer/${id}/${name}`),
+    promise: (client) => client.get(`/api/v1/answer/question/${id}/${name}`),
     data: {
       questionId: id
     }

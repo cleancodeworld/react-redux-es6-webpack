@@ -29,6 +29,7 @@ export CourseList from './CourseList/CourseList';
 export CourseView from './CourseView/CourseView';
 export PriceDisplay from './PriceDisplay/PriceDisplay';
 export SignupModal from './SignupModal/SignupModal';
+export LoginModal from './LoginModal/LoginModal';
 export SignupForm from './SignupForm/SignupForm';
 export CourseRate from './CourseRate/CourseRate';
 export StripeCheckOut from './StripeCheckOut/StripeCheckOut';
