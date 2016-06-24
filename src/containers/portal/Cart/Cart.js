@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import {
   CartCourseList,
+  CheckOutModal,
 } from 'components';
 
 import {showSignUpModal} from 'redux/modules/auth';
@@ -29,12 +30,16 @@ export default class Cart extends Component {
     title: 'Shopping Cart'
   };
 
-  getTotalPrice = (entities, order, currency) => {
+  state = {
+    checkOutModalOpen: false
+  }
+
+  getTotalPrice = (entities, order) => {
     let total = 0;
     order.map(courseName => {
       const course = entities.get(courseName);
       const price = course.getIn(['coursePrice', 'price']);
-      if (price && course.getIn(['coursePrice', 'currency']) === currency) {
+      if (price) {
         total += price;
       }
     });
@@ -43,18 +48,9 @@ export default class Cart extends Component {
 
   render() {
     const {courses, cart} = this.props;
-    const totalUSD = this.getTotalPrice(courses, cart.order, 'USD');
-    const totalEuro = this.getTotalPrice(courses, cart.order, 'EURO');
-    let priceString = '';
-    if (totalUSD) {
-      priceString += `${totalUSD}`;
-    }
-    if (totalEuro) {
-      if (totalUSD) {
-        priceString += ' + ';
-      }
-      priceString += `€${totalEuro}`;
-    }
+    const {checkOutModalOpen} = this.state;
+    const totalUSD = this.getTotalPrice(courses, cart.order);
+    const priceString = `${totalUSD}`;
     return (
       <div className="page-container">
         <Helmet title="Cart"/>
@@ -71,7 +67,8 @@ export default class Cart extends Component {
                     <h6 className="text-semibold no-margin">Total:</h6>
                     <h1 className="panel-title price">${priceString}</h1>
                     <div className="content-group mt-10">
-                      <a href="#" className="btn bg-primary legitRipple display-block">Checkout</a>
+                      <a href="javascript:void(0)" className="btn bg-primary legitRipple display-block"
+                        onClick={()=>this.setState({checkOutModalOpen: true})}>Checkout</a>
                     </div>
                     {/* -- coupon code not implemented yet --
                     <hr/>
@@ -87,6 +84,11 @@ export default class Cart extends Component {
             </div>
           </div>
         </div>
+        <CheckOutModal
+            onSuccess={(token)=> cart.checkout(totalUSD, 'usd', token.id)}
+            show={checkOutModalOpen}
+            amount={totalUSD}
+            onHide={()=>this.setState({checkOutModalOpen: false})}/>
       </div>
     );
   }

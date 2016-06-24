@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {getCurrencySymbol} from 'utils/currency';
 
 const CartCourseList = ({entities, order, cart})=> {
   return (
@@ -33,12 +32,13 @@ const CartCourseList = ({entities, order, cart})=> {
                   <div className="media-right mt-20 width-200 text-right">
                     <div className="row">
                       <div className="col-md-8">
-                        <a href="#" className="legitRipple display-block" onClick={() => cart.removeFromCart(course)}>Remove</a>
+                        <a href="javascript:void(0)" className="legitRipple display-block"
+                            onClick={() => cart.removeFromCart(course)}>Remove</a>
                       </div>
                       <div className="col-md-4">
                         <b>{
                           course.getIn(['coursePrice', 'price']) ?
-                          `${getCurrencySymbol(course.getIn(['coursePrice', 'currency']))}${course.getIn(['coursePrice', 'price'])}`
+                          `$${course.getIn(['coursePrice', 'price'])}`
                           :
                           'Free'
                         }</b>
@@ -48,16 +48,6 @@ const CartCourseList = ({entities, order, cart})=> {
                 </li>
               );
             })
-            /* <CourseListItem addToWishList={wishList.addToWishList}
-                                removeFromWishList={wishList.removeFromWishList}
-                                isWishListItem={!!wishList.entities.get(courseName)}
-                                addToCart={cart.addToCart}
-                                removeFromCart={cart.removeFromCart}
-                                isCartItem={!!cart.entities.get(courseName)}
-                                key={course.get('id')}
-                                course={course}
-                                onClickLoginRequiredLink={this.onClickLoginRequiredLink}
-                                myCourses={myCourses}/> */
           }
         </ul>
       </div>

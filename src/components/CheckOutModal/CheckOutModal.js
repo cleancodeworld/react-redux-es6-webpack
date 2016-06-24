@@ -9,15 +9,15 @@ export default class CheckOutModal extends Component {
     show: PropTypes.bool,
     onHide: PropTypes.func,
     onSuccess: PropTypes.func,
-    course: PropTypes.object,
+    amount: PropTypes.number,
   }
 
   render() {
-    const {show, onHide, course} = this.props;
+    const {show, onHide, amount} = this.props;
     return (
       <Modal show={show} onHide={onHide}>
         <Modal.Body>
-          <StripeCheckOut amount={course.getIn(['coursePrice', 'price'])}
+          <StripeCheckOut amount={amount}
                           onSuccess={this.props.onSuccess}/>
         </Modal.Body>
       </Modal>
