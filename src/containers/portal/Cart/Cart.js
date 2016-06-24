@@ -68,7 +68,7 @@ export default class Cart extends Component {
                     <h1 className="panel-title price">${priceString}</h1>
                     <div className="content-group mt-10">
                       <a href="javascript:void(0)" className="btn bg-primary legitRipple display-block"
-                        onClick={()=>this.setState({checkOutModalOpen: true})}>Checkout</a>
+                        onClick={() => this.setState({checkOutModalOpen: true})}>Checkout</a>
                     </div>
                     {/* -- coupon code not implemented yet --
                     <hr/>
@@ -85,10 +85,13 @@ export default class Cart extends Component {
           </div>
         </div>
         <CheckOutModal
-            onSuccess={(token)=> cart.checkout(totalUSD, 'usd', token.id)}
+            onSuccess={(token) => {
+              this.setState({checkOutModalOpen: false});
+              return cart.checkout(totalUSD, 'usd', token.id);
+            }}
             show={checkOutModalOpen}
             amount={totalUSD}
-            onHide={()=>this.setState({checkOutModalOpen: false})}/>
+            onHide={() => this.setState({checkOutModalOpen: false})}/>
       </div>
     );
   }
