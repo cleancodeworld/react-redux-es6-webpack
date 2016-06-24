@@ -5,12 +5,12 @@ export const CREATE_FAIL = 'knexpert/portal/CREATE_FAIL';
 import {SubmissionError} from 'redux-form';
 import config from 'config';
 
-export function create(model, sessionToken) {
+export function create(model) {
   model.privacy = model.privacy ? 'Public' : 'Private';
   model.type = model.type ? 'Personal' : 'Company';
   return {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
-    promise: (client) => client.post(`/api/v1/portal?sessionToken=${sessionToken}`, { data: model }),
+    promise: (client) => client.post(`/api/v1/portal`, { data: model }),
     data: {
       model
     }
