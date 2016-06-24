@@ -12,7 +12,7 @@ export default class CategoriesList extends Component {
   render() {
     const {activeCategory, categories: {entities, order}} = this.props;
     return (
-      categories.order.count()
+      order.count()
         ?
         <div className="category-content no-padding">
           <ul className="navigation navigation-main navigation-accordion">
