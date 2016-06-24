@@ -17,7 +17,7 @@ export default class CourseList extends Component {
 
   render() {
     const { wishList, entities, order, activeCategory, cart, myCourses } = this.props;
-    return (
+    return order.count() ? (
       <div>
         <div className="row">
           {
@@ -42,6 +42,6 @@ export default class CourseList extends Component {
           }
         </div>
       </div>
-    );
+    ) : <span>Empty</span>;
   }
 }
