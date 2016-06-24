@@ -115,7 +115,6 @@ export default class QuestionForm extends Component {
                 <h5>How to Format</h5>
 
                 <p>▸ put returns between paragraphs</p>
-                <p>▸ for linebreak add 2 spaces at end</p>
                 <p>▸ _italic_ or **bold**</p>
                 <p>▸ indent code by 4 spaces</p>
                 <p>▸ backtick escapes `like _so_`</p>
