@@ -6,20 +6,28 @@ import { userLogin } from 'redux/modules/auth';
 
 @connect(null, { userLogin })
 export default class Login extends Component {
-
   static propTypes = {
     userLogin: PropTypes.func.isRequired,
     location: PropTypes.object,
   };
 
+  confirmEmailWarning() {
+    return (<div className="panel bg-primary">
+      <div className="panel-heading">
+        <h6 className="panel-title text-center">Confirm your email before login</h6>
+      </div>
+    </div>);
+  }
+
   render() {
-    const {continueTo} = this.props.location.query;
+    const {continueTo, message} = this.props.location.query;
     return (
       <div>
         <Helmet title="Login"/>
         <div className="page-container">
           <div className="page-content">
             <div className="content-wrapper">
+              {message === 'confirm_email' ? this.confirmEmailWarning() : <span/>}
               <LoginForm onSubmit={ model => this.props.userLogin(model, continueTo || '/')}/>
             </div>
           </div>
