@@ -3,7 +3,6 @@ import {reduxForm, Field} from 'redux-form';
 import {TinyMCE} from 'components';
 import validate from './validate';
 import {WithContext as ReactTags} from 'react-tag-input';
-
 @reduxForm({
   form: 'QuestionForm',
   validate
@@ -51,6 +50,7 @@ export default class QuestionForm extends Component {
                 <Field name="content" component={content =>
                   <div className="form-group">
                     <TinyMCE {...content}/>
+                      {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
                   </div>}/>
 
                 <div className="input-group mt-20 mb-20">
@@ -66,24 +66,28 @@ export default class QuestionForm extends Component {
                   />
                   <Field name="tags" component={(tags) =>
                     <div className="input-group mb-20">
+                      <div className="input-group">
                       <span className="input-group-addon">Tags</span>
-                      <ReactTags
-                      suggestions={suggestions}
-                      tags={tags.value}
-                      labelField={'name'}
-                      handleAddition={(tag)=>{
-                        const value = tags ? tags.value : [];
-                        value.push({
-                          id: tags.length + 1,
-                          name: tag
-                        });
-                        tags.onChange(value);
-                      }}
-                      handleDelete={(index)=>{
-                        const value = tags ? tags.value : [];
-                        value.splice(index, 1);
-                        tags.onChange(value);
-                      }}/>
+                        <ReactTags
+                        suggestions={suggestions}
+                        tags={tags.value}
+                        labelField={'name'}
+                        handleAddition={(tag)=>{
+                          const value = tags ? tags.value : [];
+                          value.push({
+                            id: tags.length + 1,
+                            name: tag
+                          });
+                          tags.onChange(value);
+                        }}
+                        handleDelete={(index)=>{
+                          const value = tags ? tags.value : [];
+                          value.splice(index, 1);
+                          tags.onChange(value);
+                        }}/>
+                    </div>
+
+                      {tags.touched && tags.error && <span className="validation-error-label pull-left">{tags.error}</span>}
                     </div>}/>
                 </div>
                 <div>
