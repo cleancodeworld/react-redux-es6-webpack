@@ -42,7 +42,7 @@ export default class CourseList extends Component {
           }
         </div>
       </div>
-    ) : (<div>
+    ) : (<div class="col-md-8 col-md-offset-2">
       <div className="content-group tab-content-bordered navbar-component">
         <div className="navbar navbar-default navbar-xs">
           <div className="navbar-collapse collapse">
