@@ -158,7 +158,8 @@ export function logout() {
       types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
       promise: (client) => client.post('/api/v1/logout')
     }).then(()=> {
-      return window.location.href = `${location.protocol}//${config.mainDomain}`;
+      console.log(`${location.protocol}//${config.mainDomain}`);
+      window.location.href = `${location.protocol}//${config.mainDomain}`;
     });
   };
 }
