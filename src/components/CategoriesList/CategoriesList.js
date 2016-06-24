@@ -12,17 +12,21 @@ export default class CategoriesList extends Component {
   render() {
     const {activeCategory, categories: {entities, order}} = this.props;
     return (
-      <div className="category-content no-padding">
-        <ul className="navigation navigation-main navigation-accordion">
-          {order.map(categoryId => {
-            const category = entities.get(categoryId);
-            return (
-              <Item category={category} key={category.get('slug')}
-                    isActiveCategory={activeCategory && category.get('slug') === activeCategory.get('slug')}/>
-            );
-          })}
-        </ul>
-      </div>
+      categories.order.count()
+        ?
+        <div className="category-content no-padding">
+          <ul className="navigation navigation-main navigation-accordion">
+            {order.map(categoryId => {
+              const category = entities.get(categoryId);
+              return (
+                <Item category={category} key={category.get('slug')}
+                      isActiveCategory={activeCategory && category.get('slug') === activeCategory.get('slug')}/>
+              );
+            })}
+          </ul>
+        </div>
+        :
+        <span/>
     );
   }
 }
