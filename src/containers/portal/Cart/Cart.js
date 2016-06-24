@@ -59,7 +59,7 @@ export default class Cart extends Component {
             <div className="row">
               <div className="col-md-9">
                 <CartCourseList cart={cart} entities={courses} order={cart.order}
-                          onSessionRequired={ ()=> this.props.showSignUpModal()} />
+                          onSessionRequired={()=> this.props.showSignUpModal()} />
               </div>
               <div className="col-md-3">
                 <div className="panel panel-flat">
@@ -87,7 +87,7 @@ export default class Cart extends Component {
         <CheckOutModal
             onSuccess={(token) => {
               this.setState({checkOutModalOpen: false});
-              return cart.checkout(totalUSD, 'usd', token.id);
+              return cart.checkout(courses, cart.order, totalUSD, 'usd', token.id);
             }}
             show={checkOutModalOpen}
             amount={totalUSD}

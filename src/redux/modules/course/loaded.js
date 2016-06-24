@@ -171,7 +171,9 @@ export default function courseLoad(state = initialState, action) {
         const {wishlistItems} = action.result.data;
         const courses = wishlistItems.map(item => item.course);
         courses.map(course=> {
-          map.setIn(['entities', course.slug], Immutable.fromJS(course));
+          if (course) {
+            map.setIn(['entities', course.slug], Immutable.fromJS(course));
+          }
         });
       });
     case RESET_COURSES:

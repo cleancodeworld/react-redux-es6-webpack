@@ -30,8 +30,10 @@ export default function myCourses(state = initialState, action) {
       return state.withMutations(map=> {
         const {wishlistItems} = action.result.data;
         wishlistItems.map((item)=> {
-          map.setIn(['entities', item.course.slug], true);
-          map.update('order', array=>array.push(item.course.slug));
+          if (item.course) {
+            map.setIn(['entities', item.course.slug], true);
+            map.update('order', array=>array.push(item.course.slug));
+          }
         });
         map.set('isLoaded', true);
       });
