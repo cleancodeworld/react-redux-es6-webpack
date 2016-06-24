@@ -12,8 +12,8 @@ export function create(model) {
     promise: (client) => client.post(`/api/v1/signup`, {
       data: {
         ...model,
-        email: model.email.toLowerCase(),
-        username: model.username.toLowerCase(),
+        email: model.email,
+        username: model.username,
         roleId: '572d7765cbb4e22d164579b9'
       }
     }),
@@ -30,7 +30,7 @@ export function createWithPortal(model) {
       .then(()=> dispatch(silentLogin(model)))
       .then(({data})=> dispatch(portalCreate({
         ...model,
-        name: model.portalName.toLowerCase(),
+        name: model.portalName,
         privacy: model.isPublic ? 'Public' : 'Private',
         type: model.isPersonal ? 'Personal' : 'Company',
         ownerId: data.userId,

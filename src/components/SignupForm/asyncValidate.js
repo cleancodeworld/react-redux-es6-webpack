@@ -5,7 +5,7 @@ const checkAvailability = (values) => {
   return new Promise((resolve, reject) => {
     async.parallel(
       {
-        username: (cb)=> values.username ? superagent.get(`/api/v1/author/${values.username.toLowerCase()}/available`).end((err, {body} = {})=> {
+        username: (cb)=> values.username ? superagent.get(`/api/v1/author/${values.username}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
           if (!body.data.available) cb({ username: 'This username is not available' });
           else cb(null);

@@ -91,7 +91,7 @@ export function isAuthenticated(globalState) {
 export function login(model) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post(`/api/v1/login`, { data: { ...model, email: model.email.toLowerCase() } }),
+    promise: (client) => client.post(`/api/v1/login`, { data: model }),
     data: {
       model
     }
@@ -101,7 +101,7 @@ export function login(model) {
 export function silentLogin(model) {
   return {
     types: [LOGIN, LOGIN, LOGIN],
-    promise: (client) => client.post(`/api/v1/login`, { data: { ...model, email: model.email.toLowerCase() } }),
+    promise: (client) => client.post(`/api/v1/login`, { data: model }),
     data: {
       model
     }
