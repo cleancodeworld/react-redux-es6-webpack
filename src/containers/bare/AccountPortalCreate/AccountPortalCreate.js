@@ -21,7 +21,7 @@ export default class AccountPortalCreate extends Component {
             <div className="content-wrapper">
               <AccountPortalForm
                 onSubmit={ model => this.props.userCreateWithPortal(model)
-                .then(()=>location.href = `${location.protocol}//${model.portalName}.${config.mainDomain}?message=confirm_email`)}/>
+                .then(()=>location.href = `${location.protocol}//${model.portalName}.${config.mainDomain}/login?message=confirm_email`)}/>
             </div>
           </div>
         </div>
