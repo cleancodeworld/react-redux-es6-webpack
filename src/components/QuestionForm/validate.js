@@ -5,7 +5,7 @@ const validate = values => {
 
   if (!values.title) {
     errors.title = 'Title is missing';
-  } else if (values.title && values.title.length < 150) {
+  } else if (values.title && values.title.length > 150) {
     errors.title = 'Title cannot be longer than 150 characters.';
   }
   if (isEmpty(values.tags)) {
