@@ -74,16 +74,14 @@ export default class QuestionForm extends Component {
                         labelField={'name'}
                         handleAddition={(tag)=>{
                           const value = tags ? tags.value : [];
-                          value.push({
+                          return tags.onChange([ ...value, {
                             id: tags.length + 1,
                             name: tag
-                          });
-                          tags.onChange(value);
+                          }]);
                         }}
                         handleDelete={(index)=>{
                           const value = tags ? tags.value : [];
-                          value.splice(index, 1);
-                          tags.onChange(value);
+                          tags.onChange(value.splice(index, 1));
                         }}/>
                     </div>
 

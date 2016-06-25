@@ -12,7 +12,7 @@ const validate = values => {
     errors.tags = 'Please enter at least one tag;';
   }
 
-  if (!values.content) {
+  if (!values.content || values.content === '<p></p>') {
     errors.content = 'Body is missing';
   }
   return errors;
