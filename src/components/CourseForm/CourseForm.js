@@ -98,7 +98,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="thumbnail" component={thumbnail =>
                   <div>
-                    <Dropzone
+                    <Dropzone multiple={false} accept="image/*"
                               {...thumbnail}
                               accept="image/*" className="action btn bg-warning"
                               style={{height: 60}}

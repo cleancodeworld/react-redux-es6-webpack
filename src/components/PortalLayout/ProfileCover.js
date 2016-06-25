@@ -46,7 +46,8 @@ export default class ProfileCover extends Component {
             <ul className="list-inline list-inline-condensed no-margin-bottom text-nowrap">
               <li>
                 <Dropzone
-                  accept="image/*" className="action"
+                  multiple={false} accept="image/*"
+                  className="action"
                   style={{height: 40}}
                   multiple={false} onDrop={this.onDrop}>
                   <a href="javascript:void(0)" className="btn btn-default"><i

@@ -49,7 +49,8 @@ export default class SideProfile extends Component {
           <div className="category-content">
 
             <Dropzone
-              accept="image/*" className="action"
+              multiple={false} accept="image/*"
+              className="action"
               style={{height: 110}}
               multiple={false} onDrop={this.onDrop}>
               <div className="sidebar-user-material-content">

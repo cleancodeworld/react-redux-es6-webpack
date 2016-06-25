@@ -41,7 +41,7 @@ export default class TinyMCE extends Component {
     if (!isScriptLoaded) return <div>Loading</div>;
     return (
       <div>
-        <Dropzone ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
+        <Dropzone multiple={false} accept="image/*" ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
         <TinyMCEEditor
           content={value}
           config={{
