@@ -111,29 +111,6 @@ export default class QuestionForm extends Component {
                   <a href="#" className="display-block">asking help »</a>
                 </div>
               </div>
-              <div className="sticky-note mb-20">
-                <h5>How to Format</h5>
-
-                <p>▸ put returns between paragraphs</p>
-                <p>▸ _italic_ or **bold**</p>
-                <p>▸ indent code by 4 spaces</p>
-                <p>▸ backtick escapes `like _so_`</p>
-                <p>▸ quote by placing &gt; at start of line</p>
-                <p>▸ to make links</p>
-
-                <p>
-                  &lt;http://foo.com&gt;<br/>
-                  [foo](http://foo.com)<br/>
-                  &lt;a href="http://foo.com"&gt;foo&lt;/a&gt;
-                </p>
-
-                <p>▸ basic HTML also allowed</p>
-
-                <div className="text-right">
-                  <a href="#" className="display-block">formatting help »</a>
-                  <a href="#" className="display-block">asking help »</a>
-                </div>
-              </div>
             </div>
           </div>
 
