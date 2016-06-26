@@ -1,13 +1,13 @@
 import { normalize, Schema, arrayOf } from 'normalizr';
-import * as _ from 'lodash';
+import get from 'lodash/get';
 
 export function courses(arrayOfCourses) {
   const coursesSchema = new Schema('courses', { idAttribute: 'slug' });
   const results = normalize({ courses: arrayOfCourses }, {
     courses: arrayOf(coursesSchema)
   });
-  const entities = _.get(results, 'entities.courses', {});
-  const order = _.get(results, 'result.courses', []);
+  const entities = get(results, 'entities.courses', {});
+  const order = get(results, 'result.courses', []);
   return { order, entities, listLoaded: true };
 }
 
@@ -20,8 +20,8 @@ export function normalizeBySlug(arrayOfObjects) {
     {
       objects: arrayOf(schema)
     });
-  const entities = _.get(results, 'entities.objects', {});
-  const order = _.get(results, 'result.objects', []);
+  const entities = get(results, 'entities.objects', {});
+  const order = get(results, 'result.objects', []);
   return { order, entities, listLoaded: true };
 }
 
@@ -34,8 +34,8 @@ export function normalizeBy(arrayOfObjects, idAttribute) {
     {
       objects: arrayOf(schema)
     });
-  const entities = _.get(results, 'entities.objects', {});
-  const order = _.get(results, 'result.objects', []);
+  const entities = get(results, 'entities.objects', {});
+  const order = get(results, 'result.objects', []);
   return { order, entities, listLoaded: true };
 }
 
@@ -45,8 +45,8 @@ export function lessons(arrayOfLessons) {
   const results = normalize({ lessons: lessonsWithPages }, {
     lessons: arrayOf(lessonsSchema)
   });
-  const entities = _.get(results, 'entities.lessons', {});
-  const order = _.get(results, 'result.lessons', []);
+  const entities = get(results, 'entities.lessons', {});
+  const order = get(results, 'result.lessons', []);
   return { order, entities, listLoaded: true };
 }
 
@@ -56,7 +56,7 @@ export function categories(arrayOfCategories) {
   const results = normalize({ categories: arrayOfCategories }, {
     categories: arrayOf(categoriesSchema)
   });
-  const entities = _.get(results, 'entities.categories', {});
-  const order = _.get(results, 'result.categories', []);
+  const entities = get(results, 'entities.categories', {});
+  const order = get(results, 'result.categories', []);
   return { order, entities, listLoaded: true };
 }

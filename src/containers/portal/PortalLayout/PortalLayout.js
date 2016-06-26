@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import {connect} from 'react-redux';
 import Breadcrumbs from 'react-breadcrumbs';
-import * as _ from 'lodash';
+import last from 'lodash/last';
 import {
   UserNav,
   PageHeader,
@@ -39,7 +39,7 @@ export default class PortalLayout extends Component {
   render() {
     const logoImage = require('./knexpert.png');
     const {user} = this.context;
-    const lastRoute = _.last(this.props.routes);
+    const lastRoute = last(this.props.routes);
     return (
       <div className="navbar-bottom portal-container">
         <Navbar className="bg-blue" fluid inverse>

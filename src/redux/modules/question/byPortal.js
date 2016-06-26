@@ -4,6 +4,9 @@ export const BY_PORTAL_LIST = 'knexpert/question/BY_PORTAL_LIST';
 export const BY_PORTAL_LIST_SUCCESS = 'knexpert/question/BY_PORTAL_LIST_SUCCESS';
 export const BY_PORTAL_LIST_FAIL = 'knexpert/question/BY_PORTAL_LIST_FAIL';
 import {CREATE_SUCCESS as QUESTION_CREATE_SUCCESS} from './create';
+import {
+  REMOVE_SUCCESS as QUESTION_REMOVE_SUCCESS
+} from './../question/remove';
 
 import Immutable from 'immutable';
 import {
@@ -23,6 +26,12 @@ export default function byPortal(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case QUESTION_REMOVE_SUCCESS:
+      return state.withMutations(map => {
+        const {questionShortId} = action.data;
+        map.removeIn(['entities', questionShortId]);
+        map.updateIn(['order'], array=>array.filter((question)=> question !== questionShortId));
+      });
     case QUESTION_CREATE_SUCCESS:
       return state.withMutations(map => {
         const {question} = action.result.data;

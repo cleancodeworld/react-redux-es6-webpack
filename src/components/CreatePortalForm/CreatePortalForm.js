@@ -31,7 +31,7 @@ export default class CreatePortalForm extends Component {
       handleSubmit,
       submitting,
       error
-    } = this.props;
+      } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit} autoComplete="off">
@@ -61,7 +61,7 @@ export default class CreatePortalForm extends Component {
                     <Field name="description" component={description =>
                       <div>
                         <input type="text" className="form-control" {...description} onChange={event=>description.onBlur(event)} placeholder="Portal Description"/>
-                        {/* portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span> */}
+                        {description.touched && description.error && <span className="validation-error-label">{description.error}</span>}
                       </div>
                     }/>
                     <div className="form-control-feedback">
@@ -104,7 +104,8 @@ export default class CreatePortalForm extends Component {
                     </div>
                   </div>
                   <div className="form-group text-center">
-                    <button type="submit" disabled={submitting} className="btn bg-teal-400">Create <i className="icon-circle-right2 position-right"></i></button>
+                    <button type="submit" disabled={submitting} className="btn bg-teal-400">Create <i
+                      className="icon-circle-right2 position-right"></i></button>
                   </div>
                 </div>
               </div>
