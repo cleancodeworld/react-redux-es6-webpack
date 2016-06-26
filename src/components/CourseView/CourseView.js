@@ -245,7 +245,7 @@ export default class CourseView extends Component {
           <CheckOutModal
             onSuccess={this.props.onCheckOutSuccess}
             show={checkOutModalOpen}
-            course={course}
+            amount={course.getIn(['coursePrice', 'price'])}
             onHide={()=>this.setState({checkOutModalOpen: false})}/>
         </div>
       </div>

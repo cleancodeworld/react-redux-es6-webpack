@@ -9,6 +9,12 @@ export const REMOVE_FROM_CART_FAIL = 'knexpert/cart/REMOVE_FROM_CART_FAIL';
 export const LOAD_MY_CART = 'knexpert/cart/LOAD_MY_CART';
 export const LOAD_MY_CART_SUCCESS = 'knexpert/cart/LOAD_MY_CART_SUCCESS';
 export const LOAD_MY_CART_FAIL = 'knexpert/cart/LOAD_MY_CART_FAIL';
+export const ADD = 'knexpert/mycourses/ADD_MULTIPLE';
+export const ADD_SUCCESS = 'knexpert/mycourses/ADD_MULTIPLE_SUCCESS';
+export const ADD_FAIL = 'knexpert/mycourses/ADD_MULTIPLE_FAIL';
+export const CART_STRIPE_CHARGE = 'knexpert/cart/STRIPE_CHARGE';
+export const CART_STRIPE_CHARGE_SUCCESS = 'knexpert/cart/STRIPE_CHARGE_SUCCESS';
+export const CART_STRIPE_CHARGE_FAIL = 'knexpert/cart/STRIPE_CHARGE_FAIL';
 
 import Immutable from 'immutable';
 
@@ -48,6 +54,8 @@ export default function cart(state = initialState, action) {
       });
     case LOGOUT_SUCCESS:
       return initialState;
+    case ADD_SUCCESS:
+      return initialState;
     default:
       return state;
   }
@@ -82,4 +90,44 @@ export function load() {
 
 export function isLoaded(globalState) {
   return globalState.cart && globalState.cart.get('isLoaded');
+}
+
+function stripeChargeCart(amount, currency, stripeToken) {
+  return {
+    types: [CART_STRIPE_CHARGE, CART_STRIPE_CHARGE_SUCCESS, CART_STRIPE_CHARGE_FAIL],
+    promise: (client) => client.post(`/stripe/charge`, {
+      data: {
+        stripeToken,
+        amount: amount * 100,
+        currency: currency
+      }
+    })
+  };
+}
+
+function _add(entities, order, transactionId) {
+  let courseIds = '';
+  order.map(courseName => {
+    const course = entities.get(courseName);
+    courseIds += course.get('id') + ',';
+  });
+  return {
+    types: [ADD, ADD_SUCCESS, ADD_FAIL],
+    promise: (client) => client.post(`/api/v1/mycourses`, {
+      data: {
+        transactionId,
+        CoursesIds: courseIds
+      }
+    })
+  };
+}
+
+export function checkout(entities, order, amount, currency, tokenId) {
+  return dispatch => {
+    dispatch(stripeChargeCart(amount, currency, tokenId))
+      .then(res => dispatch(_add(entities, order, res.id)))
+      .catch(err => {
+        alert(JSON.stringify(err, null, 4));
+      });
+  };
 }
