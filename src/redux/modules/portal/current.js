@@ -46,6 +46,6 @@ export function isLoaded(globalState) {
 export function load(portalName) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/portal/${portalName}`)
+    promise: (client) => client.get(`/api/v1/portal/name/${portalName}`)
   };
 }

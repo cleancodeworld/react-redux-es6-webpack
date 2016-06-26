@@ -36,7 +36,7 @@ export default function categoriesLoaded(state = initialState, action) {
 export function load(portalName) {
   return {
     types: [LIST, LIST_SUCCESS, LIST_FAIL],
-    promise: (client) => client.get(`/api/v1/portal/${portalName}/categories`),
+    promise: (client) => client.get(`/api/v1/portal/name/${portalName}/categories`),
     data: {
       portalName
     }

@@ -5,7 +5,7 @@ const checkAvailability = (values) => {
   return new Promise((resolve, reject) => {
     async.parallel(
       {
-        name: (cb)=> values.name ? superagent.get(`/api/v1/portal/${values.name}/available`).end((err, {body} = {})=> {
+        name: (cb)=> values.name ? superagent.get(`/api/v1/portal/name/${values.name}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
           const { available } = body.data;
           if (!available) cb({ name: 'This portal name already token' });
