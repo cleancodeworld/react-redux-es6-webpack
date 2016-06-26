@@ -2,9 +2,11 @@ import React from 'react';
 import AuthorCardQAndA from './../AuthorCardQAndA/AuthorCardQAndA';
 import VotingBar from './../VotingBar/VotingBar';
 import Favorite from './Favorite/Favorite';
+import RemoveButton from './RemoveButton/RemoveButton';
+
 import {Link} from 'react-router';
 
-const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite, userId})=> {
+const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite, onRemove, userId})=> {
   // TODO: camelcase (Author)
   return (<div className="panel panel-flat">
       <div className="panel-heading">
@@ -33,8 +35,12 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite,
         <div className="row">
           <div className="col-md-4">
             {userId === question.getIn(['author', 'id'])
-              ? <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this
-              question</Link>
+              ? <div>
+              <Link to={`/question/${question.get('shortId')}/${question.get('slug')}/edit`}>improve this
+                question</Link>
+              <RemoveButton question={question}
+                            onRemove={()=> onRemove(question)}/>
+            </div>
               : <span/>}
           </div>
           <div className="col-md-4 pull-right">

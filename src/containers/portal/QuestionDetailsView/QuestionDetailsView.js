@@ -6,11 +6,13 @@ import {add} from 'redux/modules/answer/create';
 import {voteUp as questionVoteUp, voteDown as questionVoteDown} from 'redux/modules/question/voting';
 import {voteUp as answerVoteUp, voteDown as answerVoteDown} from 'redux/modules/answer/voting';
 import {remove as removeAnswer} from 'redux/modules/answer/remove';
+import {remove as removeQuestion} from 'redux/modules/question/remove';
 
 import {winner as answerWinner} from 'redux/modules/answer/winner';
 import {favorite, unfavorite} from 'redux/modules/question/favorite';
 import { userLogin } from 'redux/modules/auth';
 import {connect} from 'react-redux';
+import { push } from 'react-router-redux';
 
 @connect(null, {
   add,
@@ -23,6 +25,8 @@ import {connect} from 'react-redux';
   answerWinner,
   userLogin,
   removeAnswer,
+  removeQuestion,
+  push
 })
 @withQuestion
 @withUserId
@@ -39,7 +43,9 @@ export default class QuestionDetailsView extends Component {
     unfavorite: PropTypes.func,
     answerWinner: PropTypes.func,
     removeAnswer: PropTypes.func,
+    removeQuestion: PropTypes.func,
     userLogin: PropTypes.func,
+    push: PropTypes.func,
   };
 
   state = {
@@ -81,6 +87,7 @@ export default class QuestionDetailsView extends Component {
                       onVoteDown={()=>this.props.questionVoteDown(question, userId)}
                       onFavorite={()=>this.props.favorite(question, userId)}
                       onUnfavorite={()=>this.props.unfavorite(question, userId)}
+                      onRemove={()=>this.props.removeQuestion(question, userId).then(()=> this.props.push('/question'))}
                       userId={userId}
                       question={question}/>
         <AnswersList onVoteUp={(answer)=>this.props.answerVoteUp(answer, question.get('shortId'), userId)}

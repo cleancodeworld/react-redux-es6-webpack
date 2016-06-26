@@ -20,6 +20,9 @@ import {
 import {
   REMOVE_SUCCESS as ANSWER_REMOVE_SUCCESS
 } from './../answer/remove';
+import {
+  REMOVE_SUCCESS as QUESTION_REMOVE_SUCCESS
+} from './../question/remove';
 
 import {
   normalizeBy
@@ -32,6 +35,11 @@ export default function loaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case QUESTION_REMOVE_SUCCESS:
+      return state.withMutations(map => {
+        const {questionShortId} = action.data;
+        map.removeIn([questionShortId]);
+      });
     case ANSWER_REMOVE_SUCCESS:
       return state.withMutations(map => {
         const {answerId, questionShortId} = action.data;
