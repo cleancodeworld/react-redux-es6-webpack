@@ -171,6 +171,7 @@ export default function courseLoad(state = initialState, action) {
         const {wishlistItems} = action.result.data;
         const courses = wishlistItems.map(item => item.course);
         courses.map(course=> {
+          // TODO: remove if(course) when api fix the issue
           if (course) {
             map.setIn(['entities', course.slug], Immutable.fromJS(course));
           }
