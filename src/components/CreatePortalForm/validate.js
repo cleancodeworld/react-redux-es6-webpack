@@ -10,6 +10,10 @@ const CreatePortalValidation = values => {
     errors.name = 'Name should contain only letters and numbers';
   }
 
+  if (values.description && values.description.length > 200) {
+    errors.name = 'Portal description cannot be longer than 200 characters.';
+  }
+
   if (!values.isAccepted) {
     errors.isAccepted = 'You must accept to continue';
   }
