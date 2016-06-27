@@ -1,8 +1,8 @@
 export const INIT = '@@INIT';
 export const REDUX_INIT = '@@redux/INIT';
-export const LOAD = 'knexpert/portal/LOAD';
-export const LOAD_SUCCESS = 'knexpert/portal/LOAD_SUCCESS';
-export const LOAD_FAIL = 'knexpert/portal/LOAD_FAIL';
+export const LOAD = 'knexpert/portal/LOAD_MY_PORTALS';
+export const LOAD_SUCCESS = 'knexpert/portal/LOAD_MY_PORTALS_SUCCESS';
+export const LOAD_FAIL = 'knexpert/portal/LOAD_MY_PORTALS_FAIL';
 
 import {
   normalizeBy,
