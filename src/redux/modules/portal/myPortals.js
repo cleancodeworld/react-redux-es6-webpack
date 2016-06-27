@@ -35,10 +35,10 @@ export default function byPortal(state = initialState, action) {
   }
 }
 
-export function load() {
+export function load(username) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`/api/v1/portal/owner/test5`)
+    promise: (client) => client.get(`/api/v1/portal/owner/${username}`)
   };
 }
 

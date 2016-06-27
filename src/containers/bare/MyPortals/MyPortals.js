@@ -10,7 +10,8 @@ import config from '../../../config';
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     if (!isLoaded(getState())) {
-      promises.push(dispatch(load()));
+      const username = getState().auth.getIn(['user', 'username']);
+      promises.push(dispatch(load(username)));
     }
     return Promise.all(promises);
   }
