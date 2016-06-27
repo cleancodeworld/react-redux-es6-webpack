@@ -21,15 +21,15 @@ const initialState = Immutable.fromJS({
   entities: {}
 });
 
-export default function myCourses(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
-        const {wishlistItems} = action.result.data;
-        wishlistItems.map((item)=> {
+        const {myCourses} = action.result.data;
+        myCourses.map((item)=> {
           // TODO: remove if(item.course) when api fix the issue
           if (item.course) {
             map.setIn(['entities', item.course.slug], true);

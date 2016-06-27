@@ -168,8 +168,8 @@ export default function courseLoad(state = initialState, action) {
       });
     case LOAD_MY_COURSES_SUCCESS:
       return state.withMutations(map=> {
-        const {wishlistItems} = action.result.data;
-        const courses = wishlistItems.map(item => item.course);
+        const {myCourses} = action.result.data;
+        const courses = myCourses.map(item => item.course);
         courses.map(course=> {
           // TODO: remove if(course) when api fix the issue
           if (course) {
