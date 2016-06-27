@@ -8,7 +8,7 @@ export function updateCoverImage(portal, coverImage) {
   const portalName = portal.name;
   return {
     types: [UPDATE_COVER_IMAGE, UPDATE_COVER_IMAGE_SUCCESS, UPDATE_COVER_IMAGE_FAIL],
-    promise: (client) => client.put(`/api/v1/portal/${portalName}`, { data: { ...portal, coverImage } }),
+    promise: (client) => client.put(`/api/v1/portal/name/${portalName}`, { data: { ...portal, coverImage } }),
     data: {
       coverImage
     }
