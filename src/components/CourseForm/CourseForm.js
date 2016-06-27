@@ -24,12 +24,18 @@ export default class CourseForm extends Component {
     categories: PropTypes.object,
   }
 
+  state = {
+    isUploadingImage: false
+  }
+
   onDrop = (files, field)=> {
     const req = superagent.post('/upload');
     files.forEach((file)=> {
       req.attach('thumbnail', file);
     });
+    this.setState({ isUploadingImage: true });
     req.end((err, { body } = {})=> {
+      this.setState({ isUploadingImage: true });
       if (err) {
         alert(JSON.stringify(err));
       } else {
@@ -106,6 +112,7 @@ export default class CourseForm extends Component {
                       <div>Drop thumbnail here, or click to select file to upload.</div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
+                    {this.state.isUploadingImage && <span className="label bg-blue">Uploading</span>}
                   </div>
                 }/>
               </div>
@@ -225,7 +232,7 @@ export default class CourseForm extends Component {
               </div>
             </div>
             <div className="col-md-12 text-right">
-              <button type="submit" disabled={submitting} className="btn bg-blue">Submit</button>
+              <button type="submit" disabled={submitting || this.state.isUploadingImage} className="btn bg-blue">Submit</button>
             </div>
           </div>
         </form>
