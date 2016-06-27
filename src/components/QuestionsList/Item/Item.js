@@ -8,13 +8,13 @@ const Item = ({question})=> {
     <div className="media-left width-200 pr-5">
       <div className="heading-btn-group">
         <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-          <div className="counts">0</div>
+          <div className="counts">{question.get('votes')}</div>
           <span>votes</span></a>
         <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-          <div className="counts">0</div>
+          <div className="counts">{question.get('answerCount')}</div>
           <span>answers</span></a>
         <a href="#" className="btn text-muted text-size-small p-5 pl-10 pr-10 legitRipple">
-          <div className="counts">1</div>
+          <div className="counts">{question.get('viewsCount')}</div>
           <span>views</span></a>
       </div>
     </div>
