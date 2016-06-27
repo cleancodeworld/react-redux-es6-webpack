@@ -14,6 +14,7 @@ export const STRIPE_CHARGE_FAIL = 'knexpert/mycourses/STRIPE_CHARGE_FAIL';
 import Immutable from 'immutable';
 
 import { LOGOUT_SUCCESS } from './auth';
+import { ADD_SUCCESS as ADD_MYCOURSES_SUCCESS } from './cart';
 
 const initialState = Immutable.fromJS({
   isLoaded: false,
@@ -49,6 +50,15 @@ export default function reducer(state = initialState, action) {
     case ADD_FAIL:
       alert(JSON.stringify(action.result, null, 4));
       return state;
+    case ADD_MYCOURSES_SUCCESS:
+      const {order} = action.data;
+      return state.withMutations(map=> {
+        order.map((courseName)=> {
+          map.setIn(['entities', courseName], true);
+          map.update('order', array=>array.push(courseName));
+        });
+        map.set('isLoaded', true);
+      });
     default:
       return state;
   }

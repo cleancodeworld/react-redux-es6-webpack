@@ -6,6 +6,9 @@ export const ADD_TO_CART_FAIL = 'knexpert/cart/ADD_TO_CART_FAIL';
 export const REMOVE_FROM_CART = 'knexpert/cart/REMOVE_FROM_CART';
 export const REMOVE_FROM_CART_SUCCESS = 'knexpert/cart/REMOVE_FROM_CART_SUCCESS';
 export const REMOVE_FROM_CART_FAIL = 'knexpert/cart/REMOVE_FROM_CART_FAIL';
+export const CLEAR_CART = 'knexpert/cart/CLEAR_CART';
+export const CLEAR_CART_SUCCESS = 'knexpert/cart/CLEAR_CART_SUCCESS';
+export const CLEAR_CART_FAIL = 'knexpert/cart/CLEAR_CART_FAIL';
 export const LOAD_MY_CART = 'knexpert/cart/LOAD_MY_CART';
 export const LOAD_MY_CART_SUCCESS = 'knexpert/cart/LOAD_MY_CART_SUCCESS';
 export const LOAD_MY_CART_FAIL = 'knexpert/cart/LOAD_MY_CART_FAIL';
@@ -54,7 +57,7 @@ export default function cart(state = initialState, action) {
       });
     case LOGOUT_SUCCESS:
       return initialState;
-    case ADD_SUCCESS:
+    case CLEAR_CART_SUCCESS:
       return initialState;
     default:
       return state;
@@ -118,7 +121,18 @@ function _add(entities, order, transactionId) {
         transactionId,
         CoursesIds: courseIds
       }
-    })
+    }),
+    data: {
+      entities,
+      order
+    }
+  };
+}
+
+function clearCart() {
+  return {
+    types: [CLEAR_CART, CLEAR_CART_SUCCESS, CLEAR_CART_FAIL],
+    promise: (client) => client.del('/api/v1/cart')
   };
 }
 
@@ -126,6 +140,7 @@ export function checkout(entities, order, amount, currency, tokenId) {
   return dispatch => {
     dispatch(stripeChargeCart(amount, currency, tokenId))
       .then(res => dispatch(_add(entities, order, res.id)))
+      .then(() => dispatch(clearCart()))
       .catch(err => {
         alert(JSON.stringify(err, null, 4));
       });
