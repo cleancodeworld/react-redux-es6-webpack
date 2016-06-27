@@ -35,7 +35,7 @@ export default class CourseForm extends Component {
     });
     this.setState({ isUploadingImage: true });
     req.end((err, { body } = {})=> {
-      this.setState({ isUploadingImage: true });
+      this.setState({ isUploadingImage: false });
       if (err) {
         alert(JSON.stringify(err));
       } else {
@@ -112,7 +112,7 @@ export default class CourseForm extends Component {
                       <div>Drop thumbnail here, or click to select file to upload.</div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                    {this.state.isUploadingImage && <span className="label bg-blue">Uploading</span>}
+                    {this.state.isUploadingImage && <span style={{marginLeft:'5'}} className="label bg-blue">Uploading</span>}
                   </div>
                 }/>
               </div>
