@@ -5,7 +5,7 @@ export const WINNER_FAIL = 'knexpert/answer/WINNER_FAIL';
 export function winner(answer, questionShortId) {
   return {
     types: [WINNER, WINNER_SUCCESS, WINNER_FAIL],
-    promise: (client) => client.put(`/api/v1/answer/${answer.get('id')}/winner`),
+    promise: (client) => client.put(`/api/v1/answer/id/${answer.get('id')}/winner`),
     data: {
       answerId: answer.get('id'),
       questionShortId
