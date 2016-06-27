@@ -106,7 +106,7 @@ export default class LessonForm extends Component {
               </div>
             }/>
             <div className="text-right">
-              <button type="submit" disabled={submitting  || this.state.isUploadingImage} className="btn btn-primary">Save <i
+              <button type="submit" disabled={submitting || this.state.isUploadingImage} className="btn btn-primary">Save <i
                 className="icon-arrow-right14 position-right"></i></button>
             </div>
           </form>
