@@ -50,7 +50,7 @@ export default class MyPortals extends Component {
                       const portal = portals.get(slug);
                       return ( <tr key={portal.get('slug')}>
                         <td>{index + 1}</td>
-                        <td><a href={`http://${portal.get('slug')}.${config.mainDomain}/`}>{portal.get('slug')}</a> </td>
+                        <td><a href={`http://${portal.get('slug')}.${config.mainDomain}/`} target="_blank">{`http://${portal.get('slug')}.${config.mainDomain}/`}</a> </td>
                       </tr>);
                     })}
                     </tbody>
