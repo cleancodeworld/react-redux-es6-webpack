@@ -112,7 +112,8 @@ export default class CourseForm extends Component {
                       <div>Drop thumbnail here, or click to select file to upload.</div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                    {this.state.isUploadingImage && <span style={{marginLeft: '5'}} className="label bg-blue">Uploading</span>}
+                    {this.state.isUploadingImage && <span style={{marginLeft: 5}} className="label bg-blue">Uploading</span>}
+                    {thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
                   </div>
                 }/>
               </div>
