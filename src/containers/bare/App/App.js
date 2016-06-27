@@ -48,6 +48,11 @@ export default class App extends Component {
                   <NavItem eventKey={2}>Create account & Portal</NavItem>
                 </LinkContainer>
                   : null}
+                {this.context.user
+                  ? <LinkContainer to="/portals/my">
+                  <NavItem eventKey={2}>My Portals</NavItem>
+                </LinkContainer>
+                  : null}
                 {this.context.user ?
                   <LinkContainer to="/create-portal">
                     <NavItem eventKey={3}>Create Portal</NavItem>

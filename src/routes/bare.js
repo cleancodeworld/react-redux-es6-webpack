@@ -9,6 +9,7 @@ import {
   CreatePortal,
   PasswordForget,
   PasswordReset,
+  MyPortals,
 } from '../containers/bare';
 import {
   Login,
@@ -34,6 +35,7 @@ export default (params) => {
         <Route path="login" component={Login}/>
         <Route onEnter={(nextState, replace, cb)=>requireLogin(store, nextState, replace, cb)}>
           <Route path="create-portal" component={CreatePortal}/>
+          <Route path="portals/my" component={MyPortals}/>
         </Route>
         <Route path="password/forget" component={PasswordForget}/>
         <Route path="password/reset" component={PasswordReset}/>

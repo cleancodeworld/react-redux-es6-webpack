@@ -16,6 +16,8 @@ import myCourses from './myCourses';
 import notifications from './notifications';
 import questionLoaded from './question/loaded';
 import questionsByPortal from './question/byPortal';
+import myPortals from './portal/myPortals';
+import portalLoaded from './portal/loaded';
 
 export default combineReducers({
   wishList,
@@ -34,4 +36,6 @@ export default combineReducers({
   notifications,
   questionLoaded,
   questionsByPortal,
+  myPortals,
+  portalLoaded,
 });
