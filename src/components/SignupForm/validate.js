@@ -5,6 +5,10 @@ const SignupValidation = values => {
     errors.username = 'Required';
   }
 
+  if (values.username.length < 3 || values.username.length > 20) {
+    errors.username = 'Username length should be between 3 and 20 characters';
+  }
+
   if (!values.isAccepted) {
     errors.isAccepted = 'Required';
   }
