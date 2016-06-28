@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
 import validate from './validate';
+import debounce from 'lodash/debounce';
+const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
 
 @reduxForm({
   form: 'CreatePortalForm',
@@ -49,7 +51,13 @@ export default class CreatePortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="name" component={name =>
                       <div>
-                        <input type="text" className="form-control" {...name} onChange={event=>name.onBlur(event)} placeholder="Portal name"/>
+                        <input type="text" className="form-control" {...name}
+                        onChange={event=> {
+                          name.onChange(event);
+                          event.persist();
+                          debounceBlurField(name, event);
+                        }}
+                        placeholder="Portal name"/>
                         {name.touched && name.error && <span className="validation-error-label">{name.error}</span>}
                       </div>
                     }/>
