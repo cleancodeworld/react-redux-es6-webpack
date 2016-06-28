@@ -81,7 +81,14 @@ export default class QuestionForm extends Component {
                         }}
                         handleDelete={(index)=>{
                           const value = tags ? tags.value : [];
-                          tags.onChange(value.splice(index, 1));
+                          const res = [];
+                          for ( let ndx = 0; ndx < value.length; ndx++ ) {
+                            if (index !== ndx) {
+                              const tag = value[ndx];
+                              res.push(tag);
+                            }
+                          }
+                          tags.onChange(res);
                         }}/>
                     </div>
 
