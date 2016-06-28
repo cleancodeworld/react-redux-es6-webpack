@@ -29,12 +29,17 @@ export default class CourseForm extends Component {
   }
 
   onDrop = (files, field)=> {
+    if (this.uploadRequest) {
+      this.uploadRequest.abort();
+    }
     const req = superagent.post('/upload');
+    this.uploadRequest = req;
     files.forEach((file)=> {
       req.attach('thumbnail', file);
     });
     this.setState({ isUploadingImage: true });
     req.end((err, { body } = {})=> {
+      this.uploadRequest = false;
       this.setState({ isUploadingImage: false });
       if (err) {
         alert(JSON.stringify(err));

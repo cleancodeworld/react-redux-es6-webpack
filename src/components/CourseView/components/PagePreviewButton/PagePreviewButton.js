@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
-export default class LessonPreviewButton extends Component {
+export default class PagePreviewButton extends Component {
 
   static propTypes = {
     page: PropTypes.object.isRequired,
