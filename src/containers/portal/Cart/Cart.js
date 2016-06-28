@@ -46,6 +46,13 @@ export default class Cart extends Component {
     return total;
   }
 
+  checkoutCart = () => {
+    const {cart} = this.props;
+    if (cart.order.size > 0) {
+      this.setState({checkOutModalOpen: true});
+    }
+  }
+
   render() {
     const {courses, cart} = this.props;
     const {checkOutModalOpen} = this.state;
@@ -68,7 +75,8 @@ export default class Cart extends Component {
                     <h1 className="panel-title price">${priceString}</h1>
                     <div className="content-group mt-10">
                       <a href="javascript:void(0)" className="btn bg-primary legitRipple display-block"
-                        onClick={() => this.setState({checkOutModalOpen: true})}>Checkout</a>
+                        onClick={this.checkoutCart}
+                        disabled={cart.order.size === 0}>Checkout</a>
                     </div>
                     {/* -- coupon code not implemented yet --
                     <hr/>
