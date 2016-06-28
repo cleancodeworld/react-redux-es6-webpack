@@ -112,12 +112,13 @@ export default class CourseForm extends Component {
                     <Dropzone multiple={false} accept="image/*"
                               {...thumbnail}
                               accept="image/*" className="action btn bg-warning"
-                              style={{height: 60}}
+                              style={{height: 60, width: 444}}
+                              disabled={this.state.isUploadingImage}
+                              disableClick={this.state.isUploadingImage}
                               multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
-                      <div>Drop thumbnail here, or click to select file to upload.</div>
+                      <div> {this.state.isUploadingImage ? 'Uploading... please wait' : 'Drop thumbnail here, or click to select file to upload.'} </div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                    {this.state.isUploadingImage && <span style={{marginLeft: 5}} className="label bg-blue">Uploading</span>}
                     {thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
                   </div>
                 }/>
@@ -238,7 +239,9 @@ export default class CourseForm extends Component {
               </div>
             </div>
             <div className="col-md-12 text-right">
-              <button type="submit" disabled={submitting || this.state.isUploadingImage} className="btn bg-blue">Submit</button>
+              <button type="submit" disabled={submitting || this.state.isUploadingImage} className="btn bg-blue">
+                Submit
+              </button>
             </div>
           </div>
         </form>
