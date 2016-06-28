@@ -3,6 +3,8 @@ import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
 import {Link} from 'react-router';
 import validate from './validate';
+import debounce from 'lodash/debounce';
+const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
 
 @reduxForm({
   form: 'AccountPortalForm',
@@ -51,7 +53,12 @@ export default class AccountPortalForm extends Component {
                     <Field name="username"
                            component={username =>
                       <div>
-                        <input type="text" className="form-control" {...username} onChange={event=>username.onBlur(event)} placeholder="Choose username"/>
+                        <input type="text" className="form-control" {...username}
+                        onChange={event=> {
+                          username.onChange(event);
+                          event.persist();
+                          debounceBlurField(username, event);
+                        }} placeholder="Choose username"/>
                         {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
                       </div>
                       }/>
@@ -137,7 +144,13 @@ export default class AccountPortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="portalName" component={portalName =>
                           <div>
-                            <input type="text" className="form-control" {...portalName} onChange={event=>portalName.onBlur(event)} placeholder="Choose Portal name"/>
+                            <input type="text" className="form-control" {...portalName}
+                             onChange={event=> {
+                               portalName.onChange(event);
+                               event.persist();
+                               debounceBlurField(portalName, event);
+                             }}
+                            placeholder="Choose Portal name"/>
                             {portalName.touched && portalName.error && <span className="validation-error-label">{portalName.error}</span>}
                           </div>
                         }/>
