@@ -136,6 +136,13 @@ function clearCart() {
   };
 }
 
+function clearCart() {
+  return {
+    types: [CLEAR_CART, CLEAR_CART_SUCCESS, CLEAR_CART_FAIL],
+    promise: (client) => client.del(`/api/v1/cart`)
+  };
+}
+
 export function checkout(entities, order, amount, currency, tokenId) {
   return dispatch => {
     dispatch(stripeChargeCart(amount, currency, tokenId))
