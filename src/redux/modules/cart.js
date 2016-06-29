@@ -132,7 +132,7 @@ function _add(entities, order, transactionId) {
 function clearCart() {
   return {
     types: [CLEAR_CART, CLEAR_CART_SUCCESS, CLEAR_CART_FAIL],
-    promise: (client) => client.del('/api/v1/cart')
+    promise: (client) => client.del(`/api/v1/cart`)
   };
 }
 
