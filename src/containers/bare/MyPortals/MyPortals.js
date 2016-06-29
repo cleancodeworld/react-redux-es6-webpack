@@ -36,7 +36,7 @@ export default class MyPortals extends Component {
         <div className="page-container">
           <div className="page-content">
             <div className="row">
-              <div className="col-md-4 col-md-offset-4">
+              <div className="col-md-6 col-md-offset-3">
                 <div className="panel">
                   <table className="table table-striped">
                     <thead>
