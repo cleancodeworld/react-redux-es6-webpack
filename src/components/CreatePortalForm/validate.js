@@ -11,7 +11,7 @@ const CreatePortalValidation = values => {
   }
 
   if (values.description && values.description.length > 200) {
-    errors.name = 'Portal description cannot be longer than 200 characters.';
+    errors.description = 'Portal description cannot be longer than 200 characters.';
   }
 
   if (!values.isAccepted) {

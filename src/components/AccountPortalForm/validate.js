@@ -1,4 +1,5 @@
 import isNumeric from 'validator/lib/isNumeric';
+import isAlphanumeric from 'validator/lib/isAlphanumeric';
 
 const AccountPortalValidation = values => {
   const errors = {};
