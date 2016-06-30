@@ -2,16 +2,22 @@ import isNumeric from 'validator/lib/isNumeric';
 
 const CourseFormValidate = (values) => {
   const errors = {};
-  if (!values.title) {
-    errors.title = 'Required';
-  } else if (values.title > 100) {
-    errors.title = 'Title cannot be longer than 100 characters.';
+  if (!values.name) {
+    errors.name = 'Required';
+  } else if (values.name > 100) {
+    errors.name = 'Title cannot be longer than 100 characters.';
+  } else if (!/^[a-z0-9\s]+$/i.test(values.name)) {
+    errors.name = 'You can use only alphabets, numbers and spaces in title.';
   }
+
   if (!values.subtitle) {
     errors.subtitle = 'Required';
   } else if (values.subtitle > 150) {
     errors.subtitle = 'Title cannot be longer than 150 characters.';
+  } else if (!/^[a-z0-9\s]+$/i.test(values.subtitle)) {
+    errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
   }
+
   if (!values.thumbnail) {
     errors.thumbnail = 'Required';
   }
