@@ -48,6 +48,8 @@ const AccountPortalValidation = values => {
     errors.password = 'Required';
   } else if (values.confirmPassword && values.confirmPassword !== values.password) {
     errors.password = 'Does not match the entered confirm password';
+  } else if (values.password.length < 3) {
+    errors.password = 'Password length should be at least 3 characters';
   }
 
   if (!values.termsOfUse) {
@@ -59,6 +61,7 @@ const AccountPortalValidation = values => {
   } else if (values.confirmPassword !== values.password) {
     errors.confirmPassword = 'Does not match the entered password';
   }
+
   return errors;
 };
 
