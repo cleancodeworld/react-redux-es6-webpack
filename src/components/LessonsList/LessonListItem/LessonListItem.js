@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {RemoveButton} from './RemoveButton/RemoveButton';
+import RemoveButton from './RemoveButton/RemoveButton';
 import moment from 'moment';
 
 export default class LessonListItem extends Component {
