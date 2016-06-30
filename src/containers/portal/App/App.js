@@ -7,6 +7,8 @@ import { isLoaded as isWishListLoaded, load as wishListLoaded } from 'redux/modu
 import { isLoaded as isCartLoaded, load as cartLoaded } from 'redux/modules/cart';
 import { isLoaded as isMyCoursesLoaded, load as myCoursesLoad } from 'redux/modules/myCourses';
 import { isAuthenticated } from 'redux/modules/auth';
+import { withPortal, withUserId } from 'hoc';
+import {ErrorPage} from 'components';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -24,13 +26,20 @@ import { isAuthenticated } from 'redux/modules/auth';
     return Promise.all(promises);
   }
 }])
+@withUserId
+@withPortal
 export default class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
+    portal: PropTypes.object.isRequired,
+    userId: PropTypes.string.isRequired,
   }
 
   render() {
+    if (this.props.portal.meta.get('privacy') !== 'Public') {
+      return (<ErrorPage>Oops, This portal is private</ErrorPage>);
+    }
     return (
       <div>
         <Helmet {...config.app.head}/>

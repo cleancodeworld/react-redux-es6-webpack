@@ -46,3 +46,4 @@ export AnswersList from './AnswersList/AnswersList';
 export QuestionsList from './QuestionsList/QuestionsList';
 export CartCourseList from './CartCourseList/CartCourseList';
 export CartSuggestedCourses from './CartSuggestedCourses/CartSuggestedCourses';
+export ErrorPage from './ErrorPage/ErrorPage';
