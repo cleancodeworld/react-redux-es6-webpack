@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import {withPortals} from 'hoc';
 import {asyncConnect} from 'redux-connect';
 import { isLoaded, load } from 'redux/modules/portal/myPortals';
+import { remove } from 'redux/modules/portal/remove';
+
+import { PortalsList } from 'components';
 import config from '../../../config';
 
 @asyncConnect([{
@@ -18,7 +21,8 @@ import config from '../../../config';
 }])
 
 @connect(
-  ({myPortals})=>({ order: myPortals.get('order') })
+  ({myPortals})=>({ order: myPortals.get('order') }),
+  {remove}
 )
 @withPortals
 export default class MyPortals extends Component {
@@ -26,6 +30,8 @@ export default class MyPortals extends Component {
   static propTypes = {
     portals: PropTypes.object.isRequired,
     order: PropTypes.object.isRequired,
+    remove: PropTypes.func.isRequired,
+
   };
 
   render() {
@@ -38,23 +44,7 @@ export default class MyPortals extends Component {
             <div className="row">
               <div className="col-md-6 col-md-offset-3">
                 <div className="panel">
-                  <table className="table table-striped">
-                    <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Portal</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {order.map((slug, index)=> {
-                      const portal = portals.get(slug);
-                      return ( <tr key={portal.get('slug')}>
-                        <td>{index + 1}</td>
-                        <td><a href={`http://${portal.get('slug')}.${config.mainDomain}/`} target="_blank">{`http://${portal.get('slug')}.${config.mainDomain}/`}</a> </td>
-                      </tr>);
-                    })}
-                    </tbody>
-                  </table>
+                  <PortalsList portals={portals} onRemove={(portal)=> this.props.remove(portal)} order={order} config={config}/>
                 </div>
               </div>
             </div>

@@ -3,6 +3,9 @@ export const REDUX_INIT = '@@redux/INIT';
 import {
   LOAD_SUCCESS as LOAD_MY_PORTALS_SUCCESS,
 } from './myPortals';
+import {
+  REMOVE_SUCCESS as REMOVE_PORTAL_SUCCESS,
+} from './remove';
 
 import Immutable from 'immutable';
 
@@ -19,6 +22,11 @@ export default function reducer(state = initialState, action) {
         portals.map(portal=> {
           map.set(portal.slug, Immutable.fromJS(portal));
         });
+      });
+    case REMOVE_PORTAL_SUCCESS:
+      return state.withMutations(map=> {
+        const {portal} = action.data;
+        map.removeIn([portal.name]);
       });
     default:
       return state;

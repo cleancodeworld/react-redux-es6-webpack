@@ -3,6 +3,9 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/portal/LOAD_MY_PORTALS';
 export const LOAD_SUCCESS = 'knexpert/portal/LOAD_MY_PORTALS_SUCCESS';
 export const LOAD_FAIL = 'knexpert/portal/LOAD_MY_PORTALS_FAIL';
+import {
+  REMOVE_SUCCESS as REMOVE_PORTAL_SUCCESS,
+} from './remove';
 
 import {
   normalizeBy,
@@ -29,6 +32,12 @@ export default function byPortal(state = initialState, action) {
         });
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);
+      });
+    case REMOVE_PORTAL_SUCCESS:
+      return state.withMutations(map=> {
+        const {portal} = action.data;
+        map.removeIn(['entities', portal.name]);
+        map.updateIn(['order'], array=>array.filter((_portal)=> _portal !== portal.name));
       });
     default:
       return state;
