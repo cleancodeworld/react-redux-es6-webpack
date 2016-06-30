@@ -6,7 +6,7 @@ const AccountPortalValidation = values => {
 
   if (!values.username) {
     errors.username = 'Required';
-  } else if (values.username.length > 3 && values.username.length < 20) {
+  } else if (values.username.length < 3 || values.username.length > 20) {
     errors.username = 'Username length should be between 3 and 20 characters';
   }
 
@@ -18,6 +18,8 @@ const AccountPortalValidation = values => {
     errors.firstName = 'Required';
   } else if (isNumeric(values.firstName)) {
     errors.firstName = 'First name should at least contain 1 letter';
+  } else if (values.firstName.length < 3 || values.firstName.length > 20) {
+    errors.firstName = 'Username length should be between 3 and 20 characters';
   }
 
   if (!values.portalName) {
@@ -32,6 +34,8 @@ const AccountPortalValidation = values => {
     errors.lastName = 'Required';
   } else if (isNumeric(values.lastName)) {
     errors.firstName = 'First name should at least contain 1 letter';
+  } else if (values.lastName.length < 3 || values.lastName.length > 20) {
+    errors.lastName = 'Username length should be between 3 and 20 characters';
   }
 
   if (!values.email) {
