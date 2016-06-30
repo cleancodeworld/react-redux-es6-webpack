@@ -24,6 +24,8 @@ const AccountPortalValidation = values => {
 
   if (!values.portalName) {
     errors.portalName = 'Required';
+  } else if (values.portalName.length < 3) {
+    errors.portalName = 'Portal name should be longer than 2 characters.';
   } else if (values.portalName.length > 30) {
     errors.portalName = 'Portal name can not be longer than 30 characters.';
   } else if (!isAlphanumeric(values.portalName + '')) {
