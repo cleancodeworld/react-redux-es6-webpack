@@ -4,7 +4,7 @@ const CourseFormValidate = (values) => {
   const errors = {};
   if (!values.name) {
     errors.name = 'Required';
-  } else if (values.name > 100) {
+  } else if (values.name.length > 100) {
     errors.name = 'Title cannot be longer than 100 characters.';
   } else if (!/^[a-z0-9\s]+$/i.test(values.name)) {
     errors.name = 'You can use only alphabets, numbers and spaces in title.';
@@ -12,7 +12,7 @@ const CourseFormValidate = (values) => {
 
   if (!values.subtitle) {
     errors.subtitle = 'Required';
-  } else if (values.subtitle > 150) {
+  } else if (values.subtitle.length > 150) {
     errors.subtitle = 'Title cannot be longer than 150 characters.';
   } else if (!/^[a-z0-9\s]+$/i.test(values.subtitle)) {
     errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
