@@ -22,7 +22,7 @@ const AccountPortalValidation = values => {
   } else if (values.firstName.length < 3 || values.firstName.length > 20) {
     errors.firstName = 'First name length should be between 3 and 20 characters';
   } else if (!isAlpha(values.firstName)) {
-    errors.username = 'First name can contain only alphabet';
+    errors.firstName = 'First name can contain only alphabet';
   }
 
   if (!values.portalName) {
