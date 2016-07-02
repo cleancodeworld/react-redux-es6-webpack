@@ -9,8 +9,6 @@ const AccountPortalValidation = values => {
     errors.username = 'Required';
   } else if (values.username.length < 3 || values.username.length > 20) {
     errors.username = 'Username length should be between 3 and 20 characters';
-  } else if (isAlpha(values.username)) {
-    errors.username = 'Username can contain only alphabet';
   }
 
   if (!values.isAccepted) {
@@ -22,7 +20,9 @@ const AccountPortalValidation = values => {
   } else if (isNumeric(values.firstName)) {
     errors.firstName = 'First name should at least contain 1 letter';
   } else if (values.firstName.length < 3 || values.firstName.length > 20) {
-    errors.firstName = 'Username length should be between 3 and 20 characters';
+    errors.firstName = 'First name length should be between 3 and 20 characters';
+  } else if (!isAlpha(values.firstName)) {
+    errors.username = 'First name can contain only alphabet';
   }
 
   if (!values.portalName) {
@@ -41,6 +41,8 @@ const AccountPortalValidation = values => {
     errors.firstName = 'First name should at least contain 1 letter';
   } else if (values.lastName.length < 3 || values.lastName.length > 20) {
     errors.lastName = 'Username length should be between 3 and 20 characters';
+  } else if (!isAlpha(values.lastName)) {
+    errors.lastName = 'Last name can contain only alphabet';
   }
 
   if (!values.email) {
