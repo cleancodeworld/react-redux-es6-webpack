@@ -1,5 +1,6 @@
 import isNumeric from 'validator/lib/isNumeric';
 import isAlphanumeric from 'validator/lib/isAlphanumeric';
+import isAlpha from 'validator/lib/isAlpha';
 
 const AccountPortalValidation = values => {
   const errors = {};
@@ -8,6 +9,8 @@ const AccountPortalValidation = values => {
     errors.username = 'Required';
   } else if (values.username.length < 3 || values.username.length > 20) {
     errors.username = 'Username length should be between 3 and 20 characters';
+  } else if (isAlpha(values.username)) {
+    errors.username = 'Username can contain only alphabet';
   }
 
   if (!values.isAccepted) {
