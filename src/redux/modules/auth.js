@@ -158,6 +158,7 @@ export function logout() {
       types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
       promise: (client) => client.post('/api/v1/logout')
     }).then(()=> {
+      alert(`${location.protocol}//${config.mainDomain}/login`);
       window.location.href = `${location.protocol}//${config.mainDomain}/login`;
     });
   };
@@ -181,7 +182,6 @@ export function showLogInModal() {
     type: SHOW_LOG_IN_MODAL,
   };
 }
-
 
 export function hideLogInModal() {
   return {
