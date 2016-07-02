@@ -18,7 +18,9 @@ export default class ProfileCover extends Component {
     });
     req.end((err, { body } = {})=> {
       if (err) {
-        alert(JSON.stringify(err));
+        if (!err.crossDomain) {
+          alert(JSON.stringify(err));
+        }
       } else {
         this.props.updateCoverImage(portal.toJS(), body.url);
       }

@@ -28,7 +28,9 @@ export default class SideProfile extends Component {
     });
     req.end((err, { body } = {})=> {
       if (err) {
-        alert(JSON.stringify(err));
+        if (!err.crossDomain) {
+          alert(JSON.stringify(err));
+        }
       } else {
         this.props.updateImage(user.toJS(), body.url);
       }
