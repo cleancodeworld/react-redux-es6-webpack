@@ -29,7 +29,9 @@ export default class TinyMCE extends Component {
     });
     req.end((err, { body } = {})=> {
       if (err) {
-        alert(JSON.stringify(err));
+        if (!err.crossDomain) {
+          alert(JSON.stringify(err));
+        }
       } else {
         $('div[aria-label="Insert/edit image"] input.mce-textbox').first().val(body.url);
       }

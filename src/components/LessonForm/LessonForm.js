@@ -30,7 +30,9 @@ export default class LessonForm extends Component {
     req.end((err, { body } = {})=> {
       this.setState({ isUploadingImage: false });
       if (err) {
-        alert(JSON.stringify(err));
+        if (!err.crossDomain) {
+          alert(JSON.stringify(err));
+        }
       } else {
         field.onChange(body.url);
       }
