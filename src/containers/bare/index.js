@@ -6,3 +6,4 @@ export CreatePortal from './CreatePortal/CreatePortal';
 export PasswordForget from './PasswordForget/PasswordForget';
 export PasswordReset from './PasswordReset/PasswordReset';
 export MyPortals from './MyPortals/MyPortals';
+export Login from './Login/Login';

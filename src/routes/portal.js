@@ -4,7 +4,6 @@ import {SET_REQ_SUBDOMAIN} from 'redux/modules/portal/current';
 
 import {
   App,
-  PortalLogin,
   Dashboard,
   LessonList,
   LessonAdd,
@@ -60,7 +59,6 @@ export default (params) => {
               <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>
           </Route>
-          <Route name="Login" path="login" component={PortalLogin}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
           <Route name="My Courses" path="my-courses" component={MyCourses}/>

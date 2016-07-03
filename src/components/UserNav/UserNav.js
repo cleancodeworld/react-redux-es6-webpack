@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
+import config from '../../config';
 
-const UserNav = ({loggedIn = false, logout}) => {
+const UserNav = ({loggedIn = false, logout, portal}) => {
   let res;
   if (loggedIn) {
     res = (<ul className="nav navbar-nav pull-right">
@@ -12,7 +13,10 @@ const UserNav = ({loggedIn = false, logout}) => {
   } else {
     res = (<ul className="nav navbar-nav pull-right">
       <li className="nav-item dropdown">
-        <Link className="nav-link active" to="/login">Login</Link>
+        {portal
+          ? <a className="nav-link active" href={`http://${config.mainDomain}/login`}>Login</a>
+          : <Link className="nav-link active" to="/login">Login</Link>
+        }
       </li>
     </ul>);
   }

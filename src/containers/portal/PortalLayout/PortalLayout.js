@@ -75,7 +75,7 @@ export default class PortalLayout extends Component {
                 <NavItem eventKey={6}>Author Admin Panel</NavItem>
               </LinkContainer> : null}
             </Nav>
-            <UserNav logout={this.props.logout} user={user} loggedIn={!!user}/>
+            <UserNav portal logout={this.props.logout} user={user} loggedIn={!!user}/>
           </Navbar.Collapse>
         </Navbar>
         <div>

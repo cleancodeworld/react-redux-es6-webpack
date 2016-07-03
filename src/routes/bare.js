@@ -9,10 +9,10 @@ import {
   CreatePortal,
   PasswordForget,
   PasswordReset,
+  Login,
   MyPortals,
 } from '../containers/bare';
 import {
-  Login,
   Root,
   NotFound,
 } from '../containers/shared';
