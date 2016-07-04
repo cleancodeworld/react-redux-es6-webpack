@@ -13,7 +13,7 @@ export default class QuestionsList extends Component {
       <div className="navbar navbar-default navbar-xs">
         <ul className="nav navbar-nav no-border visible-xs-block">
           <li><a className="text-center collapsed legitRipple" data-toggle="collapse"
-                 data-target="#navbar-second-toggle"><i className="icon-circle-down2"></i></a></li>
+                 data-target="#navbar-second-toggle">Top Questions</a></li>
         </ul>
         <div className="navbar-collapse collapse" id="navbar-second-toggle">
           <div className="navbar-text h3">Top Questions</div>

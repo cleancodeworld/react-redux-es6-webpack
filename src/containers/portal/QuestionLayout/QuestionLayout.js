@@ -22,7 +22,9 @@ export default class QuestionLayout extends Component {
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Users</a>
                 <a href="#" style={style} className="btn btn-flat bg-slate-300 legitRipple btn-xs">Badges</a>
                 <Link to="/question/ask" style={style} className="btn btn-flat bg-danger-300 legitRipple btn-xs">
-                  Ask Question</Link>
+                  <span className="visible-xs">Ask</span>
+                  <span className="hidden-xs">Ask Question</span>
+                </Link>
               </div>
             </div>
           </div>
