@@ -46,7 +46,7 @@ export default class CourseCreate extends Component {
     const initialFormValues = {
       level: 'all',
       language: 'English',
-      category: 'General',
+      category: '',
       duration: '',
       thumbnail: '',
       authorId: user.get('userId'),

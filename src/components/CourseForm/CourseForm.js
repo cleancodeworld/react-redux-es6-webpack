@@ -134,6 +134,7 @@ export default class CourseForm extends Component {
                   onBlur={() => {}}
                   onBlurResetsInput={false}
                   value={language.value}
+                  searchable={false}
                   options={['English', 'Spanish', 'Dutch', 'French'].map( value => ({ value: value, label: value}))}
                   />
                   {language.touched && language.error && <label className="validation-error-label">{language.error}</label>}
@@ -153,6 +154,7 @@ export default class CourseForm extends Component {
                   onBlurResetsInput={false}
                   value={category.value}
                   allowCreate
+                  searchable={false}
                   multi
                   newOptionCreator={input => ({
                     value: input.replace(' ', '-'),
