@@ -18,9 +18,9 @@ const CourseFormValidate = (values) => {
     errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
   }
 
-  if (!values.thumbnail) {
+  /* if (!values.thumbnail) {
     errors.thumbnail = 'Required';
-  }
+  } */
   if (!values.duration) {
     errors.duration = 'Required';
   } else if (!isNumeric(values.duration + '')) {
