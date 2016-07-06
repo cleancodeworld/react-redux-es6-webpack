@@ -2,9 +2,9 @@ export const SIGNUP = 'knexpert/auth/SIGNUP';
 export const SIGNUP_SUCCESS = 'knexpert/auth/SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'knexpert/auth/SIGNUP_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import {create as portalCreate} from '../portal/create';
 import {silentLogin} from '../auth';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function create(model) {
   return {
@@ -36,7 +36,7 @@ export function createWithPortal(model) {
           ownerId: data.id,
         }))
       ).catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }
@@ -47,7 +47,7 @@ export function signup(model) {
       create({ ...model, roleId: '5724386acbb4e23adde20249' }))
       .then(()=> dispatch(silentLogin(model)))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

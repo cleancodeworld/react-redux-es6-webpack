@@ -17,8 +17,8 @@ import {UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 
 import Immutable from 'immutable';
 import { push } from 'react-router-redux';
-import { SubmissionError } from 'redux-form';
 import reactCookie from 'react-cookie';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 import config from 'config';
 const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
@@ -136,7 +136,7 @@ export function userLogin(model, continueTo) {
         return continueTo ? dispatch(push(continueTo)) : null;
       })
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

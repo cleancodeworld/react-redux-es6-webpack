@@ -2,8 +2,8 @@ export const EDIT = 'knexpert/course/EDIT';
 export const EDIT_SUCCESS = 'knexpert/course/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/course/EDIT_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import {resetCourses} from './loaded';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 function _edit(model, courseName, portalId) {
   return {
@@ -26,7 +26,7 @@ export function edit(model, courseName, portalId) {
     return dispatch(_edit(model, courseName, portalId))
       .then(()=>dispatch(resetCourses()))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

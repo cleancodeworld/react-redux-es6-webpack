@@ -4,9 +4,8 @@ export const ADD = 'knexpert/pages/ADD';
 export const ADD_SUCCESS = 'knexpert/pages/ADD_SUCCESS';
 export const ADD_FAIL = 'knexpert/pages/ADD_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function _add(model, course, lesson) {
   return {
@@ -31,7 +30,7 @@ export function add(model, course, lesson) {
     return dispatch(_add({ ...model }, course, lesson))
       .then(()=> dispatch(push(`/author/course/${course.get('slug')}/lesson/list`)))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

@@ -1,8 +1,9 @@
 export const CREATE = 'knexpert/question/CREATE';
 export const CREATE_SUCCESS = 'knexpert/question/CREATE_SUCCESS';
 export const CREATE_FAIL = 'knexpert/question/CREATE_FAIL';
-import {SubmissionError} from 'redux-form';
+
 import {showLogInModal} from './../auth';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function create(model) {
   return dispatch => {
@@ -13,7 +14,7 @@ export function create(model) {
     })
       .catch(res => {
         if (!model.authorId) dispatch(showLogInModal());
-        else throw new SubmissionError({ _error: res.error });
+        else beautifyAndThrow(res.error);
       });
   };
 }

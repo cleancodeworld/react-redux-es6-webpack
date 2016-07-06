@@ -4,9 +4,9 @@ export const CREATE = 'knexpert/course/CREATE';
 export const CREATE_SUCCESS = 'knexpert/course/CREATE_SUCCESS';
 export const CREATE_FAIL = 'knexpert/course/CREATE_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
 import {resetCourses} from './loaded';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 function _create(model) {
   return {
@@ -25,7 +25,7 @@ export function create(portalId, model) {
       .then(()=>dispatch(resetCourses()))
       .then(()=> dispatch(push('/author/course/list')))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

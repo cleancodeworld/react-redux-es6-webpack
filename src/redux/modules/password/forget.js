@@ -2,7 +2,7 @@ export const FORGET = 'knexpert/password/FORGET';
 export const FORGET_SUCCESS = 'knexpert/password/FORGET_SUCCESS';
 export const FORGET_FAIL = 'knexpert/password/FORGET_FAIL';
 
-import {SubmissionError} from 'redux-form';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 function _create(email) {
   return {
@@ -19,7 +19,7 @@ export function sendResetToken(email) {
     return dispatch(
       _create(email))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

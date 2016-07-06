@@ -4,7 +4,7 @@ export const ADD = 'knexpert/answers/ADD';
 export const ADD_SUCCESS = 'knexpert/answers/ADD_SUCCESS';
 export const ADD_FAIL = 'knexpert/answers/ADD_FAIL';
 
-import {SubmissionError} from 'redux-form';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function _add(model, questionShortId) {
   return {
@@ -21,7 +21,7 @@ export function add(model, questionShortId) {
   return dispatch => {
     return dispatch(_add(model, questionShortId))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

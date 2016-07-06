@@ -2,8 +2,8 @@ export const CREATE = 'knexpert/portal/CREATE';
 export const CREATE_SUCCESS = 'knexpert/portal/CREATE_SUCCESS';
 export const CREATE_FAIL = 'knexpert/portal/CREATE_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import config from 'config';
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function create(model) {
   model.privacy = model.privacy ? 'Public' : 'Private';
@@ -25,7 +25,7 @@ export function createPortal(model, ownerId) {
         window.location.href = `${location.protocol}//${res.data.portal.name}.${config.mainDomain}`;
       })
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }

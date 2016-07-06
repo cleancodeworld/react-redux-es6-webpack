@@ -1,7 +1,8 @@
 export const CREATE = 'knexpert/question/CREATE';
 export const CREATE_SUCCESS = 'knexpert/question/CREATE_SUCCESS';
 export const CREATE_FAIL = 'knexpert/question/CREATE_FAIL';
-import { SubmissionError } from 'redux-form';
+
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function edit(model) {
   return dispatch =>
@@ -10,6 +11,6 @@ export function edit(model) {
       promise: (client) => client.put(`/api/v1/question/name/${model.id}/${model.slug}`, { data: model }),
       data: model
     }).catch(res => {
-      throw new SubmissionError({ _error: res.error });
+      beautifyAndThrow(res.error);
     });
 }

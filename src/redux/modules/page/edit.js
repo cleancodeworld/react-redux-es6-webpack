@@ -4,9 +4,8 @@ export const EDIT = 'knexpert/pages/EDIT';
 export const EDIT_SUCCESS = 'knexpert/pages/EDIT_SUCCESS';
 export const EDIT_FAIL = 'knexpert/pages/EDIT_FAIL';
 
-import {SubmissionError} from 'redux-form';
 import { push } from 'react-router-redux';
-
+import beautifyAndThrow from 'utils/errorBeautifier';
 
 export function _edit(model, course, lesson, page) {
   return {
@@ -32,7 +31,7 @@ export function edit(model, course, lesson, page) {
     return dispatch(_edit(model, course, lesson, page))
       .then(()=> dispatch(push(`/author/course/${course.get('slug')}/lesson/list`)))
       .catch(res => {
-        throw new SubmissionError({ _error: res.error });
+        beautifyAndThrow(res.error);
       });
   };
 }
