@@ -1,7 +1,7 @@
 import React from 'react';
 import RemoveButton from './RemoveButton/RemoveButton';
 const MyPortals = ({config, order, portals, onRemove})=> {
-  return (<table className="table table-striped">
+  return (<table className="table table-striped my-portals-table">
     <thead>
     <tr>
       <th>#</th>
@@ -14,7 +14,7 @@ const MyPortals = ({config, order, portals, onRemove})=> {
       const portal = portals.get(slug);
       return portal ? ( <tr key={portal.get('slug')}>
         <td>{index + 1}</td>
-        <td>
+        <td className="portal-link">
           <a href={`http://${portal.get('slug')}.${config.mainDomain}/`}
              target="_blank">{`http://${portal.get('slug')}.${config.mainDomain}/`}</a>
         </td>
