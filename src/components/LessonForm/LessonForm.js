@@ -85,8 +85,7 @@ export default class LessonForm extends Component {
                 <Dropzone
                         {...thumbnail}
                         multiple={false} accept="image/*"
-                        accept="image/*" className="action btn bg-warning"
-                        style={{height: 60}}
+                        accept="image/*" className="action btn bg-warning upload-btn"
                         multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
                   <div>Drop thumbnail here, or click to select file to upload.</div>
                 </Dropzone>

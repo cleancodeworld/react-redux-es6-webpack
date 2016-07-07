@@ -108,8 +108,7 @@ export default class CourseForm extends Component {
                   <div>
                     <Dropzone multiple={false} accept="image/*"
                               {...thumbnail}
-                              accept="image/*" className="action btn bg-warning"
-                              style={{height: 60, width: 444}}
+                              accept="image/*" className="action btn bg-warning upload-btn"
                               disabled={this.state.isUploadingImage}
                               disableClick={this.state.isUploadingImage}
                               multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
