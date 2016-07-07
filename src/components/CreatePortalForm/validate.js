@@ -4,7 +4,7 @@ const CreatePortalValidation = values => {
 
   if (!values.name) {
     errors.name = 'Required';
-  } else if (values.portalName.length < 3) {
+  } else if (values.name.length < 3) {
     errors.name = 'Name should be longer than 2 characters.';
   } else if (values.name.length > 30) {
     errors.name = 'Name can not be longer than 30 characters.';
