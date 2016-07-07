@@ -9,9 +9,9 @@ const LessonFormValidation = values => {
     errors.title = 'Title cannot be longer than 100 characters.';
   }
 
-  if (!values.thumbnail) {
+  /* if (!values.thumbnail) {
     errors.thumbnail = 'Required';
-  }
+  } */
   if (!values.videoUrl) {
     errors.videoUrl = 'Required';
   } else if (!isURL(values.videoUrl)) {
