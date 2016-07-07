@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
-import asyncValidate from './asyncValidate';
+// import asyncValidate from './asyncValidate';
 import {Link} from 'react-router';
 import validate from './validate';
 import debounce from 'lodash/debounce';
@@ -9,7 +9,7 @@ const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
 @reduxForm({
   form: 'AccountPortalForm',
   validate,
-  asyncValidate,
+  // asyncValidate,
   asyncBlurFields: ['username', 'portalName']
 })
 

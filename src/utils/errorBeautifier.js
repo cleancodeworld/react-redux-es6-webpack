@@ -13,8 +13,10 @@ export default function beautifyAndThrow(errorMessage) {
       failedFields.push(field);
     });
     error += failedFields.join(', ');
+  } else if (/^json:/.test(errorMessage)) {
+    error = 'Unexpected error occurred on the server';
   } else {
-    error = errorMessage; // 'Unexpected error occurred on the server';
+    error = errorMessage;
   }
   throw new SubmissionError({ _error: error });
 }
