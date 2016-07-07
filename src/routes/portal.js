@@ -64,9 +64,9 @@ export default (params) => {
           <Route name="My Courses" path="my-courses" component={MyCourses}/>
           <Route name="Courses" staticName path="courses">
             <IndexRoute name="Courses" staticName component={Home}/>
-            <Route path=":categoryName" component={CoursesByCategory}/>
+            <Route name="Category" path=":categoryName" component={CoursesByCategory}/>
           </Route>
-          <Route path="check-out" component={CheckOut}/>
+          <Route name="Checkout" path="check-out" component={CheckOut}/>
 
           <Route name="Courses" path="course">
             <IndexRoute name="Courses" component={Courses}/>
@@ -80,9 +80,9 @@ export default (params) => {
               <IndexRoute component={Dashboard}/>
               <Route name="Course" path="course">
                 <IndexRoute component={CoursesByPortal}/>
-                <Route path="create" component={CourseCreate}/>
-                <Route path="list" component={CoursesByPortal}/>
-                <Route path=":courseName" component={Course}>
+                <Route name="Create" path="create" component={CourseCreate}/>
+                <Route name="List" path="list" component={CoursesByPortal}/>
+                <Route name="View" path=":courseName" component={Course}>
                   <Route component={PortalAuthorCourseLayout}>
                     <IndexRoute name="Goals" component={CourseEdit}/>
                     <Route name="Goals" path="goals" component={CourseEdit}/>
@@ -98,7 +98,7 @@ export default (params) => {
             </Route>
           </Route>
           { /* Catch all route */ }
-          <Route path="*" component={NotFound}/>
+          <Route name="Not Found" path="*" component={NotFound}/>
         </Route>
       </Route>
     </Route>
