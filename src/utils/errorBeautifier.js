@@ -12,7 +12,7 @@ export default function beautifyAndThrow(errorMessage) {
     });
     error += failedFields.join(', ');
   } else {
-    error = 'Unexpected server error occurred';
+    error = errorMessage; // 'Unexpected server error occurred';
   }
   throw new SubmissionError({ _error: error });
 }
