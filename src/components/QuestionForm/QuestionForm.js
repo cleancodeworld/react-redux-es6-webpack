@@ -96,7 +96,7 @@ export default class QuestionForm extends Component {
                     </div>}/>
                 </div>
                 <div>
-                  <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">
+                  <button type="submit" disabled={submitting} className="btn btn-primary legitRipple" style={{ marginBottom: '15px' }}>
                     POST YOUR QUESTION
                   </button>
                 </div>

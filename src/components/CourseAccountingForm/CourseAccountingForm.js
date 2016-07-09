@@ -41,12 +41,12 @@ export default class CourseAccountingForm extends Component {
       submitting,
       error,
       submitStatus,
-      } = this.props;
+    } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-body">
-          <h2>Price &amp; Coupons</h2>
-          <p className="text-muted">Set the price of your course and promote it with a discounted coupon code</p>
+          <h2>Price</h2>
+          <p className="text-muted">Set the price of your course</p>
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="row">
               <div className="col-md-12">
@@ -59,7 +59,7 @@ export default class CourseAccountingForm extends Component {
                   </div>
                   <Field name="paid" component={paid =>
                     <label>
-                      <Switch state={paid.value} {...paid} onText="Paid" offText="Free" labelText="&nbsp;" />
+                      <Switch state={paid.value} {...paid} onText="Paid" offText="Free" labelText="&nbsp;"/>
                     </label>
                   }/>
                 </div>
@@ -73,6 +73,7 @@ export default class CourseAccountingForm extends Component {
                           {...currency}
                           onBlur={() => {}}
                           onBlurResetsInput={false}
+                          searchable={false}
                           options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
                         />
                       </div>
@@ -86,6 +87,7 @@ export default class CourseAccountingForm extends Component {
                         {...price}
                         onBlur={() => {}}
                         onBlurResetsInput={false}
+                        searchable={false}
                         options={['20', '30', '40', '50'].map( value => ({ value: value, label: '$' + value}))}
                       />
                     </div>
@@ -93,7 +95,7 @@ export default class CourseAccountingForm extends Component {
                 </div>
               </div>
               <div className="col-md-12 text-right">
-                <button type="submit" disabled={submitting} className="btn bg-blue">Save</button>
+                <button type="submit" disabled={submitting} className="btn bg-blue" style={{ marginTop: '15px' }}>Save</button>
               </div>
             </div>
           </form>
