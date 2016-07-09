@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
-import {Link} from 'react-router';
 import validate from './validate';
 import config from 'config';
 
