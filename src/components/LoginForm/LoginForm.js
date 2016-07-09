@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {Link} from 'react-router';
 import validate from './validate';
+import config from 'config';
+
 @reduxForm({
   form: 'LoginForm',
   validate,
@@ -76,7 +78,7 @@ export default class LoginForm extends Component {
                 }/>
 
                 <div className="col-sm-6 text-right">
-                  <Link to="/password/forget">Forgot password?</Link>
+                  <Link to={`http://${config.mainDomain}/password/forget`}>Forgot password?</Link>
                 </div>
               </div>
             </div>
@@ -87,7 +89,7 @@ export default class LoginForm extends Component {
             </div>
 
             <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-            <Link to="/account-portal-create" className="btn bg-slate btn-block content-group">Register</Link>
+            <Link to={`http://${config.mainDomain}/account-portal-create`} className="btn bg-slate btn-block content-group">Register</Link>
             <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
               href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
           </div>
