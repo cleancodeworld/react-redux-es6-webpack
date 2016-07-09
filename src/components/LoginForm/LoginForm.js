@@ -78,7 +78,7 @@ export default class LoginForm extends Component {
                 }/>
 
                 <div className="col-sm-6 text-right">
-                  <Link to={`http://${config.mainDomain}/password/forget`}>Forgot password?</Link>
+                  <a href={`http://${config.mainDomain}/password/forget`}>Forgot password?</a>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default class LoginForm extends Component {
             </div>
 
             <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-            <Link to={`http://${config.mainDomain}/account-portal-create`} className="btn bg-slate btn-block content-group">Register</Link>
+            <a href={`http://${config.mainDomain}/account-portal-create`} className="btn bg-slate btn-block content-group">Register</a>
             <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
               href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
           </div>
