@@ -8,10 +8,12 @@ const LessonFormValidation = values => {
   } else if (values.title.length > 100) {
     errors.title = 'Title cannot be longer than 100 characters.';
   }
-
-  /* if (!values.thumbnail) {
-    errors.thumbnail = 'Required';
-  } */
+  if (values.thumbnail && values.thumbnail.length) {
+    const file = values.thumbnail[0].name.toLowerCase();
+    if (file.indexOf('.jpg') === -1 && file.indexOf('.png') === -1 && file.indexOf('.jpeg') === -1 && file.indexOf('.gif') === -1) {
+      errors.thumbnail = 'only images allowed';
+    }
+  }
   if (!values.videoUrl) {
     errors.videoUrl = 'Required';
   } else if (!isURL(values.videoUrl)) {
