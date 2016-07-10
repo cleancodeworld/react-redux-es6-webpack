@@ -29,21 +29,24 @@ export default class CourseForm extends Component {
   }
 
   onDrop = (files, field)=> {
-    const req = superagent.post('/upload');
-    files.forEach((file)=> {
-      req.attach('thumbnail', file);
-    });
-    this.setState({ isUploadingImage: true });
-    req.end((err, { body } = {})=> {
-      this.setState({ isUploadingImage: false });
-      if (err) {
-        if (!err.crossDomain) {
-          alert(JSON.stringify(err));
+    const _file = files[0];
+    if (_file.name.indexOf('.jpg') > -1 || _file.name.indexOf('.png') > -1 || _file.name.indexOf('.jpeg') || -1  || _file.name.indexOf('.gif') || -1) {
+      const req = superagent.post('/upload');
+      files.forEach((file)=> {
+        req.attach('thumbnail', file);
+      });
+      this.setState({ isUploadingImage: true });
+      req.end((err, { body } = {})=> {
+        this.setState({ isUploadingImage: false });
+        if (err) {
+          if (!err.crossDomain) {
+            alert(JSON.stringify(err));
+          }
+        } else {
+          field.onChange(body.url);
         }
-      } else {
-        field.onChange(body.url);
-      }
-    });
+      });
+    }
   }
 
   errorRender = (error) => {
@@ -115,7 +118,7 @@ export default class CourseForm extends Component {
                       <div> {this.state.isUploadingImage ? 'Uploading... please wait' : 'Drop thumbnail here, or click to select file to upload.'} </div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                    {thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
+                    {!thumbnail.error && thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
                   </div>
                 }/>
               </div>
