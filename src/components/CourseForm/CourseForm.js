@@ -30,7 +30,7 @@ export default class CourseForm extends Component {
 
   onDrop = (files, field)=> {
     const _file = files[0];
-    if (_file.name.indexOf('.jpg') > -1 || _file.name.indexOf('.png') > -1 || _file.name.indexOf('.jpeg') || -1  || _file.name.indexOf('.gif') || -1) {
+    if (_file.name.indexOf('.jpg') > -1 || _file.name.indexOf('.png') > -1 || _file.name.indexOf('.jpeg') > -1 || _file.name.indexOf('.gif') || -1) {
       const req = superagent.post('/upload');
       files.forEach((file)=> {
         req.attach('thumbnail', file);
