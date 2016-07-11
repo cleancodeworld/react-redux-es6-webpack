@@ -17,10 +17,12 @@ const CourseFormValidate = (values) => {
   } else if (!/^[a-z0-9\s]+$/i.test(values.subtitle)) {
     errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
   }
-
-  /* if (!values.thumbnail) {
-    errors.thumbnail = 'Required';
-  } */
+  if (values.thumbnail && values.thumbnail.length && values.thumbnail[0].name) {
+    const file = values.thumbnail[0].name.toLowerCase();
+    if (file.indexOf('.jpg') === -1 && file.indexOf('.png') === -1 && file.indexOf('.jpeg') === -1 && file.indexOf('.gif') === -1) {
+      errors.thumbnail = 'only images allowed';
+    }
+  }
   if (!values.duration) {
     errors.duration = 'Required';
   } else if (!isNumeric(values.duration + '')) {

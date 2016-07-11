@@ -5,9 +5,11 @@ const checkAvailability = (values) => {
   return new Promise((resolve, reject) => {
     async.parallel(
       {
-        username: (cb)=> values.username ? superagent.get(`/api/v1/author/${values.username}/available`).end((err, {body} = {})=> {
+        username: (cb)=> values.username && values.username.length > 3 && values.username.length < 20 ? superagent.get(`/api/v1/author/${values.username}/available`).end((err, {body} = {})=> {
           if (err) cb(err);
-          if (!body.data.available) cb({ username: 'This username is not available' });
+          const { available } = body.data;
+
+          if (!available) cb({ username: 'This username is not available' });
           else cb(null);
         }) : cb(null)
       },

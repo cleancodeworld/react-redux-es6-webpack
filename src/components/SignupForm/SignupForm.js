@@ -3,6 +3,8 @@ import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
 import {Link} from 'react-router';
 import validate from './validate';
+import debounce from 'lodash/debounce';
+const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
 
 @reduxForm({
   form: 'SignupForm',
@@ -47,7 +49,12 @@ export default class AccountPortalForm extends Component {
             <Field name="username"
                    component={username =>
               <div>
-                <input type="text" className="form-control" {...username} onChange={event=>username.onBlur(event)} placeholder="Choose username"/>
+                <input type="text" className="form-control" {...username}
+                onChange={event=> {
+                  username.onChange(event);
+                  event.persist();
+                  debounceBlurField(username, event);
+                }} placeholder="Choose username"/>
                 {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
               </div>
               }/>

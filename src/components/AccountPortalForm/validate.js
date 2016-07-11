@@ -1,5 +1,6 @@
 import isAlphanumeric from 'validator/lib/isAlphanumeric';
 import isAlpha from 'validator/lib/isAlpha';
+import isEmail from 'validator/lib/isEmail';
 
 const AccountPortalValidation = values => {
   const errors = {};
@@ -42,7 +43,7 @@ const AccountPortalValidation = values => {
 
   if (!values.email) {
     errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!isEmail(values.email)) {
     errors.email = 'Invalid email address';
   }
 
