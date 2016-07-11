@@ -2,7 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Switch from 'react-bootstrap-switch';
 import Select from 'react-select';
-
+import {connect} from 'react-redux';
+@connect(state=>({
+  formValues: state.form.CourseAccountingForm && state.form.CourseAccountingForm.values
+}))
 @reduxForm({
   form: 'CourseAccountingForm',
 })
@@ -12,11 +15,22 @@ export default class CourseAccountingForm extends Component {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool,
     error: PropTypes.string,
+    formValues: PropTypes.object,
     submitStatus: PropTypes.bool,
   }
 
-  state = {
-    isPaid: false
+  getCurrencySymbol(currency) {
+    let res = '';
+    switch (currency) {
+      case 'EURO':
+        res = '€';
+        break;
+      case 'USD':
+      default:
+        res = '$';
+        break;
+    }
+    return res;
   }
 
   errorRender = (error) => {
@@ -45,7 +59,9 @@ export default class CourseAccountingForm extends Component {
       submitting,
       error,
       submitStatus,
+      formValues,
       } = this.props;
+    const {paid, currency} = formValues || {};
     return (
       <div className="panel panel-flat">
         <div className="panel-body">
@@ -61,13 +77,10 @@ export default class CourseAccountingForm extends Component {
                     <label className="control-label">Price Settings</label>
                     <span className="pull-right"><a href="#">Learn more about pricing</a></span>
                   </div>
-                  <Field name="paid" component={paid =>
+                  <Field name="paid" component={field =>
                     <label>
-                      <Switch state={paid.value} {...paid}
-                      onChange={(val)=> {
-                        paid.onChange(val);
-                        this.setState({isPaid: val});
-                      }}
+                      <Switch state={field.value} {...field}
+                      onChange={(val)=> field.onChange(val)}
                       onText="Paid" offText="Free" labelText="&nbsp;"/>
                     </label>
                   }/>
@@ -75,12 +88,12 @@ export default class CourseAccountingForm extends Component {
               </div>
               <div className="paid-contents" id="collapseExample">
                 <div className="col-md-2">
-                  { this.state.isPaid
+                  { paid
                     ?
-                    <Field name="currency" component={currency =>
+                    <Field name="currency" component={field =>
                         <div>
                           <Select
-                            {...currency}
+                            {...field}
                             onBlur={() => {}}
                             onBlurResetsInput={false}
                             searchable={false}
@@ -91,23 +104,23 @@ export default class CourseAccountingForm extends Component {
                     :
                     <div className="Select is-disabled">
                       <div className="Select-control">
-                        <div className="Select-placeholder">0</div>
+                        <div className="Select-placeholder">Select...</div>
                       </div>
                     </div>
                   }
                 </div>
                 <div className="col-md-6">
-                  { this.state.isPaid
-                    ? <Field name="price" component={price =>
-                    <div>
-                      <Select
-                        {...price}
-                        onBlur={() => {}}
-                        onBlurResetsInput={false}
-                        searchable={false}
-                        options={['20', '30', '40', '50'].map( value => ({ value: value.toString(), label: `$${value.toString()}`}))}
-                      />
-                    </div>
+                  { paid
+                    ? <Field name="price" error={currency} component={price =>
+                      <div>
+                        <Select
+                          {...price}
+                          onBlur={() => {}}
+                          onBlurResetsInput={false}
+                          searchable={false}
+                          options={['20', '30', '40', '50'].map( value => ({ value: value.toString(), label: `${this.getCurrencySymbol(price.error)}${value.toString()}`}))}
+                        />
+                      </div>
                   }/>
                     : <div className="Select is-disabled">
                     <div className="Select-control">
