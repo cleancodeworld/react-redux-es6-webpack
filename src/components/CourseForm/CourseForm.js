@@ -29,10 +29,11 @@ export default class CourseForm extends Component {
   }
 
   onDrop = (files, field)=> {
-    const fileName = files[0].name.toLowerCase();
+    const fileType = files[0].type;
     console.log(files);
     console.log(field);
-    if (fileName.indexOf('.jpg') > -1 || fileName.indexOf('.png') > -1 || fileName.indexOf('.jpeg') > -1 || fileName.indexOf('.gif') || -1) {
+    console.log(fileType.indexOf('image') > -1);
+    if (fileType.indexOf('image') > -1) {
       const req = superagent.post('/upload');
       files.forEach((file)=> {
         req.attach('thumbnail', file);
