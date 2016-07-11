@@ -4,7 +4,7 @@ import Switch from 'react-bootstrap-switch';
 import Select from 'react-select';
 
 @reduxForm({
-  form: 'CourseAccountingForm'
+  form: 'CourseAccountingForm',
 })
 export default class CourseAccountingForm extends Component {
 
@@ -13,6 +13,10 @@ export default class CourseAccountingForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string,
     submitStatus: PropTypes.bool,
+  }
+
+  state = {
+    isPaid: false
   }
 
   errorRender = (error) => {
@@ -41,7 +45,7 @@ export default class CourseAccountingForm extends Component {
       submitting,
       error,
       submitStatus,
-    } = this.props;
+      } = this.props;
     return (
       <div className="panel panel-flat">
         <div className="panel-body">
@@ -59,43 +63,63 @@ export default class CourseAccountingForm extends Component {
                   </div>
                   <Field name="paid" component={paid =>
                     <label>
-                      <Switch state={paid.value} {...paid} onText="Paid" offText="Free" labelText="&nbsp;"/>
+                      <Switch state={paid.value} {...paid}
+                      onChange={(val)=> {
+                        paid.onChange(val);
+                        this.setState({isPaid: val});
+                      }}
+                      onText="Paid" offText="Free" labelText="&nbsp;"/>
                     </label>
                   }/>
                 </div>
               </div>
               <div className="paid-contents" id="collapseExample">
                 <div className="col-md-2">
-                  <Field name="currency" component={currency => {
-                    return (
-                      <div>
-                        <Select
-                          {...currency}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          searchable={false}
-                          options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
-                        />
+                  { this.state.isPaid
+                    ?
+                    <Field name="currency" component={currency =>
+                        <div>
+                          <Select
+                            {...currency}
+                            onBlur={() => {}}
+                            onBlurResetsInput={false}
+                            searchable={false}
+                            options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
+                          />
+                        </div>
+                  }/>
+                    :
+                    <div className="Select is-disabled">
+                      <div className="Select-control">
+                        <div className="Select-placeholder">0</div>
                       </div>
-                    );
-                  }}/>
+                    </div>
+                  }
                 </div>
                 <div className="col-md-6">
-                  <Field name="price" component={price =>
+                  { this.state.isPaid
+                    ? <Field name="price" component={price =>
                     <div>
                       <Select
                         {...price}
                         onBlur={() => {}}
                         onBlurResetsInput={false}
                         searchable={false}
-                        options={['20', '30', '40', '50'].map( value => ({ value: value, label: '$' + value}))}
+                        options={['20', '30', '40', '50'].map( value => ({ value: value.toString(), label: `$${value.toString()}`}))}
                       />
                     </div>
                   }/>
+                    : <div className="Select is-disabled">
+                    <div className="Select-control">
+                      <div className="Select-placeholder">0</div>
+                    </div>
+                  </div>
+                  }
                 </div>
               </div>
               <div className="col-md-12 text-right">
-                <button type="submit" disabled={submitting} className="btn bg-blue" style={{ marginTop: '15px' }}>Save</button>
+                <button type="submit" disabled={submitting} className="btn bg-blue" style={{ marginTop: '15px' }}>Save
+                </button>
               </div>
             </div>
           </form>
