@@ -6,6 +6,8 @@ const CourseFormValidate = (values) => {
     errors.name = 'Required';
   } else if (values.name.length > 100) {
     errors.name = 'Title cannot be longer than 100 characters.';
+  } else if (values.name.length < 5) {
+    errors.name = 'Title cannot be less than 5 characters.';
   } else if (!/^[a-z0-9\s]+$/i.test(values.name)) {
     errors.name = 'You can use only alphabets, numbers and spaces in title.';
   }
