@@ -43,7 +43,7 @@ export default class LessonListContainer extends Component {
         <div className="panel panel-flat">
           <div className="panel-heading">
             <h6 className="panel-title">Lessons</h6>
-            <div className="heading-elements">
+            <div className="heading-elements" style={{display: 'block'}}>
               <Link to={'/author/course/' + courseName + '/lesson/add'} className="btn btn-warning btn-xs">Add
                 Lesson <i className="icon-pen-plus position-right"></i></Link>
             </div>

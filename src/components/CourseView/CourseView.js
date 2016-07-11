@@ -51,7 +51,7 @@ export default class CourseView extends Component {
                     </div>
                     <div className="col-lg-8">
                       <div className="asset-container" className="text-center">
-                        <img src={course.get('thumbnail')} style={{maxHeight: 400}}/>
+                        <img src={course.get('thumbnail')} style={{maxWidth: '100%', maxHeight: 400}}/>
                       </div>
                     </div>
                     <div className="col-lg-4">
