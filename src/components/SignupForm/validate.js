@@ -6,10 +6,6 @@ const SignupValidation = values => {
 
   if (!values.username) {
     errors.username = 'Required';
-  }
-
-  if (!values.username) {
-    errors.username = 'Required';
   } else if (values.username.length < 3 || values.username.length > 20) {
     errors.username = 'Username length should be between 3 and 20 characters';
   }
@@ -47,6 +43,8 @@ const SignupValidation = values => {
     errors.password = 'Does not match the entered confirm password';
   } else if (values.password.length < 3) {
     errors.password = 'Password length should be at least 3 characters';
+  } else if (values.password.length > 100) {
+    errors.password = 'Password must have at most 100 characters';
   }
 
   if (!values.termsOfUse) {

@@ -1,5 +1,6 @@
 import isAlphanumeric from 'validator/lib/isAlphanumeric';
 import isAlpha from 'validator/lib/isAlpha';
+import isEmail from 'validator/lib/isEmail';
 
 const AccountPortalValidation = values => {
   const errors = {};
@@ -42,7 +43,7 @@ const AccountPortalValidation = values => {
 
   if (!values.email) {
     errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (!isEmail(values.email)) {
     errors.email = 'Invalid email address';
   }
 
@@ -52,6 +53,8 @@ const AccountPortalValidation = values => {
     errors.password = 'Does not match the entered confirm password';
   } else if (values.password.length < 3) {
     errors.password = 'Password length should be at least 3 characters';
+  } else if (values.password.length > 100) {
+    errors.password = 'Password must have at most 100 characters';
   }
 
   if (!values.termsOfUse) {
