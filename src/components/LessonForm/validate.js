@@ -11,7 +11,7 @@ const LessonFormValidation = values => {
   if (values.thumbnail && values.thumbnail.length && values.thumbnail[0].name) {
     const file = values.thumbnail[0].name.toLowerCase();
     if (file.indexOf('.jpg') === -1 && file.indexOf('.png') === -1 && file.indexOf('.jpeg') === -1 && file.indexOf('.gif') === -1) {
-      errors.thumbnail = 'only images allowed';
+      errors.thumbnail = 'Make sure to upload a JPG, GIF, or PNG file and try again.';
     }
   }
   if (!values.videoUrl) {
