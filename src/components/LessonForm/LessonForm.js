@@ -94,7 +94,7 @@ export default class LessonForm extends Component {
                 </Dropzone>
                 {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
                 {this.state.isUploadingImage && <span style={{marginLeft: 5}} className="label bg-blue">Uploading</span>}
-                {thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
+                {!thumbnail.error && thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
               </div>
             }/>
             <Field name="description" component={description =>
