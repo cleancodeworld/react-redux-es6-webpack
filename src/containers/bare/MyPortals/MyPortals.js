@@ -38,7 +38,7 @@ export default class MyPortals extends Component {
     const {portals, order} = this.props;
     return (
       <div>
-        <Helmet title="Create Portal"/>
+        <Helmet title="My Portals"/>
         <div className="page-container">
           <div className="page-content">
             <div className="row">
