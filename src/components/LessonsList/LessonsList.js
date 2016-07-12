@@ -26,7 +26,7 @@ export default class LessonListContainer extends Component {
   render() {
     const {lessons, courseName, onRemove} = this.props;
     return (
-      <div className="table-responsive">
+      <div className="table-responsive" style={{ overflowX: 'scroll' }}>
         <table className="table table-hover table-lg">
           <thead>
           <tr className="bg-blue">
