@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
-import {Link} from 'react-router';
+import {Link} from 'react-router';  // eslint-disable-line
 import validate from './validate';
 import debounce from 'lodash/debounce';
+import config from '../../config';
 const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
 
 @reduxForm({
@@ -27,6 +28,13 @@ export default class AccountPortalForm extends Component {
       </div> );
     }
     return res;
+  }
+
+  loginUrl() {
+    if (!config.port || config.port === 80) {
+      return `http://${config.mainDomain}/login`;
+    }
+    return `http://${config.mainDomain}:${config.port}/login`;
   }
 
   render() {
@@ -145,9 +153,12 @@ export default class AccountPortalForm extends Component {
             </label>
           </div>
           <div className="clearfix">
-            <Link to="/login" className="btn btn-link pull-left" style={{ paddingLeft: 0, paddingRight: 0 }}>
+            {/* <Link to="/login" className="btn btn-link pull-left" style={{ paddingLeft: 0, paddingRight: 0 }}>
               <i className="icon-arrow-left13 position-left"></i> Already have an account? click to login
-            </Link>
+            </Link> */}
+            <a href={this.loginUrl()} className="btn btn-link pull-left" style={{ paddingLeft: 0, paddingRight: 0 }}>
+              <i className="icon-arrow-left13 position-left"></i> Already have an account? click to login
+            </a>
             <button type="submit" disabled={submitting} className="btn bg-teal-400 ml-10 pull-right">
               Sign Up
             </button>
