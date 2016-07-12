@@ -100,8 +100,8 @@ export default function Notifications(state = initialState, action) {
 
 export function show(opts, level = 'success') {
   return {
-    type: SHOW_NOTIFICATION,
     ...opts,
+    type: SHOW_NOTIFICATION,
     level,
     position: 'tc',
   };

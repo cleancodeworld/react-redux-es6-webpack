@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {updateCoverImage} from 'redux/modules/portal/edit';
 import {withPortal, withUser, withCourse} from 'hoc';
+import {error} from 'redux/modules/notifications';
 
 import {
   ProfileCover,
@@ -10,7 +11,7 @@ import {
   CourseRightMenu
 } from 'components';
 
-@connect(null, { updateCoverImage })
+@connect(null, { updateCoverImage, error })
 
 @withPortal
 @withUser
@@ -23,13 +24,16 @@ export default class PortalAuthorCourseLayout extends Component {
     course: PropTypes.object,
     user: PropTypes.object,
     updateCoverImage: PropTypes.func.isRequired,
+    error: PropTypes.func.isRequired,
   };
 
   render() {
     const { portal, user, course } = this.props;
     return (
       <div>
-        <ProfileCover portal={portal.meta} user={user} updateCoverImage={this.props.updateCoverImage}/>
+        <ProfileCover error={this.props.error}
+                      portal={portal.meta} user={user}
+                      updateCoverImage={this.props.updateCoverImage}/>
         <ProfileToolbar />
         <div className="row">
           <div className="col-lg-9">

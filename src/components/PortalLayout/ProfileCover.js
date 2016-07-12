@@ -6,25 +6,31 @@ export default class ProfileCover extends Component {
   static propTypes = {
     updateCoverImage: PropTypes.func.isRequired,
     success: PropTypes.func,
+    error: PropTypes.func,
     portal: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   };
 
   onDrop = (files)=> {
-    const { portal } = this.props;
-    const req = superagent.post('/upload');
-    files.forEach((file)=> {
-      req.attach('thumbnail', file);
-    });
-    req.end((err, { body } = {})=> {
-      if (err) {
-        if (!err.crossDomain) {
-          alert(JSON.stringify(err));
+    const fileType = files[0].type;
+    if (fileType.indexOf('image') > -1) {
+      const { portal } = this.props;
+      const req = superagent.post('/upload');
+      files.forEach((file)=> {
+        req.attach('thumbnail', file);
+      });
+      req.end((err, { body } = {})=> {
+        if (err) {
+          if (!err.crossDomain) {
+            alert(JSON.stringify(err));
+          }
+        } else {
+          this.props.updateCoverImage(portal.toJS(), body.url);
         }
-      } else {
-        this.props.updateCoverImage(portal.toJS(), body.url);
-      }
-    });
+      });
+    } else {
+      this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' });
+    }
   }
 
   render() {
@@ -48,10 +54,13 @@ export default class ProfileCover extends Component {
             <ul className="list-inline list-inline-condensed no-margin-bottom text-nowrap">
               <li>
                 <Dropzone
-                  multiple={false} accept="image/*"
+                  multiple={false}
                   className="action"
                   style={{height: 40}}
-                  multiple={false} onDrop={this.onDrop}>
+                  multiple={false}
+                  accept="image/*"
+                  onDrop={this.onDrop}
+                  onDropRejected={this.onDrop}>
                   <a href="javascript:void(0)" className="btn btn-default"><i
                     className="icon-file-picture position-left"></i> Cover image</a>
                 </Dropzone>
