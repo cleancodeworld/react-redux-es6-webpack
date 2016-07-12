@@ -24,7 +24,7 @@ const validate = values => {
 
   if (!content) {
     errors.content = 'Body is missing';
-  } else if (content > 30000) {
+  } else if (content.length > 30000) {
     errors.content = 'Body can not be longer than 30000 characters.';
   }
   return errors;
