@@ -11,6 +11,8 @@ function _edit(model, courseName, portalId) {
     promise: (client) => client.put(`/api/v1/course/name/${courseName}`, {
       data: {
         ...model,
+        pages: null,
+        lessons: null,
         portalId,
         duration: parseInt(model.duration, 10),
       }
