@@ -107,6 +107,7 @@ export default class LessonForm extends Component {
               <div className="form-group">
                 <label>Content</label>
                 <TextEditor {...content}/>
+                {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
               </div>
             }/>
             <div className="text-right">
