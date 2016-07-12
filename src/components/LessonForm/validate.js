@@ -7,6 +7,8 @@ const LessonFormValidation = values => {
     errors.title = 'Required';
   } else if (values.title.length > 100) {
     errors.title = 'Title cannot be longer than 100 characters.';
+  } else if (values.title.length < 2) {
+    errors.title = 'Title cannot be less than 2 characters.';
   } else if (!/^[a-z0-9\s]+$/i.test(values.title)) {
     errors.title = 'You can use only alphabets, numbers and spaces in title.';
   }
