@@ -37,8 +37,6 @@ export default class SideProfile extends Component {
           this.props.updateImage(user.toJS(), body.url);
         }
       });
-    } else {
-      this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' });
     }
   }
 
@@ -61,8 +59,9 @@ export default class SideProfile extends Component {
               style={{height: 110}}
               disableClick={false}
               accept="image/*"
-              multiple={false} onDrop={this.onDrop}
-              onDropRejected={this.onDrop}>
+              multiple={false}
+              onDrop={this.onDrop}
+              onDropRejected={()=>this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' })}>
 
               <div className="sidebar-user-material-content">
                 <a href="javascript:void(0)">

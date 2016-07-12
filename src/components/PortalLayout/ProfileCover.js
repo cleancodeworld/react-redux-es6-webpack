@@ -28,10 +28,12 @@ export default class ProfileCover extends Component {
           this.props.updateCoverImage(portal.toJS(), body.url);
         }
       });
-    } else {
-      this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' });
     }
   }
+  onDropRejected = ()=> {
+    this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' });
+  }
+
 
   render() {
     const { portal, user } = this.props;
@@ -60,7 +62,7 @@ export default class ProfileCover extends Component {
                   multiple={false}
                   accept="image/*"
                   onDrop={this.onDrop}
-                  onDropRejected={this.onDrop}>
+                  onDropRejected={()=>this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' })}>
                   <a href="javascript:void(0)" className="btn btn-default"><i
                     className="icon-file-picture position-left"></i> Cover image</a>
                 </Dropzone>
