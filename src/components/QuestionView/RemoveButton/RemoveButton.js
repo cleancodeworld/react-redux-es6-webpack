@@ -13,7 +13,7 @@ export default class LessonRemoveButton extends Component {
   }
 
   render() {
-    const {question, onRemove} = this.props;
+    const {onRemove} = this.props;
     return (
       <div>
         <a href="javascript:void(0)" onClick={()=>this.setState({ showModal: true })}>
