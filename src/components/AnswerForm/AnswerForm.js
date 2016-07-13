@@ -47,6 +47,8 @@ export default class AnswerForm extends Component {
                 <Field name="content" component={content =>
                   <div className="form-group">
                     <TinyMCE {...content}/>
+                    {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
+
                   </div>}/>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">

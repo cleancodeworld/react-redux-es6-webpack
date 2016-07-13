@@ -25,6 +25,13 @@ const LessonFormValidation = values => {
     errors.videoUrl = 'Invalid Url';
   }
 
+  const content = values.content && values.content.replace(/<(?:.|\n)*?>/gm, '') || '';
+  if (!content) {
+    errors.content = 'Content is missing';
+  } else if (content.length > 30000) {
+    errors.content = 'Content can not be longer than 30000 characters.';
+  }
+
   return errors;
 };
 

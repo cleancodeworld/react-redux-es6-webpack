@@ -6,11 +6,12 @@ import {
 } from 'components';
 import { logout } from 'redux/modules/auth';
 import {updateImage} from 'redux/modules/user/edit';
+import {error} from 'redux/modules/notifications';
 import { withUser } from 'hoc';
 
 @connect(
   null,
-  { logout, updateImage }
+  { logout, updateImage, error }
 )
 @withUser
 export default class PortalAuthorLayout extends Component {
@@ -20,6 +21,7 @@ export default class PortalAuthorLayout extends Component {
     user: PropTypes.object,
     logout: PropTypes.func,
     updateImage: PropTypes.func,
+    error: PropTypes.func,
   };
 
   render() {
@@ -29,7 +31,7 @@ export default class PortalAuthorLayout extends Component {
         <div className="page-content">
           <div className="sidebar sidebar-main sidebar-default">
             <div className="sidebar-content">
-              <SideProfile logout={this.props.logout} updateImage={this.props.updateImage} user={user}/>
+              <SideProfile error={this.props.error} logout={this.props.logout} updateImage={this.props.updateImage} user={user}/>
               <SideMenu />
             </div>
           </div>

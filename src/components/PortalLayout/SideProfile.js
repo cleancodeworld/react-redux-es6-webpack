@@ -8,7 +8,7 @@ export default class SideProfile extends Component {
     user: PropTypes.object,
     logout: PropTypes.func,
     updateImage: PropTypes.func,
-    success: PropTypes.func,
+    error: PropTypes.func,
   };
 
   constructor(props) {
@@ -21,20 +21,23 @@ export default class SideProfile extends Component {
   };
 
   onDrop = (files)=> {
-    const { user } = this.props;
-    const req = superagent.post('/upload');
-    files.forEach((file)=> {
-      req.attach('thumbnail', file);
-    });
-    req.end((err, { body } = {})=> {
-      if (err) {
-        if (!err.crossDomain) {
-          alert(JSON.stringify(err));
+    const fileType = files[0].type;
+    if (fileType.indexOf('image') > -1) {
+      const { user } = this.props;
+      const req = superagent.post('/upload');
+      files.forEach((file)=> {
+        req.attach('thumbnail', file);
+      });
+      req.end((err, { body } = {})=> {
+        if (err) {
+          if (!err.crossDomain) {
+            alert(JSON.stringify(err));
+          }
+        } else {
+          this.props.updateImage(user.toJS(), body.url);
         }
-      } else {
-        this.props.updateImage(user.toJS(), body.url);
-      }
-    });
+      });
+    }
   }
 
   onMenuToggle(ev) {
@@ -51,10 +54,15 @@ export default class SideProfile extends Component {
           <div className="category-content">
 
             <Dropzone
-              multiple={false} accept="image/*"
+              multiple={false}
               className="action"
               style={{height: 110}}
-              multiple={false} onDrop={this.onDrop}>
+              disableClick={false}
+              accept="image/*"
+              multiple={false}
+              onDrop={this.onDrop}
+              onDropRejected={()=>this.props.error({ title: 'Make sure to upload a JPG, GIF, or PNG file and try again.' })}>
+
               <div className="sidebar-user-material-content">
                 <a href="javascript:void(0)">
                   <img src={user.get('image')}
