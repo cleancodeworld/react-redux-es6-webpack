@@ -23,7 +23,7 @@ export default class LessonRemoveButton extends Component {
             <Modal.Title>Remove confirmation</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Are you sure you want to delete `{question.get('title')}` this question?</h4>
+            <h4>Are you sure you want to delete this question?</h4>
             <p>Note: you can not rollback after you click confirm</p>
             <hr />
           </Modal.Body>
