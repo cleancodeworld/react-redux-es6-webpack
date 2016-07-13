@@ -42,11 +42,20 @@ export default class Root extends React.Component {
     user: PropTypes.object
   };
 
+  state = {
+    footerOpen: false
+  };
+
   getChildContext() {
     const {user} = this.props;
     return {
       user
     };
+  }
+
+  toggleFooter = () => {
+    this.state.footerOpen = !this.state.footerOpen;
+    this.forceUpdate();
   }
 
   render() {
@@ -68,10 +77,15 @@ export default class Root extends React.Component {
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">
         <ul className="nav navbar-nav visible-xs-block">
-          <li><a className="text-center collapsed legitRipple" data-toggle="collapse" data-target="#footer"><i
-            className="icon-circle-up2"></i></a></li>
+          <li><a className="text-center collapsed legitRipple" data-toggle="collapse" data-target="#footer" onClick={this.toggleFooter}>
+            { this.state.footerOpen ?
+              (<i className="icon-circle-down2"></i>)
+              :
+              (<i className="icon-circle-up2"></i>)
+            }
+          </a></li>
         </ul>
-        <div className="navbar-collapse collapse" id="footer">
+        <div className={'navbar-collapse collapse' + (this.state.footerOpen ? ' in' : '')} id="footer">
           <div className="navbar-text">
             © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com"
                                                                            className="navbar-link"
