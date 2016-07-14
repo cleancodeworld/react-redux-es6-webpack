@@ -23,6 +23,9 @@ import {ADD_SUCCESS as ADD_LESSON_SUCCESS} from './../lesson/create';
 import {
   EDIT_SUCCESS as EDIT_PAGE_SUCCESS,
 } from './../page/edit';
+import {
+  ADD_SUCCESS as ADD_PAGE_SUCCESS,
+} from './../page/create';
 
 import {
   EDIT_SUCCESS as EDIT_LESSON_SUCCESS,
@@ -115,6 +118,7 @@ export default function courseLoad(state = initialState, action) {
         map.mergeIn(['entities', courseName, 'lessons', 'entities', lesson.slug], Immutable.fromJS(lesson));
       });
 
+    case ADD_PAGE_SUCCESS:
     case EDIT_PAGE_SUCCESS:
       return state.withMutations(map => {
         const {courseName, lessonName} = action.data;
