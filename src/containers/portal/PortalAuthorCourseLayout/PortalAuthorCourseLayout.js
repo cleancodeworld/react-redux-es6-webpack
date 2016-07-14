@@ -8,7 +8,8 @@ import {error} from 'redux/modules/notifications';
 import {
   ProfileCover,
   ProfileToolbar,
-  CourseRightMenu
+  CourseRightMenu,
+  ErrorPage
 } from 'components';
 
 @connect(null, { updateCoverImage, error })
@@ -29,6 +30,9 @@ export default class PortalAuthorCourseLayout extends Component {
 
   render() {
     const { portal, user, course } = this.props;
+    if (course.get('authorId') !== user.get('userId')) {
+      return (<ErrorPage>Oops, Only owner can edit course</ErrorPage>);
+    }
     return (
       <div>
         <ProfileCover error={this.props.error}
