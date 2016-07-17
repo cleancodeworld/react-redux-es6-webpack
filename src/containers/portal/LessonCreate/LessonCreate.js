@@ -27,11 +27,14 @@ export default class LessonAdd extends Component {
   render() {
     const {courseName} = this.props.params;
     const {course} = this.props;
-
+    const initialFormValues = {
+      thumbnail: '/assets/images/placeholder.jpg',
+    };
     return (
       <div>
         <Helmet title="Create Lesson"/>
         <LessonForm
+          initialValues={initialFormValues}
           onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName)}/>
       </div>
     );

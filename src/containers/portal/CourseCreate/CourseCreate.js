@@ -48,7 +48,7 @@ export default class CourseCreate extends Component {
       language: 'English',
       category: '',
       duration: '',
-      thumbnail: '',
+      thumbnail: '/assets/images/placeholder.jpg',
       authorId: user.get('userId'),
       author: user.toJS()
     };
