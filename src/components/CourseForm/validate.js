@@ -1,4 +1,5 @@
 import isNumeric from 'validator/lib/isNumeric';
+import matches from 'validator/lib/matches';
 
 const CourseFormValidate = (values) => {
   const errors = {};
@@ -8,7 +9,7 @@ const CourseFormValidate = (values) => {
     errors.name = 'Title cannot be longer than 100 characters.';
   } else if (values.name.length < 2) {
     errors.name = 'Title cannot be less than 2 characters.';
-  } else if (!/^[a-z0-9\s]+$/i.test(values.name)) {
+  } else if (!matches(values.name, /^[a-z0-9\s]+$/i)) {
     errors.name = 'You can use only alphabets, numbers and spaces in title.';
   }
 

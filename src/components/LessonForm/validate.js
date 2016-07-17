@@ -1,4 +1,5 @@
 import isURL from 'validator/lib/isURL';
+import matches from 'validator/lib/matches';
 
 const LessonFormValidation = values => {
   const errors = {};
@@ -9,7 +10,7 @@ const LessonFormValidation = values => {
     errors.title = 'Title cannot be longer than 100 characters.';
   } else if (values.title.length < 2) {
     errors.title = 'Title cannot be less than 2 characters.';
-  } else if (!/^[a-z0-9\s]+$/i.test(values.title)) {
+  } else if (!matches(values.title, /^[a-z0-9]+$/i)) {
     errors.title = 'You can use only alphabets, numbers and spaces in title.';
   }
 
