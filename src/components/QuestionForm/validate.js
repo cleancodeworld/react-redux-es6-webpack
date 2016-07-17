@@ -10,7 +10,7 @@ const validate = values => {
     errors.title = 'Title cannot be longer than 150 characters.';
   } else if (values.title.length < 3) {
     errors.title = 'Title cannot be less than 3 characters.';
-  } else if (!matches(values.title, /^[a-z0-9 _-]+$/i)) {
+  } else if (!matches(values.title, /^[a-z0-9]+$/i)) {
     errors.title = 'Title can not contain special characters';
   }
   if (isEmpty(values.tags)) {
