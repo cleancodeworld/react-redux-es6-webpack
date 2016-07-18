@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import {connect} from 'react-redux';
-import { replace } from 'react-router-redux';
 import { withUserId, withPortal} from 'hoc';
+import {
+  ErrorPage
+} from 'components';
 
-@connect(null, { replace })
 @withUserId
 @withPortal
 export default class AuthorContainer extends React.Component {
@@ -13,19 +13,13 @@ export default class AuthorContainer extends React.Component {
     userId: PropTypes.string,
     location: PropTypes.object.isRequired,
     portal: PropTypes.object,
-    replace: PropTypes.func
-  }
-
-  componentWillMount() {
-    const { userId, portal } = this.props;
-    if (userId !== portal.meta.get('ownerId')) {
-      let continueTo = this.props.location.pathname + this.props.location.search;
-      continueTo = encodeURIComponent(continueTo);
-      this.props.replace('/login?continueTo=' + continueTo);
-    }
   }
 
   render() {
+    const { userId, portal } = this.props;
+    if (userId !== portal.meta.get('ownerId')) {
+      return (<ErrorPage>You have not permission to access this page</ErrorPage>);
+    }
     return this.props.children;
   }
 }
