@@ -12,7 +12,7 @@ export default class Login extends Component {
   };
 
   confirmEmailWarning() {
-    return (<div className="panel bg-primary">
+    return (<div className="panel bg-primary login-form">
       <div className="panel-heading">
         <h6 className="panel-title text-center">Confirm your email before login</h6>
       </div>
@@ -20,7 +20,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const {continueTo, message} = this.props.location.query;
+    const {continueTo, message, portalName} = this.props.location.query;
     return (
       <div>
         <Helmet title="Login"/>
@@ -28,7 +28,7 @@ export default class Login extends Component {
           <div className="page-content">
             <div className="content-wrapper">
               {message === 'confirm_email' ? this.confirmEmailWarning() : <span/>}
-              <LoginForm onSubmit={ model => this.props.userLogin(model, continueTo || '/')}/>
+              <LoginForm onSubmit={ model => this.props.userLogin(model, continueTo || '/', portalName)}/>
             </div>
           </div>
         </div>

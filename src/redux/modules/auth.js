@@ -119,7 +119,7 @@ export function silentLogin(model) {
   };
 }
 
-export function userLogin(model, continueTo) {
+export function userLogin(model, continueTo, portalName) {
   return dispatch => {
     return dispatch(
       login(model))
@@ -133,7 +133,11 @@ export function userLogin(model, continueTo) {
         reactCookie.save('sessionToken', sessionToken, cookieOpt);
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
-        return continueTo ? dispatch(push(continueTo)) : null;
+        if (portalName) {
+          return location.href = `//${portalName}.${config.mainDomain}`;
+        } else if (continueTo) {
+          return dispatch(push(continueTo));
+        }
       })
       .catch(res => {
         beautifyAndThrow(res.error);

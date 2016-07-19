@@ -3,13 +3,14 @@ import Helmet from 'react-helmet';
 import {AccountPortalForm} from 'components';
 import { connect } from 'react-redux';
 import { createWithPortal as userCreateWithPortal } from 'redux/modules/user/create';
-import config from '../../../config';
+import { push } from 'react-router-redux';
 
-@connect(null, { userCreateWithPortal })
+@connect(null, { userCreateWithPortal, push })
 export default class AccountPortalCreate extends Component {
 
   static propTypes = {
     userCreateWithPortal: PropTypes.func.isRequired,
+    push: PropTypes.func,
   };
 
   render() {
@@ -21,7 +22,7 @@ export default class AccountPortalCreate extends Component {
             <div className="content-wrapper">
               <AccountPortalForm
                 onSubmit={ model => this.props.userCreateWithPortal(model)
-                .then(()=>location.href = `${location.protocol}//${model.portalName}.${config.mainDomain}/login?message=confirm_email`)}/>
+                .then(()=>this.props.push(`/login?message=confirm_email&portalName=${model.portalName}`))}/>
             </div>
           </div>
         </div>
