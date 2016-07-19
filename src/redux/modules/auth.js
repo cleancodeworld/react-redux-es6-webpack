@@ -134,7 +134,7 @@ export function userLogin(model, continueTo, portalName) {
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
         if (portalName) {
-          return location.href = `//${portalName}.${config.mainDomain}`;
+          location.href = `//${portalName}.${config.mainDomain}`;
         } else if (continueTo) {
           return dispatch(push(continueTo));
         }
