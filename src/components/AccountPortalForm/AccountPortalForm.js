@@ -20,6 +20,8 @@ export default class AccountPortalForm extends Component {
     error: PropTypes.string
   }
 
+  state = {}
+
   errorRender(error) {
     let res = <span/>;
     if (error) {
@@ -100,9 +102,12 @@ export default class AccountPortalForm extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <Field name="password" component={password =>
+                        <Field name="password" confirmPasswordUpdated={this.state.confirmPasswordUpdated} component={password =>
                           <div>
-                            <input type="password" className="form-control" {...password} placeholder="Create password"/>
+                            <input type="password" className="form-control" {...password} onChange={(event)=>{
+                              password.onChange(event);
+                              this.setState({passwordUpdated: Math.random()});
+                            }} placeholder="Create password"/>
                             {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
                           </div>
                         }/>
@@ -113,9 +118,13 @@ export default class AccountPortalForm extends Component {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <Field name="confirmPassword" component={confirmPassword =>
+                        <Field name="confirmPassword" passwordUpdated={this.state.passwordUpdated} component={confirmPassword =>
                           <div>
-                            <input type="password" className="form-control" {...confirmPassword} placeholder="Repeat password"/>
+                            <input type="password" className="form-control" {...confirmPassword} onChange={(event)=>{
+                              confirmPassword.onChange(event);
+                              this.setState({confirmPasswordUpdated: Math.random()});
+                            }}
+                            placeholder="Repeat password"/>
                             {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
                           </div>
                         }/>
