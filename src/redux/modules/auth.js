@@ -56,12 +56,10 @@ export default function auth(state = initialState, action) {
       return state.remove('user');
     case LOGOUT_SUCCESS:
     case LOGOUT_FAIL:
-      return state.withMutations((map)=> {
-        map.remove('user');
-        reactCookie.remove('sessionToken', cookieOpt);
-        reactCookie.remove('userId', cookieOpt);
-        reactCookie.remove('username', cookieOpt);
-      });
+      reactCookie.remove('sessionToken', cookieOpt);
+      reactCookie.remove('userId', cookieOpt);
+      reactCookie.remove('username', cookieOpt);
+      return state;
     case LOAD_SUCCESS:
       return state.withMutations((map)=> {
         const { user } = action.result.data;
@@ -162,7 +160,7 @@ export function logout() {
       types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
       promise: (client) => client.post('/api/v1/logout')
     }).then(()=> {
-      window.location.href = `${location.protocol}//${config.mainDomain}/login`;
+      window.location.href = `//${config.mainDomain}/login`;
     });
   };
 }
