@@ -31,7 +31,7 @@ export default class LessonAdd extends Component {
       <div>
         <Helmet title="Create Lesson"/>
         <PageForm
-          onSubmit={ model => this.props.addPage(model, course, lesson)}/>
+          onSubmit={ model => this.props.addPage({...model, title: model.title.trim()}, course, lesson)}/>
       </div>
     );
   }
