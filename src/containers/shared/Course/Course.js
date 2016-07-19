@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { asyncConnect } from 'redux-connect';
 import { load as loadCourse, isLoaded as isCourseLoaded } from 'redux/modules/course/loaded';
+import { load as loadRates, isLoaded as isCourseRatesLoaded } from 'redux/modules/course/rate';
 import { isLoaded as isLessonsLoaded, load as loadLessons } from 'redux/modules/lesson/loaded';
 
 @asyncConnect([{
@@ -12,6 +13,9 @@ import { isLoaded as isLessonsLoaded, load as loadLessons } from 'redux/modules/
     }
     if (!isLessonsLoaded(getState(), params.courseName)) {
       promises.push(dispatch(loadLessons(params.courseName)));
+    }
+    if (!isCourseRatesLoaded(getState(), params.courseName)) {
+      promises.push(dispatch(loadRates(params.courseName, state.auth.getIn(['user', 'userId']))));
     }
     return Promise.all(promises);
   }

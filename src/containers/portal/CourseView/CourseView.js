@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 
 
 import {withWishList, withCart, withCourse, withMyCourses} from 'hoc';
-import { rate } from 'redux/modules/course/rate';
+import { create, edit } from 'redux/modules/course/rate';
 import { signup } from 'redux/modules/user/create';
 import {showSignUpModal} from 'redux/modules/auth';
 import {add as addToMyCourses} from 'redux/modules/myCourses';
 
 @connect(
   null,
-  { rate, signup, showSignUpModal, addToMyCourses }
+  { create, edit, signup, showSignUpModal, addToMyCourses }
 )
 @withCart
 @withWishList
@@ -25,7 +25,8 @@ export default class CourseViewContainer extends Component {
   static propTypes = {
     auth: PropTypes.object,
     course: PropTypes.object,
-    rate: PropTypes.func,
+    create: PropTypes.func,
+    edit: PropTypes.func,
     showSignUpModal: PropTypes.func,
     addToMyCourses: PropTypes.func,
     params: PropTypes.object,
@@ -53,7 +54,9 @@ export default class CourseViewContainer extends Component {
                     showSignUpModal={this.props.showSignUpModal}
                     addToCart={cart.addToCart}
                     removeFromCart={cart.removeFromCart}
-                    onRate={(rateValue)=> this.props.rate({rate: rateValue, courseId: course.get('id')})}/>
+                    isRated={course.get('isRated')}
+                    onRateCreate={(rateValue)=> this.props.create({rate: rateValue, courseId: course.get('id')}, course.get('slug'))}
+                    onRateEdit={(rateValue)=> this.props.edit({rate: rateValue, courseId: course.get('id')}, course.get('slug'))}/>
       </div>
     );
   }

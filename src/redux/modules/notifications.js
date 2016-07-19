@@ -10,7 +10,8 @@ import Immutable from 'immutable';
 import {CREATE_SUCCESS as COURSE_CREATE_SUCCESS} from './course/create';
 import {EDIT_SUCCESS as COURSE_EDIT_SUCCESS} from './course/edit';
 import {EDIT_SUCCESS as PRICE_EDIT_SUCCESS} from './course/price';
-import {RATE_SUCCESS as COURSE_RATE_SUCCESS, RATE_FAIL as COURSE_RATE_FAIL} from './course/rate';
+import {CREATE_SUCCESS as CREATE_RATE_SUCCESS, EDIT_SUCCESS as EDIT_RATE_SUCCESS} from './course/rate';
+import {CREATE_FAIL as CREATE_RATE_FAIL, EDIT_FAIL as EDIT_RATE_FAIL} from './course/rate';
 import {ADD_SUCCESS as LESSON_ADD_SUCCESS} from './lesson/create';
 import {EDIT_SUCCESS as LESSON_EDIT_SUCCESS} from './lesson/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as PORTAL_UPDATE_COVER_IMAGE_SUCCESS} from './portal/edit';
@@ -28,7 +29,8 @@ export default function Notifications(state = initialState, action) {
     case COURSE_CREATE_SUCCESS:
     case COURSE_EDIT_SUCCESS:
     case PRICE_EDIT_SUCCESS:
-    case COURSE_RATE_SUCCESS:
+    case CREATE_RATE_SUCCESS:
+    case EDIT_RATE_SUCCESS:
     case LESSON_ADD_SUCCESS:
     case LESSON_EDIT_SUCCESS:
     case QUESTION_CREATE_SUCCESS:
@@ -75,7 +77,8 @@ export default function Notifications(state = initialState, action) {
         });
       }
       return state;
-    case COURSE_RATE_FAIL:
+    case CREATE_RATE_FAIL:
+    case EDIT_RATE_FAIL:
       return state.withMutations(map=> {
         const notify = Immutable.fromJS({
           level: 'error',

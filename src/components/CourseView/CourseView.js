@@ -13,7 +13,9 @@ export default class CourseView extends Component {
 
   render() {
     const {course,
-      onRate,
+      onRateCreate,
+      isRated,
+      onRateEdit,
       isWishListItem,
       addToWishList,
       removeFromWishList,
@@ -40,7 +42,7 @@ export default class CourseView extends Component {
                       <ul className="list list-inline">
                         <li>
                           <CourseRate avgRate={course.get('avgRate')}
-                                      onChange={onRate}/>
+                                      onChange={(data)=> isRated ? onRateEdit(data) : onRateCreate(data)}/>
                         </li>
                         <li>{course.get('ratesCount')} students enrolled</li>
                         <li>
@@ -259,7 +261,9 @@ CourseView.contextTypes = {
 
 CourseView.propTypes = {
   course: PropTypes.object.isRequired,
-  onRate: PropTypes.func,
+  onRateCreate: PropTypes.func,
+  onRateEdit: PropTypes.func,
+  isRated: PropTypes.bool,
   isMyCoursesItem: PropTypes.bool,
   isWishListItem: PropTypes.bool,
   addToWishList: PropTypes.func,
