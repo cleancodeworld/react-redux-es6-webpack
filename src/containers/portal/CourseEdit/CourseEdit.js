@@ -49,7 +49,7 @@ export default class CourseEdit extends Component {
       <div>
         <Helmet title={`Edit: ${course.get('name')}`}/>
         <CourseForm initialValues={course.toJS()} categories={categories}
-                    onSubmit={ model => this.props.edit(model, courseName, portal.meta.get('id')) }/>
+                    onSubmit={ model => this.props.edit({...model, name: model.name.trim()}, courseName, portal.meta.get('id')) }/>
       </div>
     );
   }

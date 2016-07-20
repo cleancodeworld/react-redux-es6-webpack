@@ -3,13 +3,14 @@ import matches from 'validator/lib/matches';
 
 const CourseFormValidate = (values) => {
   const errors = {};
-  if (!values.name) {
+  const name = values.name && values.name.trim() || '';
+  if (!name) {
     errors.name = 'Required';
-  } else if (values.name.length > 100) {
+  } else if (name.length > 100) {
     errors.name = 'Title cannot be longer than 100 characters.';
-  } else if (values.name.length < 2) {
+  } else if (name.length < 2) {
     errors.name = 'Title cannot be less than 2 characters.';
-  } else if (!matches(values.name, /^[a-z0-9\s]+$/i)) {
+  } else if (!matches(name, /^[a-z0-9\s]+$/i)) {
     errors.name = 'You can use only alphabets, numbers and spaces in title.';
   }
 

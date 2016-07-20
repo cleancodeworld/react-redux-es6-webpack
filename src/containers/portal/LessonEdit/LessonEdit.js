@@ -36,7 +36,7 @@ export default class LessonEdit extends Component {
       <div>
         <Helmet title={`Edit Lesson: ${lesson.get('title')}`}/>
         <LessonForm initialValues={lesson.toJS()}
-                    onSubmit={ model => this.props.editLesson(model, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
+                    onSubmit={ model => this.props.editLesson({...model, title: model.title.trim()}, lesson.get('courseId'), courseName, lessonName).then(()=>this.setState({saved: true}))}
                     submitStatus={this.state.saved}/>
       </div>
     );

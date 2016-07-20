@@ -40,6 +40,11 @@ import {
 } from './price';
 
 import {
+  LOAD_SUCCESS as LOAD_RATE_SUCCESS,
+  CREATE_SUCCESS as CREATE_RATE_SUCCESS
+} from './rate';
+
+import {
   LOAD_MY_WISH_LIST_SUCCESS,
 } from './../wishList';
 
@@ -148,6 +153,18 @@ export default function courseLoad(state = initialState, action) {
         const {courseName} = action.data;
         map.mergeIn(['entities', courseName, 'coursePrice'], Immutable.fromJS(course));
       });
+    case LOAD_RATE_SUCCESS:
+      return state.withMutations(map=> {
+        const {courseRates} = action.result.data;
+        const {courseName, userId} = action.data;
+        const isRated = courseRates.find((item)=> item.userId === userId);
+        map.setIn(['entities', courseName, 'isRated'], !!isRated);
+      });
+    case CREATE_RATE_SUCCESS:
+      return state.withMutations(map=> {
+        const {courseName} = action.data;
+        map.setIn(['entities', courseName, 'isRated'], true);
+      });
     case EDIT_PRICE_SUCCESS:
       return state.withMutations(map=> {
         const {coursePrice} = action.result.data;
@@ -201,7 +218,8 @@ export function isLoaded(globalState, courseName) {
   return globalState.courseLoaded
     && globalState.courseLoaded.getIn(['entities', courseName])
     && globalState.courseLoaded.getIn(['entities', courseName, 'author'])
-    && globalState.courseLoaded.getIn(['entities', courseName, 'coursePrice']);
+    && globalState.courseLoaded.getIn(['entities', courseName, 'coursePrice'])
+    && globalState.courseLoaded.getIn(['entities', courseName, 'rate']);
 }
 
 export function resetCourses() {

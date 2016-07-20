@@ -35,7 +35,7 @@ export default class LessonAdd extends Component {
         <Helmet title="Create Lesson"/>
         <LessonForm
           initialValues={initialFormValues}
-          onSubmit={ model => this.props.addLesson(model, course.get('id'), courseName)}/>
+          onSubmit={ model => this.props.addLesson({...model, title: model.title.trim()}, course.get('id'), courseName)}/>
       </div>
     );
   }

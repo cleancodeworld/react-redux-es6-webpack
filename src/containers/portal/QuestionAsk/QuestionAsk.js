@@ -30,6 +30,7 @@ export default class QuestionAsk extends Component {
           initialValues={{tags: []}}
           onSubmit={ model => this.props.create({
             ...model,
+            title: model.title.trim(),
             authorId: userId,
             portalId: portal.meta.get('id'),
             tags: model.tags.map(item => item.name).join(',')

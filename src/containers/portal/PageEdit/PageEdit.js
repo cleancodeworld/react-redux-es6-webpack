@@ -37,7 +37,7 @@ export default class PageEdit extends Component {
       <div>
         <Helmet title={`Edit Lesson: ${page.get('title')}`}/>
         <PageForm initialValues={page.toJS()}
-                  onSubmit={ model => this.props.editPage(model, course, lesson, page).then(()=>this.setState({saved: true}))}
+                  onSubmit={ model => this.props.editPage({...model, title: model.title.trim()}, course, lesson, page).then(()=>this.setState({saved: true}))}
                   submitStatus={this.state.saved}/>
       </div>
     );
