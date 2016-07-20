@@ -26,9 +26,9 @@ export default function publicOnly(WrappedComponent) {
       const props = this.props;
       const { userId} = this.props;
       if (userId) {
-        return (<WrappedComponent { ...props }/>);
+        return (<span/>);
       }
-      return (<span/>);
+      return (<WrappedComponent { ...props }/>);
     }
   }
   return hoistStatics(WithUserId, WrappedComponent);
