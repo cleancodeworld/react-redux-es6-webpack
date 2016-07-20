@@ -41,3 +41,22 @@
     padding-right: 0;
   }
 }
+
+@media (max-width: 540px) {
+  .table-lessons {
+    position: relative;
+    td:not(:last-child) {
+      padding-bottom: 45px;
+    }
+    td:last-child {
+      padding: 0;
+      .icons-list {
+        display: block;
+        position: absolute;
+        left: 20px;
+        transform: translateY(7px);
+        border: 0;
+      }
+    }
+  }
+}
