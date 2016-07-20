@@ -2,9 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { PasswordForgetForm } from 'components';
+import { publicOnly } from 'hoc';
 import { sendResetToken } from 'redux/modules/password/forget';
 
 @connect(null, { sendResetToken })
+@publicOnly
+
 export default class PasswordForget extends Component {
 
   static propTypes = {
