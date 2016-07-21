@@ -11,6 +11,7 @@ import {
   PasswordReset,
   Login,
   MyPortals,
+  SitePage,
 } from '../containers/bare';
 import {
   Root,
@@ -40,7 +41,7 @@ export default (params) => {
         <Route path="password/forget" component={PasswordForget}/>
         <Route path="password/reset" component={PasswordReset}/>
         <Route path="verify/registration" component={VerifyRegistration}/>
-
+        <Route path="page/:sitePageName/:sitePageId" component={SitePage}/>
         { /* Catch all route */ }
         <Route path="*" component={NotFound} status={404}/>
       </Route>

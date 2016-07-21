@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import {withPortals} from 'hoc';
 import {asyncConnect} from 'redux-connect';
+import {withPortals} from 'hoc';
 import { isLoaded, load } from 'redux/modules/portal/myPortals';
 import { remove } from 'redux/modules/portal/remove';
 
