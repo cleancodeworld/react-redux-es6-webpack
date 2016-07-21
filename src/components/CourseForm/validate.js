@@ -18,7 +18,9 @@ const CourseFormValidate = (values) => {
   if (!subtitle) {
     errors.subtitle = 'Required';
   } else if (subtitle.length > 150) {
-    errors.subtitle = 'Title cannot be longer than 150 characters.';
+    errors.subtitle = 'Subtitle cannot be longer than 150 characters.';
+  } else if (name.length < 2) {
+    errors.subtitle = 'Subtitle cannot be less than 2 characters.';
   } else if (!matches(subtitle, /^[a-z0-9\s]+$/i)) {
     errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
   }
