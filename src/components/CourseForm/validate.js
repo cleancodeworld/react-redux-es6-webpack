@@ -4,6 +4,7 @@ import matches from 'validator/lib/matches';
 const CourseFormValidate = (values) => {
   const errors = {};
   const name = values.name && values.name.trim() || '';
+  const subtitle = values.subtitle && values.subtitle.trim() || '';
   if (!name) {
     errors.name = 'Required';
   } else if (name.length > 100) {
@@ -14,11 +15,11 @@ const CourseFormValidate = (values) => {
     errors.name = 'You can use only alphabets, numbers and spaces in title.';
   }
 
-  if (!values.subtitle) {
+  if (!subtitle) {
     errors.subtitle = 'Required';
-  } else if (values.subtitle.length > 150) {
+  } else if (subtitle.length > 150) {
     errors.subtitle = 'Title cannot be longer than 150 characters.';
-  } else if (!/^[a-z0-9\s]+$/i.test(values.subtitle)) {
+  } else if (!matches(subtitle, /^[a-z0-9\s]+$/i)) {
     errors.subtitle = 'You can use only alphabets, numbers and spaces in subtitle.';
   }
   if (values.thumbnail && values.thumbnail.length && values.thumbnail[0].name) {
