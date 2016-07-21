@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
 import { withCourseCategories } from 'hoc';
+import config from 'config';
 
 @reduxForm({
   form: 'CourseForm',
