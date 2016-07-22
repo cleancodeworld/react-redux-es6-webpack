@@ -127,7 +127,8 @@ export default function courseLoad(state = initialState, action) {
     case EDIT_PAGE_SUCCESS:
       return state.withMutations(map => {
         const {courseName, lessonName} = action.data;
-        map.setIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages'], Immutable.fromJS({}));
+        map.deleteIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages']);
+        map.setIn(['entities', courseName, 'lessons', 'entities', lessonName, 'pages', 'listLoaded'], false);
       });
     case REMOVE_LESSON_SUCCESS:
       return state.withMutations(map => {
