@@ -203,7 +203,7 @@ export default class AccountPortalForm extends Component {
                     </div>
                   </div>
                   <div>
-                    <Link to="/login" className="btn btn-link"><i className="icon-arrow-left13 position-left"></i>
+                    <Link to="/login" className="btn btn-link account-create-login-link"><i className="icon-arrow-left13 position-left"></i>
                       Already a Knexpert? click to login
                     </Link>
                     <button type="submit" className="btn bg-teal-400 btn-labeled btn-labeled-right ml-10 pull-right">
