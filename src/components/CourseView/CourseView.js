@@ -42,7 +42,19 @@ export default class CourseView extends Component {
                       <ul className="list list-inline">
                         <li>
                           <CourseRate avgRate={course.get('avgRate')}
-                                      onChange={(data)=> isRated ? onRateEdit(data) : onRateCreate(data)}/>
+                                      onChange={(data)=>{
+                                        let res;
+                                        if (user) {
+                                          if ( isRated ) {
+                                            res = onRateEdit(data);
+                                          } else {
+                                            res = onRateCreate(data);
+                                          }
+                                        } else {
+                                          res = showSignUpModal(course);
+                                        }
+                                        return res;
+                                      }}/>
                         </li>
                         <li>{course.get('ratesCount')} students enrolled</li>
                         <li>
@@ -251,7 +263,8 @@ export default class CourseView extends Component {
             onHide={()=>this.setState({checkOutModalOpen: false})}/>
         </div>
       </div>
-    );
+    )
+      ;
   }
 }
 

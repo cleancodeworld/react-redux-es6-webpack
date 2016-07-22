@@ -4,7 +4,9 @@ import {AccountPortalForm} from 'components';
 import { connect } from 'react-redux';
 import { createWithPortal as userCreateWithPortal } from 'redux/modules/user/create';
 import { push } from 'react-router-redux';
+import { publicOnly } from 'hoc';
 
+@publicOnly
 @connect(null, { userCreateWithPortal, push })
 export default class AccountPortalCreate extends Component {
 

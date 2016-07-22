@@ -21,3 +21,4 @@ export clientSideOnly from './clientSideOnly';
 export withQuestion from './withQuestion';
 export withQuestions from './withQuestions';
 export withPortals from './withPortals';
+export publicOnly from './publicOnly';

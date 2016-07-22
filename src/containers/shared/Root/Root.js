@@ -8,7 +8,7 @@ import { signup } from 'redux/modules/user/create';
 import { hideSignUpModal, hideLogInModal } from 'redux/modules/auth';
 import { push } from 'react-router-redux';
 import { userLogin } from 'redux/modules/auth';
-
+import config from 'config';
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
@@ -77,7 +77,8 @@ export default class Root extends React.Component {
       {this.props.children}
       <div className="navbar navbar-default navbar-fixed-bottom footer">
         <ul className="nav navbar-nav visible-xs-block">
-          <li><a className="text-center collapsed legitRipple" data-toggle="collapse" data-target="#footer" onClick={this.toggleFooter}>
+          <li><a className="text-center collapsed legitRipple" data-toggle="collapse" data-target="#footer"
+                 onClick={this.toggleFooter}>
             { this.state.footerOpen ?
               (<i className="icon-circle-down2"></i>)
               :
@@ -93,9 +94,9 @@ export default class Root extends React.Component {
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">
-              <li><a href="#" className="legitRipple">About</a></li>
-              <li><a href="#" className="legitRipple">Terms</a></li>
-              <li><a href="#" className="legitRipple">Contact</a></li>
+              <li><a href={'//' + config.mainDomain + '/page/About-Us/zKfdYx'}className="legitRipple">About</a></li>
+              <li><a href={'//' + config.mainDomain + '/page/Terms/T9ltKI'}className="legitRipple">Terms</a></li>
+              <li><a href={'//' + config.mainDomain + '/page/Contact/JwLbzB'}className="legitRipple">Contact</a></li>
               <li><a target="_blank" href={ `${repoUrl}/tree/${lastCommit}` }
                      className="legitRipple">{buildVersion}</a></li>
             </ul>

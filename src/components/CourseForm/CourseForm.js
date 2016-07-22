@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone';
 import superagent from 'superagent';
 import validate from './validate';
 import { withCourseCategories } from 'hoc';
+import config from 'config';
 
 @reduxForm({
   form: 'CourseForm',
@@ -100,6 +101,7 @@ export default class CourseForm extends Component {
                     {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
                   </div>
                 }/>
+                <a href={'//' + config.mainDomain + '/page/Course-Title-Quality-Standards/u2qrZT'}>Learn more about title, subtitle</a>
               </div>
             </div>
             <div className="col-md-12">

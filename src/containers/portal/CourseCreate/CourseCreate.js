@@ -56,7 +56,7 @@ export default class CourseCreate extends Component {
       <div>
         <Helmet title="Create Course"/>
         <CourseForm initialValues={initialFormValues} categories={categories}
-                    onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), {...model, name: model.name.trim()})}/>
+                    onSubmit={ model => this.props.courseCreate(portal.meta.get('id'), {...model, name: model.name.trim(), subtitle: model.subtitle.trim()})}/>
       </div>
     );
   }

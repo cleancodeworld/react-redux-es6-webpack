@@ -3,10 +3,15 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { LoginForm } from 'components';
 import { userLogin } from 'redux/modules/auth';
+import {withUserId, publicOnly} from 'hoc';
 
 @connect(null, { userLogin })
+@withUserId
+@publicOnly
 export default class Login extends Component {
   static propTypes = {
+
+    userId: PropTypes.string.isRequired,
     userLogin: PropTypes.func.isRequired,
     location: PropTypes.object,
   };
