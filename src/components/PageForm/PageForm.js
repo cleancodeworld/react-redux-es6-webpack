@@ -42,14 +42,14 @@ export default class PageForm extends Component {
             <Field name="title" component={title =>
               <div className="form-group">
                 <label>Title</label>
-                <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
+                <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
               </div>
             }/>
             <Field name="html" component={html =>
               <div className="form-group">
                 <label>Content</label>
-                <TinyMCE {...html}/>
+                <TinyMCE {...html.input}/>
               </div>
             }/>
             <div className="text-right">

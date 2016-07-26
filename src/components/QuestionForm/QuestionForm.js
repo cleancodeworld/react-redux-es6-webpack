@@ -44,12 +44,12 @@ export default class QuestionForm extends Component {
                 <Field name="title" component={title =>
                     <div className="input-group mb-20">
                       <span className="input-group-addon">Title</span>
-                      <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
+                      <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
                       {title.touched && title.error && <span className="validation-error-label pull-left">{title.error}</span>}
                     </div>}/>
                 <Field name="content" component={content =>
                   <div className="form-group">
-                    <TinyMCE {...content}/>
+                    <TinyMCE {...content.input}/>
                       {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
                   </div>}/>
 
@@ -58,7 +58,7 @@ export default class QuestionForm extends Component {
                   <Field name="notifyAnswerByEmail" component={(notifyAnswerByEmail) =>
                   <div className="checkbox">
                     <label>
-                      <input type="checkbox" {...notifyAnswerByEmail} />
+                      <input type="checkbox" {...notifyAnswerByEmail.input} />
                       <strong>Send me new responses to my posts via email</strong>
                       <a href="#">(settings)</a>
                     </label>

@@ -79,7 +79,7 @@ export default class CourseAccountingForm extends Component {
                   </div>
                   <Field name="paid" component={field =>
                     <label>
-                      <Switch state={field.value} {...field}
+                      <Switch state={field.value} {...field.input}
                       onChange={(val)=> field.onChange(val)}
                       onText="Paid" offText="Free" labelText="&nbsp;"/>
                     </label>
@@ -93,7 +93,7 @@ export default class CourseAccountingForm extends Component {
                     <Field name="currency" component={field =>
                         <div>
                           <Select
-                            {...field}
+                            {...field.input}
                             onBlur={() => {}}
                             onBlurResetsInput={false}
                             searchable={false}
@@ -114,7 +114,7 @@ export default class CourseAccountingForm extends Component {
                     ? <Field name="price" error={currency} component={price =>
                       <div>
                         <Select
-                          {...price}
+                          {...price.input}
                           onBlur={() => {}}
                           onBlurResetsInput={false}
                           searchable={false}

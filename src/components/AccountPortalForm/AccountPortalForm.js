@@ -55,7 +55,7 @@ export default class AccountPortalForm extends Component {
                     <Field name="username"
                            component={username =>
                       <div>
-                        <input type="text" className="form-control" {...username}
+                        <input type="text" className="form-control" {...username.input}
                         onChange={event=> {
                           username.onChange(event);
                           event.persist();
@@ -74,7 +74,7 @@ export default class AccountPortalForm extends Component {
                       <div className="form-group has-feedback">
                         <Field name="firstName" component={firstName =>
                           <div>
-                            <input type="text" className="form-control" {...firstName} placeholder="First name"/>
+                            <input type="text" className="form-control" {...firstName.input} placeholder="First name"/>
                             {firstName.touched && firstName.error && <label className="validation-error-label">{firstName.error}</label>}
                           </div>
                         }/>
@@ -88,7 +88,7 @@ export default class AccountPortalForm extends Component {
                       <div className="form-group has-feedback">
                         <Field name="lastName" component={lastName =>
                           <div>
-                            <input type="text" className="form-control" {...lastName} placeholder="Last name"/>
+                            <input type="text" className="form-control" {...lastName.input} placeholder="Last name"/>
                             {lastName.touched && lastName.error && <label className="validation-error-label">{lastName.error}</label>}
                           </div>
                         }/>
@@ -104,7 +104,7 @@ export default class AccountPortalForm extends Component {
                       <div className="form-group has-feedback">
                         <Field name="password" confirmPasswordUpdated={this.state.confirmPasswordUpdated} component={password =>
                           <div>
-                            <input type="password" className="form-control" {...password} onChange={(event)=>{
+                            <input type="password" className="form-control" {...password.input} onChange={(event)=>{
                               password.onChange(event);
                               this.setState({passwordUpdated: Math.random()});
                             }} placeholder="Create password"/>
@@ -120,7 +120,7 @@ export default class AccountPortalForm extends Component {
                       <div className="form-group has-feedback">
                         <Field name="confirmPassword" passwordUpdated={this.state.passwordUpdated} component={confirmPassword =>
                           <div>
-                            <input type="password" className="form-control" {...confirmPassword} onChange={(event)=>{
+                            <input type="password" className="form-control" {...confirmPassword.input} onChange={(event)=>{
                               confirmPassword.onChange(event);
                               this.setState({confirmPasswordUpdated: Math.random()});
                             }}
@@ -140,7 +140,7 @@ export default class AccountPortalForm extends Component {
                       <div className="form-group has-feedback">
                         <Field name="email" component={email =>
                           <div>
-                            <input type="text" className="form-control" {...email} placeholder="Email"/>
+                            <input type="text" className="form-control" {...email.input} placeholder="Email"/>
                             {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
                           </div>
                         }/>
@@ -153,7 +153,7 @@ export default class AccountPortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="portalName" component={portalName =>
                           <div>
-                            <input type="text" className="form-control" {...portalName}
+                            <input type="text" className="form-control" {...portalName.input}
                              onChange={event=> {
                                portalName.onChange(event);
                                event.persist();
@@ -172,7 +172,7 @@ export default class AccountPortalForm extends Component {
                       <label>
                         <Field name="isPersonal" component={isPersonal =>
                           <div>
-                            <input type="checkbox" className="styled" {...isPersonal} placeholder="Personal Portal"/>
+                            <input type="checkbox" className="styled" {...isPersonal.input} placeholder="Personal Portal"/>
                             <a href="#">Personal Portal</a>
                           </div>
                         }/>
@@ -183,7 +183,7 @@ export default class AccountPortalForm extends Component {
                       <label>
                         <Field name="isPublic" component={isPublic =>
                           <div>
-                            <input type="checkbox" className="styled" {...isPublic} placeholder="Last name"/>
+                            <input type="checkbox" className="styled" {...isPublic.input} placeholder="Last name"/>
                             Publically available
                           </div>
                         }/>
@@ -194,7 +194,7 @@ export default class AccountPortalForm extends Component {
                       <label>
                         <Field name="isAccepted" component={isAccepted =>
                           <div>
-                            <input type="checkbox" className="styled" {...isAccepted} placeholder="terms of service"/>
+                            <input type="checkbox" className="styled" {...isAccepted.input} placeholder="terms of service"/>
                                Accept <a href="#">terms of service</a>
                                {isAccepted.touched && isAccepted.error && <span className="validation-error-label">{isAccepted.error}</span>}
                           </div>
