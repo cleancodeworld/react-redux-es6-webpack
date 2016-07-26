@@ -79,7 +79,7 @@ export default class CourseAccountingForm extends Component {
                   </div>
                   <Field name="paid" component={field =>
                     <label>
-                      <Switch state={field.value} {...field.input}
+                      <Switch state={field.input.value} {...field.input}
                       onChange={(val)=> field.onChange(val)}
                       onText="Paid" offText="Free" labelText="&nbsp;"/>
                     </label>

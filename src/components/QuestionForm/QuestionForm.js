@@ -70,7 +70,7 @@ export default class QuestionForm extends Component {
                       <span className="input-group-addon">Tags</span>
                         <ReactTags
                         suggestions={suggestions}
-                        tags={tags.value}
+                        tags={tags.input.value}
                         labelField={'name'}
                         handleAddition={(tag)=>{
                           const value = tags ? tags.value : [];
