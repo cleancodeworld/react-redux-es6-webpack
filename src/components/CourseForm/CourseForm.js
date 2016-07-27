@@ -158,10 +158,9 @@ export default class CourseForm extends Component {
                   onBlurResetsInput={false}
                   value={category.input.value}
                   allowCreate
-                  searchable={false}
                   multi
                   newOptionCreator={input => ({
-                    value: input.replace(' ', '-'),
+                    value: input.replace(/ /g, '-'),
                     label: input
                   })}
                   options={order.map(slug => ({value: entities.getIn([slug, 'slug']) || 'slug', label: entities.getIn([slug, 'category'])})).toJS()}/>
