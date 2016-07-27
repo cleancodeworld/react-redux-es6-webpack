@@ -51,7 +51,7 @@ export default class PortalLayout extends Component {
             </Navbar.Brand>
             <Navbar.Toggle/>
           </Navbar.Header>
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar>
               <LinkContainer to="/courses">
                 <NavItem eventKey={2}>Courses</NavItem>

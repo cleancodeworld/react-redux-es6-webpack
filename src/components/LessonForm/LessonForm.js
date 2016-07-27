@@ -69,14 +69,14 @@ export default class LessonForm extends Component {
             <Field name="title" component={title =>
               <div className="form-group">
                 <label>Title</label>
-                <input type="text" name="title" className="form-control" {...title} placeholder="Enter Title ..." />
+                <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
                 {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
               </div>
             }/>
             <Field name="videoUrl" component={videoUrl =>
               <div className="form-group">
                 <label className="display-block">Video url</label>
-                <input type="text" name="videoUrl" className="form-control" {...videoUrl} placeholder="Enter Video Url ..." />
+                <input type="text" name="videoUrl" className="form-control" {...videoUrl.input} placeholder="Enter Video Url ..." />
                 {videoUrl.touched && videoUrl.error && <span className="validation-error-label">{videoUrl.error}</span>}
               </div>
             }/>
@@ -86,7 +86,7 @@ export default class LessonForm extends Component {
                   <label>Upload thumbnail</label>
                 </div>
                 <Dropzone
-                        {...thumbnail}
+                        {...thumbnail.input}
                         multiple={false} accept="image/*"
                         accept="image/*" className="action btn bg-warning upload-btn"
                         multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
@@ -94,19 +94,19 @@ export default class LessonForm extends Component {
                 </Dropzone>
                 {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
                 {this.state.isUploadingImage && <span style={{marginLeft: 5}} className="label bg-blue">Uploading</span>}
-                {!thumbnail.error && thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
+                {!thumbnail.error && thumbnail.input.value && <img src={thumbnail.input.value} width="50" height="50"></img>}
               </div>
             }/>
             <Field name="description" component={description =>
               <div className="form-group">
                 <label className="display-block">Short Description</label>
-                <textarea cols="5" rows="5" className="form-control" placeholder="Enter text ..." {...description}></textarea>
+                <textarea cols="5" rows="5" className="form-control" placeholder="Enter text ..." {...description.input}></textarea>
               </div>
             }/>
             <Field name="content" component={content =>
               <div className="form-group">
                 <label>Content</label>
-                <TextEditor {...content}/>
+                <TextEditor {...content.input}/>
                 {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
               </div>
             }/>

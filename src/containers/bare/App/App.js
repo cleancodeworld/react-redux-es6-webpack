@@ -41,7 +41,7 @@ export default class App extends Component {
               </Navbar.Brand>
               <Navbar.Toggle/>
             </Navbar.Header>
-            <Navbar.Collapse eventKey={0}>
+            <Navbar.Collapse>
               <Nav navbar>
                 {!this.context.user
                   ? <LinkContainer to="/account-portal-create">

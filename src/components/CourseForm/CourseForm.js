@@ -84,7 +84,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="name" component={name =>
                   <div>
-                    <input type="text" className="form-control" placeholder="Title" {...name} />
+                    <input type="text" className="form-control" placeholder="Title" {...name.input} />
                     {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
                   </div>
                 }/>
@@ -97,7 +97,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="subtitle" component={subtitle =>
                   <div>
-                    <input type="text" className="form-control" placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle} />
+                    <input type="text" className="form-control" placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle.input} />
                     {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
                   </div>
                 }/>
@@ -112,15 +112,15 @@ export default class CourseForm extends Component {
                 <Field name="thumbnail" component={thumbnail =>
                   <div>
                     <Dropzone multiple={false} accept="image/*"
-                              {...thumbnail}
+                              {...thumbnail.input}
                               accept="image/*" className="action btn bg-warning upload-btn"
                               disabled={this.state.isUploadingImage}
                               disableClick={this.state.isUploadingImage}
-                              multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail)}>
+                              multiple={false} onDrop={(files)=>this.onDrop(files, thumbnail.input)}>
                       <div> {this.state.isUploadingImage ? 'Uploading... please wait' : 'Drop thumbnail here, or click to select file to upload.'} </div>
                     </Dropzone>
                     {thumbnail.error && <label className="validation-error-label">{thumbnail.error}</label>}
-                    {!thumbnail.error && thumbnail.value && <img src={thumbnail.value} width="50" height="50"></img>}
+                    {!thumbnail.error && thumbnail.input.value && <img src={thumbnail.input.value} width="50" height="50"></img>}
                   </div>
                 }/>
               </div>
@@ -134,10 +134,10 @@ export default class CourseForm extends Component {
                 <Field name="language" component={language =>
                 <div>
                 <Select
-                  {...language}
+                  {...language.input}
                   onBlur={() => {}}
                   onBlurResetsInput={false}
-                  value={language.value}
+                  value={language.input.value}
                   searchable={false}
                   options={['English', 'Spanish', 'Dutch', 'French'].map( value => ({ value: value, label: value}))}
                   />
@@ -153,15 +153,14 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="category" component={category =><div>
                 <Select
-                  {...category}
+                  {...category.input}
                   onBlur={() => {}}
                   onBlurResetsInput={false}
-                  value={category.value}
+                  value={category.input.value}
                   allowCreate
-                  searchable={false}
                   multi
                   newOptionCreator={input => ({
-                    value: input.replace(' ', '-'),
+                    value: input.replace(/ /g, '-'),
                     label: input
                   })}
                   options={order.map(slug => ({value: entities.getIn([slug, 'slug']) || 'slug', label: entities.getIn([slug, 'category'])})).toJS()}/>
@@ -180,7 +179,7 @@ export default class CourseForm extends Component {
                   <div className="choice">
                     <Field
                       name="level"
-                      component={level=> <span className={classnames({checked: level.value === 'beginner'})}><input type="radio" {...level} value="beginner" className="styled" /></span>}
+                      component={level=> <span className={classnames({checked: level.input.value === 'beginner'})}><input type="radio" {...level.input} value="beginner" className="styled" /></span>}
                     />
                   </div>
                   Beginner Level
@@ -190,7 +189,7 @@ export default class CourseForm extends Component {
                   <div className="choice">
                     <Field
                       name="level"
-                      component={level=> <span className={classnames({checked: level.value === 'intermediate'})}><input type="radio" {...level} value="intermediate" className="styled" /></span>}
+                      component={level=> <span className={classnames({checked: level.input.value === 'intermediate'})}><input type="radio" {...level.input} value="intermediate" className="styled" /></span>}
                     />
                   </div>
                   Intermediate Level
@@ -200,7 +199,7 @@ export default class CourseForm extends Component {
                   <div className="choice">
                     <Field
                       name="level"
-                      component={level=> <span className={classnames({checked: level.value === 'expert'})}><input type="radio" {...level} value="expert" className="styled" /></span>}
+                      component={level=> <span className={classnames({checked: level.input.value === 'expert'})}><input type="radio" {...level.input} value="expert" className="styled" /></span>}
                     />
                   </div>
                   Expert Level
@@ -210,7 +209,7 @@ export default class CourseForm extends Component {
                   <div className="choice">
                     <Field
                       name="level"
-                      component={level=> <span className={classnames({checked: level.value === 'all'})}><input type="radio" {...level} value="all" className="styled" /></span>}
+                      component={level=> <span className={classnames({checked: level.input.value === 'all'})}><input type="radio" {...level.input} value="all" className="styled" /></span>}
                     />
                   </div>
                   All Levels
@@ -224,7 +223,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field
                   name="description"
-                  component={description=> <TextEditor {...description}/>}
+                  component={description=> <TextEditor {...description.input}/>}
                 />
               </div>
             </div>
@@ -235,7 +234,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field name="duration" component={duration =>
                   <div>
-                    <input type="text" className="form-control" placeholder="Duration in minutes (Numbers only)" {...duration} />
+                    <input type="text" className="form-control" placeholder="Duration in minutes (Numbers only)" {...duration.input} />
                     {duration.touched && duration.error && <label className="validation-error-label">{duration.error}</label>}
                   </div>
                 }/>

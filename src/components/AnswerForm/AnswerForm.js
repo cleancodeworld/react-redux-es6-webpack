@@ -46,7 +46,7 @@ export default class AnswerForm extends Component {
               <form onSubmit={handleSubmit} autoComplete="off">
                 <Field name="content" component={content =>
                   <div className="form-group">
-                    <TinyMCE {...content}/>
+                    <TinyMCE {...content.input}/>
                     {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
 
                   </div>}/>
