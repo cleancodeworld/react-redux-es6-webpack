@@ -44,7 +44,7 @@ export default class LoginForm extends Component {
             <div className="form-group has-feedback has-feedback-left">
               <Field name="email" component={email =>
                 <div>
-                  <input type="text" className="form-control" placeholder="Email" {...email} />
+                  <input type="text" className="form-control" placeholder="Email" {...email.input} />
                   <div className="form-control-feedback">
                     <i className="icon-user text-muted"></i>
                   </div>
@@ -56,7 +56,7 @@ export default class LoginForm extends Component {
             <div className="form-group has-feedback has-feedback-left">
               <Field name="password" component={password =>
                 <div>
-                  <input type="password" className="form-control" placeholder="Password" {...password} />
+                  <input type="password" className="form-control" placeholder="Password" {...password.input} />
                   <div className="form-control-feedback">
                     <i className="icon-lock2 text-muted"></i>
                   </div>
@@ -70,7 +70,7 @@ export default class LoginForm extends Component {
                 <Field name="remember" component={remember =>
                   <div className="col-sm-6">
                     <label className="checkbox-inline">
-                      <input type="checkbox" className="styled" {...remember} placeholder="Remember Me"/>
+                      <input type="checkbox" className="styled" {...remember.input} placeholder="Remember Me"/>
                       Remember Me
                     </label>
                   </div>

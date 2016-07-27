@@ -51,7 +51,7 @@ export default class CreatePortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="name" component={name =>
                       <div>
-                        <input type="text" className="form-control" {...name}
+                        <input type="text" className="form-control" {...name.input}
                         onChange={event=> {
                           name.onChange(event);
                           event.persist();
@@ -68,7 +68,7 @@ export default class CreatePortalForm extends Component {
                   <div className="form-group has-feedback">
                     <Field name="description" component={description =>
                       <div>
-                        <input type="text" className="form-control" {...description} onChange={event=>description.onBlur(event)} placeholder="Portal Description"/>
+                        <input type="text" className="form-control" {...description.input} onChange={event=>description.onBlur(event)} placeholder="Portal Description"/>
                         {description.touched && description.error && <span className="validation-error-label">{description.error}</span>}
                       </div>
                     }/>
@@ -81,7 +81,7 @@ export default class CreatePortalForm extends Component {
                       <label>
                         <Field name="type" component={type =>
                           <div>
-                            <input type="checkbox" className="styled" {...type} placeholder="Portal Type"/>
+                            <input type="checkbox" className="styled" {...type.input} placeholder="Portal Type"/>
                             <a href="#">Portal Type</a>
                           </div>
                         }/>
@@ -92,7 +92,7 @@ export default class CreatePortalForm extends Component {
                       <label>
                         <Field name="privacy" component={privacy =>
                           <div>
-                            <input type="checkbox" className="styled" {...privacy} placeholder="Publically available"/>
+                            <input type="checkbox" className="styled" {...privacy.input} placeholder="Publically available"/>
                             Publically available
                           </div>
                         }/>
@@ -103,7 +103,7 @@ export default class CreatePortalForm extends Component {
                       <label>
                         <Field name="isAccepted" component={isAccepted =>
                           <div>
-                            <input type="checkbox" className="styled" {...isAccepted} placeholder="terms of service"/>
+                            <input type="checkbox" className="styled" {...isAccepted.input} placeholder="terms of service"/>
                                Accept <a href="#">terms of service</a>
                                {isAccepted.touched && isAccepted.error && <span className="validation-error-label">{isAccepted.error}</span>}
                           </div>

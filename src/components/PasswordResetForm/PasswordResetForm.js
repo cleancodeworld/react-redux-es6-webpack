@@ -59,7 +59,7 @@ export default class PasswordForgetForm extends Component {
             <div className="form-group has-feedback">
               <Field name="password" component={password =>
                           <div>
-                            <input type="password" className="form-control" {...password} placeholder="Create password"/>
+                            <input type="password" className="form-control" {...password.input} placeholder="Create password"/>
                             {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
                           </div>
                         }/>
@@ -70,7 +70,7 @@ export default class PasswordForgetForm extends Component {
             <div className="form-group has-feedback">
               <Field name="confirmPassword" component={confirmPassword =>
                           <div>
-                            <input type="password" className="form-control" {...confirmPassword} placeholder="Repeat password"/>
+                            <input type="password" className="form-control" {...confirmPassword.input} placeholder="Repeat password"/>
                             {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
                           </div>
                         }/>
