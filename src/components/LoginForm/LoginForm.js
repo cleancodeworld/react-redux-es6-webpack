@@ -24,6 +24,35 @@ export default class LoginForm extends Component {
     return res;
   }
 
+  emailField(field) {
+    return ( <div>
+      <input type="text" className="form-control" placeholder="Email" {...field.input} />
+      <div className="form-control-feedback">
+        <i className="icon-user text-muted"></i>
+      </div>
+      {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+    </div>);
+  }
+
+  passwordField(field) {
+    return (<div>
+      <input type="password" className="form-control" placeholder="Password" {...field.input} />
+      <div className="form-control-feedback">
+        <i className="icon-lock2 text-muted"></i>
+      </div>
+      {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+    </div>);
+  }
+
+  rememberMeField(field) {
+    return ( <div className="col-sm-6">
+      <label className="checkbox-inline">
+        <input type="checkbox" className="styled" {...field.input} placeholder="Remember Me"/>
+        Remember Me
+      </label>
+    </div>);
+  }
+
   render() {
     const {
       handleSubmit,
@@ -42,40 +71,16 @@ export default class LoginForm extends Component {
             </div>
             {this.errorRender(error)}
             <div className="form-group has-feedback has-feedback-left">
-              <Field name="email" component={email =>
-                <div>
-                  <input type="text" className="form-control" placeholder="Email" {...email.input} />
-                  <div className="form-control-feedback">
-                    <i className="icon-user text-muted"></i>
-                  </div>
-                  {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
-                </div>
-              }/>
+              <Field name="email" component={this.emailField}/>
             </div>
 
             <div className="form-group has-feedback has-feedback-left">
-              <Field name="password" component={password =>
-                <div>
-                  <input type="password" className="form-control" placeholder="Password" {...password.input} />
-                  <div className="form-control-feedback">
-                    <i className="icon-lock2 text-muted"></i>
-                  </div>
-                  {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
-                </div>
-              }/>
+              <Field name="password" component={this.passwordField}/>
             </div>
 
             <div className="form-group login-options">
               <div className="row">
-                <Field name="remember" component={remember =>
-                  <div className="col-sm-6">
-                    <label className="checkbox-inline">
-                      <input type="checkbox" className="styled" {...remember.input} placeholder="Remember Me"/>
-                      Remember Me
-                    </label>
-                  </div>
-                }/>
-
+                <Field name="remember" component={this.rememberMeField}/>
                 <div className="col-sm-6 text-right">
                   <a href={`http://${config.mainDomain}/password/forget`}>Forgot password?</a>
                 </div>
@@ -88,7 +93,8 @@ export default class LoginForm extends Component {
             </div>
 
             <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-            <a href={`http://${config.mainDomain}/account-portal-create`} className="btn bg-slate btn-block content-group">Register</a>
+            <a href={`http://${config.mainDomain}/account-portal-create`}
+               className="btn bg-slate btn-block content-group">Register</a>
             <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
               href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
           </div>

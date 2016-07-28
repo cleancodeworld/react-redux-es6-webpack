@@ -11,7 +11,7 @@ import {withUserId, publicOnly} from 'hoc';
 export default class Login extends Component {
   static propTypes = {
 
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
     userLogin: PropTypes.func.isRequired,
     location: PropTypes.object,
   };
