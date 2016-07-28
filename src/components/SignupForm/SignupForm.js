@@ -5,7 +5,7 @@ import {Link} from 'react-router';  // eslint-disable-line
 import validate from './validate';
 import debounce from 'lodash/debounce';
 import config from '../../config';
-const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
+const debounceBlurField = debounce((field, event)=>field.input.onBlur(event), 500);
 
 @reduxForm({
   form: 'SignupForm',
@@ -20,7 +20,6 @@ export default class AccountPortalForm extends Component {
     error: PropTypes.string
   }
 
-  state = {}
 
   errorRender(error) {
     let res = <span/>;
@@ -103,13 +102,10 @@ export default class AccountPortalForm extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="password" confirmPasswordUpdated={this.state.confirmPasswordUpdated} component={password =>
+                <Field name="password" component={password =>
                   <div>
                     <input type="password" className="form-control" {...password.input}
-                      onChange={(event)=>{
-                        password.input.onChange(event);
-                        this.setState({passwordUpdated: Math.random()});
-                      }} placeholder="Create password"/>
+                     placeholder="Create password"/>
                     {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
                   </div>
                 }/>
@@ -120,13 +116,10 @@ export default class AccountPortalForm extends Component {
             </div>
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="confirmPassword" passwordUpdated={this.state.passwordUpdated} component={confirmPassword =>
+                <Field name="confirmPassword" component={confirmPassword =>
                   <div>
                     <input type="password" className="form-control" {...confirmPassword.input}
-                      onChange={(event)=>{
-                        confirmPassword.input.onChange(event);
-                        this.setState({confirmPasswordUpdated: Math.random()});
-                      }} placeholder="Repeat password"/>
+                      placeholder="Repeat password"/>
                     {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
                   </div>
                 }/>

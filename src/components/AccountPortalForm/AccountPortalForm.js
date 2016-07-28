@@ -4,7 +4,7 @@ import {reduxForm, Field} from 'redux-form';
 import {Link} from 'react-router';
 import validate from './validate';
 import debounce from 'lodash/debounce';
-const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
+const debounceBlurField = debounce((field, event)=>field.input.onBlur(event), 500);
 
 @reduxForm({
   form: 'AccountPortalForm',
@@ -19,8 +19,6 @@ export default class AccountPortalForm extends Component {
     submitting: PropTypes.bool,
     error: PropTypes.string
   }
-
-  state = {}
 
   errorRender(error) {
     let res = <span/>;
@@ -102,12 +100,9 @@ export default class AccountPortalForm extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <Field name="password" confirmPasswordUpdated={this.state.confirmPasswordUpdated} component={password =>
+                        <Field name="password" component={password =>
                           <div>
-                            <input type="password" className="form-control" {...password.input} onChange={(event)=>{
-                              password.input.onChange(event);
-                              this.setState({passwordUpdated: Math.random()});
-                            }} placeholder="Create password"/>
+                            <input type="password" className="form-control" {...password.input} placeholder="Create password"/>
                             {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
                           </div>
                         }/>
@@ -118,12 +113,9 @@ export default class AccountPortalForm extends Component {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group has-feedback">
-                        <Field name="confirmPassword" passwordUpdated={this.state.passwordUpdated} component={confirmPassword =>
+                        <Field name="confirmPassword" component={confirmPassword =>
                           <div>
-                            <input type="password" className="form-control" {...confirmPassword.input} onChange={(event)=>{
-                              confirmPassword.input.onChange(event);
-                              this.setState({confirmPasswordUpdated: Math.random()});
-                            }}
+                            <input type="password" className="form-control" {...confirmPassword.input}
                             placeholder="Repeat password"/>
                             {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
                           </div>
@@ -203,7 +195,8 @@ export default class AccountPortalForm extends Component {
                     </div>
                   </div>
                   <div>
-                    <Link to="/login" className="btn btn-link account-create-login-link"><i className="icon-arrow-left13 position-left"></i>
+                    <Link to="/login" className="btn btn-link account-create-login-link"><i
+                      className="icon-arrow-left13 position-left"></i>
                       Already a Knexpert? click to login
                     </Link>
                     <button type="submit" className="btn bg-teal-400 btn-labeled btn-labeled-right ml-10 pull-right">

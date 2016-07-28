@@ -3,7 +3,7 @@ import {reduxForm, Field} from 'redux-form';
 import asyncValidate from './asyncValidate';
 import validate from './validate';
 import debounce from 'lodash/debounce';
-const debounceBlurField = debounce((field, event)=>field.onBlur(event), 500);
+const debounceBlurField = debounce((field, event)=>field.input.onBlur(event), 500);
 
 @reduxForm({
   form: 'CreatePortalForm',
