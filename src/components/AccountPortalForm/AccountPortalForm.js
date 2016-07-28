@@ -57,7 +57,7 @@ export default class AccountPortalForm extends Component {
                       <div>
                         <input type="text" className="form-control" {...username.input}
                         onChange={event=> {
-                          username.onChange(event);
+                          username.input.onChange(event);
                           event.persist();
                           debounceBlurField(username, event);
                         }} placeholder="Choose username"/>
@@ -105,7 +105,7 @@ export default class AccountPortalForm extends Component {
                         <Field name="password" confirmPasswordUpdated={this.state.confirmPasswordUpdated} component={password =>
                           <div>
                             <input type="password" className="form-control" {...password.input} onChange={(event)=>{
-                              password.onChange(event);
+                              password.input.onChange(event);
                               this.setState({passwordUpdated: Math.random()});
                             }} placeholder="Create password"/>
                             {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
@@ -121,7 +121,7 @@ export default class AccountPortalForm extends Component {
                         <Field name="confirmPassword" passwordUpdated={this.state.passwordUpdated} component={confirmPassword =>
                           <div>
                             <input type="password" className="form-control" {...confirmPassword.input} onChange={(event)=>{
-                              confirmPassword.onChange(event);
+                              confirmPassword.input.onChange(event);
                               this.setState({confirmPasswordUpdated: Math.random()});
                             }}
                             placeholder="Repeat password"/>
@@ -155,7 +155,7 @@ export default class AccountPortalForm extends Component {
                           <div>
                             <input type="text" className="form-control" {...portalName.input}
                              onChange={event=> {
-                               portalName.onChange(event);
+                               portalName.input.onChange(event);
                                event.persist();
                                debounceBlurField(portalName, event);
                              }}

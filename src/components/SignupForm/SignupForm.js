@@ -61,7 +61,7 @@ export default class AccountPortalForm extends Component {
               <div>
                 <input type="text" className="form-control" {...username.input}
                 onChange={event=> {
-                  username.onChange(event);
+                  username.input.onChange(event);
                   event.persist();
                   debounceBlurField(username, event);
                 }} placeholder="Choose username"/>
@@ -107,7 +107,7 @@ export default class AccountPortalForm extends Component {
                   <div>
                     <input type="password" className="form-control" {...password.input}
                       onChange={(event)=>{
-                        password.onChange(event);
+                        password.input.onChange(event);
                         this.setState({passwordUpdated: Math.random()});
                       }} placeholder="Create password"/>
                     {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
@@ -124,7 +124,7 @@ export default class AccountPortalForm extends Component {
                   <div>
                     <input type="password" className="form-control" {...confirmPassword.input}
                       onChange={(event)=>{
-                        confirmPassword.onChange(event);
+                        confirmPassword.input.onChange(event);
                         this.setState({confirmPasswordUpdated: Math.random()});
                       }} placeholder="Repeat password"/>
                     {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}

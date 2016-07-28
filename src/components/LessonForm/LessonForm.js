@@ -36,7 +36,7 @@ export default class LessonForm extends Component {
             alert(JSON.stringify(err));
           }
         } else {
-          field.onChange(body.url);
+          field.input.onChange(body.url);
         }
       });
     }

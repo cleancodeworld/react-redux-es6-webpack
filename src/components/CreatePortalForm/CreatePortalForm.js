@@ -53,7 +53,7 @@ export default class CreatePortalForm extends Component {
                       <div>
                         <input type="text" className="form-control" {...name.input}
                         onChange={event=> {
-                          name.onChange(event);
+                          name.input.onChange(event);
                           event.persist();
                           debounceBlurField(name, event);
                         }}
