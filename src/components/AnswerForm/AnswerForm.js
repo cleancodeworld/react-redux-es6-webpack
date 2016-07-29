@@ -26,6 +26,12 @@ export default class AnswerForm extends Component {
     return res;
   }
 
+  contentField = content =>
+    <div className="form-group">
+      <TinyMCE {...content.input}/>
+      {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -44,12 +50,7 @@ export default class AnswerForm extends Component {
             <div className="col-md-9 col-sm-8">
               {this.errorRender(error)}
               <form onSubmit={handleSubmit} autoComplete="off">
-                <Field name="content" component={content =>
-                  <div className="form-group">
-                    <TinyMCE {...content.input}/>
-                    {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
-
-                  </div>}/>
+                <Field name="content" component={this.contentField}/>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple">
                     POST YOUR ANSWER

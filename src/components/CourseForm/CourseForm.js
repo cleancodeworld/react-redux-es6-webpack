@@ -60,6 +60,26 @@ export default class CourseForm extends Component {
     return res;
   }
 
+  nameField = name =>
+    <div>
+      <input type="text" className="form-control" placeholder="Title" {...name.input} />
+      {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
+    </div>
+
+  subtitleField = subtitle => <div>
+    <input type="text" className="form-control"
+           placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle.input} />
+    {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
+  </div>
+
+  descriptionField = description=> <TextEditor {...description.input}/>
+
+  durationField = duration =>
+    <div>
+      <input type="text" className="form-control"
+             placeholder="Duration in minutes (Numbers only)" {...duration.input} />
+      {duration.touched && duration.error && <label className="validation-error-label">{duration.error}</label>}
+    </div>
 
   render() {
     const {
@@ -82,12 +102,7 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Title
                 </div>
-                <Field name="name" component={name =>
-                  <div>
-                    <input type="text" className="form-control" placeholder="Title" {...name.input} />
-                    {name.touched && name.error && <label className="validation-error-label">{name.error}</label>}
-                  </div>
-                }/>
+                <Field name="name" component={this.nameField}/>
               </div>
             </div>
             <div className="col-md-12">
@@ -95,13 +110,9 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Subtitle
                 </div>
-                <Field name="subtitle" component={subtitle =>
-                  <div>
-                    <input type="text" className="form-control" placeholder="e.g. A-Z guide to creating amazing images and clips using the newest version." {...subtitle.input} />
-                    {subtitle.touched && subtitle.error && <label className="validation-error-label">{subtitle.error}</label>}
-                  </div>
-                }/>
-                <a href={'//' + config.mainDomain + '/page/Course-Title-Quality-Standards/u2qrZT'}>Learn more about title, subtitle</a>
+                <Field name="subtitle" component={this.subtitleField}/>
+                <a href={'//' + config.mainDomain + '/page/Course-Title-Quality-Standards/u2qrZT'}>Learn more about
+                  title, subtitle</a>
               </div>
             </div>
             <div className="col-md-12">
@@ -223,7 +234,7 @@ export default class CourseForm extends Component {
                 </div>
                 <Field
                   name="description"
-                  component={description=> <TextEditor {...description.input}/>}
+                  component={this.descriptionField}
                 />
               </div>
             </div>
@@ -232,12 +243,7 @@ export default class CourseForm extends Component {
                 <div className="control-label">
                   Course Duration
                 </div>
-                <Field name="duration" component={duration =>
-                  <div>
-                    <input type="text" className="form-control" placeholder="Duration in minutes (Numbers only)" {...duration.input} />
-                    {duration.touched && duration.error && <label className="validation-error-label">{duration.error}</label>}
-                  </div>
-                }/>
+                <Field name="duration" component={this.durationField}/>
               </div>
             </div>
             <div className="col-md-12 text-right">

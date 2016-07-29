@@ -37,6 +37,19 @@ export default class PasswordForgetForm extends Component {
     </div>);
   }
 
+  passwordField = password =>
+    <div>
+      <input type="password" className="form-control" {...password.input} placeholder="Create password"/>
+      {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
+    </div>
+
+  confirmPasswordField = confirmPassword =>
+    <div>
+      <input type="password" className="form-control" {...confirmPassword.input} placeholder="Repeat password"/>
+      {confirmPassword.touched && confirmPassword.error &&
+      <label className="validation-error-label">{confirmPassword.error}</label>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -57,23 +70,13 @@ export default class PasswordForgetForm extends Component {
             </div>
             {this.serverError(error)}
             <div className="form-group has-feedback">
-              <Field name="password" component={password =>
-                          <div>
-                            <input type="password" className="form-control" {...password.input} placeholder="Create password"/>
-                            {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
-                          </div>
-                        }/>
+              <Field name="password" component={this.passwordField}/>
               <div className="form-control-feedback">
                 <i className="icon-user-lock text-muted"></i>
               </div>
             </div>
             <div className="form-group has-feedback">
-              <Field name="confirmPassword" component={confirmPassword =>
-                          <div>
-                            <input type="password" className="form-control" {...confirmPassword.input} placeholder="Repeat password"/>
-                            {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
-                          </div>
-                        }/>
+              <Field name="confirmPassword" component={this.confirmPasswordField}/>
               <div className="form-control-feedback">
                 <i className="icon-user-lock text-muted"></i>
               </div>

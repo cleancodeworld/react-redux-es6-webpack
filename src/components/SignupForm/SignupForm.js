@@ -38,6 +38,57 @@ export default class AccountPortalForm extends Component {
     return `http://${config.mainDomain}:${config.port}/login`;
   }
 
+  usernameField = (username)=>
+    <div>
+      <input type="text" className="form-control" {...username.input}
+             onChange={event=> {
+               username.input.onChange(event);
+               event.persist();
+               debounceBlurField(username, event);
+             }} placeholder="Choose username"/>
+      {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
+    </div>
+
+  firstNameField = firstName =>
+    <div>
+      <input type="text" className="form-control" {...firstName.input} placeholder="First name"/>
+      {firstName.touched && firstName.error && <label className="validation-error-label">{firstName.error}</label>}
+    </div>
+
+  lastNameField = lastName =>
+    <div>
+      <input type="text" className="form-control" {...lastName.input} placeholder="Last name"/>
+      {lastName.touched && lastName.error && <label className="validation-error-label">{lastName.error}</label>}
+    </div>
+
+  passwordField = password =>
+    <div>
+      <input type="password" className="form-control" {...password.input}
+             placeholder="Create password"/>
+      {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
+    </div>
+
+  confirmPasswordField = confirmPassword =>
+    <div>
+      <input type="password" className="form-control" {...confirmPassword.input}
+             placeholder="Repeat password"/>
+      {confirmPassword.touched && confirmPassword.error &&
+      <label className="validation-error-label">{confirmPassword.error}</label>}
+    </div>
+
+  emailField = email =>
+    <div>
+      <input type="text" className="form-control" {...email.input} placeholder="Email"/>
+      {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
+    </div>
+
+  isAcceptedField = isAccepted =>
+    <div>
+      <input type="checkbox" className="styled" {...isAccepted.input} placeholder="terms of service"/>
+      Accept <a href="#">terms of service</a>
+      {isAccepted.touched && isAccepted.error && <span className="validation-error-label">{isAccepted.error}</span>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -55,18 +106,7 @@ export default class AccountPortalForm extends Component {
           </div>
           {this.errorRender(error)}
           <div className="form-group has-feedback">
-            <Field name="username"
-                   component={username =>
-              <div>
-                <input type="text" className="form-control" {...username.input}
-                onChange={event=> {
-                  username.input.onChange(event);
-                  event.persist();
-                  debounceBlurField(username, event);
-                }} placeholder="Choose username"/>
-                {username.touched && username.error && <label className="validation-error-label">{username.error}</label>}
-              </div>
-              }/>
+            <Field name="username" component={this.usernameField}/>
             <div className="form-control-feedback">
               <i className="icon-user-plus text-muted"></i>
             </div>
@@ -74,12 +114,7 @@ export default class AccountPortalForm extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="firstName" component={firstName =>
-                  <div>
-                    <input type="text" className="form-control" {...firstName.input} placeholder="First name"/>
-                    {firstName.touched && firstName.error && <label className="validation-error-label">{firstName.error}</label>}
-                  </div>
-                }/>
+                <Field name="firstName" component={this.firstNameField}/>
                 <div className="form-control-feedback">
                   <i className="icon-user-check text-muted"></i>
                 </div>
@@ -87,12 +122,7 @@ export default class AccountPortalForm extends Component {
             </div>
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="lastName" component={lastName =>
-                  <div>
-                    <input type="text" className="form-control" {...lastName.input} placeholder="Last name"/>
-                    {lastName.touched && lastName.error && <label className="validation-error-label">{lastName.error}</label>}
-                  </div>
-                }/>
+                <Field name="lastName" component={this.lastNameField}/>
                 <div className="form-control-feedback">
                   <i className="icon-user-check text-muted"></i>
                 </div>
@@ -102,13 +132,7 @@ export default class AccountPortalForm extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="password" component={password =>
-                  <div>
-                    <input type="password" className="form-control" {...password.input}
-                     placeholder="Create password"/>
-                    {password.touched && password.error && <label className="validation-error-label">{password.error}</label>}
-                  </div>
-                }/>
+                <Field name="password" component={this.passwordField}/>
                 <div className="form-control-feedback">
                   <i className="icon-user-lock text-muted"></i>
                 </div>
@@ -116,13 +140,7 @@ export default class AccountPortalForm extends Component {
             </div>
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="confirmPassword" component={confirmPassword =>
-                  <div>
-                    <input type="password" className="form-control" {...confirmPassword.input}
-                      placeholder="Repeat password"/>
-                    {confirmPassword.touched && confirmPassword.error && <label className="validation-error-label">{confirmPassword.error}</label>}
-                  </div>
-                }/>
+                <Field name="confirmPassword" component={this.confirmPasswordField}/>
                 <div className="form-control-feedback">
                   <i className="icon-user-lock text-muted"></i>
                 </div>
@@ -132,12 +150,7 @@ export default class AccountPortalForm extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group has-feedback">
-                <Field name="email" component={email =>
-                  <div>
-                    <input type="text" className="form-control" {...email.input} placeholder="Email"/>
-                    {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
-                  </div>
-                }/>
+                <Field name="email" component={this.emailField}/>
                 <div className="form-control-feedback">
                   <i className="icon-mention text-muted"></i>
                 </div>
@@ -146,13 +159,7 @@ export default class AccountPortalForm extends Component {
           </div>
           <div className="checkbox">
             <label>
-              <Field name="isAccepted" component={isAccepted =>
-                <div>
-                  <input type="checkbox" className="styled" {...isAccepted.input} placeholder="terms of service"/>
-                     Accept <a href="#">terms of service</a>
-                     {isAccepted.touched && isAccepted.error && <span className="validation-error-label">{isAccepted.error}</span>}
-                </div>
-              }/>
+              <Field name="isAccepted" component={this.isAcceptedField}/>
             </label>
           </div>
           <div className="clearfix">

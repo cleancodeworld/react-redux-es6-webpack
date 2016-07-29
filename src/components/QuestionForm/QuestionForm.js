@@ -26,6 +26,26 @@ export default class QuestionForm extends Component {
     return res;
   }
 
+  titleField = title =>
+    <div className="input-group mb-20">
+      <span className="input-group-addon">Title</span>
+      <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..."/>
+      {title.touched && title.error && <span className="validation-error-label pull-left">{title.error}</span>}
+    </div>
+  contentField = content =>
+    <div className="form-group">
+      <TinyMCE {...content.input}/>
+      {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
+    </div>
+  notifyAnswerByEmailField = notifyAnswerByEmail =>
+    <div className="checkbox">
+      <label>
+        <input type="checkbox" {...notifyAnswerByEmail.input} />
+        <strong>Send me new responses to my posts via email</strong>
+        <a href="#">(settings)</a>
+      </label>
+    </div>
+
   render() {
     const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
     const {
@@ -41,29 +61,12 @@ export default class QuestionForm extends Component {
             <div className="col-md-9 col-sm-8">
               {this.errorRender(error)}
               <form onSubmit={handleSubmit} autoComplete="off">
-                <Field name="title" component={title =>
-                    <div className="input-group mb-20">
-                      <span className="input-group-addon">Title</span>
-                      <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
-                      {title.touched && title.error && <span className="validation-error-label pull-left">{title.error}</span>}
-                    </div>}/>
-                <Field name="content" component={content =>
-                  <div className="form-group">
-                    <TinyMCE {...content.input}/>
-                      {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
-                  </div>}/>
+                <Field name="title" component={this.titleField}/>
+                <Field name="content" component={this.contentField}/>
 
                 <div className="input-group mt-20 mb-20">
 
-                  <Field name="notifyAnswerByEmail" component={(notifyAnswerByEmail) =>
-                  <div className="checkbox">
-                    <label>
-                      <input type="checkbox" {...notifyAnswerByEmail.input} />
-                      <strong>Send me new responses to my posts via email</strong>
-                      <a href="#">(settings)</a>
-                    </label>
-                  </div>}
-                  />
+                  <Field name="notifyAnswerByEmail" component={this.notifyAnswerByEmailField}/>
                   <Field name="tags" component={(tags) =>
                     <div className="input-group mb-20">
                       <div className="input-group">
@@ -96,7 +99,8 @@ export default class QuestionForm extends Component {
                     </div>}/>
                 </div>
                 <div>
-                  <button type="submit" disabled={submitting} className="btn btn-primary legitRipple" style={{ marginBottom: '15px' }}>
+                  <button type="submit" disabled={submitting} className="btn btn-primary legitRipple"
+                          style={{ marginBottom: '15px' }}>
                     POST YOUR QUESTION
                   </button>
                 </div>

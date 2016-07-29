@@ -25,6 +25,19 @@ export default class PageForm extends Component {
     return res;
   }
 
+  htmlField = html =>
+    <div className="form-group">
+      <label>Content</label>
+      <TinyMCE {...html.input}/>
+    </div>
+
+  titleField = title =>
+    <div className="form-group">
+      <label>Title</label>
+      <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..."/>
+      {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -34,23 +47,13 @@ export default class PageForm extends Component {
     return (
       <div className="panel panel-flat">
         <div className="panel-heading">
-          <h6 className="panel-t itle">Page Detail</h6>
+          <h6 className="panel-title">Page Detail</h6>
         </div>
         <div className="panel-body">
           {this.errorRender(error)}
           <form onSubmit={handleSubmit} autoComplete="off">
-            <Field name="title" component={title =>
-              <div className="form-group">
-                <label>Title</label>
-                <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
-                {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
-              </div>
-            }/>
-            <Field name="html" component={html =>
-              <div className="form-group">
-                <label>Content</label>
-                <TinyMCE {...html.input}/>
-              </div>
+            <Field name="title" component={this.titleField}/>
+            <Field name="html" component={this.htmlField
             }/>
             <div className="text-right">
               <button type="submit" disabled={submitting} className="btn btn-primary">

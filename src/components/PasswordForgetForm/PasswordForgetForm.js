@@ -37,6 +37,15 @@ export default class PasswordForgetForm extends Component {
     </div>);
   }
 
+  emailField = email =>
+    <div>
+      <input type="text" className="form-control" placeholder="Email" {...email.input} />
+      <div className="form-control-feedback">
+        <i className="icon-mail5 text-muted"></i>
+      </div>
+      {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -57,15 +66,7 @@ export default class PasswordForgetForm extends Component {
             </div>
             {this.serverError(error)}
             <div className="form-group has-feedback">
-              <Field name="email" component={email =>
-                <div>
-                  <input type="text" className="form-control" placeholder="Email" {...email.input} />
-                  <div className="form-control-feedback">
-                  	<i className="icon-mail5 text-muted"></i>
-                  </div>
-                  {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
-                </div>
-              }/>
+              <Field name="email" component={this.emailField}/>
             </div>
             <div className="form-group">
               <button type="submit" disabled={submitting} className="btn bg-blue btn-block">Reset password<i

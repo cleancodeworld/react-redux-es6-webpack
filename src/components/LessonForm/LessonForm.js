@@ -52,6 +52,33 @@ export default class LessonForm extends Component {
     return res;
   }
 
+  titleField = title =>
+    <div className="form-group">
+      <label>Title</label>
+      <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..."/>
+      {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
+    </div>
+  videoUrlField = videoUrl =>
+    <div className="form-group">
+      <label className="display-block">Video url</label>
+      <input type="text" name="videoUrl" className="form-control" {...videoUrl.input}
+             placeholder="Enter Video Url ..."/>
+      {videoUrl.touched && videoUrl.error && <span className="validation-error-label">{videoUrl.error}</span>}
+    </div>
+  descriptionField = description =>
+    <div className="form-group">
+      <label className="display-block">Short Description</label>
+      <textarea cols="5" rows="5" className="form-control"
+                placeholder="Enter text ..." {...description.input}></textarea>
+    </div>
+
+  contentField = content =>
+    <div className="form-group">
+      <label>Content</label>
+      <TextEditor {...content.input}/>
+      {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
+    </div>
+
   render() {
     const {
       handleSubmit,
@@ -66,20 +93,8 @@ export default class LessonForm extends Component {
         <div className="panel-body">
           {this.errorRender(error)}
           <form onSubmit={handleSubmit} autoComplete="off">
-            <Field name="title" component={title =>
-              <div className="form-group">
-                <label>Title</label>
-                <input type="text" name="title" className="form-control" {...title.input} placeholder="Enter Title ..." />
-                {title.touched && title.error && <span className="validation-error-label">{title.error}</span>}
-              </div>
-            }/>
-            <Field name="videoUrl" component={videoUrl =>
-              <div className="form-group">
-                <label className="display-block">Video url</label>
-                <input type="text" name="videoUrl" className="form-control" {...videoUrl.input} placeholder="Enter Video Url ..." />
-                {videoUrl.touched && videoUrl.error && <span className="validation-error-label">{videoUrl.error}</span>}
-              </div>
-            }/>
+            <Field name="title" component={this.titleField}/>
+            <Field name="videoUrl" component={this.videoUrlField}/>
             <Field name="thumbnail" component={thumbnail =>
               <div className="form-group">
                 <div>
@@ -97,19 +112,8 @@ export default class LessonForm extends Component {
                 {!thumbnail.error && thumbnail.input.value && <img src={thumbnail.input.value} width="50" height="50"></img>}
               </div>
             }/>
-            <Field name="description" component={description =>
-              <div className="form-group">
-                <label className="display-block">Short Description</label>
-                <textarea cols="5" rows="5" className="form-control" placeholder="Enter text ..." {...description.input}></textarea>
-              </div>
-            }/>
-            <Field name="content" component={content =>
-              <div className="form-group">
-                <label>Content</label>
-                <TextEditor {...content.input}/>
-                {content.touched && content.error && <span className="validation-error-label">{content.error}</span>}
-              </div>
-            }/>
+            <Field name="description" component={this.descriptionField}/>
+            <Field name="content" component={this.contentField}/>
             <div className="text-right">
               <button type="submit" disabled={submitting || this.state.isUploadingImage} className="btn btn-primary">
                 Save <i

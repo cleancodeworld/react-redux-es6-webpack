@@ -24,34 +24,30 @@ export default class LoginForm extends Component {
     return res;
   }
 
-  emailField(field) {
-    return ( <div>
-      <input type="text" className="form-control" placeholder="Email" {...field.input} />
-      <div className="form-control-feedback">
-        <i className="icon-user text-muted"></i>
-      </div>
-      {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
-    </div>);
-  }
+  emailField = (field) =>( <div>
+    <input type="text" className="form-control" placeholder="Email" {...field.input} />
+    <div className="form-control-feedback">
+      <i className="icon-user text-muted"></i>
+    </div>
+    {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+  </div>)
 
-  passwordField(field) {
-    return (<div>
+  passwordField = (field) =>
+    (<div>
       <input type="password" className="form-control" placeholder="Password" {...field.input} />
       <div className="form-control-feedback">
         <i className="icon-lock2 text-muted"></i>
       </div>
       {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
-    </div>);
-  }
+    </div>)
 
-  rememberMeField(field) {
-    return ( <div className="col-sm-6">
+  rememberMeField = (field) =>
+    ( <div className="col-sm-6">
       <label className="checkbox-inline">
         <input type="checkbox" className="styled" {...field.input} placeholder="Remember Me"/>
         Remember Me
       </label>
     </div>);
-  }
 
   render() {
     const {
