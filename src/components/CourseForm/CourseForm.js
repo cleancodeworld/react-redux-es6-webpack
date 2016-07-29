@@ -44,7 +44,7 @@ export default class CourseForm extends Component {
             alert(JSON.stringify(err));
           }
         } else {
-          field.input.onChange(body.url);
+          field.onChange(body.url);
         }
       });
     }

@@ -1,6 +1,6 @@
 /* global $ */
 import React, { Component, PropTypes} from 'react';
-import TinyMCEEditor from 'react-tinymce';
+import TinyMCEEditor from 'react-tinymce-input';
 import scriptLoader from 'react-async-script-loader';
 import Dropzone from 'react-dropzone';
 import {clientSideOnly} from 'hoc';
@@ -45,8 +45,8 @@ export default class TinyMCE extends Component {
       <div>
         <Dropzone multiple={false} accept="image/*" ref="dropzone" onDrop={this.onDrop} style={{display: 'none'}}/>
         <TinyMCEEditor
-          content={value}
-          config={{
+          value={value}
+          tinymceConfig={{
             plugins: 'autolink link image lists print preview media',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
             images_upload_url: 'postAcceptor.php',
@@ -57,7 +57,7 @@ export default class TinyMCE extends Component {
               if (type === 'image') this.refs.dropzone.open();
             }
           }}
-          onChange={(event)=> onChange(event.target.getContent())}
+          onChange={(content)=> onChange(content)}
         />
       </div>
     );

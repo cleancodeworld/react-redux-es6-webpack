@@ -137,7 +137,7 @@
     "react-select": "0.9.1",
     "react-stripe-checkout": "^1.8.0",
     "react-tag-input": "3.0.0",
-    "react-tinymce": "^0.5.1",
+    "react-tinymce-input": "^1.2.0",
     "react-youtube": "^6.1.0",
     "redux": "^3.0.4",
     "redux-connect": "^2.3.0",

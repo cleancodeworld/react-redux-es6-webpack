@@ -46,8 +46,39 @@ export default class QuestionForm extends Component {
       </label>
     </div>
 
-  render() {
+  tagsField = tags => {
     const suggestions = ['mango', 'pineapple', 'orange', 'pear'];
+    return ( <div className="input-group mb-20">
+      <div className="input-group">
+        <span className="input-group-addon">Tags</span>
+        <ReactTags
+          suggestions={suggestions}
+          tags={tags.input.value}
+          labelField={'name'}
+          handleAddition={(tag)=>{
+            const value = tags ? tags.input.value : [];
+            return tags.input.onChange([ ...value, {
+              id: tags.length + 1,
+              name: tag
+            }]);
+          }}
+          handleDelete={(index)=>{
+            const value = tags ? tags.input.value : [];
+            const res = [];
+            for ( let ndx = 0; ndx < value.length; ndx++ ) {
+              if (index !== ndx) {
+                const tag = value[ndx];
+                res.push(tag);
+              }
+            }
+            tags.input.onChange(res);
+          }}/>
+      </div>
+      {tags.touched && tags.error && <span className="validation-error-label pull-left">{tags.error}</span>}
+    </div>);
+  }
+
+  render() {
     const {
       handleSubmit,
       submitting,
@@ -63,40 +94,9 @@ export default class QuestionForm extends Component {
               <form onSubmit={handleSubmit} autoComplete="off">
                 <Field name="title" component={this.titleField}/>
                 <Field name="content" component={this.contentField}/>
-
                 <div className="input-group mt-20 mb-20">
-
                   <Field name="notifyAnswerByEmail" component={this.notifyAnswerByEmailField}/>
-                  <Field name="tags" component={(tags) =>
-                    <div className="input-group mb-20">
-                      <div className="input-group">
-                      <span className="input-group-addon">Tags</span>
-                        <ReactTags
-                        suggestions={suggestions}
-                        tags={tags.input.value}
-                        labelField={'name'}
-                        handleAddition={(tag)=>{
-                          const value = tags ? tags.value : [];
-                          return tags.onChange([ ...value, {
-                            id: tags.length + 1,
-                            name: tag
-                          }]);
-                        }}
-                        handleDelete={(index)=>{
-                          const value = tags ? tags.value : [];
-                          const res = [];
-                          for ( let ndx = 0; ndx < value.length; ndx++ ) {
-                            if (index !== ndx) {
-                              const tag = value[ndx];
-                              res.push(tag);
-                            }
-                          }
-                          tags.onChange(res);
-                        }}/>
-                    </div>
-
-                      {tags.touched && tags.error && <span className="validation-error-label pull-left">{tags.error}</span>}
-                    </div>}/>
+                  <Field name="tags" component={this.tagsField}/>
                 </div>
                 <div>
                   <button type="submit" disabled={submitting} className="btn btn-primary legitRipple"

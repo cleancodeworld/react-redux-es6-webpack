@@ -34,8 +34,8 @@ const CourseFormValidate = (values) => {
     errors.duration = 'Required';
   } else if (!isNumeric(values.duration + '')) {
     errors.duration = 'Only Numbers';
-  } else if (parseInt(values.duration, 10) < 0 || parseInt(values.duration, 10) > 9223372036854775808) {
-    errors.duration = 'Duration must be less than 9223372036854775808 and larger than 0';
+  } else if (parseInt(values.duration, 10) < 0 || parseInt(values.duration, 10) > 10000) {
+    errors.duration = 'Duration must be less than 10000 and larger than 0';
   }
   return errors;
 };
