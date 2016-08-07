@@ -33,7 +33,7 @@ export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     portal: PropTypes.object.isRequired,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
   }
 
   render() {

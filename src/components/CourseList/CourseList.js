@@ -11,6 +11,7 @@ export default class CourseList extends Component {
     user: PropTypes.object,
     cart: PropTypes.object,
     activeCategory: PropTypes.object,
+    onSessionRequired: PropTypes.func,
     myCourses: PropTypes.bool,
   };
 
@@ -33,6 +34,7 @@ export default class CourseList extends Component {
                                   isCartItem={!!cart.entities.get(courseName)}
                                   key={course.get('id')}
                                   course={course}
+                                  onSessionRequired={this.props.onSessionRequired}
                                   onClickLoginRequiredLink={this.onClickLoginRequiredLink}
                                   myCourses={myCourses}/>
                 );
