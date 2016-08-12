@@ -92,7 +92,9 @@ export default class LoginForm extends Component {
             <a href={`http://${config.mainDomain}/account-portal-create`}
                className="btn bg-slate btn-block content-group">Register</a>
             <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
-              href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
+              href={'//' + config.mainDomain + '/page/Terms/T9ltKI'}>Terms &amp; Conditions</a> and <a
+              href={'//' + config.mainDomain + '/page/Cookies-Policy/uYpf3A'}
+              href="#">Cookie Policy</a></span>
           </div>
         </form>
       </div>
