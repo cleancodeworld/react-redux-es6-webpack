@@ -3,11 +3,14 @@ import {reduxForm, Field} from 'redux-form';
 import Switch from 'react-bootstrap-switch';
 import Select from 'react-select';
 import {connect} from 'react-redux';
+import validate from './validate';
+
 @connect(state=>({
   formValues: state.form.CourseAccountingForm && state.form.CourseAccountingForm.values
 }))
 @reduxForm({
   form: 'CourseAccountingForm',
+  validate
 })
 export default class CourseAccountingForm extends Component {
 
@@ -99,6 +102,7 @@ export default class CourseAccountingForm extends Component {
                             searchable={false}
                             options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
                           />
+                          {field.error && <label className="validation-error-label">{field.error}</label>}
                         </div>
                   }/>
                     :
@@ -111,15 +115,19 @@ export default class CourseAccountingForm extends Component {
                 </div>
                 <div className="col-md-6">
                   { paid
-                    ? <Field name="price" error={currency} component={price =>
+                    ? <Field name="price" currency={currency} component={price =>
                       <div>
                         <Select
                           {...price.input}
+                          placeholder="Price"
+                          value={price.input.value.toString()}
                           onBlur={() => {}}
                           onBlurResetsInput={false}
                           searchable={false}
-                          options={['20', '30', '40', '50'].map( value => ({ value: value.toString(), label: `${this.getCurrencySymbol(price.error)}${value.toString()}`}))}
+                          options={['20', '30', '40', '50'].map( value => ({ value: `${value.toString()}`, label: `${this.getCurrencySymbol(price.currency)}${value.toString()}`}))}
                         />
+                        {price.error && <label className="validation-error-label">{price.error}</label>}
+
                       </div>
                   }/>
                     : <div className="Select is-disabled">

@@ -90,6 +90,7 @@ export default class Root extends React.Component {
           <div className="navbar-text">
             © 2016. <a href="#" className="navbar-link">Knexpert</a> by <a href="http://knexpert.com"
                                                                            className="navbar-link"
+                                                                           style={{display: 'inline-block'}}
                                                                            target="_blank">CURTIS Digital, Inc.</a>
           </div>
           <div className="navbar-right">
