@@ -99,6 +99,7 @@ export default class CourseAccountingForm extends Component {
                             {...field.input}
                             onBlur={() => {}}
                             onBlurResetsInput={false}
+                            clearable={false}
                             searchable={false}
                             options={['USD', 'EURO'].map( value => ({ value: value, label: value}))}
                           />
@@ -122,6 +123,7 @@ export default class CourseAccountingForm extends Component {
                           placeholder="Price"
                           value={price.input.value.toString()}
                           onBlur={() => {}}
+                          clearable={false}
                           onBlurResetsInput={false}
                           searchable={false}
                           options={['20', '30', '40', '50'].map( value => ({ value: `${value.toString()}`, label: `${this.getCurrencySymbol(price.currency)}${value.toString()}`}))}
