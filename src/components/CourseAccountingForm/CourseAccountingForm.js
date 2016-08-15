@@ -22,6 +22,9 @@ export default class CourseAccountingForm extends Component {
     submitStatus: PropTypes.bool,
   }
 
+  state = {
+  }
+
   getCurrencySymbol(currency) {
     let res = '';
     switch (currency) {
@@ -98,6 +101,10 @@ export default class CourseAccountingForm extends Component {
                           <Select
                             {...field.input}
                             onBlur={() => {}}
+                            onChange={(value)=>{
+                              field.input.onChange(value);
+                              this.setState({currency: value});
+                            }}
                             onBlurResetsInput={false}
                             clearable={false}
                             searchable={false}
@@ -116,7 +123,7 @@ export default class CourseAccountingForm extends Component {
                 </div>
                 <div className="col-md-6">
                   { paid
-                    ? <Field name="price" currency={currency} component={price =>
+                    ? <Field name="price" component={price =>
                       <div>
                         <Select
                           {...price.input}
@@ -126,7 +133,7 @@ export default class CourseAccountingForm extends Component {
                           clearable={false}
                           onBlurResetsInput={false}
                           searchable={false}
-                          options={['20', '30', '40', '50'].map( value => ({ value: `${value.toString()}`, label: `${this.getCurrencySymbol(price.currency)}${value.toString()}`}))}
+                          options={['20', '30', '40', '50'].map( value => ({ value: `${value.toString()}`, label: `${this.getCurrencySymbol(this.state.currency || currency)}${value.toString()}`}))}
                         />
                         {price.error && <label className="validation-error-label">{price.error}</label>}
 
