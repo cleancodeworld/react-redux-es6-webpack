@@ -5,7 +5,6 @@ const AccountPortalValidation = values => {
   if (values.paid && isEmpty(values.currency)) {
     errors.currency = 'Select currency';
   }
-  console.log(values.price);
   if (values.paid && values.price === 0) {
     errors.price = 'Select price';
   }
