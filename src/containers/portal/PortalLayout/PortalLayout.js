@@ -38,7 +38,7 @@ export default class PortalLayout extends Component {
 
   render() {
     const logoImage = require('./knexpert.png');
-    const {user} = this.context;
+    const {user} = this.props;
     const lastRoute = last(this.props.routes);
     return (
       <div className="navbar-bottom portal-container">
