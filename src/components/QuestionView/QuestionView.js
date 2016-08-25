@@ -27,7 +27,7 @@ const QuestionView = ({question, onVoteUp, onVoteDown, onFavorite, onUnfavorite,
         <div className="content-group">
           {
             question.get('tags').split(',').map(tag=> {
-              return (<button key={tag} type="button" className="btn btn-default btn-sm legitRipple"> {tag} </button>);
+              return (<button key={tag} type="button" className="btn btn-default btn-sm pb-5 legitRipple"> {tag} </button>);
             })
           }
         </div>
