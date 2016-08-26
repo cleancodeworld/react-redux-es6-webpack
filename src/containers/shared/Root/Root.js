@@ -95,9 +95,9 @@ export default class Root extends React.Component {
           </div>
           <div className="navbar-right">
             <ul className="nav navbar-nav">
-              <li><a href={'//' + config.mainDomain + '/page/About-Us/zKfdYx'} className="legitRipple">About</a></li>
-              <li><a href={'//' + config.mainDomain + '/page/Terms/T9ltKI'} className="legitRipple">Terms</a></li>
-              <li><a href={'//' + config.mainDomain + '/page/Contact/JwLbzB'} className="legitRipple">Contact</a></li>
+              <li><a href={'//' + config.mainDomain() + '/page/About-Us/zKfdYx'} className="legitRipple">About</a></li>
+              <li><a href={'//' + config.mainDomain() + '/page/Terms/T9ltKI'} className="legitRipple">Terms</a></li>
+              <li><a href={'//' + config.mainDomain() + '/page/Contact/JwLbzB'} className="legitRipple">Contact</a></li>
               <li><a target="_blank" href={ `${repoUrl}/tree/${lastCommit}` }
                      className="legitRipple">{buildVersion}</a></li>
             </ul>

@@ -21,7 +21,7 @@ import reactCookie from 'react-cookie';
 import beautifyAndThrow from 'utils/errorBeautifier';
 
 import config from 'config';
-const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain };
+const cookieOpt = { path: '/', secure: false, httpOnly: false, domain: '.' + config.mainDomain(false) };
 
 const initialState = Immutable.fromJS({
   loaded: false,
@@ -132,7 +132,7 @@ export function userLogin(model, continueTo, portalName) {
         reactCookie.save('userId', userId, cookieOpt);
         reactCookie.save('username', username, cookieOpt);
         if (portalName) {
-          location.href = `//${portalName}.${config.mainDomain}`;
+          location.href = `//${portalName}.${config.mainDomain()}`;
         } else if (continueTo) {
           return dispatch(push(continueTo));
         }
@@ -160,7 +160,7 @@ export function logout() {
       types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
       promise: (client) => client.post('/api/v1/logout')
     }).then(()=> {
-      window.location.href = `//${config.mainDomain}/login`;
+      window.location.href = `//${config.mainDomain()}/login`;
     });
   };
 }

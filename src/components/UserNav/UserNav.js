@@ -14,7 +14,7 @@ const UserNav = ({loggedIn = false, logout, portal}) => {
     res = (<ul className="nav navbar-nav pull-right">
       <li className="nav-item dropdown">
         {portal
-          ? <a className="nav-link active" href={`http://${config.mainDomain}/login`}>Login</a>
+          ? <a className="nav-link active" href={`//${config.mainDomain()}/login`}>Login</a>
           : <Link className="nav-link active" to="/login">Login</Link>
         }
       </li>

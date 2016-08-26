@@ -15,8 +15,8 @@ const MyPortals = ({config, order, portals, onRemove})=> {
       return portal ? ( <tr key={portal.get('slug')}>
         <td>{index + 1}</td>
         <td className="portal-link">
-          <a href={`http://${portal.get('slug')}.${config.mainDomain}/`}
-             target="_blank">{`http://${portal.get('slug')}.${config.mainDomain}/`}</a>
+          <a href={`http://${portal.get('slug')}.${config.mainDomain()}/`}
+             target="_blank">{`http://${portal.get('slug')}.${config.mainDomain()}/`}</a>
         </td>
         <td>
           <RemoveButton portal={portal} onRemove={()=> onRemove(portal)}/>

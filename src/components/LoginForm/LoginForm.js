@@ -78,7 +78,7 @@ export default class LoginForm extends Component {
               <div className="row">
                 <Field name="remember" component={this.rememberMeField}/>
                 <div className="col-sm-6 text-right">
-                  <a href={`http://${config.mainDomain}/password/forget`}>Forgot password?</a>
+                  <a href={`http://${config.mainDomain()}/password/forget`}>Forgot password?</a>
                 </div>
               </div>
             </div>
@@ -89,11 +89,11 @@ export default class LoginForm extends Component {
             </div>
 
             <div className="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-            <a href={`http://${config.mainDomain}/account-portal-create`}
+            <a href={`http://${config.mainDomain()}/account-portal-create`}
                className="btn bg-slate btn-block content-group">Register</a>
             <span className="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
-              href={'//' + config.mainDomain + '/page/Terms/T9ltKI'}>Terms &amp; Conditions</a> and <a
-              href={'//' + config.mainDomain + '/page/Cookies-Policy/uYpf3A'}
+              href={'//' + config.mainDomain() + '/page/Terms/T9ltKI'}>Terms &amp; Conditions</a> and <a
+              href={'//' + config.mainDomain() + '/page/Cookies-Policy/uYpf3A'}
               href="#">Cookie Policy</a></span>
           </div>
         </form>

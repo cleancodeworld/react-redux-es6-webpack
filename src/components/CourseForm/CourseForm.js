@@ -111,7 +111,7 @@ export default class CourseForm extends Component {
                   Subtitle
                 </div>
                 <Field name="subtitle" component={this.subtitleField}/>
-                <a href={'//' + config.mainDomain + '/page/Course-Title-Quality-Standards/u2qrZT'}>Learn more about
+                <a href={'//' + config.mainDomain() + '/page/Course-Title-Quality-Standards/u2qrZT'}>Learn more about
                   title, subtitle</a>
               </div>
             </div>

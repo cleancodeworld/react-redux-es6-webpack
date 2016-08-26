@@ -32,10 +32,7 @@ export default class AccountPortalForm extends Component {
   }
 
   loginUrl() {
-    if (!config.port || config.port === 80) {
-      return `http://${config.mainDomain}/login`;
-    }
-    return `http://${config.mainDomain}:${config.port}/login`;
+    return `http://${config.mainDomain()}/login`;
   }
 
   usernameField = (username)=>
