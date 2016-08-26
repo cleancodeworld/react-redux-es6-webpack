@@ -37,14 +37,19 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.props.portal.meta.get('privacy') !== 'Public') {
-      return (<ErrorPage>Oops, This portal is private</ErrorPage>);
+    let res;
+    if (this.props.portal.meta.get('privacy') === 'Private') {
+      res = (<ErrorPage>Oops, This portal is private</ErrorPage>);
+    } else if (!this.props.portal.meta.get('privacy')) {
+      res = (<ErrorPage>Oops, Portal does not exists</ErrorPage>);
+    } else {
+      res = (
+        <div>
+          <Helmet {...config.app.head}/>
+          {this.props.children}
+        </div>
+      );
     }
-    return (
-      <div>
-        <Helmet {...config.app.head}/>
-        {this.props.children}
-      </div>
-    );
+    return res;
   }
 }
