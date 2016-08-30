@@ -362,7 +362,7 @@ export default class CallForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.moment, label: value.label}))}
+                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>
@@ -388,7 +388,7 @@ export default class CallForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.moment, label: value.label}))}
+                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>
@@ -412,7 +412,7 @@ export default class CallForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.moment, label: value.label}))}
+                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>
