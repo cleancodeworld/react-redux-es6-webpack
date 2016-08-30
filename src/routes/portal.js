@@ -33,6 +33,7 @@ import {
   RequestCallLayout,
   BrowseExperts,
   ExpertProfile,
+  CallCreate,
 } from '../containers/portal';
 import {
   Root,
@@ -65,7 +66,7 @@ export default (params) => {
           <Route path="request-call" name="Request Call" component={RequestCallLayout}>
             <IndexRoute component={BrowseExperts}/>
             <Route name="Expert Profile" path="profile" component={ExpertProfile}/>
-
+            <Route name="Request Call" path="john" component={CallCreate}/>
           </Route>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>

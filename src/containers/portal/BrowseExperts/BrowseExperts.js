@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 export default class BrowseExperts extends Component {
 
@@ -28,20 +29,22 @@ export default class BrowseExperts extends Component {
                               </div>
 
                               <div className="media-body">
-                                <h6 className="media-heading"><a href="#">Email Marketing</a></h6>
+                                <h6 className="media-heading"><Link to="/request-call/profile">Email Marketing</Link></h6>
                                 <ul className="list-inline list-inline-separate text-muted">
                                   <li><b>Seth Berman</b></li>
                                   <li>San Francisco, CA</li>
                                 </ul>
-                                I tripled Redbubble email subscribers, increased Redbubble sales from email by 150% and grew
+                                I tripled Redbubble email subscribers, increased Redbubble sales from email by 150% and
+                                grew
                                 BabyCenter email subscribers to 10 million.
                               </div>
 
                               <div className="media-right text-center">
                                 <h1 className="panel-title price"><b>$5.83</b></h1>
                                 <small>per minute</small>
-                                <button className="btn btn-primary legitRipple mt-5 mb-5" type="button">Request a Call <i
-                                  className="icon-arrow-right14 position-right"></i></button>
+                                <Link to="/request-call/john" className="btn btn-primary legitRipple mt-5 mb-5" type="button">Request a Call
+                                  <i
+                                    className="icon-arrow-right14 position-right"></i></Link>
                                 <div className="text-muted">
                                   <i className="icon-star-full2 text-size-base text-warning-300"></i>
                                   <i className="icon-star-full2 text-size-base text-warning-300"></i>
