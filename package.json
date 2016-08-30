@@ -111,6 +111,7 @@
     "lru-memoize": "^1.0.0",
     "map-props": "^1.0.0",
     "moment": "^2.13.0",
+    "moment-range": "^2.2.0",
     "multer": "^1.1.0",
     "multireducer": "^2.0.0",
     "normalizr": "^2.1.0",

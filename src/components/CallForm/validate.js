@@ -1,8 +1,8 @@
 const validate = values => {
   const errors = {};
 
-  if (!values.title) {
-    errors.title = 'Required';
+  if (!values.message) {
+    errors.message = 'Required';
   }
 
   const content = values.content && values.content.replace(/<(?:.|\n)*?>/gm, '') || '';

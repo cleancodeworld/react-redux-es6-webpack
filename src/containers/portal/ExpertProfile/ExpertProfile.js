@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router';
 export default class ExpertProfile extends Component {
 
   static propTypes = {};
@@ -57,12 +57,12 @@ export default class ExpertProfile extends Component {
                         <i className="fa fa-star-o"></i>
                         <span>(495)</span>
                       </p>
-                      <p><a href="#"
-                            className="btn btn-labeled btn-labeled-right bg-blue heading-btn legitRipple full-width">Request
+                      <p><Link to="/request-call/john"
+                               className="btn btn-labeled btn-labeled-right bg-blue heading-btn legitRipple full-width">Request
                         a call
                         <b><i className="fa fa-chevron-right"></i></b>
                         <span className="legitRipple-ripple"></span>
-                        <span className="legitRipple-ripple"></span></a>
+                        <span className="legitRipple-ripple"></span></Link>
                       </p>
                       <p><a href="#" className="btn border-slate text-slate-800 btn-flat legitRipple full-width">Send a
                         Message</a></p>
