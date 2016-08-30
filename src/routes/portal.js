@@ -30,6 +30,9 @@ import {
   QuestionLayout,
   QuestionsByPortal,
   QuestionEdit,
+  RequestCallLayout,
+  BrowseExperts,
+  ExpertProfile,
 } from '../containers/portal';
 import {
   Root,
@@ -58,6 +61,11 @@ export default (params) => {
               <IndexRoute name="Question" component={QuestionDetailsView}/>
               <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>
+          </Route>
+          <Route path="request-call" name="Request Call" component={RequestCallLayout}>
+            <IndexRoute component={BrowseExperts}/>
+            <Route name="Expert Profile" path="profile" component={ExpertProfile}/>
+
           </Route>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
