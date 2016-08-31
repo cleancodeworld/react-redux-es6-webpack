@@ -3,7 +3,7 @@ import validate from './validate';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import moment from 'moment';
-import range from 'lodash/range';
+import DatePicker from 'react-datepicker';
 
 require('moment-range');
 
@@ -348,9 +348,7 @@ export default class CallForm extends Component {
                     <div className="col-lg-8">
                       <div className="input-group">
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
-                        <input type="text" className="form-control datepicker hasDatepicker"
-                               placeholder="Pick a date…"
-                               id="dp1472575066648"/>
+                        <DatePicker placeholder="Pick a date…" className="form-control datepicker hasDatepicker" />
                       </div>
                     </div>
                     <div className="col-lg-4">
@@ -374,9 +372,7 @@ export default class CallForm extends Component {
                     <div className="col-lg-8">
                       <div className="input-group">
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
-                        <input type="text" className="form-control datepicker hasDatepicker"
-                               placeholder="Pick a date…"
-                               id="dp1472575066649"/>
+                        <DatePicker placeholder="Pick a date…" className="form-control datepicker hasDatepicker" />
                       </div>
                     </div>
                     <div className="col-lg-4">
@@ -398,9 +394,7 @@ export default class CallForm extends Component {
                     <div className="col-lg-8">
                       <div className="input-group">
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
-                        <input type="text" className="form-control datepicker hasDatepicker"
-                               placeholder="Pick a date…"
-                               id="dp1472575066650"/>
+                        <DatePicker placeholder="Pick a date…" className="form-control datepicker hasDatepicker" />
                       </div>
                     </div>
                     <div className="col-lg-4">
@@ -421,125 +415,6 @@ export default class CallForm extends Component {
                   </div>
                   <div className="help-block">Please note that the times you choose will be 1 hour later for Adrian
                     (EDT) <br/><a href="#">Change my timezone (currently CDT)</a></div>
-                </fieldset>
-                <fieldset className="content-group">
-                  <legend className="text-bold text-size-large">
-                    <span className="label bg-blue-400 mr-5 pl-10 pr-10"><b className="text-size-large">3</b></span>
-                    Payment Details
-                    <div className="pull-right"><img alt="" src="assets/images/placeholder.jpg"
-                                                     style={{height: 28, width: 40}}/></div>
-                  </legend>
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Credit Card</label>
-                    <div className="col-lg-7">
-                      <input type="text" className="form-control" name="format-credit-card"
-                             placeholder="Card number"/>
-                    </div>
-                    <div className="col-lg-3">
-                      <input type="text" className="form-control" placeholder="CVV"/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Expiration</label>
-                    <div className="col-lg-7">
-                      <Field name="month" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={range(1, 12).map( value => ({ value: value, label: value}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/></div>
-                    <div className="col-lg-3">
-                      <Field name="year" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={range(2016, 2035).map( value => ({ value: value, label: value}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/>
-                    </div>
-                  </div>
-
-                  <div className="help-block">Your information is kept 100% private!</div>
-                </fieldset>
-
-                <fieldset className="content-group">
-                  <legend className="text-bold text-size-large"><span
-                    className="label bg-blue-400 mr-5 pl-10 pr-10"><b
-                    className="text-size-large">4</b></span> Billing Address
-                  </legend>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Address line 1 <code
-                      className="no-padding bg-white">*</code></label>
-                    <div className="col-lg-10">
-                      <input type="text" className="form-control" placeholder="123 Smith St."/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Address line 2</label>
-                    <div className="col-lg-10">
-                      <input type="text" className="form-control" placeholder="Optional"/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">City <code
-                      className="no-padding bg-white">*</code></label>
-                    <div className="col-lg-10">
-                      <input type="text" className="form-control" placeholder="New York"/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">State/Province <code
-                      className="no-padding bg-white">*</code></label>
-                    <div className="col-lg-10">
-                      <input type="text" className="form-control" placeholder="NY"/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Postal Code / ZIP <code
-                      className="no-padding bg-white">*</code></label>
-                    <div className="col-lg-10">
-                      <input type="text" className="form-control" placeholder="10001"/>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="control-label col-lg-2">Country <code
-                      className="no-padding bg-white">*</code></label>
-                    <div className="col-lg-10">
-                      <Field name="country" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={this.countries && this.countries.map( value => ({ value: value.code, label: value.name}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/>
-                    </div>
-                  </div>
                 </fieldset>
                 <button type="submit" className="btn btn-primary content-group">Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>

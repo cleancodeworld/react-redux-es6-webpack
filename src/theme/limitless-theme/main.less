@@ -6,6 +6,7 @@
 @import "../custom-style/react-select";
 @import "../custom-style/customizations";
 @import "../../../node_modules/react-tag-input/example/reactTags.css";
+@import "../../../node_modules/react-datepicker/dist/react-datepicker.min.css";
 
 .sticky-note {
   padding: 15px 15px 10px 15px;
@@ -32,33 +33,39 @@ div[aria-label="Insert/edit image"] .mce-container.mce-abs-layout-item.mce-last.
   display: none;
 }
 
-.content-group .legitRipple{
+.content-group .legitRipple {
   text-transform: none;
 }
-.page-header .btn{
+
+.page-header .btn {
   @media (max-width: @screen-xs-max) {
     padding: 3px 6px;
   }
 }
-.page-header .container{
+
+.page-header .container {
   @media (max-width: @screen-xs-max) {
     padding: 0px;
     margin: 0px;
   }
 }
 
-.page-header .page-title{
+.page-header .page-title {
   @media (max-width: @screen-xs-max) {
     padding-left: 0px;
     padding-right: 0px;
   }
 }
 
-body{
+body {
   min-width: 300px;
 }
 
-.pb-5{
-  margin-right: 2px ;
-  margin-bottom: 2px ;
+.pb-5 {
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+
+.react-datepicker__input-container {
+  display: block;
 }
