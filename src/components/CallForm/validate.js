@@ -4,6 +4,17 @@ const validate = values => {
   if (!values.message) {
     errors.message = 'Required';
   }
+  if (!values.estimated) {
+    errors.estimated = 'Required';
+  }
+  if (!(values.date1 && values.time1) && !(values.date2 && values.time2) && !(values.date3 && values.time3)) {
+    errors.date1 = 'At least select 1 date & time';
+    errors.date2 = 'At least select 1 date & time';
+    errors.date3 = 'At least select 1 date & time';
+    errors.time1 = 'At least select 1 date & time';
+    errors.time2 = 'At least select 1 date & time';
+    errors.time3 = 'At least select 1 date & time';
+  }
 
   const content = values.content && values.content.replace(/<(?:.|\n)*?>/gm, '') || '';
   if (!content) {
