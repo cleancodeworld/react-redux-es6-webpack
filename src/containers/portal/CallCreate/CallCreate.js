@@ -21,8 +21,6 @@ export default class CallCreate extends Component {
   static pageHeader = {}
 
   render() {
-    const {userId, portal} = this.props;
-
     return (
       <div className="page-container">
         <div className="row">
@@ -31,15 +29,7 @@ export default class CallCreate extends Component {
               <div className="container">
                 <Helmet title="Request Call"/>
                 <CallForm
-                  initialValues={{tags: []}}
-                  onSubmit={ model => this.props.create({
-                    ...model,
-                    title: model.title.trim(),
-                    authorId: userId,
-                    portalId: portal.meta.get('id'),
-                    tags: model.tags.map(item => item.name).join(',')
-                  }).then((res)=> this.props.push(`/question/${res.data.question.shortId}/${res.data.question.slug}`))
-                  }/>
+                  onSubmit={ model => alert(JSON.stringify(model, null, 4))}/>
               </div>
             </div>
           </div>

@@ -47,8 +47,10 @@ export default class CallForm extends Component {
     {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
   </div>)
 
+
   render() {
     const { handleSubmit } = this.props;
+    const minPrice = 2;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -77,7 +79,7 @@ export default class CallForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={['15 minutes ($75.00)', '30 minutes ($150.00)', '1 hour ($300.00)'].map( value => ({ value: value, label: value}))}
+                          options={ [15, 30, 60].map( value => ({ value: value, label: `${value} minutes ($${minPrice * value})`}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>
@@ -209,8 +211,10 @@ export default class CallForm extends Component {
         <div className="col-lg-3">
           <div className="media-list panel">
             <div className="media p-15 pr-10">
-              <div className="media-left"><a href="#"><img src="https://placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=40%C3%9740&w=40&h=40" className="img-circle"
-                                                           alt=""/></a></div>
+              <div className="media-left"><a href="#"><img
+                src="https://placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=40%C3%9740&w=40&h=40"
+                className="img-circle"
+                alt=""/></a></div>
               <div className="media-body">
                 <span className="media-heading text-semibold">Adrian Salamunovic</span>
                 <span className="text-muted display-block">Los Angeles and Ottawa, Canada $5/min</span>
