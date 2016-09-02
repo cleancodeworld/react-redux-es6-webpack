@@ -20,7 +20,7 @@ export default class ExpertProfile extends Component {
                           <div className="media-left">
                             <div className="thumb">
                               <a href="#" className="img-circle display-block overflow-hidden">
-                                <img src="assets/images/placeholder.jpg" className="img-responsive media-preview"
+                                <img src="//placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=90%C3%9790&w=90&h=90" className="img-responsive media-preview"
                                      alt=""/>
                               </a>
                             </div>
@@ -64,8 +64,6 @@ export default class ExpertProfile extends Component {
                         <span className="legitRipple-ripple"></span>
                         <span className="legitRipple-ripple"></span></Link>
                       </p>
-                      <p><a href="#" className="btn border-slate text-slate-800 btn-flat legitRipple full-width">Send a
-                        Message</a></p>
                       <p><a href="#" className="btn border-slate text-slate-800 btn-flat legitRipple full-width"><i
                         className="fa fa-heart"></i> Save to Favorite</a></p>
                     </div>

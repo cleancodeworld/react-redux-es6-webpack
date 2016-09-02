@@ -209,7 +209,7 @@ export default class CallForm extends Component {
         <div className="col-lg-3">
           <div className="media-list panel">
             <div className="media p-15 pr-10">
-              <div className="media-left"><a href="#"><img src="assets/images/placeholder.jpg" className="img-circle"
+              <div className="media-left"><a href="#"><img src="https://placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=40%C3%9740&w=40&h=40" className="img-circle"
                                                            alt=""/></a></div>
               <div className="media-body">
                 <span className="media-heading text-semibold">Adrian Salamunovic</span>
