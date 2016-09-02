@@ -17,7 +17,6 @@ import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 import bodyParser from 'body-parser';
-import {config} from './config';
 
 const upload = multer({ dest: 'uploads/' });
 
