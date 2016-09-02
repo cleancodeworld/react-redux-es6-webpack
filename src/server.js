@@ -17,6 +17,7 @@ import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 import bodyParser from 'body-parser';
+import {config} from './config';
 
 const upload = multer({ dest: 'uploads/' });
 
@@ -57,6 +58,38 @@ app.post('/upload', upload.single('thumbnail'), (req, res) => {
   cloudinary.uploader.upload(req.file.path, (result) => {
     res.send(result);
   });
+});
+
+
+app.get('/call', function(req, res) {
+  if (!req.query.phone1 || !req.query.phone2 || req.query.phone1 == 'xxx' || req.query.phone1 == 'yyy') {
+    return res.send('Error: Please set phone1, phone2');
+  }
+  var client = require('twilio')(config.twilio.accoundSid, config.twilio.authToken);
+  client.makeCall({
+    from: config.twilio.number,
+    to: '+' + req.query.phone2,
+    url: `${config.mainDomain()}/knexpert/join`
+  });
+  client.makeCall({
+    from: config.twilio.number,
+    to: '+' + req.query.phone1,
+    url: `${config.mainDomain()}/knexpert/join`
+  });
+  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')})`);
+});
+
+var conferenceId = '';
+app.post('/join', function(req, res) {
+  res.type('text/xml');
+  conferenceId = conferenceId || req.body.CallSid;
+  return res.send(twimlGenerator.connectConferenceTwiml({
+      conferenceId: conferenceId,
+      waitUrl: config.twilio.waitUrl,
+      startConferenceOnEnter: true,
+      endConferenceOnExit: true
+    })
+    .toString());
 });
 
 app.use('/api/v1', (req, res) => {

@@ -49,6 +49,12 @@ module.exports = Object.assign({
       ]
     }
   },
+  twilio: {
+    accoundSid: 'ACafdfb7da9a7708481e68ea12804122c6',
+    authToken: '7b71b83ebdc717edd7f90d0a6ec4ad62',
+    waitUrl: 'http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical',
+    number: '+12105987580'
+  }
 
 }, environment);
 /*eslint-enable */
