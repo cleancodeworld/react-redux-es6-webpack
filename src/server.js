@@ -76,7 +76,7 @@ app.get('/call', (req, res) => {
     to: '+' + req.query.phone1,
     url: `${config.mainDomain()}/join`
   });
-  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')})`);
+  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${from}, url: ${config.mainDomain()}/join`);
 });
 
 app.post('/join', (req, res) => {
