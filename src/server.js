@@ -17,7 +17,7 @@ import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 import bodyParser from 'body-parser';
-import twimlGenerator from './server/twiml-generator';
+import {connectConferenceTwiml} from './server/twiml-generator';
 
 const upload = multer({ dest: 'uploads/' });
 let conferenceId = '';
@@ -69,21 +69,24 @@ app.get('/call', (req, res) => {
   client.makeCall({
     from: config.twilio.number,
     to: '+' + req.query.phone2,
-    url: `${config.mainDomain()}/join`
+    url: `${config.mainDomain(false)}/join`
   });
   client.makeCall({
     from: config.twilio.number,
     to: '+' + req.query.phone1,
-    url: `${config.mainDomain()}/join`
+    url: `${config.mainDomain(false)}/join`
   });
-  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain()}/join`);
+  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain(false)}/join`);
 });
 
-app.post('/join', (req, res) => {
+app.post('/join', bodyParser.json(), (req, res) => {
   res.type('text/xml');
-  conferenceId = conferenceId || req.body.CallSid;
+  conferenceId = conferenceId || req.body.CallSid || 'ACafdfb7da9a7708481e68ea12804132c5';
+  console.log(req);
+  console.log(req.body);
+  console.log(conferenceId);
   return res.send(
-    twimlGenerator.connectConferenceTwiml(
+    connectConferenceTwiml(
       {
         conferenceId: conferenceId,
         waitUrl: config.twilio.waitUrl,

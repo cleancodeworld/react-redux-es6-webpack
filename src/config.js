@@ -5,7 +5,7 @@ const environment = {
     isProduction: false,
     mainDomain: function(withPort) {
       var _withPort = typeof withPort !== 'undefined' ? withPort : true;
-      var res = 'local.com';
+      var res = 'https://5e49e85b.ngrok.io';
       if (_withPort) {
         res += ':3000';
       }
@@ -25,7 +25,7 @@ const environment = {
     isProduction: true,
     mainDomain: function(withPort) {
       var _withPort = typeof withPort !== 'undefined' ? withPort : true;
-      var res = 'knexpert.quotient.net';
+      var res = 'https://knexpert.quotient.net';
       if (_withPort) {
         res += ':80';
       }
