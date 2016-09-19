@@ -12,6 +12,14 @@ const environment = {
       return res;
     },
     apiUrl: process.env.APIURL || 'http://api-knexpert.quotient.net',
+    cloudinary: {
+      cloudName: 'clinic',
+      apiKey: '676869843726733',
+      apiSecret: 'foThBMkX7npvcYuNsOi2DhJrqJ8'
+    },
+    stripe: {
+      apiKey: 'sk_test_AopgwkZFwvtosTZE1BSRFAo1'
+    },
   },
   production: {
     isProduction: true,
@@ -24,6 +32,14 @@ const environment = {
       return res;
     },
     apiUrl: process.env.APIURL || 'http://api-knexpert.quotient.net',
+    cloudinary: {
+      cloudName: 'clinic',
+      apiKey: '676869843726733',
+      apiSecret: 'foThBMkX7npvcYuNsOi2DhJrqJ8'
+    },
+    stripe: {
+      apiKey: 'sk_test_AopgwkZFwvtosTZE1BSRFAo1'
+    }
   }
 }[process.env.NODE_ENV || 'development'];
 

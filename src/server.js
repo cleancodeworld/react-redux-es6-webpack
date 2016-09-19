@@ -23,9 +23,9 @@ const upload = multer({ dest: 'uploads/' });
 let conferenceId = '';
 
 cloudinary.config({
-  cloud_name: 'clinic',
-  api_key: '676869843726733',
-  api_secret: 'foThBMkX7npvcYuNsOi2DhJrqJ8'
+  cloud_name: config.cloudinary.cloudName,
+  api_key: config.cloudinary.apiKey,
+  api_secret: config.cloudinary.apiSecret
 });
 
 import { match } from 'react-router';
@@ -105,7 +105,7 @@ const onProxyReq = (proxyReq, req) => {
 };
 
 app.post('/stripe/charge', bodyParser.json(), (req, res)=> {
-  const stripe = require('stripe')('sk_test_AopgwkZFwvtosTZE1BSRFAo1');
+  const stripe = require('stripe')(config.stripe.apiKey);
   const stripeToken = req.body.stripeToken;
   const amount = req.body.amount;
   const currency = req.body.currency;
