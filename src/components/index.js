@@ -49,3 +49,4 @@ export CartSuggestedCourses from './CartSuggestedCourses/CartSuggestedCourses';
 export ErrorPage from './ErrorPage/ErrorPage';
 export PortalsList from './PortalsList/PortalsList';
 export CallForm from './CallForm/CallForm';
+export CallList from './CallList/CallList';

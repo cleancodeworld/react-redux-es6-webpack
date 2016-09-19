@@ -4,6 +4,7 @@ import { reducer as reduxAsyncConnect } from 'redux-connect';
 import { reducer as formReducer } from 'redux-form';
 
 import wishList from './wishList';
+import callsAll from './call/all';
 import userVerify from './user/verify';
 import auth from './auth';
 import portalCurrent from './portal/current';
@@ -18,6 +19,7 @@ import questionLoaded from './question/loaded';
 import questionsByPortal from './question/byPortal';
 import myPortals from './portal/myPortals';
 import portalLoaded from './portal/loaded';
+import callLoaded from './call/loaded';
 import sitePage from './sitePage';
 
 export default combineReducers({
@@ -39,5 +41,7 @@ export default combineReducers({
   questionsByPortal,
   myPortals,
   portalLoaded,
+  callLoaded,
   sitePage,
+  callsAll,
 });

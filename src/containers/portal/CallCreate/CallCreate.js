@@ -3,10 +3,10 @@ import { CallForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {withUserId, withPortal} from 'hoc';
-import {create} from 'redux/modules/question/create';
 import { push } from 'react-router-redux';
+import { create as callCreate } from 'redux/modules/call/create';
 
-@connect(null, { create, push })
+@connect(null, { callCreate, push })
 @withUserId
 @withPortal
 
@@ -16,11 +16,13 @@ export default class CallCreate extends Component {
     portal: PropTypes.object,
     create: PropTypes.func,
     push: PropTypes.func,
+    callCreate: PropTypes.func,
   };
 
   static pageHeader = {}
 
   render() {
+    const {userId, portal} = this.props;
     return (
       <div className="page-container">
         <div className="row">
@@ -29,7 +31,7 @@ export default class CallCreate extends Component {
               <div className="container">
                 <Helmet title="Request Call"/>
                 <CallForm
-                  onSubmit={ model => alert(JSON.stringify(model, null, 4))}/>
+                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: userId})}/>
               </div>
             </div>
           </div>

@@ -67,6 +67,10 @@ export default class PortalLayout extends Component {
                   <NavItem eventKey={3}>My wishlist</NavItem>
                 </LinkContainer> : null}
               {user ?
+                <LinkContainer to="/request-call/my-calls">
+                  <NavItem eventKey={3}>My Calls</NavItem>
+                </LinkContainer> : null}
+              {user ?
                 <LinkContainer to="/cart">
                   <NavItem eventKey={4}>Cart</NavItem>
                 </LinkContainer> : null}
