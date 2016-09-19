@@ -81,10 +81,7 @@ app.get('/call', (req, res) => {
 
 app.post('/join', bodyParser.json(), (req, res) => {
   res.type('text/xml');
-  conferenceId = conferenceId || req.body.CallSid || 'ACafdfb7da9a7708481e68ea12804132c5';
-  console.log(req);
-  console.log(req.body);
-  console.log(conferenceId);
+  conferenceId = conferenceId || req.body.CallSid || 'ACafdfb7da9a7704481e68ea12804132c5';
   return res.send(
     connectConferenceTwiml(
       {
