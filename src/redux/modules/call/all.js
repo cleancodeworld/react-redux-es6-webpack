@@ -24,7 +24,6 @@ export default function all(state = initialState, action) {
     case LOAD_SUCCESS:
       return state.withMutations(map=> {
         const {calls} = action.result.data;
-        debugger;
         const {order} = normalizeBy(calls, 'id');
         order.map(call=> {
           map.setIn(['entities', call], true);
