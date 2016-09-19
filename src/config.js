@@ -25,7 +25,7 @@ const environment = {
     isProduction: true,
     mainDomain: function(withPort) {
       var _withPort = typeof withPort !== 'undefined' ? withPort : true;
-      var res = 'https://knexpert.quotient.net';
+      var res = 'http://knexpert.quotient.net';
       if (_withPort) {
         res += ':80';
       }
