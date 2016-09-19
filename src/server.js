@@ -79,7 +79,7 @@ app.get('/call', (req, res) => {
   return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')})`);
 });
 
-app.post('/join', (req, res) => {
+app.post('/knexpert/join', (req, res) => {
   res.type('text/xml');
   conferenceId = conferenceId || req.body.CallSid;
   return res.send(
