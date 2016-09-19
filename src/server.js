@@ -18,6 +18,7 @@ import cloudinary from 'cloudinary';
 import multer from 'multer';
 import bodyParser from 'body-parser';
 import {connectConferenceTwiml} from './server/twiml-generator';
+import async from 'async';
 
 const upload = multer({ dest: 'uploads/' });
 let conferenceId = '';
@@ -66,17 +67,22 @@ app.get('/call', (req, res) => {
     return res.send('Error: Please set phone1, phone2');
   }
   const client = require('twilio')(config.twilio.accoundSid, config.twilio.authToken);
-  client.makeCall({
-    from: config.twilio.number,
-    to: '+' + req.query.phone2,
-    url: `${config.mainDomain(false)}/join`
-  });
-  client.makeCall({
-    from: config.twilio.number,
-    to: '+' + req.query.phone1,
-    url: `${config.mainDomain(false)}/join`
-  });
-  return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain(false)}/join`);
+  async.parallel([
+
+      callback=> client.makeCall({
+        from: config.twilio.number,
+        to: '+' + req.query.phone1,
+        url: `${config.mainDomain(false)}/join`
+      }, callback),
+
+      client.makeCall({
+        from: config.twilio.number,
+        to: '+' + req.query.phone2,
+        url: `${config.mainDomain(false)}/join`
+      })],
+    (err, results)=> {
+      return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain(false)}/join results= ${JSON.stringify(results)} error:${err}`);
+    })
 });
 
 app.post('/join', bodyParser.json(), (req, res) => {
