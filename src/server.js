@@ -69,17 +69,17 @@ app.get('/call', (req, res) => {
   const client = require('twilio')(config.twilio.accoundSid, config.twilio.authToken);
   async.parallel(
     [
-      callback=> client.makeCall({
+      (callback)=> client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone1,
         url: `${config.mainDomain(false)}/join`
       }, callback),
 
-      client.makeCall({
+      (callback) => client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone2,
         url: `${config.mainDomain(false)}/join`
-      })
+      }, callback)
     ],
     (err, results)=> {
       return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain(false)}/join results= ${JSON.stringify(results)} error:${err}`);
