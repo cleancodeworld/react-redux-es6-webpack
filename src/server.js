@@ -69,17 +69,17 @@ app.get('/call', (req, res) => {
   client.makeCall({
     from: config.twilio.number,
     to: '+' + req.query.phone2,
-    url: `${config.mainDomain()}/knexpert/join`
+    url: `${config.mainDomain()}/join`
   });
   client.makeCall({
     from: config.twilio.number,
     to: '+' + req.query.phone1,
-    url: `${config.mainDomain()}/knexpert/join`
+    url: `${config.mainDomain()}/join`
   });
   return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')})`);
 });
 
-app.post('/knexpert/join', (req, res) => {
+app.post('/join', (req, res) => {
   res.type('text/xml');
   conferenceId = conferenceId || req.body.CallSid;
   return res.send(
