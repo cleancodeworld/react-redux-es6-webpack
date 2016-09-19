@@ -83,7 +83,7 @@ app.get('/call', (req, res) => {
     ],
     (err, results)=> {
       return res.send(`conference created (${req.param('phone1')}, ${req.param('phone2')}), from: ${config.twilio.number}, url: ${config.mainDomain(false)}/join results= ${JSON.stringify(results)} error:${err}`);
-    })
+    });
 });
 
 app.post('/join', bodyParser.json(), (req, res) => {
