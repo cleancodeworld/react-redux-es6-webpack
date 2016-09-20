@@ -5,7 +5,7 @@ const environment = {
     isProduction: false,
     mainDomain: function(withPort) {
       var _withPort = typeof withPort !== 'undefined' ? withPort : true;
-      var res = 'https://5e49e85b.ngrok.io';
+      var res = 'local.com';
       if (_withPort) {
         res += ':3000';
       }
