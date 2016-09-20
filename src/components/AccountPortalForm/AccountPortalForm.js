@@ -64,10 +64,17 @@ export default class AccountPortalForm extends Component {
       {confirmPassword.touched && confirmPassword.error &&
       <label className="validation-error-label">{confirmPassword.error}</label>}
     </div>
+
   emailField = email =>
     <div>
       <input type="text" className="form-control" {...email.input} placeholder="Email"/>
       {email.touched && email.error && <label className="validation-error-label">{email.error}</label>}
+    </div>
+
+  phoneField = phone =>
+    <div>
+      <input type="text" className="form-control" {...phone.input} placeholder="Phone"/>
+      {phone.touched && phone.error && <label className="validation-error-label">{phone.error}</label>}
     </div>
 
   portalNameField = portalName =>
@@ -177,6 +184,18 @@ export default class AccountPortalForm extends Component {
                       </div>
                     </div>
                   </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group has-feedback">
+                        <Field name="phone" component={this.phoneField}/>
+                        <div className="form-control-feedback">
+                          <i className="icon-mention text-muted"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="form-group has-feedback">
                     <Field name="portalName" component={this.portalNameField}/>
                     <div className="form-control-feedback">

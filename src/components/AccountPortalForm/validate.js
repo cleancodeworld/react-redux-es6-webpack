@@ -1,6 +1,7 @@
 import isAlphanumeric from 'validator/lib/isAlphanumeric';
 import isAlpha from 'validator/lib/isAlpha';
 import isEmail from 'validator/lib/isEmail';
+import isNumeric from 'validator/lib/isNumeric';
 
 const AccountPortalValidation = values => {
   const errors = {};
@@ -45,6 +46,17 @@ const AccountPortalValidation = values => {
     errors.email = 'Required';
   } else if (!isEmail(values.email)) {
     errors.email = 'Invalid email address';
+  }
+
+
+  if (!values.phone) {
+    errors.phone = 'Required';
+  } else if (!isNumeric(values.phone)) {
+    errors.phone = 'Only numbers';
+  } else if (values.phone.length < 6) {
+    errors.phone = 'Min length 6 numbers';
+  } else if (values.phone.length > 14) {
+    errors.phone = 'Max length 14 numbers';
   }
 
   if (!values.password) {
