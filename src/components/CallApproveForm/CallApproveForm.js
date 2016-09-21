@@ -34,7 +34,7 @@ export default class CallApproveForm extends Component {
                     className="text-size-large">1</b></span> Select call date
                   </legend>
                   <div className="form-group">
-                    <label className="control-label col-lg-2">Set Estimated Length</label>
+                    <label className="control-label col-lg-2">Set date</label>
                     <div className="col-lg-10">
                       <Field name="selectedDate" component={estimated =>
                         <div>
