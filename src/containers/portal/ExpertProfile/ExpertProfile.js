@@ -1,10 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { withPortal } from 'hoc';
+
+@withPortal
 export default class ExpertProfile extends Component {
 
-  static propTypes = {};
+  static propTypes = {
+    portal: PropTypes.object
+  };
 
   render() {
+    const {portal} = this.props;
+    const user = portal.meta.get('owner');
+    debugger;
     return (
       <div className="page-container">
         <div className="page-content">
@@ -14,29 +22,30 @@ export default class ExpertProfile extends Component {
                 <div className="col-md-9 col-sm-8">
                   <div className="panel">
                     <div className="panel-body">
-
                       <ul className="media-list content-group">
                         <li className="media stack-media-on-mobile">
                           <div className="media-left">
                             <div className="thumb">
                               <a href="#" className="img-circle display-block overflow-hidden">
-                                <img src="//placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=90%C3%9790&w=90&h=90" className="img-responsive media-preview"
-                                     alt=""/>
+                                <img
+                                  src={user.get('imageUrl')}
+                                  className="img-responsive media-preview"
+                                  alt=""/>
                               </a>
                             </div>
                           </div>
-
                           <div className="media-body">
-                            <h1 className="media-heading"><a href="#">John Curtis</a></h1>
-                            <h4 className="media-sub-heading">Serial Entrepreneur and Best Selling Author</h4>
+                            <h1 className="media-heading"><a href="#">{user.get('firstName')} {user.get('lastName')}</a>
+                            </h1>
+                            <h4 className="media-sub-heading">{user.get('username')}</h4>
 
                             <ul className="list-inline list-inline-separate text-muted mb-5">
-                              <li><i className="fa fa-map-marker"></i> Montreal Canada</li>
+                              <li><i className="fa fa-map-marker"></i> [Montreal Canada]</li>
                             </ul>
 
-                            <p>Amazon FBA Consultant and Best Selling Author. New Product Launch. Delivered 8
+                            <p>[Amazon FBA Consultant and Best Selling Author. New Product Launch. Delivered 8
                               Kickstarter
-                              projects. Marketing strategist and investor.</p>
+                              projects. Marketing strategist and investor.]</p>
                           </div>
                         </li>
                       </ul>
@@ -64,8 +73,6 @@ export default class ExpertProfile extends Component {
                         <span className="legitRipple-ripple"></span>
                         <span className="legitRipple-ripple"></span></Link>
                       </p>
-                      <p><a href="#" className="btn border-slate text-slate-800 btn-flat legitRipple full-width"><i
-                        className="fa fa-heart"></i> Save to Favorite</a></p>
                     </div>
                   </div>
 

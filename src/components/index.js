@@ -51,3 +51,4 @@ export PortalsList from './PortalsList/PortalsList';
 export CallForm from './CallForm/CallForm';
 export CallList from './CallList/CallList';
 export CallListItem from './CallListItem/CallListItem';
+export CallApproveForm from './CallApproveForm/CallApproveForm';

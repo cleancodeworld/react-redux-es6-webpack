@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { CallForm } from 'components';
+import { CallApproveForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {withUserId, withPortal} from 'hoc';
@@ -31,7 +31,7 @@ export default class CallApprove extends Component {
             <div className="content-wrapper">
               <div className="container">
                 <Helmet title="Request Call"/>
-                <CallForm
+                <CallApproveForm
                   expertUserName={params.username}
                   onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: params.id})}/>
               </div>
