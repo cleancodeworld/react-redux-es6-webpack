@@ -15,7 +15,7 @@ export default class CallList extends Component {
           {
             order.map(callId => {
               const call = entities.get(callId);
-              const datesCount = call.get('AvailabilityDates').count();
+              const datesCount = call.get('availability') && call.get('availability').count() || 0;
               return (
                 <li key={call.get('id')} className="media stack-media-on-mobile">
                   <div className="media-left">
@@ -32,16 +32,16 @@ export default class CallList extends Component {
                     <ul className="list-inline list-inline-separate text-muted">
                       <li><b>Estimated </b><strong>{call.get('estimated')}</strong> <b> min</b></li>
                       <li>Available
-                        Dates: {call.get('AvailabilityDates')
+                        Dates: {call.get('availability') && call.get('availability')
                           .map((date, index)=> {
                             const _date = moment(date).format('DD/MM/YYYY HH:mm');
                             return datesCount - 1 !== index ? _date + ' - ' : _date;
-                          })}</li>
+                          }) || '[]'}</li>
                     </ul>
                     [description]
                   </div>
                   <div className="media-right text-center">
-                    <h1 className="panel-title price"><b>$16.67</b></h1>
+                    <h1 className="panel-title price"><b>[$16.67]</b></h1>
                     <small>per minute</small>
                     <button className="btn btn-primary legitRipple mt-5 mb-5" type="button">Request a Call <i
                       className="icon-arrow-right14 position-right"></i></button>

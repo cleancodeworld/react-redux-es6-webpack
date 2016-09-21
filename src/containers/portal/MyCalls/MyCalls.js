@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {showSignUpModal} from 'redux/modules/auth';
 import { asyncConnect } from 'redux-connect';
 import { CallList, } from 'components';
-import { load, isLoaded } from 'redux/modules/call/all';
+import { load, isLoaded } from 'redux/modules/call/byExpert';
 import {withUser, withCalls} from 'hoc';
 
 @asyncConnect([{
@@ -12,14 +12,14 @@ import {withUser, withCalls} from 'hoc';
     const promises = [];
     const state = getState();
     if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.portalCurrent.get('reqSubdomain'))));
+      promises.push(dispatch(load(state.auth.getIn(['user', 'username']))));
     }
     return Promise.all(promises);
   }
 }])
 @connect(
-  ({callsAll}) => ({
-    order: callsAll.get('order'),
+  ({callsByExpert}) => ({
+    order: callsByExpert.get('order'),
   }), { showSignUpModal }
 )
 @withCalls
@@ -46,15 +46,14 @@ export default class MyCalls extends Component {
       <div className="page-container">
         <Helmet title="My Calls"/>
         <div className="content-wrapper">
-          <div className="content-group">
-            <h6 className="text-semibold">My Calls</h6>
-          </div>
-          <CallList entities={calls}
+          <div className="panel panel-body">
+            <CallList entities={calls}
                       order={order}
                       wishList={wishList}
                       cart={cart}
                       onSessionRequired={ ()=> this.props.showSignUpModal()}
                       user={user}/>
+          </div>
         </div>
       </div>
     );

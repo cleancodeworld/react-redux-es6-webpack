@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-
+import { withPortal } from 'hoc';
+@withPortal
 export default class BrowseExperts extends Component {
 
-  static propTypes = {};
+  static propTypes = {
+    portal: PropTypes.object
+  };
 
   render() {
+    const {portal} = this.props;
     return (
       <div className="page-container">
         <div className="row">
@@ -22,27 +26,28 @@ export default class BrowseExperts extends Component {
                               <div className="media-left">
                                 <div className="thumb">
                                   <a data-popup="lightbox" href="assets/images/placeholder.jpg">
-                                    <img src="assets/images/placeholder.jpg"
+                                    <img src={portal.meta.getIn(['owner', 'image'])}
                                          className="img-responsive img-rounded media-preview" alt=""/>
                                   </a>
                                 </div>
                               </div>
 
                               <div className="media-body">
-                                <h6 className="media-heading"><Link to="/request-call/profile">Email Marketing</Link></h6>
+                                <h6 className="media-heading">
+                                  <Link to="/request-call/profile">
+                                    {`${portal.meta.getIn(['owner', 'firstName'])} ${portal.meta.getIn(['owner', 'lastName'])}`}
+                                  </Link>
+                                </h6>
                                 <ul className="list-inline list-inline-separate text-muted">
-                                  <li><b>Seth Berman</b></li>
-                                  <li>San Francisco, CA</li>
+                                  <li><b>{portal.meta.getIn(['owner', 'username'])}</b></li>
                                 </ul>
-                                I tripled Redbubble email subscribers, increased Redbubble sales from email by 150% and
-                                grew
-                                BabyCenter email subscribers to 10 million.
                               </div>
 
                               <div className="media-right text-center">
                                 <h1 className="panel-title price"><b>$5.83</b></h1>
                                 <small>per minute</small>
-                                <Link to="/request-call/john" className="btn btn-primary legitRipple mt-5 mb-5" type="button">Request a Call
+                                <Link to={`/request-call/${portal.meta.getIn(['owner', 'id'])}/${portal.meta.getIn(['owner', 'username'])}`} className="btn btn-primary legitRipple mt-5 mb-5"
+                                      type="button">Request a Call
                                   <i
                                     className="icon-arrow-right14 position-right"></i></Link>
                                 <div className="text-muted">

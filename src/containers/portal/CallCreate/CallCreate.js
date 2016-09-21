@@ -13,6 +13,7 @@ import { create as callCreate } from 'redux/modules/call/create';
 export default class CallCreate extends Component {
   static propTypes = {
     userId: PropTypes.string,
+    params: PropTypes.object,
     portal: PropTypes.object,
     create: PropTypes.func,
     push: PropTypes.func,
@@ -22,7 +23,7 @@ export default class CallCreate extends Component {
   static pageHeader = {}
 
   render() {
-    const {userId, portal} = this.props;
+    const {userId, portal, params} = this.props;
     return (
       <div className="page-container">
         <div className="row">
@@ -31,7 +32,8 @@ export default class CallCreate extends Component {
               <div className="container">
                 <Helmet title="Request Call"/>
                 <CallForm
-                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: userId})}/>
+                  expertUserName={params.username}
+                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: params.id})}/>
               </div>
             </div>
           </div>

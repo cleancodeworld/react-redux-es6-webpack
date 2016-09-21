@@ -1,7 +1,8 @@
 export const INIT = '@@INIT';
 export const REDUX_INIT = '@@redux/INIT';
 export const RESET_CALLS = 'knexpert/call/RESET';
-import { LOAD_SUCCESS } from './all';
+import { LOAD_SUCCESS as LOAD_CALL_SUCCESS } from './all';
+import { LOAD_SUCCESS as LOAD_EXPERT_SUCCESS } from './byExpert';
 
 import Immutable from 'immutable';
 
@@ -14,7 +15,8 @@ export default function callLoaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
-    case LOAD_SUCCESS:
+    case LOAD_CALL_SUCCESS:
+    case LOAD_EXPERT_SUCCESS:
       return state.withMutations(map=> {
         const {calls} = action.result.data;
         calls.map(call=> {

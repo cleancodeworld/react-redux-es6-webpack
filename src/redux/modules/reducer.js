@@ -13,6 +13,7 @@ import categoriesLoaded from './categories/loaded';
 import cart from './cart';
 import coursesByAuthor from './course/byAuthor';
 import coursesByPortal from './course/byPortal';
+import callsByExpert from './call/byExpert';
 import myCourses from './myCourses';
 import notifications from './notifications';
 import questionLoaded from './question/loaded';
@@ -44,4 +45,5 @@ export default combineReducers({
   callLoaded,
   sitePage,
   callsAll,
+  callsByExpert,
 });

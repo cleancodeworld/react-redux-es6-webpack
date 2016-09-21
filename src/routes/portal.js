@@ -66,11 +66,10 @@ export default (params) => {
           </Route>
           <Route path="request-call" name="Request Call" component={RequestCallLayout}>
             <IndexRoute component={BrowseExperts}/>
-
-            <Route name="My Calls" path="my-calls" component={MyCalls}/>
             <Route name="Expert Profile" path="profile" component={ExpertProfile}/>
-            <Route name="Request Call" path="john" component={CallCreate}/>
+            <Route name="Request Call" path=":id/:username" component={CallCreate}/>
           </Route>
+          <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
           <Route name="Cart" path="cart" component={Cart}/>
           <Route name="My Courses" path="my-courses" component={MyCourses}/>

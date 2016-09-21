@@ -15,6 +15,7 @@ require('moment-range');
 export default class CallForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    expertUserName: PropTypes.string,
     success: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
@@ -49,7 +50,7 @@ export default class CallForm extends Component {
 
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, expertUserName } = this.props;
     const minPrice = 2;
     return (
       <div className="row">
@@ -63,7 +64,7 @@ export default class CallForm extends Component {
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
                   <div className="form-group">
-                    <label className="control-label col-lg-2">Message to Adrian</label>
+                    <label className="control-label col-lg-2">Message to {expertUserName}</label>
                     <div className="col-lg-10">
                       <Field name="message" component={this.messageField}/>
                     </div>
@@ -205,20 +206,6 @@ export default class CallForm extends Component {
                   Service</a>.
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-3">
-          <div className="media-list panel">
-            <div className="media p-15 pr-10">
-              <div className="media-left"><a href="#"><img
-                src="https://placeholdit.imgix.net/~text?txtsize=23&bg=ffff00&txtclr=000000&txt=40%C3%9740&w=40&h=40"
-                className="img-circle"
-                alt=""/></a></div>
-              <div className="media-body">
-                <span className="media-heading text-semibold">Adrian Salamunovic</span>
-                <span className="text-muted display-block">Los Angeles and Ottawa, Canada $5/min</span>
-              </div>
             </div>
           </div>
         </div>
