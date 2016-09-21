@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import {showSignUpModal} from 'redux/modules/auth';
 import { asyncConnect } from 'redux-connect';
 import { CallList, } from 'components';
-import { load, isLoaded } from 'redux/modules/call/byExpert';
+import { load as expertLoad, isLoaded as expertIsLoaded} from 'redux/modules/call/byExpert';
+import { load as requesterLoad, isLoaded as requesterIsLoaded} from 'redux/modules/call/byRequester';
 import {withUser, withCalls} from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
     const state = getState();
-    if (!isLoaded(state)) {
-      promises.push(dispatch(load(state.auth.getIn(['user', 'username']))));
+    if (!expertIsLoaded(state)) {
+      promises.push(dispatch(expertLoad(state.auth.getIn(['user', 'username']))));
+    }
+    if (!requesterIsLoaded(state)) {
+      promises.push(dispatch(requesterLoad(state.auth.getIn(['user', 'username']))));
     }
     return Promise.all(promises);
   }

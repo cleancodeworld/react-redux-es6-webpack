@@ -1,8 +1,8 @@
 export const INIT = '@@INIT';
 export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/call/expert/LOAD';
-export const LOAD_SUCCESS = 'knexpert/call/expert/LOAD_SUCCESS';
-export const LOAD_FAIL = 'knexpert/call/expert/LOAD_FAIL';
+export const LOAD_SUCCESS = 'knexpert/call/requester/LOAD_SUCCESS';
+export const LOAD_FAIL = 'knexpert/call/requester/LOAD_FAIL';
 
 import Immutable from 'immutable';
 import {
@@ -41,12 +41,11 @@ export default function all(state = initialState, action) {
 export function load(expertId) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`api/v1/call/expert/${expertId}`)
+    promise: (client) => client.get(`api/v1/call/requester/${expertId}`)
   };
 }
 
 export function isLoaded(globalState) {
-  debugger;
-  return globalState.callsByExpert && globalState.portalCurrent && globalState.auth &&
-    globalState.callsByExpert.get('loaded') && globalState.portalCurrent.getIn(['meta', 'ownerId']) === globalState.auth.getIn(['user', 'userId']);
+  return globalState.callsByRequester && globalState.portalCurrent && globalState.auth
+    && globalState.callsByRequester.get('loaded') && globalState.portalCurrent.getIn(['meta', 'ownerId']) === globalState.auth.getIn(['user', 'userId']);
 }
