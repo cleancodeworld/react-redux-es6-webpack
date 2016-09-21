@@ -5,7 +5,6 @@ import {
 
 const CallListItem = (props) => {
   const {portal, user} = props;
-  debugger;
   if (user && portal && user.get('userId') === portal.getIn(['owner', 'id'])) {
     return <Expert {...props}/>;
   } else if (user && user.get('userId')) {

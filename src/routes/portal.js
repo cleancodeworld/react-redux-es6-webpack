@@ -35,6 +35,7 @@ import {
   ExpertProfile,
   CallCreate,
   MyCalls,
+  CallApprove,
 } from '../containers/portal';
 import {
   Root,
@@ -64,10 +65,11 @@ export default (params) => {
               <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>
           </Route>
-          <Route path="request-call" name="Request Call" component={RequestCallLayout}>
+          <Route path="call" name="Request Call" component={RequestCallLayout}>
             <IndexRoute component={BrowseExperts}/>
-            <Route name="Expert Profile" path="profile" component={ExpertProfile}/>
-            <Route name="Request Call" path=":id/:username" component={CallCreate}/>
+            <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>
+            <Route name="Request Call" path="expert" component={CallCreate}/>
+            <Route name="Call Approval" path=":id/approve_by_expert" component={CallApprove}/>
           </Route>
           <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>

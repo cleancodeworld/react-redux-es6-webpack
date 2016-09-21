@@ -34,7 +34,7 @@ export default class BrowseExperts extends Component {
 
                               <div className="media-body">
                                 <h6 className="media-heading">
-                                  <Link to="/request-call/profile">
+                                  <Link to="/call/expert/profile">
                                     {`${portal.meta.getIn(['owner', 'firstName'])} ${portal.meta.getIn(['owner', 'lastName'])}`}
                                   </Link>
                                 </h6>
@@ -46,7 +46,7 @@ export default class BrowseExperts extends Component {
                               <div className="media-right text-center">
                                 <h1 className="panel-title price"><b>$5.83</b></h1>
                                 <small>per minute</small>
-                                <Link to={`/request-call/${portal.meta.getIn(['owner', 'id'])}/${portal.meta.getIn(['owner', 'username'])}`} className="btn btn-primary legitRipple mt-5 mb-5"
+                                <Link to={`/call/expert`} className="btn btn-primary legitRipple mt-5 mb-5"
                                       type="button">Request a Call
                                   <i
                                     className="icon-arrow-right14 position-right"></i></Link>

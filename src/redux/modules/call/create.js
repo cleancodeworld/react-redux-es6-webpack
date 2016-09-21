@@ -47,7 +47,7 @@ export function create(portalId, model) {
     return dispatch(
       _create({ ...model, availabilityDates, portalId }))
       .then(()=>dispatch(resetCalls()))
-      .then(()=> dispatch(push('/request-call')))
+      .then(()=> dispatch(push('/call')))
       .catch(res => {
         beautifyAndThrow(res.error);
       });

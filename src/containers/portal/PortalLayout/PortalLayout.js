@@ -59,7 +59,7 @@ export default class PortalLayout extends Component {
               <LinkContainer to="/question">
                 <NavItem eventKey={2}>Questions</NavItem>
               </LinkContainer>
-              <LinkContainer to="/request-call">
+              <LinkContainer to="/call">
                 <NavItem eventKey={2}>Clarify</NavItem>
               </LinkContainer>
               {user ?

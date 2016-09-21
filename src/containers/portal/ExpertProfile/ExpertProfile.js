@@ -57,7 +57,7 @@ export default class ExpertProfile extends Component {
                         <i className="fa fa-star-o"></i>
                         <span>(495)</span>
                       </p>
-                      <p><Link to="/request-call/john"
+                      <p><Link to="/call/expert"
                                className="btn btn-labeled btn-labeled-right bg-blue heading-btn legitRipple full-width">Request
                         a call
                         <b><i className="fa fa-chevron-right"></i></b>
