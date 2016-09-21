@@ -3,22 +3,21 @@ import {
   Expert, Guest, Requester
 } from './types/index';
 
-const CallListItem = (props, context) => {
-  const {call} = props;
-  if (context.user && call.get('authorId') === context.user.get('userId')) {
+const CallListItem = (props) => {
+  const {portal, user} = props;
+  debugger;
+  if (user && portal && user.get('userId') === portal.getIn(['owner', 'id'])) {
     return <Expert {...props}/>;
-  } else if (context.user && context.user.get('userId')) {
+  } else if (user && user.get('userId')) {
     return <Requester {...props}/>;
   }
   return <Guest {...props}/>;
 };
 
-CallListItem.contextTypes = {
-  user: PropTypes.object,
-};
-
 CallListItem.propTypes = {
   call: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  portal: PropTypes.object.isRequired,
 };
 
 export default CallListItem;

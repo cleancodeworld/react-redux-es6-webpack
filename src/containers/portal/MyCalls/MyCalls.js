@@ -6,7 +6,7 @@ import { asyncConnect } from 'redux-connect';
 import { CallList, } from 'components';
 import { load as expertLoad, isLoaded as expertIsLoaded} from 'redux/modules/call/byExpert';
 import { load as requesterLoad, isLoaded as requesterIsLoaded} from 'redux/modules/call/byRequester';
-import {withUser, withCalls} from 'hoc';
+import {withUser, withCalls, withPortal} from 'hoc';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -28,14 +28,14 @@ import {withUser, withCalls} from 'hoc';
 )
 @withCalls
 @withUser
+@withPortal
 
 export default class MyCalls extends Component {
 
   static propTypes = {
     calls: PropTypes.object,
     order: PropTypes.object,
-    wishList: PropTypes.object,
-    cart: PropTypes.object,
+    portal: PropTypes.object,
     showSignUpModal: PropTypes.func,
     user: PropTypes.object,
   };
@@ -45,7 +45,7 @@ export default class MyCalls extends Component {
   };
 
   render() {
-    const {calls, order, user, cart, wishList} = this.props;
+    const {calls, order, user, portal} = this.props;
     return (
       <div className="page-container">
         <Helmet title="My Calls"/>
@@ -53,9 +53,7 @@ export default class MyCalls extends Component {
           <div className="panel panel-body">
             <CallList entities={calls}
                       order={order}
-                      wishList={wishList}
-                      cart={cart}
-                      onSessionRequired={ ()=> this.props.showSignUpModal()}
+                      portal={portal.meta}
                       user={user}/>
           </div>
         </div>
