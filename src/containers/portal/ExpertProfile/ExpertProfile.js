@@ -12,7 +12,6 @@ export default class ExpertProfile extends Component {
   render() {
     const {portal} = this.props;
     const user = portal.meta.get('owner');
-    debugger;
     return (
       <div className="page-container">
         <div className="page-content">

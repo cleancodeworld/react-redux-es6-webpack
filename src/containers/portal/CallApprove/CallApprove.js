@@ -2,28 +2,45 @@ import React, { Component, PropTypes } from 'react';
 import { CallApproveForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
-import {withUserId, withPortal} from 'hoc';
+import { asyncConnect } from 'redux-connect';
+import {withUserId, withPortal, withCall} from 'hoc';
 import { push } from 'react-router-redux';
 import { create as callCreate } from 'redux/modules/call/create';
+import { load, isLoaded } from 'redux/modules/call/byId';
+import { setSelectedDate } from 'redux/modules/call/setSelectedDate';
 
-@connect(null, { callCreate, push })
+@asyncConnect([{
+  promise: ({params, store: {dispatch, getState}}) => {
+    const promises = [];
+    const state = getState();
+    if (!isLoaded(state, params.callId)) {
+      promises.push(dispatch(load(params.callId)));
+    }
+    return Promise.all(promises);
+  }
+}])
+
+@connect(null, { callCreate, push, setSelectedDate })
 @withUserId
 @withPortal
+@withCall
 
 export default class CallApprove extends Component {
   static propTypes = {
     userId: PropTypes.string,
     params: PropTypes.object,
     portal: PropTypes.object,
+    call: PropTypes.object,
     create: PropTypes.func,
     push: PropTypes.func,
+    setSelectedDate: PropTypes.func,
     callCreate: PropTypes.func,
   };
 
   static pageHeader = {}
 
   render() {
-    const {userId, portal, params} = this.props;
+    const {call} = this.props;
     return (
       <div className="page-container">
         <div className="row">
@@ -32,8 +49,10 @@ export default class CallApprove extends Component {
               <div className="container">
                 <Helmet title="Request Call"/>
                 <CallApproveForm
-                  expertUserName={params.username}
-                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: params.id})}/>
+                  initialValues={{availability: call.get('availability') && call.get('availability').toJS() || []}}
+                  onSubmit={ model => this.props.setSelectedDate(call.get('id'), {
+                    selectedDate: model.selectedDate
+                  })}/>
               </div>
             </div>
           </div>

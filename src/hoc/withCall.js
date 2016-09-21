@@ -3,7 +3,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import {connect} from 'react-redux';
 
 @connect(({callLoaded}, ownProps)=> ({
-  call: callLoaded.getIn(['entities', ownProps.params.callName])
+  call: callLoaded.getIn(['entities', ownProps.params.callId])
 }))
 
 export default function withCall(WrappedComponent) {

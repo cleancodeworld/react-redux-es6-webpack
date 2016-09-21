@@ -69,7 +69,7 @@ export default (params) => {
             <IndexRoute component={BrowseExperts}/>
             <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>
             <Route name="Request Call" path="expert" component={CallCreate}/>
-            <Route name="Call Approval" path=":id/approve_by_expert" component={CallApprove}/>
+            <Route name="Call Approval" path=":callId/approve_by_expert" component={CallApprove}/>
           </Route>
           <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>

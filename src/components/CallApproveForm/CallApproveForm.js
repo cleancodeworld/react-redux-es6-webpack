@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import validate from './validate';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
+import moment from 'moment';
 
 require('moment-range');
 
@@ -14,13 +15,13 @@ export default class CallApproveForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     success: PropTypes.func,
+    initialValues: PropTypes.object,
     submitting: PropTypes.bool,
     error: PropTypes.string,
   }
 
   render() {
-    const { handleSubmit } = this.props;
-    const minPrice = 2;
+    const { handleSubmit, initialValues: {availability} } = this.props;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -35,7 +36,7 @@ export default class CallApproveForm extends Component {
                   <div className="form-group">
                     <label className="control-label col-lg-2">Set Estimated Length</label>
                     <div className="col-lg-10">
-                      <Field name="estimated" component={estimated =>
+                      <Field name="selectedDate" component={estimated =>
                         <div>
                         <Select
                           {...estimated.input}
@@ -43,7 +44,7 @@ export default class CallApproveForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={ [15, 30, 60].map( value => ({ value: value, label: `${value} minutes ($${minPrice * value})`}))}
+                          options={ availability.map( value => ({ value: value, label: moment(value).format('DD/MM/YYYY HH:mm')}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>
