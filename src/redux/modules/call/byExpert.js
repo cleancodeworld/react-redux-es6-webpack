@@ -46,7 +46,6 @@ export function load(expertId) {
 }
 
 export function isLoaded(globalState) {
-  debugger;
   return globalState.callsByExpert && globalState.portalCurrent && globalState.auth &&
     globalState.callsByExpert.get('loaded') && globalState.portalCurrent.getIn(['meta', 'ownerId']) === globalState.auth.getIn(['user', 'userId']);
 }
