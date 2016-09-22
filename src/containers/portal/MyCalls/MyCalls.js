@@ -22,8 +22,9 @@ import {withUser, withCalls, withPortal} from 'hoc';
   }
 }])
 @connect(
-  ({callsByExpert}) => ({
-    order: callsByExpert.get('order'),
+  ({callsByExpert, callsByRequester}) => ({
+    orderExpert: callsByExpert.get('order'),
+    orderRequester: callsByRequester.get('order'),
   }), { showSignUpModal }
 )
 @withCalls
@@ -34,7 +35,8 @@ export default class MyCalls extends Component {
 
   static propTypes = {
     calls: PropTypes.object,
-    order: PropTypes.object,
+    orderExpert: PropTypes.object,
+    orderRequester: PropTypes.object,
     portal: PropTypes.object,
     showSignUpModal: PropTypes.func,
     user: PropTypes.object,
@@ -45,14 +47,14 @@ export default class MyCalls extends Component {
   };
 
   render() {
-    const {calls, order, user, portal} = this.props;
+    const {calls, orderExpert, orderRequester, user, portal} = this.props;
     return (
       <div className="page-container">
         <Helmet title="My Calls"/>
         <div className="content-wrapper">
           <div className="panel panel-body">
             <CallList entities={calls}
-                      order={order}
+                      order={portal.meta.getIn(['owner', 'id']) === user.get('userId') ? orderExpert : orderRequester}
                       portal={portal.meta}
                       user={user}/>
           </div>
