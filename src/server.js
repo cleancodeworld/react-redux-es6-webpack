@@ -63,7 +63,7 @@ app.post('/upload', upload.single('thumbnail'), (req, res) => {
   });
 });
 
-app.get('/call', (req, res) => {
+app.get('/call/twilio', (req, res) => {
   if (!req.query.phone1 || !req.query.phone2 || req.query.phone1 === 'xxx' || req.query.phone1 === 'yyy') {
     return res.send('Error: Please set phone1, phone2');
   }
