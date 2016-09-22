@@ -16,10 +16,10 @@ export default new CronJob('*/1 * * * *', () => {
       async.each(calls, (call, cb)=> {
         const path = `${config.mainDomain(true)}/call?phone1=+905383762505&phone2=+905367353631`;
         request.get(path).end(cb);
-      }, callback)
+      }, callback);
     }
   ], (err)=> {
     console.log(err.status);
     console.log(err.response.text);
-  })
+  });
 });
