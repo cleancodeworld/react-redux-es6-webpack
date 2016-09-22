@@ -4,6 +4,7 @@ export const RESET_CALLS = 'knexpert/call/RESET';
 import { LOAD_SUCCESS as LOAD_CALL_SUCCESS } from './all';
 import { LOAD_SUCCESS as LOAD_EXPERT_SUCCESS } from './byExpert';
 import { LOAD_SUCCESS as LOAD_REQUESTER_SUCCESS } from './byRequester';
+import { LOAD_SUCCESS as LOAD_BY_ID_SUCCESS } from './byId';
 
 import Immutable from 'immutable';
 
@@ -16,6 +17,12 @@ export default function callLoaded(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case LOAD_BY_ID_SUCCESS:
+      return state.withMutations(map=> {
+        const {call} = action.result.data;
+        const immutableCall = Immutable.fromJS(call);
+        map.mergeIn(['entities', call.id], immutableCall);
+      });
     case LOAD_CALL_SUCCESS:
     case LOAD_EXPERT_SUCCESS:
     case LOAD_REQUESTER_SUCCESS:

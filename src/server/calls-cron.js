@@ -2,24 +2,29 @@ import {CronJob} from 'cron';
 import request from 'superagent';
 import config from 'config';
 import async from 'async';
+import moment from 'moment';
+
 export default new CronJob('*/1 * * * *', () => {
   async.waterfall([
     (callback)=> {
-      const path = `${config.apiUrl}/api/v1/call/date/1-1-2016`;
+      const path = `${config.apiUrl}/api/v1/call/date/${moment().set('second', 0).toISOString()}/${moment().set('second', 60).toISOString()}`;
+      // const path = `${config.apiUrl}/api/v1/call/date/2016-09-19T21:20:00Z/2016-09-19T21:40:00Z`
       console.log(path);
       return request
         .get(path)
         .end(callback);
     },
-    (calls, callback)=> {
-      console.log(calls);
-      async.each(calls, (call, cb)=> {
-        const path = `${config.mainDomain(true)}/call?phone1=+905383762505&phone2=+905367353631`;
+    ({body}, callback)=> {
+      console.log(res.body);
+      async.each(body.data.calls, (call, cb)=> {
+        const path = `${config.mainDomain(true)}/call?phone1=${call.expert.phone}&phone2=${call.requester.phone}`;
         request.get(path).end(cb);
       }, callback);
     }
   ], (err)=> {
-    console.log(err.status);
-    console.log(err.response.text);
+    if (err) {
+      console.log(err.status);
+      console.log(err.response.text);
+    }
   });
 });

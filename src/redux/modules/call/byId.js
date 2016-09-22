@@ -7,7 +7,7 @@ export const LOAD_FAIL = 'knexpert/call/byId/LOAD_FAIL';
 export function load(id) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get(`api/v1/call/${id}`)
+    promise: (client) => client.get(`api/v1/call/id/${id}`)
   };
 }
 
