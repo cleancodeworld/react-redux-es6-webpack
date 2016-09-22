@@ -33,7 +33,7 @@ export default class CallCreate extends Component {
                 <Helmet title="Request Call"/>
                 <CallForm
                   expertUserName={params.username}
-                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, requesterId: userId, expertId: portal.meta.getIn(['owner', 'id'])})}/>
+                  onSubmit={ model => this.props.callCreate(portal.meta.get('id'), {...model, status: 'pending', requesterId: userId, expertId: portal.meta.getIn(['owner', 'id'])})}/>
               </div>
             </div>
           </div>
