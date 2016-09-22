@@ -45,7 +45,7 @@ export function create(portalId, model) {
 
   return dispatch => {
     return dispatch(
-      _create({ ...model, availabilityDates, portalId }))
+      _create({ ...model, availability: availabilityDates, portalId }))
       .then(()=>dispatch(resetCalls()))
       .then(()=> dispatch(push('/call')))
       .catch(res => {
