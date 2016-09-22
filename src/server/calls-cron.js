@@ -15,7 +15,6 @@ export default new CronJob('*/1 * * * *', () => {
         .end(callback);
     },
     ({body}, callback)=> {
-      console.log(res.body);
       async.each(body.data.calls, (call, cb)=> {
         const path = `${config.mainDomain(true)}/call?phone1=${call.expert.phone}&phone2=${call.requester.phone}`;
         request.get(path).end(cb);
