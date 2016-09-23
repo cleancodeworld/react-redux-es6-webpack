@@ -4,6 +4,8 @@ export const SET_SELECTED_DATE = 'knexpert/call/setSelectedDate/LOAD';
 export const SET_SELECTED_DATE_SUCCESS = 'knexpert/call/setSelectedDate/SUCCESS';
 export const SET_SELECTED_DATE_FAIL = 'knexpert/call/setSelectedDate/FAIL';
 
+import { push } from 'react-router-redux';
+
 export function _setSelectedDate(id, data) {
   return {
     types: [SET_SELECTED_DATE, SET_SELECTED_DATE_SUCCESS, SET_SELECTED_DATE_FAIL],
@@ -14,6 +16,6 @@ export function _setSelectedDate(id, data) {
 export function setSelectedDate(id, data) {
   return dispatch => {
     return dispatch(_setSelectedDate(id, data))
-      .then(()=> dispatch(push('/my-calls')))
-  }
+      .then(()=> dispatch(push('/my-calls')));
+  };
 }
