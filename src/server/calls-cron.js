@@ -7,7 +7,7 @@ import moment from 'moment';
 export default new CronJob('*/1 * * * *', () => {
   async.waterfall([
     (callback)=> {
-      const path = `${config.apiUrl}/api/v1/call/date/${moment().set('second', 0).toISOString()}/${moment().set('second', 59).toISOString()}`;
+      const path = `${config.apiUrl}/api/v1/call/date/${moment().subtract(1, 'minute').toISOString()}/${moment().add(1, 'minute').toISOString()}`;
       // const path = `${config.apiUrl}/api/v1/call/date/2016-09-19T21:20:00Z/2016-09-19T21:40:00Z`
       console.log(path);
       return request
