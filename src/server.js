@@ -73,13 +73,13 @@ app.get('/call/twilio', (req, res) => {
       (callback)=> client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone1,
-        url: `${config.mainDomain(false)}/join`
+        url: `http://${config.mainDomain(false)}/join`
       }, callback),
 
       (callback) => client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone2,
-        url: `${config.mainDomain(false)}/join`
+        url: `http://${config.mainDomain(false)}/join`
       }, callback)
     ],
     (err, results)=> {
