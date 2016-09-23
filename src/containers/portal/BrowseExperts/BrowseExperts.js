@@ -61,13 +61,6 @@ export default class BrowseExperts extends Component {
                               </div>
                             </li>
                           </ul>
-                          <div className="text-center pb-10 pt-10">
-                            <button className="btn btn-default btn-loading legitRipple"
-                                    data-loading-text="<i className='icon-spinner4 spinner position-left'></i> Load more"
-                                    type="button"><i className="icon-spinner4 position-left"></i> Load more<span
-                              className="legitRipple-ripple"></span>
-                            </button>
-                          </div>
                         </div>
                       </div>
                     </div>

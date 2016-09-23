@@ -8,6 +8,7 @@ const Requester = ({call}) => {
           <h1 className="panel-title price"><b>[$16.67]</b></h1>
           <small>per minute</small>
         </div>
+        <span>{call.get('status')}</span>
       </CallInfo>
     </li>
   );
