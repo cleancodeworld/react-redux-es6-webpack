@@ -7,11 +7,11 @@ const Expert = ({call}) => {
     case 'pending':
       status = (<Link className="btn btn-primary legitRipple mt-5 mb-5"
                       to={`/call/${call.get('id')}/accepted_by_expert`}>Approve <i
-        className="icon-arrow-right14 position-right"></i></Link>)
+        className="icon-arrow-right14 position-right"></i></Link>);
       break;
     default:
       status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Approved <i
-        className="icon-arrow-right14 position-right"></i></button>)
+        className="icon-arrow-right14 position-right"></i></button>);
       break;
   }
   return (
