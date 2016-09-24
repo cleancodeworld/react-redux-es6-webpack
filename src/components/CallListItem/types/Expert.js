@@ -5,13 +5,25 @@ const Expert = ({call}) => {
   let status;
   switch (call.get('status')) {
     case 'pending':
-      status = (<Link className="btn btn-primary legitRipple mt-5 mb-5"
-                      to={`/call/${call.get('id')}/accepted_by_expert`}>Approve <i
-        className="icon-arrow-right14 position-right"></i></Link>);
+      status = (<div>
+        <Link className="btn btn-primary legitRipple mt-5 mb-5"
+              to={`/call/${call.get('id')}/accepted_by_expert`}>Approve <i
+          className="icon-arrow-right14 position-right"></i></Link>
+        <Link className="btn btn-primary legitRipple mt-5 mb-5"
+              to={`/call/${call.get('id')}/rejected_by_expert`}>Rejected <i
+          className="icon-arrow-right14 position-right"></i></Link>
+      </div>);
       break;
-    default:
+    case 'accepted_by_expert':
       status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Approved <i
         className="icon-arrow-right14 position-right"></i></button>);
+      break;
+    case 'rejected_by_expert':
+      status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Rejected <i
+        className="icon-arrow-right14 position-right"></i></button>);
+      break;
+    default:
+      status = (<span/>);
       break;
   }
   return (

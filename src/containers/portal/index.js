@@ -30,4 +30,5 @@ export BrowseExperts from './BrowseExperts/BrowseExperts';
 export ExpertProfile from './ExpertProfile/ExpertProfile';
 export CallCreate from './CallCreate/CallCreate';
 export MyCalls from './MyCalls/MyCalls';
-export CallApprove from './CallApprove/CallApprove';
+export CallAccepted from './CallAccepted/CallAccepted';
+export CallRejected from './CallRejected/CallRejected';

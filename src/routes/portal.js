@@ -35,7 +35,8 @@ import {
   ExpertProfile,
   CallCreate,
   MyCalls,
-  CallApprove,
+  CallAccepted,
+  CallRejected,
 } from '../containers/portal';
 import {
   Root,
@@ -69,7 +70,9 @@ export default (params) => {
             <IndexRoute component={BrowseExperts}/>
             <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>
             <Route name="Request Call" path="expert" component={CallCreate}/>
-            <Route name="Call Approval" path=":callId/accepted_by_expert" component={CallApprove}/>
+            <Route name="Call Approval" path=":callId/accepted_by_expert" component={CallAccepted}/>
+            <Route name="Call Approval" path=":callId/rejected_by_expert" component={CallRejected}/>
+
           </Route>
           <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>

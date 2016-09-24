@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { CallApproveForm } from 'components';
+import { CallAcceptedForm } from 'components';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import { asyncConnect } from 'redux-connect';
@@ -25,7 +25,7 @@ import { setSelectedDate } from 'redux/modules/call/setSelectedDate';
 @withPortal
 @withCall
 
-export default class CallApprove extends Component {
+export default class CallAccepted extends Component {
   static propTypes = {
     userId: PropTypes.string,
     params: PropTypes.object,
@@ -48,7 +48,7 @@ export default class CallApprove extends Component {
             <div className="content-wrapper">
               <div className="container">
                 <Helmet title="Request Call"/>
-                <CallApproveForm
+                <CallAcceptedForm
                   initialValues={{availability: call.get('availability') && call.get('availability').toJS() || []}}
                   onSubmit={ model => this.props.setSelectedDate(call.get('id'), {
                     selectedDate: model.selectedDate

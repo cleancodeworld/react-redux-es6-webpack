@@ -11,7 +11,7 @@ require('moment-range');
   validate
 })
 
-export default class CallApproveForm extends Component {
+export default class CallAcceptedForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     success: PropTypes.func,
