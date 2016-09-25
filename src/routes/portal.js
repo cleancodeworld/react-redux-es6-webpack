@@ -37,6 +37,7 @@ import {
   MyCalls,
   CallAccepted,
   CallRejected,
+  CallFeedback,
 } from '../containers/portal';
 import {
   Root,
@@ -71,8 +72,8 @@ export default (params) => {
             <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>
             <Route name="Request Call" path="expert" component={CallCreate}/>
             <Route name="Call Approval" path=":callId/accepted_by_expert" component={CallAccepted}/>
-            <Route name="Call Approval" path=":callId/rejected_by_expert" component={CallRejected}/>
-
+            <Route name="Call Feedback" path=":callId/done" component={CallFeedback}/>
+            <Route name="Call Reject" path=":callId/rejected_by_expert" component={CallRejected}/>
           </Route>
           <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
@@ -83,14 +84,12 @@ export default (params) => {
             <Route name="Category" path=":categoryName" component={CoursesByCategory}/>
           </Route>
           <Route name="Checkout" path="check-out" component={CheckOut}/>
-
           <Route name="Courses" path="course">
             <IndexRoute name="Courses" component={Courses}/>
             <Route name="View" staticName path=":courseName" component={Course}>
               <IndexRoute component={CourseView}/>
             </Route>
           </Route>
-
           <Route name="Author" path="author" component={AuthorContainer}>
             <Route component={PortalAuthorLayout}>
               <IndexRoute component={Dashboard}/>

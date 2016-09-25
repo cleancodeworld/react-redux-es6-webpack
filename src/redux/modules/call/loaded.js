@@ -34,7 +34,6 @@ export default function callLoaded(state = initialState, action) {
         });
       });
     case RESET_CALLS:
-      return initialState;
     default:
       return state;
   }
