@@ -9,8 +9,8 @@ const Expert = ({call}) => {
         <Link className="btn btn-primary legitRipple mt-5 mb-5"
               to={`/call/${call.get('id')}/accepted_by_expert`}>Approve <i
           className="icon-arrow-right14 position-right"></i></Link>
-        <Link className="btn btn-primary legitRipple mt-5 mb-5"
-              to={`/call/${call.get('id')}/rejected_by_expert`}>Rejected <i
+        <Link className="btn btn-danger legitRipple mt-5 mb-5"
+              to={`/call/${call.get('id')}/rejected_by_expert`}>Reject <i
           className="icon-arrow-right14 position-right"></i></Link>
       </div>);
       break;
@@ -26,7 +26,7 @@ const Expert = ({call}) => {
       </div>);
       break;
     case 'rejected_by_expert':
-      status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Rejected <i
+      status = (<button disabled className="btn btn-danger legitRipple mt-5 mb-5 disabled">Rejected <i
         className="icon-arrow-right14 position-right"></i></button>);
       break;
     default:
