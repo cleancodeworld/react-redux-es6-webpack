@@ -76,7 +76,7 @@ export default class CallForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
-                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can ask call yourself') : <span/>}
+                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') : <span/>}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Message to {expertUserName}</label>
                     <div className="col-lg-10">
