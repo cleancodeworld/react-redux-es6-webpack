@@ -44,7 +44,7 @@ export default class BrowseExperts extends Component {
                               </div>
 
                               <div className="media-right text-center">
-                                <h1 className="panel-title price"><b>$5.83</b></h1>
+                                <h1 className="panel-title price"><b>${portal.meta.getIn(['owner', 'minutePrice'])}</b></h1>
                                 <small>per minute</small>
                                 <Link to={`/call/expert`} className="btn btn-primary legitRipple mt-5 mb-5"
                                       type="button">Request a Call

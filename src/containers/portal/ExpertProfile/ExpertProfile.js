@@ -54,7 +54,7 @@ export default class ExpertProfile extends Component {
                 <div className="col-md-3 col-sm-4">
                   <div className="panel">
                     <div className="panel-body text-center">
-                      <div className="h4"><big>$1</big>
+                      <div className="h4"><big>${user.get('minutePrice')}</big>
                         <small> / min</small>
                       </div>
                       <p className="rating">
