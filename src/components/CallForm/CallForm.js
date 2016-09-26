@@ -105,7 +105,7 @@ export default class CallForm extends Component {
                   <div className="help-block">call cost&nbsp;
                     <strong>${portal.meta.getIn(['owner', 'minutePrice'])}/min</strong>
                   </div>
-                  <div className="help-block">we will call you via<b>+{user.get('phone')}</b>.</div>
+                  <div className="help-block">we will call you via&nbsp;<b>+{user.get('phone')}</b>.</div>
                 </fieldset>
                 <fieldset className="content-group">
                   <legend className="text-bold text-size-large"><span
