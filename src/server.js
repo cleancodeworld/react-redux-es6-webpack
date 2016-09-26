@@ -106,14 +106,13 @@ app.post('/join', bodyParser.json(), bodyParser.urlencoded({ extended: false }),
 
 
 app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req, res) => {
-  const path = `${config.apiUrl}/api/v1/call/${req.query.callId}/setconferenceid`
   return request
-    .put(path)
+    .put(`${config.apiUrl}/api/v1/call/${req.query.callId}/setconferenceid`)
     .send({ conferenceId: req.body.ConferenceSid })
     .set('Content-Type', 'application/json')
-    .end((response, error)=> {
+    .end(()=> {
       return res.status(200).json({});
-    })
+    });
 });
 
 app.use('/api/v1', (req, res) => {
