@@ -87,7 +87,7 @@ app.get('/call/twilio', (req, res) => {
     });
 });
 
-app.post('/join', bodyParser.json(), (req, res) => {
+app.post('/join', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req, res) => {
   res.type('text/xml');
   conferenceId = conferenceId || req.body.CallSid || 'ACafdfb7da9a7704481e68ea12804132c5';
   return res.send(
@@ -96,8 +96,16 @@ app.post('/join', bodyParser.json(), (req, res) => {
         conferenceId: conferenceId,
         waitUrl: config.twilio.waitUrl,
         startConferenceOnEnter: true,
-        endConferenceOnExit: true
+        endConferenceOnExit: true,
+        statusCallbackEvent: 'end',
+        statusCallback: `http://${config.mainDomain(false)}/statusCallback`,
+        eventCallbackUrl: `http://${config.mainDomain(false)}/statusCallback`,
       }).toString());
+});
+
+
+app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req, res) => {
+  console.log(JSON.stringify(req.body, null, 4))
 });
 
 app.use('/api/v1', (req, res) => {

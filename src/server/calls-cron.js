@@ -8,7 +8,6 @@ export default new CronJob('*/1 * * * *', () => {
   async.waterfall([
     (callback)=> {
       const path = `${config.apiUrl}/api/v1/call/date/${moment().subtract(1, 'minute').toISOString()}/${moment().add(1, 'minute').toISOString()}`;
-      // const path = `${config.apiUrl}/api/v1/call/date/2016-09-19T21:20:00Z/2016-09-19T21:40:00Z`
       console.log(path);
       return request
         .get(path)
@@ -23,7 +22,7 @@ export default new CronJob('*/1 * * * *', () => {
   ], (err)=> {
     if (err) {
       console.log(err.status);
-      console.log(err.response.text);
+      console.log(err.response && err.response.text);
     }
   });
 });

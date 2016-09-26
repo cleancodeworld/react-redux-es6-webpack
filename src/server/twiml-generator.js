@@ -5,6 +5,8 @@ export const connectConferenceTwiml = (options)=> {
     dialNode.conference(options.conferenceId, {
       'startConferenceOnEnter': options.startConferenceOnEnter,
       'endConferenceOnExit': options.endConferenceOnExit,
+      'statusCallback': options.statusCallback,
+      'statusCallbackEvent': options.statusCallbackEvent,
       'record': 'record-from-start',
       'waitUrl': options.waitUrl
     });

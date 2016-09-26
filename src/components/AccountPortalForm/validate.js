@@ -73,6 +73,13 @@ const AccountPortalValidation = values => {
     errors.termsOfUse = 'Required';
   }
 
+  if (!values.minutePrice) {
+    errors.minutePrice = 'Required';
+  } else if (!isNumeric(values.minutePrice)) {
+    console.log('Only numbers');
+    errors.minutePrice = 'Only numbers';
+  }
+
   if (!values.confirmPassword) {
     errors.confirmPassword = 'Required';
   } else if (values.confirmPassword !== values.password) {
