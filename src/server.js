@@ -104,8 +104,8 @@ app.post('/join', bodyParser.json(), bodyParser.urlencoded({ extended: false }),
 });
 
 
-app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req, res) => {
-  console.log(JSON.stringify(req.body, null, 4))
+app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req) => {
+  console.log(JSON.stringify(req.body, null, 4));
 });
 
 app.use('/api/v1', (req, res) => {

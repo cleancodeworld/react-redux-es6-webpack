@@ -13,6 +13,7 @@ export function create(model) {
       data: {
         ...model,
         email: model.email,
+        minutePrice: parseInt(model.minutePrice, 10),
         username: model.username,
         roleId: '572d7765cbb4e22d164579b9'
       }
