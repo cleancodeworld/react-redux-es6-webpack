@@ -51,7 +51,6 @@ export default class CallForm extends Component {
 
   render() {
     const { handleSubmit, expertUserName } = this.props;
-    const minPrice = 2;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -80,7 +79,7 @@ export default class CallForm extends Component {
                           onBlurResetsInput={false}
                           value={estimated.input.value}
                           searchable={false}
-                          options={ [15, 30, 60].map( value => ({ value: value, label: `${value} minutes ($${minPrice * value})`}))}
+                          options={ [15, 30, 60].map( value => ({ value: value, label: `${value} minutes`}))}
                           />
                           {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
                         </div>

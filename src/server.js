@@ -20,6 +20,7 @@ import bodyParser from 'body-parser';
 import {connectConferenceTwiml} from './server/twiml-generator';
 import async from 'async';
 import callsCron from './server/calls-cron';
+import request from 'superagent';
 
 const upload = multer({ dest: 'uploads/' });
 let conferenceId = '';
@@ -73,13 +74,13 @@ app.get('/call/twilio', (req, res) => {
       (callback)=> client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone1,
-        url: `http://${config.mainDomain(false)}/join`
+        url: `http://${config.mainDomain(false)}/join?callId=${req.query.callId}`
       }, callback),
 
       (callback) => client.makeCall({
         from: config.twilio.number,
         to: '+' + req.query.phone2,
-        url: `http://${config.mainDomain(false)}/join`
+        url: `http://${config.mainDomain(false)}/join?callId=${req.query.callId}`
       }, callback)
     ],
     (err, results)=> {
@@ -98,14 +99,21 @@ app.post('/join', bodyParser.json(), bodyParser.urlencoded({ extended: false }),
         startConferenceOnEnter: true,
         endConferenceOnExit: true,
         statusCallbackEvent: 'end',
-        statusCallback: `http://${config.mainDomain(false)}/statusCallback`,
-        eventCallbackUrl: `http://${config.mainDomain(false)}/statusCallback`,
+        statusCallback: `http://${config.mainDomain(false)}/statusCallback?callId=${req.query.callId}`,
+        eventCallbackUrl: `http://${config.mainDomain(false)}/statusCallback?callId=${req.query.callId}`,
       }).toString());
 });
 
 
-app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req) => {
-  console.log(JSON.stringify(req.body, null, 4));
+app.post('/statusCallback', bodyParser.json(), bodyParser.urlencoded({ extended: false }), (req, res) => {
+  const path = `${config.apiUrl}/api/v1/call/${req.query.callId}/setconferenceid`
+  return request
+    .put(path)
+    .send({ conferenceId: req.body.ConferenceSid })
+    .set('Content-Type', 'application/json')
+    .end((response, error)=> {
+      return res.status(200).json({});
+    })
 });
 
 app.use('/api/v1', (req, res) => {

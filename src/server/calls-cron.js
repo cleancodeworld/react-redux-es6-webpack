@@ -15,7 +15,8 @@ export default new CronJob('*/1 * * * *', () => {
     },
     ({body}, callback)=> {
       async.each(body.data.calls, (call, cb)=> {
-        const path = `http://${config.mainDomain(true)}/call/twilio?phone1=${call.expert.phone}&phone2=${call.requester.phone}`;
+        const path = `http://${config.mainDomain(true)}/call/twilio?phone1=${call.expert.phone}&phone2=${call.requester.phone}&callId=${call.id}`;
+        console.log(path);
         request.get(path).end(cb);
       }, callback);
     }
