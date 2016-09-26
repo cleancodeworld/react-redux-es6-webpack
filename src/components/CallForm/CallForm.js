@@ -118,11 +118,13 @@ export default class CallForm extends Component {
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
                         <Field name="date1" component={field =>
                           <div>
-                            <DatePicker placeholder="Pick a date…"
-                              onChange={field.input.onChange}
-                              selected={field.input.value}
-                              className="form-control datepicker hasDatepicker" />
+                              <DatePicker placeholder="Pick a date…"
+                                onChange={field.input.onChange}
+                                selected={field.input.value}
+                                className="form-control datepicker hasDatepicker" />
+                            <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+                            </div>
                           </div>
                         }/>
                       </div>
@@ -154,7 +156,9 @@ export default class CallForm extends Component {
                               onChange={field.input.onChange}
                               selected={field.input.value}
                               className="form-control datepicker hasDatepicker" />
+                            <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+                            </div>
                           </div>
                         }/>
                       </div>
@@ -184,7 +188,9 @@ export default class CallForm extends Component {
                               onChange={field.input.onChange}
                               selected={field.input.value}
                               className="form-control datepicker hasDatepicker" />
+                            <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
+                            </div>
                           </div>
                         }/>
                       </div>
