@@ -4,6 +4,7 @@ import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+import { withUser, withPortal } from 'hoc';
 
 require('moment-range');
 
@@ -11,11 +12,15 @@ require('moment-range');
   form: 'CallForm',
   validate
 })
+@withUser
+@withPortal
 
 export default class CallForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     expertUserName: PropTypes.string,
+    portal: PropTypes.object,
+    user: PropTypes.object,
     success: PropTypes.func,
     submitting: PropTypes.bool,
     error: PropTypes.string,
@@ -48,9 +53,18 @@ export default class CallForm extends Component {
     {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
   </div>)
 
+  errorRender = (error) => {
+    let res = <span/>;
+    if (error) {
+      res = (<div className="alert bg-danger alert-styled-left" role="alert">
+        <strong>{error}</strong>
+      </div> );
+    }
+    return res;
+  }
 
   render() {
-    const { handleSubmit, expertUserName } = this.props;
+    const { handleSubmit, expertUserName, portal, user } = this.props;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -62,6 +76,7 @@ export default class CallForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
+                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can ask call yourself') : <span/>}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Message to {expertUserName}</label>
                     <div className="col-lg-10">
@@ -86,15 +101,10 @@ export default class CallForm extends Component {
                       }/>
                     </div>
                   </div>
-                  <div className="help-block">You will be charged <strong>$75.00</strong> for the current scheduled
-                    call
-                    length. If the call goes over over the scheduled time, you will be charged the balance at a rate
-                    of
-                    <strong>$5/min</strong>. If the call gose less than the scheduled time, you will be refunded the
-                    balance.
+                  <div className="help-block">call cost
+                    <strong>${portal.meta.getIn(['owner', 'minutePrice'])}/min</strong>
                   </div>
-                  <div className="help-block">Notifications will be sent to <b>+1 5127397250</b> and <b>john.curtis@quotient.net</b>.
-                    <a href="#">Edit</a></div>
+                  <div className="help-block">we will call you via<b>+{user.get('phone')}</b>.</div>
                 </fieldset>
                 <fieldset className="content-group">
                   <legend className="text-bold text-size-large"><span
@@ -194,10 +204,9 @@ export default class CallForm extends Component {
                       }/>
                     </div>
                   </div>
-                  <div className="help-block">Please note that the times you choose will be 1 hour later for Adrian
-                    (EDT) <br/><a href="#">Change my timezone (currently CDT)</a></div>
+                  <div className="help-block">Please note that the times you choose will be based on your local time zone </div>
                 </fieldset>
-                <button type="submit" className="btn btn-primary content-group">Book Now <i
+                <button type="submit" className="btn btn-primary content-group" disabled={portal.meta.getIn(['owner', 'id']) === user.get('userId')}>Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>
 
                 <div className="help-block">By scheduling a call you agree with our <a target="_blank" href="#">Terms

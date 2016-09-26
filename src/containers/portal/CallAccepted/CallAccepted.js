@@ -40,7 +40,7 @@ export default class CallAccepted extends Component {
   static pageHeader = {}
 
   render() {
-    const {call} = this.props;
+    const {call, portal} = this.props;
     return (
       <div className="page-container">
         <div className="row">
@@ -49,7 +49,7 @@ export default class CallAccepted extends Component {
               <div className="container">
                 <Helmet title="Request Call"/>
                 <CallAcceptedForm
-                  initialValues={{availability: call.get('availability') && call.get('availability').toJS() || []}}
+                  initialValues={{availability: call.get('availability') && call.get('availability').toJS() || [], minutePrice: portal.getIn(['owner', 'minutePrice'])}}
                   onSubmit={ model => this.props.setSelectedDate(call.get('id'), {
                     selectedDate: model.selectedDate
                   })}/>

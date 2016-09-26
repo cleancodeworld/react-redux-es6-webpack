@@ -3,6 +3,7 @@ import validate from './validate';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
 import moment from 'moment';
+import { withUser } from 'hoc';
 
 require('moment-range');
 
@@ -10,18 +11,20 @@ require('moment-range');
   form: 'CallApproveForm',
   validate
 })
+@withUser
 
 export default class CallAcceptedForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     success: PropTypes.func,
     initialValues: PropTypes.object,
+    user: PropTypes.object,
     submitting: PropTypes.bool,
     error: PropTypes.string,
   }
 
   render() {
-    const { handleSubmit, initialValues: {availability} } = this.props;
+    const { handleSubmit, initialValues: {availability, minutePrice}, user } = this.props;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -51,23 +54,11 @@ export default class CallAcceptedForm extends Component {
                       }/>
                     </div>
                   </div>
-                  <div className="help-block">You will be charged <strong>$75.00</strong> for the current scheduled
-                    call
-                    length. If the call goes over over the scheduled time, you will be charged the balance at a rate
-                    of
-                    <strong>$5/min</strong>. If the call gose less than the scheduled time, you will be refunded the
-                    balance.
-                  </div>
-                  <div className="help-block">Notifications will be sent to <b>+1 5127397250</b> and <b>john.curtis@quotient.net</b>.
-                    <a href="#">Edit</a></div>
+                  <div className="help-block">You will get<strong>${minutePrice}/min</strong></div>
+                  <div className="help-block">we will call you via<b>+{user.get('phone')}</b>.</div>
                 </fieldset>
                 <button type="submit" className="btn btn-primary content-group">Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>
-
-                <div className="help-block">By scheduling a call you agree with our <a target="_blank" href="#">Terms
-                  of
-                  Service</a>.
-                </div>
               </form>
             </div>
           </div>
