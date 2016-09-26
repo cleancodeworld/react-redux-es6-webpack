@@ -76,7 +76,8 @@ export default class CallForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
-                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') : <span/>}
+                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') :
+                    <span/>}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Message to {expertUserName}</label>
                     <div className="col-lg-10">
@@ -101,7 +102,7 @@ export default class CallForm extends Component {
                       }/>
                     </div>
                   </div>
-                  <div className="help-block">call cost
+                  <div className="help-block">call cost&nbsp;
                     <strong>${portal.meta.getIn(['owner', 'minutePrice'])}/min</strong>
                   </div>
                   <div className="help-block">we will call you via<b>+{user.get('phone')}</b>.</div>
@@ -204,9 +205,12 @@ export default class CallForm extends Component {
                       }/>
                     </div>
                   </div>
-                  <div className="help-block">Please note that the times you choose will be based on your local time zone </div>
+                  <div className="help-block">Please note that the times you choose will be based on your local time
+                    zone
+                  </div>
                 </fieldset>
-                <button type="submit" className="btn btn-primary content-group" disabled={portal.meta.getIn(['owner', 'id']) === user.get('userId')}>Book Now <i
+                <button type="submit" className="btn btn-primary content-group"
+                        disabled={portal.meta.getIn(['owner', 'id']) === user.get('userId')}>Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>
 
                 <div className="help-block">By scheduling a call you agree with our <a target="_blank" href="#">Terms
