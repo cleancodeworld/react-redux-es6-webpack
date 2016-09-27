@@ -3,6 +3,8 @@ export const REDUX_INIT = '@@redux/INIT';
 export const LOAD = 'knexpert/call/expert/LOAD';
 export const LOAD_SUCCESS = 'knexpert/call/requester/LOAD_SUCCESS';
 export const LOAD_FAIL = 'knexpert/call/requester/LOAD_FAIL';
+import { SET_SELECTED_DATE_SUCCESS } from './setSelectedDate';
+import { REJECT_SUCCESS } from './rejectCall';
 
 import Immutable from 'immutable';
 import {
@@ -31,6 +33,8 @@ export default function all(state = initialState, action) {
         map.set('order', Immutable.fromJS(order));
         map.set('loaded', true);
       });
+    case SET_SELECTED_DATE_SUCCESS:
+    case REJECT_SUCCESS:
     case RESET_CALLS:
       return state.set('loaded', false);
     default:
