@@ -12,6 +12,7 @@ import {
   Login,
   MyPortals,
   SitePage,
+  AllPortals,
 } from '../containers/bare';
 import {
   Root,
@@ -37,6 +38,7 @@ export default (params) => {
         <Route onEnter={(nextState, replace, cb)=>requireLogin(store, nextState, replace, cb)}>
           <Route path="create-portal" component={CreatePortal}/>
           <Route path="portals/my" component={MyPortals}/>
+          <Route path="portals/all" component={AllPortals}/>
         </Route>
         <Route path="password/forget" component={PasswordForget}/>
         <Route path="password/reset" component={PasswordReset}/>

@@ -20,6 +20,7 @@ import notifications from './notifications';
 import questionLoaded from './question/loaded';
 import questionsByPortal from './question/byPortal';
 import myPortals from './portal/myPortals';
+import allPortals from './portal/allPortals';
 import portalLoaded from './portal/loaded';
 import callLoaded from './call/loaded';
 import sitePage from './sitePage';
@@ -42,6 +43,7 @@ export default combineReducers({
   questionLoaded,
   questionsByPortal,
   myPortals,
+  allPortals,
   portalLoaded,
   callLoaded,
   sitePage,

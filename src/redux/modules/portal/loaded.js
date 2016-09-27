@@ -4,6 +4,9 @@ import {
   LOAD_SUCCESS as LOAD_MY_PORTALS_SUCCESS,
 } from './myPortals';
 import {
+  LOAD_SUCCESS as LOAD_ALL_PORTALS_SUCCESS,
+} from './allPortals';
+import {
   REMOVE_SUCCESS as REMOVE_PORTAL_SUCCESS,
 } from './remove';
 
@@ -16,6 +19,7 @@ export default function reducer(state = initialState, action) {
     case INIT:
     case REDUX_INIT:
       return Immutable.fromJS(state);
+    case LOAD_ALL_PORTALS_SUCCESS:
     case LOAD_MY_PORTALS_SUCCESS:
       return state.withMutations(map=> {
         const {portals} = action.result.data;
