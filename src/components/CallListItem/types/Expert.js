@@ -15,8 +15,7 @@ const Expert = ({call}) => {
       </div>);
       break;
     case 'accepted_by_expert':
-      status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Approved <i
-        className="icon-arrow-right14 position-right"></i></button>);
+      status = (<button disabled className="btn btn-primary legitRipple mt-5 mb-5 disabled">Approved</button>);
       break;
     case 'done':
       status = (<div>
@@ -26,8 +25,7 @@ const Expert = ({call}) => {
       </div>);
       break;
     case 'rejected_by_expert':
-      status = (<button disabled className="btn btn-danger legitRipple mt-5 mb-5 disabled">Rejected <i
-        className="icon-arrow-right14 position-right"></i></button>);
+      status = (<button disabled className="btn btn-danger legitRipple mt-5 mb-5 disabled">Rejected</button>);
       break;
     default:
       status = (<span/>);
