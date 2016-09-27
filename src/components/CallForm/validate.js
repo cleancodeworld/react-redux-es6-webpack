@@ -3,6 +3,8 @@ const validate = values => {
 
   if (!values.message) {
     errors.message = 'Required';
+  } else if (values.message.length < 3) {
+    errors.message = 'Message can not be less than 3 characters.';
   }
   if (!values.estimated) {
     errors.estimated = 'Required';

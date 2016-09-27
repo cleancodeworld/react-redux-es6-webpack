@@ -8,6 +8,7 @@ import { push } from 'react-router-redux';
 import {resetCalls} from './loaded';
 import beautifyAndThrow from 'utils/errorBeautifier';
 import moment from 'moment';
+import uniq from 'lodash/uniq';
 
 function _create(model) {
   return {
@@ -42,10 +43,9 @@ export function create(portalId, model) {
     const datetime3 = mergeDateWithTime(date3, time3);
     availabilityDates.push(datetime3);
   }
-
   return dispatch => {
     return dispatch(
-      _create({ ...model, availability: availabilityDates, portalId }))
+      _create({ ...model, availability: uniq(availabilityDates), portalId }))
       .then(()=>dispatch(resetCalls()))
       .then(()=> dispatch(push('/call')))
       .catch(res => {

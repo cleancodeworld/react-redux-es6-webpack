@@ -64,7 +64,7 @@ export default class CallForm extends Component {
   }
 
   render() {
-    const { handleSubmit, expertUserName, portal, user } = this.props;
+    const { handleSubmit, expertUserName, portal, user, error } = this.props;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -76,8 +76,8 @@ export default class CallForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
-                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') :
-                    <span/>}
+                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') : <span/>}
+                  {this.errorRender(error)}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Message to {expertUserName}</label>
                     <div className="col-lg-10">
@@ -218,7 +218,6 @@ export default class CallForm extends Component {
                 <button type="submit" className="btn btn-primary content-group"
                         disabled={portal.meta.getIn(['owner', 'id']) === user.get('userId')}>Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>
-
                 <div className="help-block">By scheduling a call you agree with our <a target="_blank" href="#">Terms
                   of
                   Service</a>.
