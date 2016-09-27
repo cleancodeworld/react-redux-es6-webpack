@@ -17,6 +17,9 @@ import {EDIT_SUCCESS as LESSON_EDIT_SUCCESS} from './lesson/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as PORTAL_UPDATE_COVER_IMAGE_SUCCESS} from './portal/edit';
 import {UPDATE_COVER_IMAGE_SUCCESS as USER_UPDATE_COVER_IMAGE_SUCCESS} from './user/edit';
 import {CREATE_SUCCESS as QUESTION_CREATE_SUCCESS} from './question/create';
+import {CREATE_SUCCESS as CALL_CREATE_SUCCESS} from './call/create';
+import {SET_SELECTED_DATE_SUCCESS} from './call/setSelectedDate';
+import {REJECT_SUCCESS} from './call/rejectCall';
 import {REMOVE_SUCCESS as ANSWER_REMOVE_SUCCESS} from './answer/remove';
 
 const initialState = Immutable.fromJS([]);
@@ -34,6 +37,9 @@ export default function Notifications(state = initialState, action) {
     case LESSON_ADD_SUCCESS:
     case LESSON_EDIT_SUCCESS:
     case QUESTION_CREATE_SUCCESS:
+    case CALL_CREATE_SUCCESS:
+    case SET_SELECTED_DATE_SUCCESS:
+    case REJECT_SUCCESS:
       return state.withMutations(map=> {
         const notify = Immutable.fromJS({
           level: 'success',

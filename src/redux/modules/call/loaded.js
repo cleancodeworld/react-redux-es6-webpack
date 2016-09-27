@@ -5,6 +5,8 @@ import { LOAD_SUCCESS as LOAD_CALL_SUCCESS } from './all';
 import { LOAD_SUCCESS as LOAD_EXPERT_SUCCESS } from './byExpert';
 import { LOAD_SUCCESS as LOAD_REQUESTER_SUCCESS } from './byRequester';
 import { LOAD_SUCCESS as LOAD_BY_ID_SUCCESS } from './byId';
+import { SET_SELECTED_DATE_SUCCESS } from './setSelectedDate';
+import { REJECT_SUCCESS } from './rejectCall';
 
 import Immutable from 'immutable';
 
@@ -33,6 +35,8 @@ export default function callLoaded(state = initialState, action) {
           map.mergeIn(['entities', call.id], immutableCall);
         });
       });
+    case REJECT_SUCCESS:
+    case SET_SELECTED_DATE_SUCCESS:
     case RESET_CALLS:
     default:
       return state;

@@ -23,8 +23,18 @@ export default class CallAcceptedForm extends Component {
     error: PropTypes.string,
   }
 
+  errorRender = (error) => {
+    let res = <span/>;
+    if (error) {
+      res = (<div className="alert bg-danger alert-styled-left" role="alert">
+        <strong>{error}</strong>
+      </div> );
+    }
+    return res;
+  }
+
   render() {
-    const { handleSubmit, initialValues: {availability, minutePrice}, user } = this.props;
+    const { handleSubmit, initialValues: {availability, minutePrice}, user, error } = this.props;
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -36,6 +46,7 @@ export default class CallAcceptedForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Select call date
                   </legend>
+                  {this.errorRender(error)}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Set date</label>
                     <div className="col-lg-10">
