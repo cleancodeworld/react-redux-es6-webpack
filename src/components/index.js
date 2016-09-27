@@ -54,3 +54,4 @@ export CallListItem from './CallListItem/CallListItem';
 export CallAcceptedForm from './CallAcceptedForm/CallAcceptedForm';
 export CallRejectedForm from './CallRejectedForm/CallRejectedForm';
 export CallFeedbackForm from './CallFeedbackForm/CallFeedbackForm';
+export UserProfileForm from './UserProfileForm/UserProfileForm';

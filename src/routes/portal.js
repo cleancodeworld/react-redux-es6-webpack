@@ -38,6 +38,7 @@ import {
   CallAccepted,
   CallRejected,
   CallFeedback,
+  UserProfile,
 } from '../containers/portal';
 import {
   Root,
@@ -61,12 +62,13 @@ export default (params) => {
           <IndexRoute name="Index" component={Home}/>
           <Route path="question" name="Questions" component={QuestionLayout}>
             <IndexRoute component={QuestionsByPortal}/>
-            <Route name="Question Ask" path="ask" component={QuestionAsk}/>
-            <Route name="Question View" staticName path=":questionShortId/:questionName" component={Question}>
+            <Route name="Question ask" path="ask" component={QuestionAsk}/>
+            <Route name="Question view" staticName path=":questionShortId/:questionName" component={Question}>
               <IndexRoute name="Question" component={QuestionDetailsView}/>
-              <Route name="Question Edit" path="edit" component={QuestionEdit}/>
+              <Route name="Question edit" path="edit" component={QuestionEdit}/>
             </Route>
           </Route>
+          <Route name="User profile" path="user-profile" component={UserProfile}/>
           <Route path="call" name="Call" component={RequestCallLayout}>
             <IndexRoute component={BrowseExperts}/>
             <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>

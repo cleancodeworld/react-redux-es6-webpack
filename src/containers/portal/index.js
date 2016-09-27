@@ -33,3 +33,4 @@ export MyCalls from './MyCalls/MyCalls';
 export CallAccepted from './CallAccepted/CallAccepted';
 export CallRejected from './CallRejected/CallRejected';
 export CallFeedback from './CallFeedback/CallFeedback';
+export UserProfile from './UserProfile/UserProfile';

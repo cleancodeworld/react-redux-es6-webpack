@@ -21,6 +21,7 @@ import {CREATE_SUCCESS as CALL_CREATE_SUCCESS} from './call/create';
 import {SET_SELECTED_DATE_SUCCESS} from './call/setSelectedDate';
 import {REJECT_SUCCESS} from './call/rejectCall';
 import {REMOVE_SUCCESS as ANSWER_REMOVE_SUCCESS} from './answer/remove';
+import {UPDATE_PHONE_SUCCESS} from './user/edit';
 
 const initialState = Immutable.fromJS([]);
 
@@ -40,6 +41,7 @@ export default function Notifications(state = initialState, action) {
     case CALL_CREATE_SUCCESS:
     case SET_SELECTED_DATE_SUCCESS:
     case REJECT_SUCCESS:
+    case UPDATE_PHONE_SUCCESS:
       return state.withMutations(map=> {
         const notify = Immutable.fromJS({
           level: 'success',
