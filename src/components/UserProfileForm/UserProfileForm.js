@@ -48,7 +48,7 @@ export default class UserProfileForm extends Component {
                 <fieldset className="content-group">
                   <legend className="text-bold text-size-large"><span
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
-                    className="text-size-large">1</b></span> Select call date
+                    className="text-size-large">1</b></span> Update your phone number
                   </legend>
                   {this.errorRender(error)}
                   <div className="form-group">
