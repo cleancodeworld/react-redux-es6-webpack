@@ -63,7 +63,7 @@ export default class UserProfileForm extends Component {
                     </div>
                   </div>
                 </fieldset>
-                <button type="submit" className="btn btn-primary content-group">Book Now <i
+                <button type="submit" className="btn btn-primary content-group">Update<i
                   className="icon-arrow-right14 position-right"></i></button>
               </form>
             </div>
