@@ -6,9 +6,9 @@ const UserNav = ({loggedIn = false, logout, portal}) => {
   let res;
   if (loggedIn) {
     res = (<ul className="nav navbar-nav pull-right">
-      <li className="nav-item">
+      {portal ? <li className="nav-item">
         <Link to="/user-profile">Update phone</Link>
-      </li>
+      </li> : null}
       <li className="nav-item">
         <a className="nav-link" onClick={()=>logout()} href="javascript:void(0)">Logout</a>
       </li>
