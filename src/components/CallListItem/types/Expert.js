@@ -35,7 +35,7 @@ const Expert = ({call}) => {
     <li className="media stack-media-on-mobile">
       <CallInfo call={call}>
         <div className="media-right text-center">
-          <h1 className="panel-title price"><b>[$16.67]</b></h1>
+          <h1 className="panel-title price"><b>${call.getIn(['expert', 'minutePrice'])}</b></h1>
           <small>per minute</small>
           {status}
           <div className="text-muted">
