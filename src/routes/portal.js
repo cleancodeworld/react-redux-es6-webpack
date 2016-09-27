@@ -67,13 +67,13 @@ export default (params) => {
               <Route name="Question Edit" path="edit" component={QuestionEdit}/>
             </Route>
           </Route>
-          <Route path="call" name="Request Call" component={RequestCallLayout}>
+          <Route path="call" name="Call" component={RequestCallLayout}>
             <IndexRoute component={BrowseExperts}/>
             <Route name="Expert Profile" path="expert/profile" component={ExpertProfile}/>
-            <Route name="Request Call" path="expert" component={CallCreate}/>
-            <Route name="Call Approval" path=":callId/accepted_by_expert" component={CallAccepted}/>
-            <Route name="Call Feedback" path=":callId/done" component={CallFeedback}/>
-            <Route name="Call Reject" path=":callId/rejected_by_expert" component={CallRejected}/>
+            <Route name="Call expert" path="expert" component={CallCreate}/>
+            <Route name="Call approval" path=":callId/accepted_by_expert" component={CallAccepted}/>
+            <Route name="Call feedback" path=":callId/done" component={CallFeedback}/>
+            <Route name="Call reject" path=":callId/rejected_by_expert" component={CallRejected}/>
           </Route>
           <Route name="My Calls" path="my-calls" component={MyCalls}/>
           <Route name="Wish list" path="wish-list" component={WishList}/>
