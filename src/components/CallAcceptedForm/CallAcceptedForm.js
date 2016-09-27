@@ -66,7 +66,7 @@ export default class CallAcceptedForm extends Component {
                     </div>
                   </div>
                   <div className="help-block">You will get&nbsp;<strong>${minutePrice}/min</strong></div>
-                  <div className="help-block">we will call you via&nbsp;<b>+{user.get('phone')}</b>.</div>
+                  <div className="help-block">We will call you via&nbsp;<b>+{user.get('phone')}</b>.</div>
                 </fieldset>
                 <button type="submit" className="btn btn-primary content-group">Book Now <i
                   className="icon-arrow-right14 position-right"></i></button>
