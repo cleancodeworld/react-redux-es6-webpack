@@ -24,7 +24,7 @@ import config from '../../../config';
   {remove}
 )
 @withPortals
-export default class MyPortals extends Component {
+export default class AllPortals extends Component {
 
   static propTypes = {
     portals: PropTypes.object.isRequired,
