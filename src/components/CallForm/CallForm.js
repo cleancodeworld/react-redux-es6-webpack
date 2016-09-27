@@ -2,9 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import validate from './validate';
 import {reduxForm, Field} from 'redux-form';
 import Select from 'react-select';
-import moment from 'moment';
-import DatePicker from 'react-datepicker';
 import { withUser, withPortal } from 'hoc';
+import Datetime from 'react-datetime';
+import moment from 'moment';
 
 require('moment-range');
 
@@ -26,27 +26,6 @@ export default class CallForm extends Component {
     error: PropTypes.string,
   }
 
-  componentDidMount() {
-    const datetime = moment().set({ hour: 12, minute: 0, second: 0, millisecond: 0 });
-    const start = datetime.clone().startOf('day');
-    const end = datetime.clone().endOf('day');
-    const hours = [];
-    moment()
-      .range(start, end)
-      .by('hours', hour => {
-        hours.push({
-          moment: hour,
-          label: hour.format('h:mm a')
-        });
-        const halfHour = hour.clone().add(30, 'minutes');
-        hours.push({
-          moment: halfHour,
-          label: halfHour.format('h:mm a')
-        });
-      });
-    this.hours = hours;
-  }
-
   messageField = (field) =>( <div>
     <textarea rows="2" cols="2" className="form-control"
               placeholder="Please enter a reason for the call" {...field.input}></textarea>
@@ -65,6 +44,8 @@ export default class CallForm extends Component {
 
   render() {
     const { handleSubmit, expertUserName, portal, user, error } = this.props;
+    const yesterday = moment().subtract(1, 'day');
+    const valid = (current) => current.isAfter(yesterday);
     return (
       <div className="row">
         <div className="col-lg-9">
@@ -76,7 +57,8 @@ export default class CallForm extends Component {
                     className="label bg-blue-400 mr-5 pl-10 pr-10"><b
                     className="text-size-large">1</b></span> Provide Call Information
                   </legend>
-                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') : <span/>}
+                  {portal.meta.getIn(['owner', 'id']) === user.get('userId') ? this.errorRender('You are portal owner, you can not call yourself') :
+                    <span/>}
                   {this.errorRender(error)}
                   <div className="form-group">
                     <label className="control-label col-lg-2">Message to {expertUserName}</label>
@@ -118,31 +100,16 @@ export default class CallForm extends Component {
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
                         <Field name="date1" component={field =>
                           <div>
-                              <DatePicker placeholder="Pick a date…"
+                              <Datetime placeholder="Pick a date…"
                                 onChange={field.input.onChange}
-                                selected={field.input.value}
-                                className="form-control datepicker hasDatepicker" />
+                                isValidDate={ valid }
+                                value={field.input.value} />
                             <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
                             </div>
                           </div>
                         }/>
                       </div>
-                    </div>
-                    <div className="col-lg-4">
-                      <Field name="time1" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/>
                     </div>
                   </div>
 
@@ -152,10 +119,9 @@ export default class CallForm extends Component {
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
                         <Field name="date2" component={field =>
                           <div>
-                            <DatePicker placeholder="Pick a date…"
-                              onChange={field.input.onChange}
-                              selected={field.input.value}
-                              className="form-control datepicker hasDatepicker" />
+                            <Datetime placeholder="Pick a date…"
+                                onChange={field.input.onChange}
+                                value={field.input.value} />
                             <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
                             </div>
@@ -163,20 +129,6 @@ export default class CallForm extends Component {
                         }/>
                       </div>
                     </div>
-                    <div className="col-lg-4">
-                      <Field name="time2" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/></div>
                   </div>
                   <div className="form-group">
                     <div className="col-lg-8">
@@ -184,31 +136,15 @@ export default class CallForm extends Component {
                         <span className="input-group-addon"><i className="icon-calendar"></i></span>
                         <Field name="date3" component={field =>
                           <div>
-                            <DatePicker placeholder="Pick a date…"
-                              onChange={field.input.onChange}
-                              selected={field.input.value}
-                              className="form-control datepicker hasDatepicker" />
+                            <Datetime placeholder="Pick a date…"
+                                onChange={field.input.onChange}
+                                value={field.input.value} />
                             <div style={{display: 'inline-block'}}>
                               {field.touched && field.error && <label className="validation-error-label">{field.error}</label>}
                             </div>
                           </div>
                         }/>
                       </div>
-                    </div>
-                    <div className="col-lg-4">
-                      <Field name="time3" component={estimated =>
-                        <div>
-                        <Select
-                          {...estimated.input}
-                          onBlur={() => {}}
-                          onBlurResetsInput={false}
-                          value={estimated.input.value}
-                          searchable={false}
-                          options={this.hours && this.hours.map( value => ({ value: value.label, label: value.label}))}
-                          />
-                          {estimated.touched && estimated.error && <label className="validation-error-label">{estimated.error}</label>}
-                        </div>
-                      }/>
                     </div>
                   </div>
                   <div className="help-block">Please note that the times you choose will be based on your local time

@@ -54,11 +54,8 @@ export default class UserProfileForm extends Component {
                   <div className="form-group">
                     <label className="control-label col-lg-2">Phone</label>
                     <div className="col-lg-10">
-                      <div className="form-group has-feedback">
+                      <div className="form-group">
                         <Field name="phone" component={this.phoneField}/>
-                        <div className="form-control-feedback">
-                          <i className="icon-mention text-muted"></i>
-                        </div>
                       </div>
                     </div>
                   </div>
