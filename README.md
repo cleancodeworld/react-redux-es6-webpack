@@ -1,4 +1,6 @@
-# React Redux Universal Hot Example
+# React + Redux + Universal rendering Project Example
+
+My recent project based on React, Redux, ES6, Webpack, Node.js, Express.js and Universal rendering. Uses this boilerplate: https://github.com/erikras/react-redux-universal-hot-example
 
 [![build status](https://img.shields.io/travis/erikras/react-redux-universal-hot-example/master.svg?style=flat-square)](https://travis-ci.org/erikras/react-redux-universal-hot-example)
 [![Dependency Status](https://david-dm.org/erikras/react-redux-universal-hot-example.svg?style=flat-square)](https://david-dm.org/erikras/react-redux-universal-hot-example)
