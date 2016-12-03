@@ -1,4 +1,5 @@
-# React + Redux + Universal rendering Project Example
+# React/Redux project
+(With universal rendering, and built with Webpack)
 
 My recent project based on React, Redux, ES6, Webpack, Node.js, Express.js and Universal rendering. Uses this boilerplate: https://github.com/erikras/react-redux-universal-hot-example
 
