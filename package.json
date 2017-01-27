@@ -1,8 +1,8 @@
 {
-  "name": "knexpert",
+  "name": "react-redux-example",
   "version": "0.0.1",
-  "description": "front end repo for knexpert.com",
-  "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
+  "description": "React/Redux/ES6/Webpack work example",
+  "author": "Taiki Kazuo",
   "license": "MIT",
   "repository": {
     "type": "git",
