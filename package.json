@@ -4,10 +4,6 @@
   "description": "React/Redux/ES6/Webpack work example",
   "author": "Taiki Kazuo",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quotient/knexpert.git"
-  },
   "homepage": "https://github.com/quotient/knexpert",
   "keywords": [
     "react",
